@@ -1,5 +1,5 @@
 package cs211.project.controllers;
 
 public class MainMenuController {
-    int x = 0;
+    int x = 100;
 }
