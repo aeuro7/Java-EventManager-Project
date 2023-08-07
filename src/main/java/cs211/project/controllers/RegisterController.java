@@ -14,7 +14,7 @@ public class RegisterController {
     @FXML private TextField conPasswordTextField;
 
     @FXML
-    public void onSignUpButtonClick() {
+    public void signUpButtonClick() {
         try {
             FXRouter.goTo("hello");
         } catch (IOException e) {
