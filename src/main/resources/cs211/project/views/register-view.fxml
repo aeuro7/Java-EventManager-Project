@@ -1,186 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.RegisterController">
-   <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="400.0" fitWidth="268.0" layoutX="-7.0" opacity="0.45" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../Users/Asus/Downloads/pexels-felipe-balduino-2842763.jpg" />
-               </image>
-            </ImageView>
-            <Label layoutX="85.0" layoutY="366.0" text="nebb-group " textFill="#f4f4f0">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="88.0" layoutY="348.0" text="presented by " textFill="#f4f4f0">
-               <font>
-                  <Font name="Microsoft JhengHei Light" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="13.0" layoutY="14.0" text="The Boxer">
-               <textFill>
-                  <RadialGradient centerX="0.5881057268722466" centerY="0.5" cycleMethod="REFLECT" radius="0.5">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.9684210419654846" green="0.9648343324661255" blue="0.9648343324661255" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.21951219512195122">
-                           <color>
-                              <Color red="0.5987329483032227" green="0.1871345043182373" blue="0.7894737124443054" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.3682926829268292">
-                           <color>
-                              <Color red="0.6878167390823364" green="0.3538011610507965" blue="0.7894737124443054" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.7173620457604306">
-                           <color>
-                              <Color red="0.4041910469532013" green="0.030409356579184532" blue="0.410526305437088" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.8240619768243441">
-                           <color>
-                              <Color red="0.7606879472732544" green="0.05339999869465828" blue="0.8899999856948853" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.36497727036476135" green="0.03196880966424942" blue="0.43157893419265747" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="15.0" layoutY="146.0" text="Welcome to website">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <textFill>
-                  <LinearGradient cycleMethod="REFLECT" endX="0.6553030881014736" endY="1.0" startY="0.23106054826216263">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.4041910469532013" green="0.030409356579184532" blue="0.410526305437088" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.0713324360699864">
-                           <color>
-                              <Color red="0.4041910469532013" green="0.030409356579184532" blue="0.410526305437088" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.21265141318977118">
-                           <color>
-                              <Color red="0.6823529601097107" green="0.3137255012989044" blue="0.6941176652908325" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.3028263795423957">
-                           <color>
-                              <Color red="0.5987329483032227" green="0.1871345043182373" blue="0.7894737124443054" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.3682926829268292">
-                           <color>
-                              <Color red="0.42214035987854004" green="0.105380117893219" blue="0.557894766330719" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.6006434034730656">
-                           <color>
-                              <Color red="0.7606879472732544" green="0.05339999869465828" blue="0.8899999856948853" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.7341463414634147">
-                           <color>
-                              <Color red="0.6823529601097107" green="0.3137255012989044" blue="0.6941176652908325" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.9542395693135937">
-                           <color>
-                              <Color red="0.40392157435417175" green="0.0313725508749485" blue="0.4117647111415863" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.40392157435417175" green="0.0313725508749485" blue="0.4117647111415863" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label layoutX="23.0" layoutY="181.0" text="Be first to know about latest events!" textFill="WHITE">
-               <font>
-                  <Font name="Microsoft JhengHei Light" size="13.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="402.0" prefWidth="359.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="90.0" layoutY="10.0" text="Create your account" textFill="#7c0a89">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="25.0" layoutY="108.0" text="Username">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="usernameTextField" layoutX="25.0" layoutY="128.0" prefHeight="26.0" prefWidth="290.0" />
-            <Label layoutX="25.0" layoutY="168.0" text="Email">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="emailTextField" layoutX="25.0" layoutY="188.0" prefHeight="26.0" prefWidth="290.0" />
-            <TextField fx:id="passwordTextField" layoutX="25.0" layoutY="248.0" prefHeight="26.0" prefWidth="290.0" />
-            <Label layoutX="25.0" layoutY="228.0" text="Password">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="25.0" layoutY="288.0" text="Confirm Password">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="conPasswordTextField" layoutX="25.0" layoutY="308.0" prefHeight="26.0" prefWidth="290.0" />
-            <Button layoutX="123.0" layoutY="350.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" text="Sign Up" textFill="#7c0a89">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <Label layoutX="25.0" layoutY="48.0" text="Name">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="nameTextField" layoutX="25.0" layoutY="68.0" prefHeight="26.0" prefWidth="290.0" />
-         </children>
-      </AnchorPane>
-   </right>
-</BorderPane>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="600.0" layoutX="454.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="350.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006711409395973154">
+                     <color>
+                        <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ImageView fitHeight="350.0" fitWidth="350.0" layoutX="53.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
+      <Circle layoutX="228.0" layoutY="264.0" radius="173.0" strokeType="INSIDE" strokeWidth="0.0">
+         <fill>
+            <LinearGradient endX="0.9239904988123515" endY="0.9762470308788599" startX="0.9311163895486936">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8627451062202454" green="0.9254902005195618" blue="0.9490196108818054" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006711409395973154">
+                     <color>
+                        <Color red="0.8627451062202454" green="0.9254902005195618" blue="0.9490196108818054" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5312858078245212">
+                     <color>
+                        <Color red="1.0" green="0.9259259104728699" blue="0.9876543283462524" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.8627451062202454" green="0.9254902005195618" blue="0.9490196108818054" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.9548693586698337" />
+         </stroke>
+      </Circle>
+      <Circle fill="WHITE" layoutX="228.0" layoutY="264.0" radius="161.0" strokeType="INSIDE" strokeWidth="0.0">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.9548693586698337" />
+         </stroke>
+      </Circle>
+      <TextField fx:id="usernameTextField" layoutX="509.0" layoutY="210.0" prefHeight="45.0" prefWidth="250.0" promptText="  Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="passwordTextField" layoutX="509.0" layoutY="281.0" prefHeight="45.0" prefWidth="250.0" promptText="  Password" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="485.0" layoutY="73.0" prefHeight="30.0" prefWidth="298.0" text="Create Your Account" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="485.0" layoutY="92.0" opacity="0.46" prefHeight="30.0" prefWidth="298.0" text="Be first to know upcoming events!" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+      <Button layoutX="509.0" layoutY="426.0" mnemonicParsing="false" onAction="#signUpButtonClick" prefHeight="45.0" prefWidth="250.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Sign up" textFill="#bb84e8">
+         <font>
+            <Font name="Sarabun Regular" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="733.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icon-png/home-png/proflie.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="735.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icon-png/home-png/password.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="-21.0" layoutY="571.0" prefHeight="30.0" prefWidth="498.0" text="Powered by             Inc." textAlignment="CENTER" textFill="#bcbcbc">
+         <font>
+            <Font name="Verdana Bold" size="10.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+      <ImageView fitHeight="12.0" fitWidth="34.0" layoutX="233.0" layoutY="581.0" opacity="0.29" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icon-png/logo_png/logo-black-removebg%20(1).png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="confirmPassword" layoutX="509.0" layoutY="352.0" prefHeight="45.0" prefWidth="250.0" promptText="  Confirm  Password" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="735.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icon-png/home-png/password.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameTextField1" layoutX="509.0" layoutY="139.0" prefHeight="45.0" prefWidth="250.0" promptText="  Name" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="733.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../icon-png/home-png/proflie.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="103.0" layoutY="472.0" mnemonicParsing="false" onAction="#browseButtonClick" prefHeight="45.0" prefWidth="250.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Browse" textFill="#bb84e8">
+         <font>
+            <Font name="Sarabun Regular" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

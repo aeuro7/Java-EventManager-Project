@@ -21,4 +21,14 @@ public class RegisterController {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    public void browseButtonClick() {
+        try {
+            FXRouter.goTo("hello");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
