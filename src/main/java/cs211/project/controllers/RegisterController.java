@@ -96,4 +96,13 @@ public class RegisterController {
     public void browseButtonClick() {
         // Handle browse button click
     }
+
+    @FXML
+    public void goLoginButton() {
+        try {
+            FXRouter.goTo("login-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
