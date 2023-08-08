@@ -119,7 +119,7 @@
             <Image url="@../../../icon-png/logo_png/logo-black-removebg.png" />
          </image>
       </ImageView>
-      <PasswordField fx:id="cPasswordTextField" layoutX="509.0" layoutY="400.0" prefHeight="45.0" prefWidth="250.0" promptText="  Confirm Password" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+      <PasswordField fx:id="conPasswordTextField" layoutX="509.0" layoutY="400.0" prefHeight="45.0" prefWidth="250.0" promptText="  Confirm Password" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
          <font>
             <Font size="10.0" />
          </font>
