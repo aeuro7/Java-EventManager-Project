@@ -15,7 +15,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.LoginController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="600.0" layoutX="500.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0">
@@ -82,12 +81,12 @@
             <Image url="@../../../icon-png/logo_png/logo-no-background.png" />
          </image>
       </ImageView>
-      <TextField layoutX="529.0" layoutY="210.0" prefHeight="45.0" prefWidth="250.0" promptText="  Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+      <TextField fx:id="usernameTextField" layoutX="529.0" layoutY="210.0" prefHeight="45.0" prefWidth="250.0" promptText="  Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
          <font>
             <Font size="10.0" />
          </font>
       </TextField>
-      <TextField layoutX="529.0" layoutY="281.0" prefHeight="45.0" prefWidth="250.0" promptText="  Password" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+      <TextField fx:id="passwordTextField" layoutX="529.0" layoutY="281.0" prefHeight="45.0" prefWidth="250.0" promptText="  Password" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
          <font>
             <Font size="10.0" />
          </font>
@@ -100,7 +99,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="501.0" layoutY="159.0" opacity="0.46" prefHeight="30.0" prefWidth="298.0" text="enter your usename and password" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="501.0" layoutY="159.0" opacity="0.46" prefHeight="30.0" prefWidth="298.0" text="Enter your usename and password" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -108,7 +107,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
-      <Button layoutX="529.0" layoutY="352.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="250.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Sign in" textFill="#bb84e8">
+      <Button layoutX="529.0" layoutY="352.0" mnemonicParsing="false" onAction="#onSignInButtonClick" prefHeight="45.0" prefWidth="250.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Sign in" textFill="#bb84e8">
          <font>
             <Font name="Sarabun Regular" size="13.0" />
          </font>
@@ -124,7 +123,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="632.0" layoutY="420.0" prefHeight="30.0" prefWidth="71.0" text="Create account" textAlignment="CENTER" textFill="#4e2a68" underline="true">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="632.0" layoutY="420.0" onMouseClicked="#onCreateAcButtonClick" prefHeight="30.0" prefWidth="71.0" text="Create account" textAlignment="CENTER" textFill="#4e2a68" underline="true">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -155,13 +154,21 @@
       </Label>
       <ImageView fitHeight="12.0" fitWidth="34.0" layoutX="255.0" layoutY="578.0" opacity="0.29" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../icon-png/logo_png/logo-black-removebg%20(1).png" />
+            <Image url="@../../../icon-png/logo_png/logo-black-removebg.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="12.0" fitWidth="13.0" layoutX="330.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../icon-png/logo_png/%20r%20สำเนาขนาดเล็ก.png" />
+            <Image url="@../../../icon-png/logo_png/r.png" />
          </image>
       </ImageView>
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="499.0" layoutY="180.0" prefHeight="30.0" prefWidth="298.0" text="Username May Not Exist or Invalid Password" textAlignment="CENTER" textFill="#fc0000">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
    </children>
 </AnchorPane>
