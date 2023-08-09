@@ -56,7 +56,14 @@ public class LoginController {
             throw new RuntimeException(e);
         }
     }
-
+    @FXML
+    private void nebbHyperLink() {
+        try {
+            FXRouter.goTo("developer-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private boolean isValidUser(String username, String password) {
         for (User user : userList.getAllUser()) {
             if (user.authenticate(username, password)) {
