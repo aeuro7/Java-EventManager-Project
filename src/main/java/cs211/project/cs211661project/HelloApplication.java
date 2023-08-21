@@ -12,7 +12,7 @@ public class HelloApplication extends Application {
         configRoute();
 
         FXRouter.bind(this, stage, "CS211 661 Project");
-        FXRouter.goTo("profile-view");
+        FXRouter.goTo("admin-view");
 
     }
 
@@ -23,6 +23,7 @@ public class HelloApplication extends Application {
         FXRouter.when("reg-view", resourcesPath + "register-view.fxml");
         FXRouter.when("developer-view", resourcesPath + "developer-view.fxml");
         FXRouter.when("profile-view", resourcesPath + "profile-view.fxml");
+        FXRouter.when("admin-view", resourcesPath + "admin-view.fxml");
     }
 
 
