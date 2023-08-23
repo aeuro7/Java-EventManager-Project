@@ -28,4 +28,18 @@ public class ProfileController {
             throw new RuntimeException(e);
         }
     }
+    @FXML private void goProflie() {
+        try {
+            FXRouter.goTo("profile-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML private void gotoBooking() {
+        try {
+            FXRouter.goTo("book-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

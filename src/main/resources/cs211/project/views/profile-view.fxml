@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -162,6 +163,12 @@
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
             </Button>
+            <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="17.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icon-png/profile-png/ticket-2-2.png" />
+               </image>
+            </ImageView>
+            <BorderPane layoutY="186.0" onMouseClicked="#gotoBooking" prefHeight="49.0" prefWidth="167.0" />
             </children>
         </Group>
         <Group layoutY="47.0">
@@ -194,11 +201,11 @@
                         <Font name="System Bold" size="25.0" />
                     </font>
                 </Label>
-              <Button layoutX="642.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Logout" textFill="#bb84e8">
-                  <font>
-                      <Font name="Sarabun Regular" size="13.0" />
-                  </font>
-              </Button>
+            <Button layoutX="642.0" layoutY="21.0" mnemonicParsing="false" onAction="#logoutButton" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Logout" textFill="#da5a5a">
+               <font>
+                  <Font name="Sarabun Regular" size="13.0" />
+               </font>
+            </Button>
             </children>
         </Group>
         <Group layoutY="553.0">
@@ -227,7 +234,7 @@
                         <Image url="@../../../icon-png/home-png/comment.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="69.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="69.0" layoutY="10.0" onMouseClicked="#goProflie" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon-png/home-png/proflie.png" />
                     </image>

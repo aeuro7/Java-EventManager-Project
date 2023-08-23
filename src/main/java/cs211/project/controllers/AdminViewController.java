@@ -51,4 +51,18 @@ public class AdminViewController {
             throw new RuntimeException(e);
         }
     }
+    @FXML private void logoutButton() {
+        try {
+            FXRouter.goTo("login-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML private void goProflie() {
+        try {
+            FXRouter.goTo("profile-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
