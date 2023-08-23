@@ -22,5 +22,13 @@ public class BookhistoryViewController {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML private void gotoEditprofile() {
+        try {
+            FXRouter.goTo("profile-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
