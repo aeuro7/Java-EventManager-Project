@@ -5,31 +5,22 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class MainMenuController {
+public class BookhistoryViewController {
 
     @FXML
-    public void goLogout() {
+    public void logoutButton() {
         try {
             FXRouter.goTo("login-view");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public void goAdminview() {
+    @FXML public void gotoMainMenu() {
         try {
-            FXRouter.goTo("admin-view");
+            FXRouter.goTo("main-menu");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public void goProflie() {
-        try {
-            FXRouter.goTo("profile-view");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }
+
