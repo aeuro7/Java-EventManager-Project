@@ -48,7 +48,7 @@
                         </LinearGradient>
                     </fill>
                 </Rectangle>
-            <TableView fx:id="userTableView" layoutX="75.0" layoutY="124.0" prefHeight="390.0" prefWidth="649.0">
+            <TableView fx:id="userTableView" layoutX="75.0" layoutY="124.0" prefHeight="390.0" prefWidth="649.0" stylesheets="@../../../table_style/table.css">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
@@ -109,7 +109,7 @@
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="800.0" />
                 <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="389.0" layoutY="13.0" onMouseClicked="#gotoMainMenu" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../icon-png/home-png/home 15.52.50.png" />
+                        <Image url="@../../../icon-png/home-png/home.png" />
                     </image>
                     <cursor>
                         <Cursor fx:constant="HAND" />

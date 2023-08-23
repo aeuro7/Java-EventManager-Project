@@ -1,0 +1,31 @@
+.table-view {
+    -fx-background-color: #9161d3;
+}
+
+/* เปลี่ยนสีข้อมูลในตารางของแถวที่เลขคี่ */
+.table-row-cell:odd {
+    -fx-background-color: #ffffff; /* สีขาว */
+}
+
+/* เปลี่ยนสีข้อมูลในตารางของแถวที่เลขคู่ */
+.table-row-cell:even {
+    -fx-background-color: #F6F6F6; /* สีเทา */
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #F2E2FF;
+}
+
+/* สีเมื่อไม่คลิกที่หัวคอลัมน์ */
+.table-view .column-header {
+    -fx-background-color: #9161d3;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white; /* เปลี่ยนสีข้อความเป็นขาว */
+}
+
+/* เปลี่ยนสีพื้นหลังของแถวเมื่อคลิก */
+.table-row-cell:selected {
+    -fx-background-color: #bb84e8; /* เปลี่ยนสีพื้นหลังเป็นแดง */
+    -fx-text-fill: white; /* เปลี่ยนสีข้อความเป็นขาว */
+}
