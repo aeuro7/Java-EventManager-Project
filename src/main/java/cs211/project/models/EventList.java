@@ -25,4 +25,6 @@ public class EventList {
         }
         return false;
     }
+
+    //ขอฟังค์ชั่นที่แบบปังๆ ที่จะให้ พารามิเตอร์ เป็น string username แล้วคืนค่า เป็น eventlist ที่มี username นี้ เป็นเจ้าของ
 }
