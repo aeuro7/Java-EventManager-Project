@@ -43,7 +43,7 @@ public class UserDataSource implements DataSource<UserList> {
             String line = "";
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
-                User newUser = new User(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim());
+                User newUser = new User(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(), Long.parseLong(data[4]));
                 userList.addUser(newUser);
             }
         } catch (FileNotFoundException e) {
@@ -74,7 +74,8 @@ public class UserDataSource implements DataSource<UserList> {
                 String line = newUser.getUserName() + ","
                         + newUser.getAccountName() + ","
                         + newUser.getPassWord() + ","
-                        + newUser.getRole();
+                        + newUser.getRole() + ","
+                        + newUser.getLastLoginTimestamp();
                 writer.append(line);
                 writer.newLine();
             }

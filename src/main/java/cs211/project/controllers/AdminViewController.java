@@ -5,12 +5,15 @@ import cs211.project.models.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataHardCode;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AdminViewController {
     @FXML private TableView<User> userTableView;
@@ -33,16 +36,28 @@ public class AdminViewController {
         TableColumn<User, String> roleColumn = new TableColumn<>("Role");
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
 
+        TableColumn<User, String> timestampColumn = new TableColumn<>("Last Login Timestamp");
+        timestampColumn.setCellValueFactory(cellData -> {
+            long timestamp = cellData.getValue().getLastLoginTimestamp();
+            String formattedTimestamp = formatTimestamp(timestamp); // Format the timestamp
+            return new SimpleStringProperty(formattedTimestamp);
+        });
+
         userTableView.getColumns().clear();
         userTableView.getColumns().add(userNameColumn);
         userTableView.getColumns().add(accountNameColumn);
         userTableView.getColumns().add(roleColumn);
+        userTableView.getColumns().add(timestampColumn);
 
         userTableView.getItems().clear();
 
         for (User user: userList.getAllUser()) {
             userTableView.getItems().add(user);
         }
+    }
+    private String formatTimestamp(long timestamp) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(new Date(timestamp));
     }
     @FXML private void gotoMainMenu() {
         try {

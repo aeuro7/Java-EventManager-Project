@@ -9,8 +9,8 @@ public class Admin extends User {
         super(userName, accountName, passWord);
     }
 
-    public Admin(String userName, String accountName, String passWord, String role) {
-        super(userName, accountName, passWord, role);
+    public Admin(String userName, String accountName, String passWord, String role, long timeStamp) {
+        super(userName, accountName, passWord, role, timeStamp);
     }
     public Admin(User account) {
         super(account.getUserName(), account.getAccountName(), account.getPassWord());

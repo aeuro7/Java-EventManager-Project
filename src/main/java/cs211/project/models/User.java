@@ -5,18 +5,29 @@ public class User {
     private String accountName; // accountName เปลี่ยนได้
     private String passWord; // passWord เปลี่ยนได้
     private String role;
+    private long lastLoginTimestamp;
+
 
     public User(String userName, String accountName, String passWord) {
         this.accountName = accountName;
         this.userName = userName;
         this.passWord = passWord;
         this.role = "user";
+        this.lastLoginTimestamp = System.currentTimeMillis();
     }
-    public User(String userName, String accountName, String passWord, String role) {
+    public User(String userName, String accountName, String passWord, long timeStamp) {
+        this.accountName = accountName;
+        this.userName = userName;
+        this.passWord = passWord;
+        this.role = "user";
+        this.lastLoginTimestamp = timeStamp;
+    }
+    public User(String userName, String accountName, String passWord, String role, long timeStamp) {
         this.accountName = accountName;
         this.userName = userName;
         this.passWord = passWord;
         this.role = role;
+        this.lastLoginTimestamp = System.currentTimeMillis();
     }
 
     public boolean isThisAccout(String userName) {
@@ -27,6 +38,12 @@ public class User {
     public String getAccountName() {return this.accountName;}
     public String getPassWord() {return this.passWord;} // use For write on cas ONLY!!!
     public String getRole() {return this.role;}
+    public void updateLastLoginTimestamp() {
+        this.lastLoginTimestamp = System.currentTimeMillis();
+    }
+    public long getLastLoginTimestamp() {
+        return lastLoginTimestamp;
+    }
     public void changePassWord(String newPassword) {
         if(!newPassword.equals("")) {
             this.passWord = newPassword;
@@ -38,7 +55,11 @@ public class User {
     } // ตรวจสอบ รหัสที่เข้ามา ว่าตรงกันมั้ย Return เป็น True/false
 
     public boolean authenticate(String userName, String passWord) {
-        return isThisAccout(userName) && isPasswordCorrect(passWord);
+        boolean isAuthenticated = isThisAccout(userName) && isPasswordCorrect(passWord);
+        if (isAuthenticated) {
+            updateLastLoginTimestamp(); // Update the timestamp when the user logs in
+        }
+        return isAuthenticated;
     } // ตรวจสอบรหัสผ่านและ userName ใช้ตอน Login
 
     public boolean isAdmin() {return this.role.equals("admin");}
