@@ -15,9 +15,9 @@ public class Event {
     private String location;
     private double limitStaffPT; // limit staff per team of the event
 
-    private final User eventOwner;
+    private final String eventOwner;
 
-    public Event(String eventName, String startDate, String startTime, String dueDate, String dueTime, String info, double maxSeat, String location, double limitStaffPT, User eventOwner) {
+    public Event(String eventName, String startDate, String startTime, String dueDate, String dueTime, String info, double maxSeat, String location, double limitStaffPT, String eventOwner) {
         this.eventName = eventName;
         this.startDate = startDate;
         this.startTime = startTime;
@@ -109,7 +109,7 @@ public class Event {
         return limitStaffPT;
     }
 
-    public User getEventOwner() {
+    public String getEventOwner() {
         return eventOwner;
     }
 
