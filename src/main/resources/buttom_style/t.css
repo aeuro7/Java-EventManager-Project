@@ -1,11 +1,7 @@
 .BoxAllWhite {
     -fx-background-color: white;
+    -fx-text-fill: #bb84e8;
 }
-
-/*.button:hover {*/
-/*    -fx-background-color: #bb84e8; !* เปลี่ยนสีพื้นหลังเป็นแดง *!*/
-/*    -fx-text-fill: white; !* เปลี่ยนสีข้อความเป็นขาว *!*/
-/*}*/
 
 .button:hover {
     -fx-background-color: linear-gradient(to bottom, #bb84e8, #9161d3); /* ไล่เฉดสีแดงไปสีแดงอ่อน */

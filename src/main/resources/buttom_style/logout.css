@@ -1,5 +1,6 @@
 .BoxAllWhite {
     -fx-background-color: white;
+    -fx-text-fill: #D43333;
 }
 
 /*.button:hover {*/

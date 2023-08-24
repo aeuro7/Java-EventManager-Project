@@ -7,6 +7,7 @@ import cs211.project.services.UserDataHardCode;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
@@ -15,8 +16,6 @@ public class BookhistoryViewController {
 
     @FXML private Group nowOn;
     @FXML private Group nowCom;
-
-
 
     @FXML
     private void initialize() {
