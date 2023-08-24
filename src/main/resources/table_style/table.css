@@ -16,9 +16,11 @@
     -fx-background-color: #F2E2FF;
 }
 
+
 /* สีเมื่อไม่คลิกที่หัวคอลัมน์ */
 .table-view .column-header {
-    -fx-background-color: #9161d3;
+    -fx-background-color: linear-gradient(to bottom, #bb84e8, #9161d3); /* ไล่เฉดสีแดงไปสีแดงอ่อน */
+    /*-fx-background-color: #9161d3;*/
 }
 .table-view .column-header .label {
     -fx-text-fill: white; /* เปลี่ยนสีข้อความเป็นขาว */

@@ -107,7 +107,7 @@
                   <Font name="Sarabun Regular" size="12.0" />
                </font>
             </Label>
-            <Button layoutX="642.0" layoutY="20.0" mnemonicParsing="false" onAction="#goLogout" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Logout" textFill="#da5a5a">
+            <Button layoutX="642.0" layoutY="20.0" mnemonicParsing="false" onAction="#goLogout" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Logout" textFill="#da5a5a">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
@@ -173,7 +173,7 @@
             </Rectangle>
          </children>
       </Group>
-      <TextField layoutX="9.0" layoutY="132.0" prefHeight="32.0" prefWidth="650.0" promptText="     Seach Event" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" />
+      <TextField layoutX="9.0" layoutY="132.0" prefHeight="32.0" prefWidth="650.0" promptText="     Seach Event" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
       <Button layoutX="668.0" layoutY="132.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Seach" textFill="#bb84e8">
          <font>
             <Font name="Sarabun Regular" size="13.0" />
