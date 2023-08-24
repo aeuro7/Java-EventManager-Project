@@ -52,8 +52,6 @@ public class BookhistoryViewController {
     @FXML private void showOngoing() {
             nowOn.setVisible(true);
             nowCom.setVisible(false);
-
-
     }
 
     @FXML private void showCompleted() {

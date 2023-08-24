@@ -109,13 +109,22 @@
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="494.0" layoutY="128.0" mnemonicParsing="false" onMouseClicked="#showCompleted" prefHeight="31.0" prefWidth="290.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Completed" textFill="#bb84e8">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <BorderPane layoutX="1.0" layoutY="136.0" onMouseClicked="#gotoEditprofile" prefHeight="49.0" prefWidth="167.0" />
+            <BorderPane layoutX="1.0" layoutY="136.0" onMouseClicked="#gotoEditprofile" prefHeight="49.0" prefWidth="167.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></BorderPane>
             <Group fx:id="nowOn" layoutX="190.0" layoutY="126.0">
                <children>
                   <Rectangle fx:id="s2" arcHeight="5.0" arcWidth="5.0" height="5.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="291.0">
@@ -340,10 +349,13 @@
                         <Font name="System Bold" size="25.0" />
                     </font>
                 </Label>
-              <Button layoutX="642.0" layoutY="21.0" mnemonicParsing="false" onAction="#logoutButton" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Logout" textFill="#da5a5a">
+              <Button layoutX="642.0" layoutY="21.0" mnemonicParsing="false" onAction="#logoutButton" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Logout" textFill="#da5a5a">
                   <font>
                       <Font name="Sarabun Regular" size="13.0" />
                   </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
               </Button>
             </children>
         </Group>
