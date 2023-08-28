@@ -33,4 +33,12 @@ public class UserList {
         }
         return null;
     }
+    public User findUserByUserName(String username) {
+        for(User user : getAllUser()) {
+            if(user.getUserName().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }
