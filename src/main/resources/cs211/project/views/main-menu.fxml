@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -57,14 +58,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TableView fx:id="eventTableView" layoutX="35.0" layoutY="176.0" prefHeight="328.0" prefWidth="617.0" stylesheets="@../../../table_style/table.css">
+            <TableView fx:id="eventTableView" layoutX="35.0" layoutY="176.0" prefHeight="328.0" prefWidth="724.0" stylesheets="@../../../table_style/table.css">
                <columns>
                   <TableColumn prefWidth="37.0" text="C1" />
                   <TableColumn prefWidth="113.0" text="C2" />
                   <TableColumn prefWidth="113.0" text="C3" />
                   <TableColumn prefWidth="113.0" text="C4" />
                   <TableColumn prefWidth="113.0" text="C5" />
-                  <TableColumn minWidth="250.0" prefWidth="240.0" text="C6" />
+                  <TableColumn minWidth="30.0" prefWidth="40.0" text="C6" />
                </columns>
             </TableView>
          </children>
@@ -188,14 +189,17 @@
             </Rectangle>
          </children>
       </Group>
-      <TextField layoutX="9.0" layoutY="132.0" prefHeight="32.0" prefWidth="650.0" promptText="     Seach Event" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-      <Button layoutX="668.0" layoutY="132.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Seach" textFill="#bb84e8">
+      <TextField fx:id="searchBox" layoutX="9.0" layoutY="132.0" prefHeight="32.0" prefWidth="650.0" promptText="     Seach Event" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
+      <Button layoutX="668.0" layoutY="132.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Create Event" textFill="#bb84e8">
          <font>
             <Font name="Sarabun Regular" size="13.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </Button>
    </children>
 </AnchorPane>
