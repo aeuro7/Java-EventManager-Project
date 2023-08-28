@@ -9,8 +9,10 @@ import cs211.project.services.EventDataHardCode;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataHardCode;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -21,10 +23,16 @@ public class MainMenuController {
     private EventList eventList;
     private DataSource<EventList> datasource;
 
+    @FXML TextField searchBox;
+
     @FXML public void initialize() {
         datasource = new EventDataHardCode();
         eventList = datasource.readData();
         showTable(eventList);
+
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            SearchFn(newValue);
+        });
     }
 
     private void showTable(EventList eventList) {
@@ -43,17 +51,22 @@ public class MainMenuController {
         TableColumn<Event, String> dueTimeNewColumn = new TableColumn<>("End");
         dueTimeNewColumn.setCellValueFactory(new PropertyValueFactory<>("dueTime"));
 
-        TableColumn<Event, String> leftSeatNewColumn = new TableColumn<>("Left Seat");
+        TableColumn<Event, String> leftSeatNewColumn = new TableColumn<>("Seat Available");
         leftSeatNewColumn.setCellValueFactory(new PropertyValueFactory<>("leftSeat"));
 
         TableColumn<Event, String> locationNewColumn = new TableColumn<>("Location");
         locationNewColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
+        setCenterAlignment(startDateNewColumn);
+        setCenterAlignment(dueDateNewColumn);
+        setCenterAlignment(startTimeNewColumn);
+        setCenterAlignment(dueTimeNewColumn);
+
 
         eventTableView.getColumns().clear();
 
         eventTableView.getColumns().add(eventNameColumn);
-        eventNameColumn.setMinWidth(150);
+        eventNameColumn.setMinWidth(180);
         eventTableView.getColumns().add(startDateNewColumn);
         startDateNewColumn.setMinWidth(30);
         eventTableView.getColumns().add(dueDateNewColumn);
@@ -63,15 +76,33 @@ public class MainMenuController {
         eventTableView.getColumns().add(dueTimeNewColumn);
         dueTimeNewColumn.setMinWidth(30);
 
+
         eventTableView.getColumns().add(leftSeatNewColumn);
+        leftSeatNewColumn.setMinWidth(30);
         eventTableView.getColumns().add(locationNewColumn);
-        dueTimeNewColumn.setMinWidth(68);
+        locationNewColumn.setMinWidth(184);
 
         eventTableView.getItems().clear();
 
         for (Event event: eventList.getAllEvent()) {
             eventTableView.getItems().add(event);
         }
+    }
+
+    private void setCenterAlignment(TableColumn<Event, String> column) {
+        column.setCellFactory(tc -> new TableCell<Event, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setAlignment(null);
+                } else {
+                    setText(item);
+                    setAlignment(javafx.geometry.Pos.CENTER);
+                }
+            }
+        });
     }
 
 
@@ -99,5 +130,17 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
+
+    private void SearchFn(String searchTerm) {
+        searchTerm = searchTerm.toLowerCase().trim();
+        eventTableView.getItems().clear();
+
+        for (Event event : eventList.getAllEvent()) {
+            if (event.getEventName().toLowerCase().contains(searchTerm)) {
+                eventTableView.getItems().add(event);
+            }
+        }
+    }
+
 
 }
