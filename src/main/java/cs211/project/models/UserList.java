@@ -16,4 +16,21 @@ public class UserList {
     public ArrayList<User> getAllUser() {
         return userList;
     }
+
+    public boolean isUserNameExists(String username) {
+        for (User user : getAllUser()) {
+            if (user.getUserName().toLowerCase().equals(username.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public User loginFn(String username, String password) {
+        for(User user : getAllUser()) {
+            if(user.authenticate(username, password)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }
