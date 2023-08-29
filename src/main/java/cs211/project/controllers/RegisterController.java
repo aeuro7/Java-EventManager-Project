@@ -19,7 +19,8 @@ public class RegisterController {
     @FXML private Label passwordErrorLabel;
     @FXML private Label cPasswordErrorLabel;
 
-    private DataSource dataSource;
+    private UserList userList;
+    DataSource<UserList> dataSource;
 
     public RegisterController() {
         dataSource = new UserDataHardCode(); // Initialize your data source here
@@ -30,6 +31,8 @@ public class RegisterController {
         usernameErrorLabel.setVisible(false);
         passwordErrorLabel.setVisible(false);
         cPasswordErrorLabel.setVisible(false);
+        dataSource = new UserDataHardCode();
+        userList = dataSource.readData();
     }
 
     @FXML
@@ -43,13 +46,17 @@ public class RegisterController {
         boolean isValid = true;
 
         if (username.isEmpty()) {
-            usernameErrorLabel.setVisible(true);
-            isValid = false;
+            // check if usernames is already existed?
+            if(!userList.isUserNameExists(username)) {
+                isValid = true;
+            } else {
+                usernameErrorLabel.setVisible(true);
+            }
         } else {
-            usernameErrorLabel.setVisible(false);
+            usernameErrorLabel.setVisible(true);
         }
 
-        if (!password.equals(confirmPassword)) {
+        if (!password.equals(confirmPassword) || password.isEmpty()) {
             passwordErrorLabel.setVisible(true);
             cPasswordErrorLabel.setVisible(true);
             isValid = false;
@@ -62,10 +69,11 @@ public class RegisterController {
             // Perform the signup process here
             // For example, create a new User object and save it to a database
             User newUser = new User(username, "AccountName", password);
-            dataSource.writeData(newUser); // Save the new user data
+            userList.addUser(newUser);
+            dataSource.writeData(userList);
 
             try {
-                FXRouter.goTo("main-menu"); // Redirect to a new page after successful sign-up
+                FXRouter.goTo("login-view");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -75,17 +83,8 @@ public class RegisterController {
     @FXML
     public void checkUsernameClick() {
         String username = usernameTextField.getText();
-        UserList userList = (UserList) dataSource.readData();
-        boolean isUsernameAvailable = true;
 
-        for (User user : userList.getAllUser()) {
-            if (user.isThisAccout(username)) {
-                isUsernameAvailable = false;
-                break;
-            }
-        }
-
-        if (isUsernameAvailable) {
+        if (userList.isUserNameExists(username)) {
             usernameErrorLabel.setVisible(false);
         } else {
             usernameErrorLabel.setVisible(true);
