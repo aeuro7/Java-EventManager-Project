@@ -20,15 +20,11 @@ public class AdminEditController {
     @FXML private TextField accountnameTextField;
     @FXML private TextField newpasswordField;
     @FXML private Label roleLabel;
-    private DataSource<UserList> datasource;
-    private UserList userList;
+    private DataSource<UserList> datasource = new UserDataSource("data", "login.csv");;
+    private UserList userList = datasource.readData();
+    String username = (String) FXRouter.getData();
+    User selectedUser = userList.findUserByUserName(username);
     @FXML public void initialize() {
-        datasource = new UserDataSource("data", "login.csv");
-        userList = datasource.readData();
-
-        String username = (String) FXRouter.getData();
-        User selectedUser = userList.findUserByUserName(username);
-
         showUserInfo(selectedUser);
     }
 
@@ -61,13 +57,26 @@ public class AdminEditController {
         }
     }
     @FXML private void changeRole() {
-
+        userList.changeRole(selectedUser.getUserName());
+        updateToCSV();
+        showUserInfo(selectedUser);
     }
     @FXML private void deleteAcount() {
-
+        userList.deleteThisAccount(selectedUser.getUserName());
+        updateToCSV();
+        goAdminview();
     }
     @FXML private void changeInfoButton() {
+        String newname = accountnameTextField.getText();
+        String newpassword = newpasswordField.getText();
 
+        if(!newname.isEmpty() && !newpassword.isEmpty()) {
+            userList.changeInfo(selectedUser.getUserName(), newname, newpassword);
+        } else {
+            //show error label
+        }
+        updateToCSV();
+        showUserInfo(selectedUser);
     }
 
     void showUserInfo(User user) {
@@ -75,5 +84,8 @@ public class AdminEditController {
         accountnameTextField.setText(user.getAccountName());
         newpasswordField.clear();
         roleLabel.setText(user.getRole());
+    }
+    void updateToCSV() {
+        datasource.writeData(userList);
     }
 }

@@ -41,4 +41,32 @@ public class UserList {
         }
         return null;
     }
+
+    public void changeInfo(String username, String accountName, String password) {
+        for(User user : getAllUser()) {
+            if(user.getUserName().equals(username)) {
+                user.changeAccountName(accountName);
+                user.changePassWord(password);
+            }
+        }
+    }
+    public void changeRole(String username) {
+        for(User selectedUser : getAllUser()) {
+            if(selectedUser.getUserName().equals(username)) {
+                if(selectedUser.isAdmin()) {
+                    selectedUser.thisIsUser();
+                } else {
+                    selectedUser.thisIsAdmin();
+                }
+            }
+        }
+    }
+    public void deleteThisAccount(String username) {
+        for(User selectedUser : getAllUser()) {
+            if(selectedUser.getUserName().equals(username)) {
+                userList.remove(selectedUser);
+                break;
+            }
+        }
+    }
 }
