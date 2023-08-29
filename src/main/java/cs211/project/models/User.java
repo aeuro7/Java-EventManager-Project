@@ -27,7 +27,7 @@ public class User {
         this.userName = userName;
         this.passWord = passWord;
         this.role = role;
-        this.lastLoginTimestamp = System.currentTimeMillis();
+        this.lastLoginTimestamp = timeStamp;
     }
 
     public boolean isThisAccout(String userName) {
