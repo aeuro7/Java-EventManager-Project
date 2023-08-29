@@ -5,6 +5,7 @@ import cs211.project.models.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataHardCode;
+import cs211.project.services.UserDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,7 +27,7 @@ public class LoginController {
     @FXML
     private void initialize() {
         // Initialize the userList using UserDataHardCode
-        DataSource<UserList> dataSource = new UserDataHardCode();
+        DataSource<UserList> dataSource = new UserDataSource("data", "login.csv");
         userList = dataSource.readData();
         errorLabel.setVisible(false);
     }
