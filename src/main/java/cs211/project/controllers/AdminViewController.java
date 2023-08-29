@@ -5,6 +5,7 @@ import cs211.project.models.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataHardCode;
+import cs211.project.services.UserDataSource;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,7 +24,7 @@ public class AdminViewController {
     private DataSource<UserList> datasource;
 
     @FXML public void initialize() {
-        datasource = new UserDataHardCode();
+        datasource = new UserDataSource("data", "login.csv");
         userList = datasource.readData();
         showTable(userList);
 

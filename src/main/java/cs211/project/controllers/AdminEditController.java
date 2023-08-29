@@ -5,6 +5,7 @@ import cs211.project.models.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataHardCode;
+import cs211.project.services.UserDataSource;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
@@ -22,7 +23,7 @@ public class AdminEditController {
     private DataSource<UserList> datasource;
     private UserList userList;
     @FXML public void initialize() {
-        datasource = new UserDataHardCode();
+        datasource = new UserDataSource("data", "login.csv");
         userList = datasource.readData();
 
         String username = (String) FXRouter.getData();
