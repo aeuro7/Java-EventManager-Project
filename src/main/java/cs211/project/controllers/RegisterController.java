@@ -43,7 +43,7 @@ public class RegisterController {
         String confirmPassword = conPasswordTextField.getText();
 
         // Perform validation checks
-        boolean isValid = true;
+        boolean isValid = false;
 
         if (username.isEmpty()) {
             // check if usernames is already existed?
