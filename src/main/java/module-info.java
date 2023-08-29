@@ -8,5 +8,5 @@ module cs211.project.cs211661project {
     exports cs211.project.controllers;
     opens cs211.project.controllers to javafx.fxml;
     exports cs211.project.models;
-    opens cs211.project.models to javafx.base;
+    opens cs211.project.models to javafx.base, javafx.fxml;
 }

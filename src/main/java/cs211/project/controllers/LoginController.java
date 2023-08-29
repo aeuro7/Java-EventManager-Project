@@ -36,10 +36,11 @@ public class LoginController {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        if (isValidUser(username, password)) {
+        User loginUser = userList.loginFn(username, password);
+
+        if (isValid(loginUser)) {
             try {
-                // Navigate to the main menu upon successful login
-                FXRouter.goTo("main-menu");
+                FXRouter.goTo("main-menu", loginUser.getUserName());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -64,12 +65,7 @@ public class LoginController {
             throw new RuntimeException(e);
         }
     }
-    private boolean isValidUser(String username, String password) {
-        for (User user : userList.getAllUser()) {
-            if (user.authenticate(username, password)) {
-                return true;
-            }
-        }
-        return false;
+    private boolean isValid(User user) {
+        return user != null;
     }
 }
