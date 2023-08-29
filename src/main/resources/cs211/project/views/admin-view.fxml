@@ -54,6 +54,14 @@
                 <TableColumn prefWidth="75.0" text="C2" />
               </columns>
             </TableView>
+            <Button layoutX="668.0" layoutY="-8.0" mnemonicParsing="false" onAction="#gotoMainMenu" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Main-Menu" textFill="#bb84e8">
+               <font>
+                  <Font name="Sarabun Regular" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             </children>
         </Group>
         <Group layoutY="47.0">
@@ -97,10 +105,13 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-            <Button layoutX="642.0" layoutY="22.0" mnemonicParsing="false" onAction="#logoutButton" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Logout" textFill="#da5a5a">
+            <Button layoutX="642.0" layoutY="22.0" mnemonicParsing="false" onAction="#logoutButton" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Logout" textFill="#da5a5a">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             </children>
         </Group>
@@ -119,21 +130,33 @@
                     <image>
                         <Image url="@../../../icon-png/home-png/caalendar.png" />
                     </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ImageView>
                 <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="710.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon-png/home-png/setting.png" />
                     </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ImageView>
                 <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon-png/home-png/comment.png" />
                     </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ImageView>
                 <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="69.0" layoutY="10.0" onMouseClicked="#goProflie" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon-png/home-png/proflie.png" />
                     </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ImageView>
                 <Rectangle arcHeight="5.0" arcWidth="5.0" height="5.0" layoutX="321.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="160.0">
                     <fill>

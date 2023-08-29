@@ -6,6 +6,8 @@ import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataHardCode;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,6 +26,19 @@ public class AdminViewController {
         datasource = new UserDataHardCode();
         userList = datasource.readData();
         showTable(userList);
+
+        userTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
+            @Override
+            public void changed(ObservableValue observable, User oldValue, User newValue) {
+                if (newValue != null) {
+                    try {
+                        FXRouter.goTo("admin-edit", newValue.getUserName());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
     }
 
     private void showTable(UserList userList) {
