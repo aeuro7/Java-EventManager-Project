@@ -118,7 +118,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="585.0" layoutY="175.0" text="usernameLabel">
+            <Label fx:id="usernameLabel" layoutX="585.0" layoutY="175.0" text="usernameLabel">
                <font>
                   <Font size="16.0" />
                </font>
@@ -158,7 +158,7 @@
                   <Font size="10.0" />
                </font>
             </PasswordField>
-            <Button fx:id="changeInfoButton" layoutX="629.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Confirm Change">
+            <Button layoutX="526.0" layoutY="463.0" mnemonicParsing="false" onAction="#changeInfoButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Confirm Change">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
@@ -173,6 +173,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </BorderPane>
+            <Label fx:id="errorLabel" layoutX="438.0" layoutY="390.0" text="errorLabel" textFill="RED" />
+            <Label fx:id="changeLabel" layoutX="465.0" layoutY="425.0" text="Change has been successfully made." textFill="#0f8019">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
             </children>
         </Group>
         <Group layoutY="47.0">

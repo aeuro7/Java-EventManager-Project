@@ -1,5 +1,6 @@
 package cs211.project.controllers;
 
+import cs211.project.models.Event;
 import cs211.project.models.User;
 import cs211.project.models.UserList;
 import cs211.project.services.DataSource;
@@ -12,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -20,6 +22,7 @@ import java.util.Date;
 
 public class AdminViewController {
     @FXML private TableView<User> userTableView;
+    @FXML private TextField searchBox;
     private UserList userList;
     private DataSource<UserList> datasource;
 
@@ -27,6 +30,10 @@ public class AdminViewController {
         datasource = new UserDataSource("data", "login.csv");
         userList = datasource.readData();
         showTable(userList);
+
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            SearchFn(newValue);
+        });
 
         userTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
             @Override
@@ -94,6 +101,16 @@ public class AdminViewController {
             FXRouter.goTo("profile-view");
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    private void SearchFn(String searchTerm) {
+        searchTerm = searchTerm.toLowerCase().trim();
+        userTableView.getItems().clear();
+
+        for (User user : userList.getAllUser()) {
+            if (user.getUserName().toLowerCase().contains(searchTerm)) {
+                userTableView.getItems().add(user);
+            }
         }
     }
 }
