@@ -129,7 +129,7 @@
             <Image url="@../../../icon-png/home-png/password.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameTextField1" layoutX="509.0" layoutY="160.0" prefHeight="45.0" prefWidth="250.0" promptText="  Name" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+      <TextField fx:id="accountnameTextField" layoutX="509.0" layoutY="160.0" prefHeight="45.0" prefWidth="250.0" promptText="  Name" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
          <font>
             <Font size="10.0" />
          </font>
@@ -196,5 +196,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label fx:id="accountnameErrorLabel" layoutX="672.0" layoutY="136.0" text="Name is Empty!" textFill="RED" />
    </children>
 </AnchorPane>
