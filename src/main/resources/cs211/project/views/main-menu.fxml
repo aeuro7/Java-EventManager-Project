@@ -101,7 +101,7 @@
                   <Font name="Sarabun Regular" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="207.0" layoutY="12.0" text="label_name" textFill="WHITE">
+            <Label fx:id="accountnameLabel" layoutX="207.0" layoutY="12.0" text="label_name" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

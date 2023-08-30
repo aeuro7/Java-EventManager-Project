@@ -24,10 +24,11 @@ public class LoginController {
     private Label errorLabel;
     private UserList userList;
 
+    private DataSource<UserList> dataSource;
+
     @FXML
     private void initialize() {
-        // Initialize the userList using UserDataHardCode
-        DataSource<UserList> dataSource = new UserDataSource("data", "login.csv");
+        dataSource = new UserDataSource("data", "login.csv");
         userList = dataSource.readData();
         errorLabel.setVisible(false);
     }
@@ -40,8 +41,9 @@ public class LoginController {
         User loginUser = userList.loginFn(username, password);
 
         if (isValid(loginUser)) {
+            dataSource.writeData(userList);
             try {
-                FXRouter.goTo("main-menu", loginUser.getUserName());
+                FXRouter.goTo("main-menu", loginUser);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
