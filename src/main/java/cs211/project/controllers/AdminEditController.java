@@ -20,12 +20,16 @@ public class AdminEditController {
     @FXML private TextField accountnameTextField;
     @FXML private TextField newpasswordField;
     @FXML private Label roleLabel;
+    @FXML private Label changeLabel;
+    @FXML private Label nameEmptyLabel;
     private DataSource<UserList> datasource = new UserDataSource("data", "login.csv");;
     private UserList userList = datasource.readData();
     String username = (String) FXRouter.getData();
     User selectedUser = userList.findUserByUserName(username);
     @FXML public void initialize() {
         showUserInfo(selectedUser);
+        nameEmptyLabel.setVisible(false);
+        changeLabel.setVisible(false);
     }
 
     @FXML private void gotoMainMenu() {
@@ -60,6 +64,7 @@ public class AdminEditController {
         userList.changeRole(selectedUser.getUserName());
         updateToCSV();
         showUserInfo(selectedUser);
+        changeLabel.setVisible(true);
     }
     @FXML private void deleteAcount() {
         userList.deleteThisAccount(selectedUser.getUserName());
@@ -70,13 +75,18 @@ public class AdminEditController {
         String newname = accountnameTextField.getText();
         String newpassword = newpasswordField.getText();
 
-        if(!newname.isEmpty() && !newpassword.isEmpty()) {
-            userList.changeInfo(selectedUser.getUserName(), newname, newpassword);
-        } else {
-            //show error label
+        if(!newname.isEmpty()) {
+            nameEmptyLabel.setVisible(false);
+            userList.changeInfo(selectedUser.getUserName(), newname, selectedUser.getPassWord());
+            if(!newpassword.isEmpty()) {
+                userList.changeInfo(selectedUser.getUserName(), selectedUser.getAccountName(), newpassword);
+            }
+            updateToCSV();
+            showUserInfo(selectedUser);
+            changeLabel.setVisible(true);
+        } else{
+            nameEmptyLabel.setVisible(true);
         }
-        updateToCSV();
-        showUserInfo(selectedUser);
     }
 
     void showUserInfo(User user) {

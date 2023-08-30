@@ -129,6 +129,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Label fx:id="changeLabel" layoutX="400.0" layoutY="413.0" text="Change has been successfully made." textFill="#0f8019">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameEmptyLabel" layoutX="455.0" layoutY="389.0" text="Name Cannot Be Empty!" textFill="RED" />
             </children>
         </Group>
         <Group layoutY="47.0">
