@@ -8,11 +8,10 @@ import cs211.project.services.DataSource;
 import cs211.project.services.EventDataHardCode;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataHardCode;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -20,15 +19,24 @@ import java.io.IOException;
 public class MainMenuController {
 
     @FXML private TableView<Event> eventTableView;
+    @FXML private Button adminButton;
     private EventList eventList;
     private DataSource<EventList> datasource;
 
     @FXML TextField searchBox;
+    @FXML Label accountnameLabel;
+    private User account = (User) FXRouter.getData();
 
     @FXML public void initialize() {
         datasource = new EventDataHardCode();
         eventList = datasource.readData();
+        adminButton.setVisible(false);
         showTable(eventList);
+
+        accountnameLabel.setText(account.getAccountName());
+        if(account.isAdmin()) {
+            adminButton.setVisible(true);
+        }
 
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             SearchFn(newValue);
@@ -87,7 +95,25 @@ public class MainMenuController {
         for (Event event: eventList.getAllEvent()) {
             eventTableView.getItems().add(event);
         }
+
+        eventTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Event>() {
+            @Override
+            public void changed(ObservableValue observable, Event oldValue, Event newValue) {
+                if (newValue != null) {
+                    try {
+                        FXRouter.goTo("event-view", newValue.getEventName());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+
+
+
     }
+
+
 
     private void setCenterAlignment(TableColumn<Event, String> column) {
         column.setCellFactory(tc -> new TableCell<Event, String>() {
@@ -125,7 +151,7 @@ public class MainMenuController {
 
     public void goProflie() {
         try {
-            FXRouter.goTo("profile-view");
+            FXRouter.goTo("profile-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -141,6 +167,8 @@ public class MainMenuController {
             }
         }
     }
+
+
 
 
 }
