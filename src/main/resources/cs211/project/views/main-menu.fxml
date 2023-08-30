@@ -190,7 +190,7 @@
          </children>
       </Group>
       <TextField fx:id="searchBox" layoutX="9.0" layoutY="132.0" prefHeight="32.0" prefWidth="650.0" promptText="     Seach Event" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-      <Button layoutX="668.0" layoutY="132.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Create Event" textFill="#bb84e8">
+      <Button layoutX="668.0" layoutY="132.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Create Event" textFill="#bb84e8">
          <font>
             <Font name="Sarabun Regular" size="13.0" />
          </font>

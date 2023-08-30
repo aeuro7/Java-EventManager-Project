@@ -141,6 +141,15 @@ public class MainMenuController {
         }
     }
 
+    @FXML
+    public void createEvent() {
+        try {
+            FXRouter.goTo("create-event");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void goAdminview() {
         try {
             FXRouter.goTo("admin-view");
