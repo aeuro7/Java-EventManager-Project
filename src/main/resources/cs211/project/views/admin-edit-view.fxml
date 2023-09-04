@@ -56,7 +56,6 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-            <Circle fx:id="profilepicID" fill="WHITE" layoutX="212.0" layoutY="281.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
             <Button layoutX="150.0" layoutY="446.0" mnemonicParsing="false" onAction="#deleteAcount" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Delete Account">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
@@ -135,6 +134,12 @@
                </font>
             </Label>
             <Label fx:id="nameEmptyLabel" layoutX="455.0" layoutY="389.0" text="Name Cannot Be Empty!" textFill="RED" />
+            <ImageView fx:id="profilePic" fitHeight="200.0" fitWidth="200.0" layoutX="112.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="158.0" layoutY="191.0" text="Profile Picture">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
             </children>
         </Group>
         <Group layoutY="47.0">

@@ -4,7 +4,6 @@ import cs211.project.models.User;
 import cs211.project.models.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserDataHardCode;
 import cs211.project.services.UserDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

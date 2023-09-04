@@ -11,7 +11,6 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -40,43 +39,6 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <ImageView fitHeight="350.0" fitWidth="350.0" layoutX="53.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
-      <Circle layoutX="228.0" layoutY="264.0" radius="173.0" strokeType="INSIDE" strokeWidth="0.0">
-         <fill>
-            <LinearGradient endX="0.9239904988123515" endY="0.9762470308788599" startX="0.9311163895486936">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.8627451062202454" green="0.9254902005195618" blue="0.9490196108818054" />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.006711409395973154">
-                     <color>
-                        <Color red="0.8627451062202454" green="0.9254902005195618" blue="0.9490196108818054" />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.5312858078245212">
-                     <color>
-                        <Color red="1.0" green="0.9259259104728699" blue="0.9876543283462524" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.8627451062202454" green="0.9254902005195618" blue="0.9490196108818054" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-         <stroke>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.9548693586698337" />
-         </stroke>
-      </Circle>
-      <Circle fill="WHITE" layoutX="228.0" layoutY="264.0" radius="161.0" strokeType="INSIDE" strokeWidth="0.0">
-         <stroke>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.9548693586698337" />
-         </stroke>
-      </Circle>
       <TextField fx:id="usernameTextField" layoutX="509.0" layoutY="240.0" prefHeight="45.0" prefWidth="250.0" promptText="  Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
          <font>
             <Font size="10.0" />
@@ -197,5 +159,6 @@
          </cursor>
       </Button>
       <Label fx:id="accountnameErrorLabel" layoutX="672.0" layoutY="136.0" text="Name is Empty!" textFill="RED" />
+      <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="300.0" layoutX="78.0" layoutY="136.0" pickOnBounds="true" styleClass="circular-profile" />
    </children>
 </AnchorPane>
