@@ -102,8 +102,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Circle fx:id="profilepicID" fill="WHITE" layoutX="300.0" layoutY="243.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
-            <Button fx:id="browsepicBotton" layoutX="238.0" layoutY="359.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Browse">
+            <Button layoutX="238.0" layoutY="430.0" mnemonicParsing="false" onAction="#browseButtonClick" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Browse">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
@@ -177,6 +176,12 @@
             <Label fx:id="changeLabel" layoutX="465.0" layoutY="425.0" text="Change has been successfully made." textFill="#0f8019">
                <font>
                   <Font size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="profilePic" fitHeight="200.0" fitWidth="200.0" layoutX="200.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="246.0" layoutY="138.0" text="Profile Picture">
+               <font>
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             </children>

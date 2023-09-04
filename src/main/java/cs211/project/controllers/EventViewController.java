@@ -2,11 +2,9 @@ package cs211.project.controllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
-import cs211.project.models.User;
 import cs211.project.services.DataSource;
 import cs211.project.services.EventDataHardCode;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserDataHardCode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 

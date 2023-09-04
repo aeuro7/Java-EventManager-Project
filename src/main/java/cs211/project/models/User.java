@@ -6,6 +6,7 @@ public class User {
     private String passWord; // passWord เปลี่ยนได้
     private String role;
     private long lastLoginTimestamp;
+    private String profilePicture;
 
 
     public User(String userName, String accountName, String passWord) {
@@ -14,20 +15,13 @@ public class User {
         this.passWord = passWord;
         this.role = "user";
         this.lastLoginTimestamp = System.currentTimeMillis();
+        this.profilePicture = "default";
     }
-    public User(String userName, String accountName, String passWord, long timeStamp) {
-        this.accountName = accountName;
-        this.userName = userName;
-        this.passWord = passWord;
-        this.role = "user";
+    public User(String userName, String accountName, String passWord, String role, long timeStamp, String profilePicture) {
+        this(userName, accountName, passWord);
         this.lastLoginTimestamp = timeStamp;
-    }
-    public User(String userName, String accountName, String passWord, String role, long timeStamp) {
-        this.accountName = accountName;
-        this.userName = userName;
-        this.passWord = passWord;
         this.role = role;
-        this.lastLoginTimestamp = timeStamp;
+        this.profilePicture = profilePicture;
     }
 
     public boolean isThisAccout(String userName) {
@@ -72,6 +66,14 @@ public class User {
             this.accountName = name;
         }
     }// method เปลี่ยนชื่อแต่ชื่อที่เข้ามาต้องไม่เป็น Empty String
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     @Override
     public String toString() {
