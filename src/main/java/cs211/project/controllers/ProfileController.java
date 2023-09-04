@@ -122,10 +122,23 @@ public class ProfileController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    @FXML private void gotoBooking() {
+    } @FXML private void gotoBook() {
         try {
             FXRouter.goTo("book-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML private void gotoManageTeam() {
+        try {
+            FXRouter.goTo("manage-team");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML private void gotoManageEvent() {
+        try {
+            FXRouter.goTo("manage-event");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
