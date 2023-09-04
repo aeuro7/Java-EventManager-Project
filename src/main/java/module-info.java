@@ -9,4 +9,6 @@ module cs211.project.cs211661project {
     opens cs211.project.controllers to javafx.fxml;
     exports cs211.project.models;
     opens cs211.project.models to javafx.base, javafx.fxml;
+    exports cs211.project.models.Team;
+    opens cs211.project.models.Team to javafx.base, javafx.fxml;
 }

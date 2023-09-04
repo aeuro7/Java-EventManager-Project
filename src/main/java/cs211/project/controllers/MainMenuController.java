@@ -131,7 +131,6 @@ public class MainMenuController {
         });
     }
 
-
     @FXML
     public void goLogout() {
         try {

@@ -12,15 +12,10 @@ import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
-public class BookhistoryViewController {
-
-    @FXML private Group nowOn;
-    @FXML private Group nowCom;
+public class EventManageController {
 
     @FXML
     private void initialize() {
-        nowCom.setVisible(false);
-        nowOn.setVisible(false);
 
     }
 
@@ -39,8 +34,6 @@ public class BookhistoryViewController {
             throw new RuntimeException(e);
         }
     }
-
-
     @FXML private void gotoEditprofile() {
         try {
             FXRouter.goTo("profile-view");
@@ -67,20 +60,6 @@ public class BookhistoryViewController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-
-    @FXML private void showOngoing() {
-            nowOn.setVisible(true);
-            nowCom.setVisible(false);
-    }
-
-    @FXML private void showCompleted() {
-        nowCom.setVisible(true);
-        nowOn.setVisible(false);
-
-
     }
 
 
