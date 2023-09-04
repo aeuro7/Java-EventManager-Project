@@ -60,9 +60,6 @@ public class EventViewController {
             throw new RuntimeException(e);
         }
     }
-    @FXML private void goBack() {
-
-    }
     @FXML private void joinStaff() {
 
     }

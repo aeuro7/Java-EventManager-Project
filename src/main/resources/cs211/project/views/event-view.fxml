@@ -270,7 +270,7 @@
             <Font name="Sarabun Regular" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="57.0" layoutY="489.0" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Back" textFill="#da5a5a">
+      <Button layoutX="57.0" layoutY="489.0" mnemonicParsing="false" onAction="#goMainMenu" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Back" textFill="#da5a5a">
          <font>
             <Font name="Sarabun Regular" size="13.0" />
          </font>
