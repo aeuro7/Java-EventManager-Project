@@ -14,6 +14,18 @@ public class Team {
         teamStaffList.add(teamStaff);
     }
 
+    public void addTeamStaff(String username){
+        TeamStaff teamStaff = new TeamStaff(username,"CREW");
+        teamStaffList.add(teamStaff);
+    }
+
+    public void addTeamStaff(String username,String role){
+        TeamStaff teamStaff = new TeamStaff(username,role);
+        teamStaffList.add(teamStaff);
+    }
+
+
+
     public void removeTeamStaff(TeamStaff teamStaff) {
         teamStaffList.remove(teamStaff);
     }
