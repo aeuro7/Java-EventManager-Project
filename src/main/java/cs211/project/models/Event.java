@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event {
+    private String eventID;
+    private static long idGenerator;
     private String eventName;
     private long startTime;
     private long dueTime;
@@ -29,6 +31,8 @@ public class Event {
         this.location = location;
         this.limitStaffPT = limitStaffPT;
         this.eventOwner = eventOwner;
+        idGenerator++;
+        this.eventID = idGenerator;
     }
 
     public String getEventName() {
