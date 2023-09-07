@@ -1,11 +1,14 @@
 package cs211.project.models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event {
+    private String eventID;
+    private static long idGenerator;
     private String eventName;
-    private String startDate;
-    private String dueDate;
-    private String startTime;
-    private String dueTime;
+    private long startTime;
+    private long dueTime;
     private String info; //detail on createEvent page
     private double maxSeat;
 
@@ -17,11 +20,9 @@ public class Event {
 
     private final String eventOwner;
 
-    public Event(String eventName, String startDate, String startTime, String dueDate, String dueTime, String info, double maxSeat, String location, double limitStaffPT, String eventOwner) {
+    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, String location, double limitStaffPT, String eventOwner) {
         this.eventName = eventName;
-        this.startDate = startDate;
         this.startTime = startTime;
-        this.dueDate = dueDate;
         this.dueTime = dueTime;
         this.info = info;
         this.maxSeat = maxSeat;
@@ -30,49 +31,28 @@ public class Event {
         this.location = location;
         this.limitStaffPT = limitStaffPT;
         this.eventOwner = eventOwner;
+        idGenerator++;
+        this.eventID = idGenerator;
     }
 
     public String getEventName() {
         return eventName;
     }
-    public String getStartDate() {
-        return startDate;
-    }
 
-    public void setStartDate(String startDate) {
-        if(!startDate.equals("")) {
-            this.startDate = startDate;
-        }
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(String dueDate) {
-        if(!dueDate.equals("")) {
-            this.dueDate = dueDate;
-        }
-    }
-
-    public String getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
-        if(!startTime.equals("")) {
-            this.startTime = startTime;
-        }
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
-    public String getDueTime() {
+    public long getDueTime() {
         return dueTime;
     }
 
-    public void setDueTime(String dueTime) {
-        if(!dueTime.equals("")) {
-            this.dueTime = dueTime;
-        }
+    public void setDueTime(long dueTime) {
+        this.dueTime = dueTime;
     }
     public String getInfo() {
         return info;
