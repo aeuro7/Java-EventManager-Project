@@ -11,7 +11,13 @@ import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
-public class EventManageController {
+public class AccountViewController {
+
+
+    @FXML private Label nameLabel;
+    @FXML private Label userLabel;
+    @FXML private Label statusLabel;
+    @FXML private Label teamLabel;
 
     @FXML
     private void initialize() {
@@ -56,14 +62,6 @@ public class EventManageController {
     @FXML private void gotoManageEvent() {
         try {
             FXRouter.goTo("manage-event");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-  @FXML private void gotoManageEvent2() {
-        try {
-            FXRouter.goTo("manage-event2");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

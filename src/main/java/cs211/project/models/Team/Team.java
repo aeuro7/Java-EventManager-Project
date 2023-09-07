@@ -30,8 +30,6 @@ public class Team {
         teamStaffList.add(teamStaff);
     }
 
-
-
     public void removeTeamStaff(TeamStaff teamStaff) {
         teamStaffList.remove(teamStaff);
     }

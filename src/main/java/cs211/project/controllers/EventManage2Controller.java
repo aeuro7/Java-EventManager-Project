@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
-public class EventManageController {
+public class EventManage2Controller {
 
     @FXML
     private void initialize() {
@@ -59,11 +59,9 @@ public class EventManageController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-  @FXML private void gotoManageEvent2() {
+    } @FXML private void goAccountView() {
         try {
-            FXRouter.goTo("manage-event2");
+            FXRouter.goTo("account-view");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
