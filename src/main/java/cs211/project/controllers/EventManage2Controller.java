@@ -1,11 +1,17 @@
 package cs211.project.controllers;
 
+import cs211.project.models.UserList;
+import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
-public class EventManageController {
+public class EventManage2Controller {
 
     @FXML
     private void initialize() {
@@ -53,11 +59,9 @@ public class EventManageController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-  @FXML private void gotoManageEvent2() {
+    } @FXML private void goAccountView() {
         try {
-            FXRouter.goTo("manage-event2");
+            FXRouter.goTo("account-view");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
