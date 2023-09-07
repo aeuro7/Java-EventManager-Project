@@ -161,6 +161,12 @@ public class MainMenuController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void SearchFn(String searchTerm) {

@@ -339,7 +339,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></BorderPane>
-            <BorderPane layoutY="187.0" onMouseClicked="#gotoManageEvent" prefHeight="49.0" prefWidth="167.0">
+            <BorderPane layoutY="187.0" onMouseClicked="#gotoBook" prefHeight="49.0" prefWidth="167.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
