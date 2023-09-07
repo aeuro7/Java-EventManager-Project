@@ -32,7 +32,7 @@ public class Event {
         this.limitStaffPT = limitStaffPT;
         this.eventOwner = eventOwner;
         idGenerator++;
-        this.eventID = idGenerator;
+        this.eventID = String.valueOf(idGenerator);
     }
 
     public String getEventName() {
