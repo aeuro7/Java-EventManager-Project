@@ -9,13 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EventViewController {
     @FXML private Label eventNameLabel;
-    @FXML private Label startDateLabel;
     @FXML private Label detailLabel;
     @FXML private Label seatLeftLabel;
-    @FXML private Label dueDateLabel;
     @FXML private Label dueTimeLabel;
     @FXML private Label startTimeLabel;
     @FXML private Label locationLabel;
@@ -24,10 +24,8 @@ public class EventViewController {
     private EventList eventList;
     private void showEventInfo(Event event) {
         eventNameLabel.setText(event.getEventName());
-        startDateLabel.setText(event.getStartDate());
-        startTimeLabel.setText(event.getStartTime());
-        dueDateLabel.setText(event.getDueDate());
-        dueTimeLabel.setText(event.getDueTime());
+        startTimeLabel.setText(formatTimestamp(event.getStartTime()));
+        dueTimeLabel.setText(formatTimestamp(event.getDueTime()));
         locationLabel.setText(event.getLocation());
         detailLabel.setText(event.getInfo());
         seatLeftLabel.setText(Double.toString(event.getLeftSeat()));
@@ -69,5 +67,10 @@ public class EventViewController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String formatTimestamp(long timestamp) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(new Date(timestamp));
     }
 }

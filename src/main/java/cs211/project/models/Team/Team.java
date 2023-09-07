@@ -6,6 +6,12 @@ import java.util.List;
 public class Team {
     private List<TeamStaff> teamStaffList;
 
+    private String eventID;
+
+    public String getEventID() {
+        return eventID;
+    }
+
     public Team() {
         teamStaffList = new ArrayList<>();
     }
@@ -23,8 +29,6 @@ public class Team {
         TeamStaff teamStaff = new TeamStaff(username,role);
         teamStaffList.add(teamStaff);
     }
-
-
 
     public void removeTeamStaff(TeamStaff teamStaff) {
         teamStaffList.remove(teamStaff);

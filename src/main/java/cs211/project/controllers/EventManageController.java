@@ -61,6 +61,14 @@ public class EventManageController {
         }
     }
 
+  @FXML private void gotoManageEvent2() {
+        try {
+            FXRouter.goTo("manage-event2");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 
