@@ -6,6 +6,12 @@ import java.util.List;
 public class Team {
     private List<TeamStaff> teamStaffList;
 
+    private String eventID;
+
+    public String getEventID() {
+        return eventID;
+    }
+
     public Team() {
         teamStaffList = new ArrayList<>();
     }
