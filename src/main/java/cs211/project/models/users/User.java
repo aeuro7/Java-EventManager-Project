@@ -1,4 +1,4 @@
-package cs211.project.models;
+package cs211.project.models.users;
 
 public class User {
     private final String userName; // userName เปลี่ยนไม่ได้

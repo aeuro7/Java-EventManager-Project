@@ -1,5 +1,7 @@
 package cs211.project.models;
 
+import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.UserDataSource;
 

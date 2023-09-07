@@ -1,7 +1,7 @@
 package cs211.project.services;
 
-import cs211.project.models.User;
-import cs211.project.models.UserList;
+import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
 
 import java.io.*;
 
