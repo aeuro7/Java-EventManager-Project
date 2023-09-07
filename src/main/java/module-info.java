@@ -11,4 +11,6 @@ module cs211.project.cs211661project {
     opens cs211.project.models to javafx.base, javafx.fxml;
     exports cs211.project.models.Team;
     opens cs211.project.models.Team to javafx.base, javafx.fxml;
+    exports cs211.project.models.chats;
+    opens cs211.project.models.chats to javafx.base, javafx.fxml;
 }
