@@ -8,6 +8,7 @@ import cs211.project.services.UserDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
 
@@ -25,11 +26,21 @@ public class LoginController {
 
     private DataSource<UserList> dataSource;
 
-    @FXML
-    private void initialize() {
+    @FXML private void initialize() {
         dataSource = new UserDataSource("data", "login.csv");
         userList = dataSource.readData();
         errorLabel.setVisible(false);
+        usernameTextField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                onSignInButtonClick();
+            }
+        });
+
+        passwordTextField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                onSignInButtonClick();
+            }
+        });
     }
 
     @FXML
