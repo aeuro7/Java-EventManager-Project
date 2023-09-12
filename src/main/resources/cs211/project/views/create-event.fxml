@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -83,11 +84,6 @@
                         <Font name="Sarabun Regular" size="13.0" />
                     </font>
                 </Button>
-            <TextField fx:id="startDateTextField" layoutX="382.0" layoutY="189.0" prefHeight="30.0" prefWidth="100.0" promptText="startDateTextField" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
             <Label layoutX="277.0" layoutY="151.0" text="Event Name">
                <font>
                   <Font name="System Bold" size="16.0" />
@@ -104,11 +100,6 @@
                </font>
             </Label>
             <TextField fx:id="startTimeTextField" layoutX="556.0" layoutY="189.0" prefHeight="30.0" prefWidth="100.0" promptText="startTimeTextField" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="dueDateTextField" layoutX="382.0" layoutY="229.0" prefHeight="30.0" prefWidth="100.0" promptText="dueDateTextField" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
                <font>
                   <Font size="10.0" />
                </font>
@@ -153,6 +144,8 @@
                   <Font size="10.0" />
                </font>
             </TextField>
+            <DatePicker fx:id="startDatePicker" layoutX="382.0" layoutY="192.0" prefHeight="25.0" prefWidth="115.0" />
+            <DatePicker fx:id="dueDatePicker" layoutX="382.0" layoutY="231.0" prefHeight="25.0" prefWidth="115.0" />
             </children>
         </Group>
         <Group layoutY="47.0">

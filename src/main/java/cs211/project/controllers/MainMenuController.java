@@ -5,7 +5,9 @@ import cs211.project.models.EventList;
 import cs211.project.models.users.User;
 import cs211.project.services.DataSource;
 import cs211.project.services.EventDataHardCode;
+import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -13,6 +15,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainMenuController {
 
@@ -26,7 +30,7 @@ public class MainMenuController {
     private User account = (User) FXRouter.getData();
 
     @FXML public void initialize() {
-        datasource = new EventDataHardCode();
+        datasource = new EventDataSource("data", "event.csv");
         eventList = datasource.readData();
         adminButton.setVisible(false);
         showTable(eventList);
@@ -45,17 +49,19 @@ public class MainMenuController {
         TableColumn<Event, String> eventNameColumn = new TableColumn<>("Event Name");
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
 
-        TableColumn<Event, String> startDateNewColumn = new TableColumn<>("Date");
-        startDateNewColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        TableColumn<Event, String> startTimeColumn = new TableColumn<>("Start From");
+        startTimeColumn.setCellValueFactory(cellData -> {
+            long startTime = cellData.getValue().getStartTime();
+            String formattedTimestamp = formatTimestamp(startTime); // Format the timestamp
+            return new SimpleStringProperty(formattedTimestamp);
+        });
 
-        TableColumn<Event, String> dueDateNewColumn = new TableColumn<>("Due date");
-        dueDateNewColumn.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
-
-        TableColumn<Event, String> startTimeNewColumn = new TableColumn<>("Start");
-        startTimeNewColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-
-        TableColumn<Event, String> dueTimeNewColumn = new TableColumn<>("End");
-        dueTimeNewColumn.setCellValueFactory(new PropertyValueFactory<>("dueTime"));
+        TableColumn<Event, String> dueTimeColumn = new TableColumn<>("End At");
+        dueTimeColumn.setCellValueFactory(cellData -> {
+            long endTime = cellData.getValue().getDueTime();
+            String formattedTimestamp = formatTimestamp(endTime);
+            return new SimpleStringProperty(formattedTimestamp);
+        });
 
         TableColumn<Event, String> leftSeatNewColumn = new TableColumn<>("Seat Available");
         leftSeatNewColumn.setCellValueFactory(new PropertyValueFactory<>("leftSeat"));
@@ -63,25 +69,17 @@ public class MainMenuController {
         TableColumn<Event, String> locationNewColumn = new TableColumn<>("Location");
         locationNewColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
-        setCenterAlignment(startDateNewColumn);
-        setCenterAlignment(dueDateNewColumn);
-        setCenterAlignment(startTimeNewColumn);
-        setCenterAlignment(dueTimeNewColumn);
+        setCenterAlignment(startTimeColumn);
+        setCenterAlignment(dueTimeColumn);
 
 
         eventTableView.getColumns().clear();
 
         eventTableView.getColumns().add(eventNameColumn);
         eventNameColumn.setMinWidth(180);
-        eventTableView.getColumns().add(startDateNewColumn);
-        startDateNewColumn.setMinWidth(30);
-        eventTableView.getColumns().add(dueDateNewColumn);
-        dueDateNewColumn.setMinWidth(30);
-        eventTableView.getColumns().add(startTimeNewColumn);
-        startTimeNewColumn.setMinWidth(30);
-        eventTableView.getColumns().add(dueTimeNewColumn);
-        dueTimeNewColumn.setMinWidth(30);
 
+        eventTableView.getColumns().add(startTimeColumn);
+        eventTableView.getColumns().add(dueTimeColumn);
 
         eventTableView.getColumns().add(leftSeatNewColumn);
         leftSeatNewColumn.setMinWidth(30);
@@ -111,6 +109,10 @@ public class MainMenuController {
 
     }
 
+    private String formatTimestamp(long timestamp) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(new Date(timestamp));
+    }
 
 
     private void setCenterAlignment(TableColumn<Event, String> column) {
@@ -141,7 +143,7 @@ public class MainMenuController {
     @FXML
     public void createEvent() {
         try {
-            FXRouter.goTo("create-event");
+            FXRouter.goTo("create-event", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

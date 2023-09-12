@@ -9,13 +9,14 @@ public class Event {
     private String eventName;
     private long startTime;
     private long dueTime;
-    private String info; //detail on createEvent page
+    private String info;
     private double maxSeat;
 
     private double leftSeat;
     private double bookedSeat;
 
     private String location;
+
     private double limitStaffPT; // limit staff per team of the event
 
     private final String eventOwner;
@@ -34,10 +35,24 @@ public class Event {
         idGenerator++;
         this.eventID = String.valueOf(idGenerator);
     }
+    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, double leftSeat, double booked, String location, double limitStaffPT, String eventOwner, String id) {
+        this.eventName = eventName;
+        this.startTime = startTime;
+        this.dueTime = dueTime;
+        this.info = info;
+        this.maxSeat = maxSeat;
+        this.leftSeat = leftSeat;
+        this.bookedSeat = booked;
+        this.location = location;
+        this.limitStaffPT = limitStaffPT;
+        this.eventOwner = eventOwner;
+        this.eventID = id;
+    }
 
     public String getEventName() {
         return eventName;
     }
+    public String getEventID() {return this.eventID;}
 
     public long getStartTime() {
         return startTime;
@@ -110,11 +125,17 @@ public class Event {
     public double getLeftSeat() {
         return this.leftSeat;
     }
+
+    public double getBookedSeat() {return this.bookedSeat;}
     public double changeLimitStaff(double newLimitStaffPT) {
         if(newLimitStaffPT != 0) {
             this.limitStaffPT = newLimitStaffPT;
         }
         return limitStaffPT;
+    }
+
+    public boolean isThisOwner(String username) {
+        return username.equals(this.eventOwner);
     }
 }
 

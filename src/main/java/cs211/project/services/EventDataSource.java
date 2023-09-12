@@ -1,14 +1,15 @@
 package cs211.project.services;
 
+import cs211.project.models.Event;
+import cs211.project.models.EventList;
 import cs211.project.models.users.User;
-import cs211.project.models.users.UserList;
 
 import java.io.*;
 
-public class UserDataSource implements DataSource<UserList> {
+public class EventDataSource implements DataSource<EventList>{
     private String fileDirectoryName;
     private String fileName;
-    public UserDataSource(String fileDirectoryName, String fileName) {
+    public EventDataSource(String fileDirectoryName, String fileName) {
         this.fileDirectoryName = fileDirectoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -29,8 +30,8 @@ public class UserDataSource implements DataSource<UserList> {
         }
     }
     @Override
-    public UserList readData() {
-        UserList userList = new UserList();
+    public EventList readData() {
+        EventList eventList = new EventList();
         String filePath = fileDirectoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -42,8 +43,10 @@ public class UserDataSource implements DataSource<UserList> {
             String line = "";
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
-                User newUser = new User(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(), Long.parseLong(data[4]), data[5].trim());
-                userList.addUser(newUser);
+                Event newEvent = new Event(data[0].trim(), Long.parseLong(data[1]), Long.parseLong(data[2]), data[3].trim(),
+                        Double.parseDouble(data[4]), Double.parseDouble(data[5]), Double.parseDouble(data[6]), data[7].trim(),
+                        Double.parseDouble(data[8]), data[9].trim(), data[10]);
+                eventList.addEvent(newEvent);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -57,11 +60,11 @@ public class UserDataSource implements DataSource<UserList> {
                 e.printStackTrace();
             }
         }
-        return userList;
+        return eventList;
     }
 
     @Override
-    public void writeData(UserList userList) {
+    public void writeData(EventList writeEventList) {
         String filePath = fileDirectoryName + File.separator + fileName;
         File file = new File(filePath);
         FileWriter fileWriter = null;
@@ -69,13 +72,18 @@ public class UserDataSource implements DataSource<UserList> {
             fileWriter = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fileWriter);
 
-            for (User newUser: userList.getAllUser()){
-                String line = newUser.getUserName() + ","
-                        + newUser.getAccountName() + ","
-                        + newUser.getPassWord() + ","
-                        + newUser.getRole() + ","
-                        + newUser.getLastLoginTimestamp() + ","
-                        + newUser.getProfilePicture();
+            for (Event event: writeEventList.getAllEvent()){
+                String line = event.getEventName() + ","
+                        + event.getStartTime() + ","
+                        + event.getDueTime() + ","
+                        + event.getInfo() + ","
+                        + event.getMaxSeat() + ","
+                        + event.getLeftSeat() + ","
+                        + event.getBookedSeat() + ","
+                        + event.getLocation() + ","
+                        + event.getLimitStaffPT() + ","
+                        + event.getEventOwner() + ","
+                        + event.getEventID();
                 writer.append(line);
                 writer.newLine();
             }
