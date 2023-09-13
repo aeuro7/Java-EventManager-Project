@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Chat {
     private ArrayList<Message> messageList;
     private String eventID;
+    private String eventName;
 
     public Chat() {
         messageList = new ArrayList<>();
@@ -19,6 +20,15 @@ public class Chat {
     }
     public String getEventID() {
         return eventID;
+    }
+    public String getEventName() {
+        return eventName;
+    }
+    public void setName(String name) {
+        this.eventName = name;
+    }
+    public void setID(String id) {
+        this.eventID = id;
     }
 
     public ArrayList<Message> getChatlist() {

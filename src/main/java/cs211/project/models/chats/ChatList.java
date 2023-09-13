@@ -26,4 +26,12 @@ public class ChatList {
         }
         return null;
     }
+    public Chat findChatByEventName(String eventName) {
+        for(Chat chat: chatList) {
+            if(chat.getEventName().equals(eventName)) {
+                return chat;
+            }
+        }
+        return null;
+    }
 }

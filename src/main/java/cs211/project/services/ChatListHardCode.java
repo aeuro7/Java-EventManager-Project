@@ -5,7 +5,7 @@ import cs211.project.models.chats.ChatList;
 
 public class ChatListHardCode implements DataSource{
     @Override
-    public Object readData() {
+    public ChatList readData() {
         Chat chatA = new Chat();
         chatA.addChat("admin", "now i'm gonna get apple");
         chatA.addChat("admin2", "now i'm gonna get aie-pods");
@@ -13,6 +13,8 @@ public class ChatListHardCode implements DataSource{
         chatB.addChat("Bank", "hello, bro!");
         chatB.addChat("Jane", "Hi, Bank");
         ChatList chatList = new ChatList();
+        chatA.setName("Test1");
+        chatB.setName("Test2");
         chatList.addChat(chatA);
         chatList.addChat(chatB);
         return chatList;

@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -27,14 +29,16 @@ public class ProfileController {
     @FXML private TextField connewpasswordField;
     @FXML private Label changeLabel;
     @FXML private Label errorLabel;
-    @FXML private ImageView profilePic;
+    @FXML private Circle profilepicCircle;
     private DataSource<UserList> datasource;
     private UserList userList;
     private User account;
     private File selectedImageFile;
     void showUserInfo(User user) {
         selectedImageFile = new File(user.getProfilePicture());
-        profilePic.setImage(new Image(selectedImageFile.toURI().toString()));
+        Image profileImage = new Image(selectedImageFile.toURI().toString());
+        ImagePattern imagePattern = new ImagePattern(profileImage);
+        profilepicCircle.setFill(imagePattern);
         usernameLabel.setText(user.getUserName());
         accountnameTextField.setText(user.getAccountName());
         passwordField.clear();
@@ -60,8 +64,9 @@ public class ProfileController {
         selectedImageFile = chooser.showOpenDialog(source.getScene().getWindow());
 
         if (selectedImageFile != null) {
-            Image selectedImage = new Image(selectedImageFile.toURI().toString());
-            profilePic.setImage(selectedImage);
+            Image profileImage = new Image(selectedImageFile.toURI().toString());
+            ImagePattern imagePattern = new ImagePattern(profileImage);
+            profilepicCircle.setFill(imagePattern);
         }
         copyFile(account.getUserName(), selectedImageFile);
         changeLabel.setVisible(true);

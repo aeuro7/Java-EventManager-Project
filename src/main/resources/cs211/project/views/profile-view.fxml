@@ -139,12 +139,12 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fx:id="profilePic" fitHeight="200.0" fitWidth="200.0" layoutX="200.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="246.0" layoutY="138.0" text="Profile Picture">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
+            <Circle fx:id="profilepicCircle" fill="WHITE" layoutX="300.0" layoutY="280.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
             </children>
         </Group>
         <Group layoutY="47.0">
