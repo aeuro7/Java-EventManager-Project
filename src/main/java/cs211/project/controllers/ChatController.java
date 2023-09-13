@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -47,7 +48,7 @@ public class ChatController {
 
     private void showTable(ChatList chatList) {
         TableColumn<Chat, String> eventNameColumn = new TableColumn<>("Event Name");
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventID"));
+        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
 
         chatListTableView.getColumns().clear();
         chatListTableView.getColumns().add(eventNameColumn);
@@ -68,7 +69,7 @@ public class ChatController {
 
     private void selectChat(Chat chat) {
         selectChat = chat;
-        selectLabel.setText(chat.getEventID());
+        selectLabel.setText(chat.getEventName());
         chatListview.getItems().clear();
         chatListview.setVisible(true);
         messageTextArea.setVisible(true);
@@ -77,18 +78,27 @@ public class ChatController {
     }
 
     private void setTextOnListView() {
+        chatListview.getItems().clear();
+
         for (Message message : selectChat.getChatlist()) {
             String sender = message.getSenderName();
             String text = message.getMessage();
             Label label = new Label(sender + ":\n" + text);
 
-            if (account.equalsIgnoreCase(sender)) {
-                label.setStyle("-fx-alignment: center-right;");
+            if (account.equals(sender)) {
+                label.setAlignment(Pos.CENTER_RIGHT);
+                label.setStyle("-fx-background-color: #D3E1E1; -fx-padding: 5px;");
+            } else {
+                label.setAlignment(Pos.CENTER_LEFT);
+                label.setStyle("-fx-background-color: #E1D3D3; -fx-padding: 5px;");
             }
 
             chatListview.getItems().add(label);
         }
     }
+
+
+
     public void sendButton() {
 
     }
