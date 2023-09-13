@@ -3,9 +3,11 @@ package cs211.project.controllers;
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
 import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.UserDataSource;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -26,14 +28,20 @@ public class MainMenuController {
 
     @FXML TextField searchBox;
     @FXML Label accountnameLabel;
-    private User account = (User) FXRouter.getData();
+    private User account ;
+    private UserList userList;
+
+    private DataSource<UserList> datasourceUser;
 
     @FXML public void initialize() {
         datasource = new EventDataSource("data", "event.csv");
         eventList = datasource.readData();
         adminButton.setVisible(false);
         showTable(eventList);
-
+        datasourceUser = new UserDataSource("data", "login.csv");
+        userList = datasourceUser.readData();
+        String username = ((User) FXRouter.getData()).getUserName();
+        account = userList.findUserByUserName(username);
         accountnameLabel.setText(account.getAccountName());
         if(account.isAdmin()) {
             adminButton.setVisible(true);

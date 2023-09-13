@@ -1,4 +1,4 @@
-package cs211.project.models.team;
+package cs211.project.models.Team;
 
 import java.util.ArrayList;
 import java.util.List;

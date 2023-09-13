@@ -1,4 +1,4 @@
-package cs211.project.models.team;
+package cs211.project.models.Team;
 
 public class TeamStaff {
 
