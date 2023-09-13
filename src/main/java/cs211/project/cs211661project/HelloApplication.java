@@ -33,6 +33,7 @@ public class HelloApplication extends Application {
         FXRouter.when("calendar-view", resourcesPath + "calendar-view.fxml");
         FXRouter.when("manage-event2", resourcesPath + "event-manage2.fxml");
         FXRouter.when("account-view", resourcesPath + "account-view.fxml");
+        FXRouter.when("chat-view", resourcesPath + "chat-view.fxml");
 
     }
 

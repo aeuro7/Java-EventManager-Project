@@ -1,0 +1,124 @@
+package cs211.project.controllers;
+
+import cs211.project.models.chats.Chat;
+import cs211.project.models.chats.ChatList;
+import cs211.project.models.chats.Message;
+import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
+import cs211.project.services.ChatListHardCode;
+import cs211.project.services.DataSource;
+import cs211.project.services.FXRouter;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.IOException;
+
+public class ChatController {
+
+    @FXML private TableView chatListTableView;
+    @FXML private ListView<Label> chatListview;
+    @FXML private TextArea messageTextArea;
+    @FXML private Label selectLabel;
+    @FXML private Button sendButton;
+
+    private DataSource<ChatList> dataSource = new ChatListHardCode();
+    private ChatList chatList;
+    private Chat selectChat;
+
+    private String account = (String) FXRouter.getData();
+    @FXML private void initialize() {
+        chatList = dataSource.readData();
+        clearChat();
+        showTable(chatList);
+
+        chatListTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Chat>() {
+            @Override
+            public void changed(ObservableValue observable, Chat oldValue, Chat newValue) {
+                if (newValue != null) {
+                    selectChat(newValue);
+                }
+            }
+        });
+    }
+
+    private void showTable(ChatList chatList) {
+        TableColumn<Chat, String> eventNameColumn = new TableColumn<>("Event Name");
+        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventID"));
+
+        chatListTableView.getColumns().clear();
+        chatListTableView.getColumns().add(eventNameColumn);
+
+        chatListTableView.getItems().clear();
+
+        for (Chat chat: chatList.getChatList()) {
+            chatListTableView.getItems().add(chat);
+        }
+    }
+
+    private void clearChat() {
+        selectLabel.setText("Chat List");
+        chatListview.setVisible(false);
+        messageTextArea.setVisible(false);
+        sendButton.setVisible(false);
+    }
+
+    private void selectChat(Chat chat) {
+        selectChat = chat;
+        selectLabel.setText(chat.getEventID());
+        chatListview.getItems().clear();
+        chatListview.setVisible(true);
+        messageTextArea.setVisible(true);
+        sendButton.setVisible(true);
+        setTextOnListView();
+    }
+
+    private void setTextOnListView() {
+        for (Message message : selectChat.getChatlist()) {
+            String sender = message.getSenderName();
+            String text = message.getMessage();
+            Label label = new Label(sender + ":\n" + text);
+
+            if (account.equalsIgnoreCase(sender)) {
+                label.setStyle("-fx-alignment: center-right;");
+            }
+
+            chatListview.getItems().add(label);
+        }
+    }
+    public void sendButton() {
+
+    }
+    public void goLogout() {
+        try {
+            FXRouter.goTo("login-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goProflie() {
+        try {
+            FXRouter.goTo("profile-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}

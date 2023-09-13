@@ -4,7 +4,6 @@ import cs211.project.models.Event;
 import cs211.project.models.EventList;
 import cs211.project.models.users.User;
 import cs211.project.services.DataSource;
-import cs211.project.services.EventDataHardCode;
 import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
 import javafx.beans.property.SimpleStringProperty;
@@ -170,7 +169,13 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
-
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void SearchFn(String searchTerm) {
         searchTerm = searchTerm.toLowerCase().trim();
         eventTableView.getItems().clear();

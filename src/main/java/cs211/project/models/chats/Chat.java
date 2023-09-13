@@ -13,6 +13,10 @@ public class Chat {
         Message newchat = new Message(sendername, text);
         messageList.add(newchat);
     }
+
+    public void addChat(Message message) {
+        messageList.add(message);
+    }
     public String getEventID() {
         return eventID;
     }

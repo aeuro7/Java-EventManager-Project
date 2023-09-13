@@ -3,7 +3,7 @@ package cs211.project.controllers;
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
 import cs211.project.services.DataSource;
-import cs211.project.services.EventDataHardCode;
+import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -33,7 +33,7 @@ public class EventViewController {
     }
 
     @FXML public void initialize() {
-        datasource = new EventDataHardCode();
+        datasource = new EventDataSource("data", "event.csv");
         eventList = datasource.readData();
 
         String eventname = (String) FXRouter.getData();
