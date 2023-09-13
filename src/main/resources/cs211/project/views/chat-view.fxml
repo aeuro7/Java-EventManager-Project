@@ -109,7 +109,7 @@
         <Group layoutY="553.0">
             <children>
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="800.0" />
-                <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="389.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="389.0" layoutY="13.0" onMouseClicked="#goMain" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon-png/home-png/home.png" />
                     </image>
@@ -125,7 +125,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ImageView>
-                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" onMouseClicked="#goChat" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon-png/home-png/comment.png" />
                     </image>

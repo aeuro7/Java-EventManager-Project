@@ -35,7 +35,6 @@ public class ChatController {
         chatList = dataSource.readData();
         clearChat();
         showTable(chatList);
-
         chatListTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Chat>() {
             @Override
             public void changed(ObservableValue observable, Chat oldValue, Chat newValue) {
@@ -130,5 +129,11 @@ public class ChatController {
             throw new RuntimeException(e);
         }
     }
-
+    public void goMain() {
+        try {
+            FXRouter.goTo("main-menu", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

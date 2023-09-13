@@ -3,7 +3,6 @@ package cs211.project.models.chats;
 import java.util.ArrayList;
 
 public class ChatList {
-
     private ArrayList<Chat> chatList;
 
     public ChatList() {
@@ -14,9 +13,7 @@ public class ChatList {
         chatList.add(chat);
     }
 
-    public ArrayList<Chat> getChatList() {
-        return chatList;
-    }
+    public ArrayList<Chat> getChatList() {return chatList;}
 
     public Chat findChatByEventID(String eventID) {
         for(Chat chat: chatList) {
