@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,10 +22,12 @@ import java.util.Date;
 public class AdminViewController {
     @FXML private TableView<User> userTableView;
     @FXML private TextField searchBox;
+    @FXML private Label label_name;
     private UserList userList;
     private DataSource<UserList> datasource;
-
+    String account = (String) FXRouter.getData();
     @FXML public void initialize() {
+        label_name.setText(account);
         datasource = new UserDataSource("data", "login.csv");
         userList = datasource.readData();
         showTable(userList);
@@ -82,21 +85,21 @@ public class AdminViewController {
     }
     @FXML private void gotoMainMenu() {
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void logoutButton() {
         try {
-            FXRouter.goTo("login-view");
+            FXRouter.goTo("login-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void goProflie() {
         try {
-            FXRouter.goTo("profile-view");
+            FXRouter.goTo("profile-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

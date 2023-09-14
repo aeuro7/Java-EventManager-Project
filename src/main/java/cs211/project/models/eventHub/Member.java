@@ -1,11 +1,11 @@
 package cs211.project.models.eventHub;
 
-public class Membership {
+public class Member {
 
     private String username;
     private String eventID;
     private String role;
-    public Membership(String username, String eventID, String role) {
+    public Member(String username, String eventID, String role) {
         this.username = username;
         this.eventID = eventID;
         this.role = role;

@@ -1,15 +1,14 @@
 package cs211.project.services;
 
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
-import cs211.project.models.users.User;
+import cs211.project.models.eventHub.Member;
+import cs211.project.models.eventHub.MemberList;
 
 import java.io.*;
 
-public class EventDataSource implements DataSource<EventList>{
+public class MemberDataSource implements DataSource<MemberList> {
     private String fileDirectoryName;
     private String fileName;
-    public EventDataSource(String fileDirectoryName, String fileName) {
+    public MemberDataSource(String fileDirectoryName, String fileName) {
         this.fileDirectoryName = fileDirectoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -30,8 +29,8 @@ public class EventDataSource implements DataSource<EventList>{
         }
     }
     @Override
-    public EventList readData() {
-        EventList eventList = new EventList();
+    public MemberList readData() {
+        MemberList memberList = new MemberList();
         String filePath = fileDirectoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -43,10 +42,7 @@ public class EventDataSource implements DataSource<EventList>{
             String line = "";
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
-                Event newEvent = new Event(data[0].trim(), Long.parseLong(data[1]), Long.parseLong(data[2]), data[3].trim(),
-                        Double.parseDouble(data[4]), Double.parseDouble(data[5]), Double.parseDouble(data[6]), data[7].trim(),
-                        Double.parseDouble(data[8]), data[9].trim());
-                eventList.addEvent(newEvent);
+                memberList.addMember(data[0], data[1], data[2]);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -60,11 +56,11 @@ public class EventDataSource implements DataSource<EventList>{
                 e.printStackTrace();
             }
         }
-        return eventList;
+        return memberList;
     }
 
     @Override
-    public void writeData(EventList writeEventList) {
+    public void writeData(MemberList memberList) {
         String filePath = fileDirectoryName + File.separator + fileName;
         File file = new File(filePath);
         FileWriter fileWriter = null;
@@ -72,17 +68,10 @@ public class EventDataSource implements DataSource<EventList>{
             fileWriter = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fileWriter);
 
-            for (Event event: writeEventList.getAllEvent()){
-                String line = event.getEventName() + ","
-                        + event.getStartTime() + ","
-                        + event.getDueTime() + ","
-                        + event.getInfo() + ","
-                        + event.getMaxSeat() + ","
-                        + event.getLeftSeat() + ","
-                        + event.getBookedSeat() + ","
-                        + event.getLocation() + ","
-                        + event.getLimitStaffPT() + ","
-                        + event.getEventID();
+            for (Member member: memberList.getMemberList()){
+                String line = member.getUsername() + ","
+                        + member.getEventID() + ","
+                        + member.getRole();
                 writer.append(line);
                 writer.newLine();
             }

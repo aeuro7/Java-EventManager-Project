@@ -40,7 +40,7 @@ public class MainMenuController {
         showTable(eventList);
         datasourceUser = new UserDataSource("data", "login.csv");
         userList = datasourceUser.readData();
-        String username = ((User) FXRouter.getData()).getUserName();
+        String username = (String) FXRouter.getData();
         account = userList.findUserByUserName(username);
         accountnameLabel.setText(account.getAccountName());
         if(account.isAdmin()) {
@@ -158,7 +158,7 @@ public class MainMenuController {
 
     public void goAdminview() {
         try {
-            FXRouter.goTo("admin-view");
+            FXRouter.goTo("admin-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -166,13 +166,13 @@ public class MainMenuController {
 
     public void goProflie() {
         try {
-            FXRouter.goTo("profile-view", account);
+            FXRouter.goTo("profile-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }public void goCalendar() {
         try {
-            FXRouter.goTo("calendar-view", account);
+            FXRouter.goTo("calendar-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

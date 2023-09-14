@@ -5,6 +5,7 @@ import cs211.project.models.chats.ChatList;
 import cs211.project.models.chats.Message;
 import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
+import cs211.project.services.ChatListDataSource;
 import cs211.project.services.ChatListHardCode;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
@@ -26,7 +27,7 @@ public class ChatController {
     @FXML private Label selectLabel;
     @FXML private Button sendButton;
 
-    private DataSource<ChatList> dataSource = new ChatListHardCode();
+    private DataSource<ChatList> dataSource = new ChatListDataSource("data", "chatList.csv");
     private ChatList chatList;
     private Chat selectChat;
 

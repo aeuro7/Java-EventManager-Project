@@ -53,7 +53,7 @@ public class LoginController {
         if (isValid(loginUser)) {
             dataSource.writeData(userList);
             try {
-                FXRouter.goTo("main-menu", loginUser);
+                FXRouter.goTo("main-menu", username);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

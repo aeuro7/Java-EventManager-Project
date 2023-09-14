@@ -2,9 +2,12 @@ package cs211.project.controllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
+import cs211.project.models.eventHub.Member;
+import cs211.project.models.eventHub.MemberList;
 import cs211.project.services.DataSource;
 import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.MemberDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -28,13 +31,17 @@ public class CreateEventController {
     @FXML private TextField descriptionTextField;
 
     private EventList eventList;
-    DataSource<EventList> dataSource;
+    DataSource<EventList> eventListDataSource;
+    private MemberList memberList;
+    DataSource<MemberList> memberListDataSource;
 
     private String account;
     @FXML public void initialize() {
         account = (String) FXRouter.getData();
-        dataSource = new EventDataSource("data", "event.csv");
-        eventList = dataSource.readData();
+        eventListDataSource = new EventDataSource("data", "event.csv");
+        memberListDataSource = new MemberDataSource("data", "member.csv");
+        memberList = memberListDataSource.readData();
+        eventList = eventListDataSource.readData();
     }
     @FXML
     public void browsepicBotton() {
@@ -64,10 +71,14 @@ public class CreateEventController {
         long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
 
         Event newEvent = new Event(eventName, startTimeMillis, dueTimeMillis, info,
-                Double.parseDouble(audience), location, Double.parseDouble(limitStaff), account);
+                Double.parseDouble(audience), location, Double.parseDouble(limitStaff));
+
+        Member member = new Member(account, newEvent.getEventID(), "OWNER");
 
         eventList.addEvent(newEvent);
-        dataSource.writeData(eventList);
+        memberList.addMember(member);
+        eventListDataSource.writeData(eventList);
+        memberListDataSource.writeData(memberList);
 
         try {
             FXRouter.goTo("main-menu");

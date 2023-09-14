@@ -49,7 +49,7 @@ public class ProfileController {
     @FXML public void initialize() {
         datasource = new UserDataSource("data", "login.csv");
         userList = datasource.readData();
-        String username = ((User) FXRouter.getData()).getUserName();
+        String username = (String) FXRouter.getData();
         account = userList.findUserByUserName(username);
         showUserInfo(account);
         errorLabel.setVisible(false);
