@@ -44,14 +44,13 @@ public class ChatListDataSource implements DataSource<ChatList> {
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 5) {
+                if (data.length == 2) {
                     // New chat entry
                     currentChat = new Chat();
                     currentChat.setID(data[0]);
                     currentChat.setName(data[1]);
                     chatList.addChat(currentChat);
-                } else if (data.length == 4 && currentChat != null) {
-                    // Message entry
+                } else if (currentChat != null) {
                     Message message = new Message(data[1], data[3]);
                     message.setSentDateTime(Long.parseLong(data[2]));
                     currentChat.addChat(message);
@@ -81,7 +80,7 @@ public class ChatListDataSource implements DataSource<ChatList> {
                     String line = chat.getEventID() + ","
                             + message.getSenderName() + ","
                             + message.getSentDateTime() + ","
-                            + message.getMessage();
+                            + message.getMessage().trim();
                     bufferedWriter.write(line);
                     bufferedWriter.newLine();
                 }

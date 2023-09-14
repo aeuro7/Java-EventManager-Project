@@ -89,6 +89,13 @@ public class CalendarController {
             throw new RuntimeException(e);
         }
     }
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void showTable(CalendarList calendars) {
         TableColumn<Calendar, String> eventNameColumn = new TableColumn<>("Event");
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventLinkName"));

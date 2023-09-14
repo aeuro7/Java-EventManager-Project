@@ -35,10 +35,8 @@ public class ProfileController {
     private User account;
     private File selectedImageFile;
     void showUserInfo(User user) {
-        selectedImageFile = new File(user.getProfilePicture());
-        Image profileImage = new Image(selectedImageFile.toURI().toString());
-        ImagePattern imagePattern = new ImagePattern(profileImage);
-        profilepicCircle.setFill(imagePattern);
+        Image profileImage = new Image("file:" + user.getProfilePicture());
+        profilepicCircle.setFill(new ImagePattern(profileImage));
         usernameLabel.setText(user.getUserName());
         accountnameTextField.setText(user.getAccountName());
         passwordField.clear();

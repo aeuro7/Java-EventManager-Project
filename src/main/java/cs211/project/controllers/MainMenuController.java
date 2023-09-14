@@ -14,6 +14,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -104,7 +105,8 @@ public class MainMenuController {
             public void changed(ObservableValue observable, Event oldValue, Event newValue) {
                 if (newValue != null) {
                     try {
-                        FXRouter.goTo("event-view", newValue.getEventName());
+                        Pair<String , String> sender = new Pair<String, String>(newValue.getEventName(), account.getUserName());
+                        FXRouter.goTo("event-view", sender);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

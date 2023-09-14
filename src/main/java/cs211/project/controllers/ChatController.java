@@ -3,13 +3,9 @@ package cs211.project.controllers;
 import cs211.project.models.chats.Chat;
 import cs211.project.models.chats.ChatList;
 import cs211.project.models.chats.Message;
-import cs211.project.models.users.User;
-import cs211.project.models.users.UserList;
 import cs211.project.services.ChatListDataSource;
-import cs211.project.services.ChatListHardCode;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -30,7 +26,7 @@ public class ChatController {
     private DataSource<ChatList> dataSource = new ChatListDataSource("data", "chatList.csv");
     private ChatList chatList;
     private Chat selectChat;
-
+    private Message message;
     private String account = (String) FXRouter.getData();
     @FXML private void initialize() {
         chatList = dataSource.readData();
@@ -98,10 +94,15 @@ public class ChatController {
         }
     }
 
-
-
     public void sendButton() {
-
+        String messageText = messageTextArea.getText();
+        if (!messageText.isEmpty()) {
+            Message newMessage = new Message(account, messageText);
+            selectChat.addChat(newMessage);
+            setTextOnListView();
+            messageTextArea.clear();
+            dataSource.writeData(chatList);
+        }
     }
     public void goLogout() {
         try {
@@ -120,6 +121,13 @@ public class ChatController {
     public void goCalendar() {
         try {
             FXRouter.goTo("calendar-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goMain() {
+        try {
+            FXRouter.goTo("main-menu", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

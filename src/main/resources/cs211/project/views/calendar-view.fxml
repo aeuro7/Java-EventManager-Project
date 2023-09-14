@@ -172,7 +172,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </ImageView>
-                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" onMouseClicked="#goChat" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../icon-png/home-png/comment.png" />
                     </image>
