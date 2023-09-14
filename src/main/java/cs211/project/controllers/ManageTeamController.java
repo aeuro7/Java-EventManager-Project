@@ -1,15 +1,8 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
-import cs211.project.models.Team.Team;
-import cs211.project.models.Team.TeamList;
-import cs211.project.models.chats.Chat;
-import cs211.project.models.chats.ChatList;
-import cs211.project.models.users.UserList;
+import cs211.project.models.team.Team;
+import cs211.project.models.team.TeamList;
 import cs211.project.services.*;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,6 +13,8 @@ import java.io.IOException;
 public class ManageTeamController {
 
     private Team selectTeam;
+
+    @FXML
     private TableView<Team> teamTableView;
 
     private TeamList teamList;
@@ -43,7 +38,9 @@ public class ManageTeamController {
 
         teamTableView.getItems().clear();
 
-        teamTableView.getItems().addAll(teamList.getAllTeams());
+        for (Team team: teamList.getAllTeams()) {
+            teamTableView.getItems().add(team);
+        }
     }
 
 

@@ -1,10 +1,10 @@
-package cs211.project.models.Team;
+package cs211.project.models.team;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Team {
-    private List<TeamStaff> teamStaffList;
+    private ArrayList<TeamStaff> teamStaffList;
 
     private String nameTeam;
 
@@ -23,6 +23,7 @@ public class Team {
     }
 
     public Team(String nameTeam, String eventID) {
+        teamStaffList = new ArrayList<>();
         this.nameTeam = nameTeam;
         this.eventID = eventID;
     }
@@ -49,7 +50,7 @@ public class Team {
         teamStaffList.remove(teamStaff);
     }
 
-    public List<TeamStaff> getAllTeamStaff() {
+    public ArrayList<TeamStaff> getAllTeamStaff() {
         return teamStaffList;
     }
 

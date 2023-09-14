@@ -14,6 +14,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -40,7 +41,7 @@ public class MainMenuController {
         showTable(eventList);
         datasourceUser = new UserDataSource("data", "login.csv");
         userList = datasourceUser.readData();
-        String username = ((User) FXRouter.getData()).getUserName();
+        String username = (String) FXRouter.getData();
         account = userList.findUserByUserName(username);
         accountnameLabel.setText(account.getAccountName());
         if(account.isAdmin()) {
@@ -104,7 +105,8 @@ public class MainMenuController {
             public void changed(ObservableValue observable, Event oldValue, Event newValue) {
                 if (newValue != null) {
                     try {
-                        FXRouter.goTo("event-view", newValue.getEventName());
+                        Pair<String , String> sender = new Pair<String, String>(newValue.getEventName(), account.getUserName());
+                        FXRouter.goTo("event-view", sender);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -158,7 +160,7 @@ public class MainMenuController {
 
     public void goAdminview() {
         try {
-            FXRouter.goTo("admin-view");
+            FXRouter.goTo("admin-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -166,13 +168,13 @@ public class MainMenuController {
 
     public void goProflie() {
         try {
-            FXRouter.goTo("profile-view", account);
+            FXRouter.goTo("profile-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }public void goCalendar() {
         try {
-            FXRouter.goTo("calendar-view", account);
+            FXRouter.goTo("calendar-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

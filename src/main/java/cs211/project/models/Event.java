@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Event {
     private String eventID;
-    private static long idGenerator;
     private String eventName;
     private long startTime;
     private long dueTime;
@@ -19,9 +18,8 @@ public class Event {
 
     private double limitStaffPT; // limit staff per team of the event
 
-    private final String eventOwner;
 
-    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, String location, double limitStaffPT, String eventOwner) {
+    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, String location, double limitStaffPT) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
@@ -31,11 +29,9 @@ public class Event {
         this.bookedSeat = 0;
         this.location = location;
         this.limitStaffPT = limitStaffPT;
-        this.eventOwner = eventOwner;
-        idGenerator++;
-        this.eventID = String.valueOf(idGenerator);
+        this.eventID = String.valueOf(System.currentTimeMillis());
     }
-    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, double leftSeat, double booked, String location, double limitStaffPT, String eventOwner, String id) {
+    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, double leftSeat, double booked, String location, double limitStaffPT, String id) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
@@ -45,7 +41,6 @@ public class Event {
         this.bookedSeat = booked;
         this.location = location;
         this.limitStaffPT = limitStaffPT;
-        this.eventOwner = eventOwner;
         this.eventID = id;
     }
 
@@ -104,10 +99,6 @@ public class Event {
         return limitStaffPT;
     }
 
-    public String getEventOwner() {
-        return eventOwner;
-    }
-
     public void changeEventName(String newEventName) {
         if(!newEventName.equals("")) {
             this.eventName = newEventName;
@@ -134,9 +125,6 @@ public class Event {
         return limitStaffPT;
     }
 
-    public boolean isThisOwner(String username) {
-        return username.equals(this.eventOwner);
-    }
 }
 
 

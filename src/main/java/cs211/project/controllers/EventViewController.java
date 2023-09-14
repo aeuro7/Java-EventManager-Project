@@ -7,6 +7,7 @@ import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ public class EventViewController {
     @FXML private Label maxSeatLabel;
     private DataSource<EventList> datasource;
     private EventList eventList;
+    private String userName;
     private void showEventInfo(Event event) {
         eventNameLabel.setText(event.getEventName());
         startTimeLabel.setText(formatTimestamp(event.getStartTime()));
@@ -36,7 +38,8 @@ public class EventViewController {
         datasource = new EventDataSource("data", "event.csv");
         eventList = datasource.readData();
 
-        String eventname = (String) FXRouter.getData();
+        String eventname = ((Pair<String, String>) FXRouter.getData()).getKey();
+        userName = ((Pair<String, String>) FXRouter.getData()).getValue();
         Event selectedEvent = eventList.findEventByEventName(eventname);
         showEventInfo(selectedEvent);
     }
@@ -46,14 +49,28 @@ public class EventViewController {
     }
     @FXML private void goMainMenu() {
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu", userName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML private void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", userName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML private void goChat() {
+        try {
+            FXRouter.goTo("chat-view", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void goProflie() {
         try {
-            FXRouter.goTo("profile-view");
+            FXRouter.goTo("profile-view", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -35,10 +35,8 @@ public class ProfileController {
     private User account;
     private File selectedImageFile;
     void showUserInfo(User user) {
-        selectedImageFile = new File(user.getProfilePicture());
-        Image profileImage = new Image(selectedImageFile.toURI().toString());
-        ImagePattern imagePattern = new ImagePattern(profileImage);
-        profilepicCircle.setFill(imagePattern);
+        Image profileImage = new Image("file:" + user.getProfilePicture());
+        profilepicCircle.setFill(new ImagePattern(profileImage));
         usernameLabel.setText(user.getUserName());
         accountnameTextField.setText(user.getAccountName());
         passwordField.clear();
@@ -49,7 +47,7 @@ public class ProfileController {
     @FXML public void initialize() {
         datasource = new UserDataSource("data", "login.csv");
         userList = datasource.readData();
-        String username = ((User) FXRouter.getData()).getUserName();
+        String username = (String) FXRouter.getData();
         account = userList.findUserByUserName(username);
         showUserInfo(account);
         errorLabel.setVisible(false);

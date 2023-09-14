@@ -1,7 +1,7 @@
 package cs211.project.services;
 
-import cs211.project.models.Team.Team;
-import cs211.project.models.Team.TeamList;
+import cs211.project.models.team.Team;
+import cs211.project.models.team.TeamList;
 
 public class TeamHardCode implements DataSource<TeamList> {
 

@@ -1,10 +1,10 @@
-package cs211.project.models.Team;
+package cs211.project.models.team;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeamList {
-    private List<Team> teamList;
+    private ArrayList<Team> teamList;
 
     public TeamList() {
         teamList = new ArrayList<>();

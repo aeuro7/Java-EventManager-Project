@@ -97,7 +97,7 @@
                         <Font name="Sarabun Regular" size="18.0" />
                     </font>
                 </Label>
-                <Label layoutX="206.0" layoutY="22.0" text="label_name" textFill="WHITE">
+                <Label fx:id="label_name" layoutX="206.0" layoutY="22.0" text="label_name" textFill="WHITE">
                     <font>
                         <Font size="18.0" />
                     </font>
