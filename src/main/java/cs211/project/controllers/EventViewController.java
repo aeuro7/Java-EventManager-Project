@@ -7,6 +7,9 @@ import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -21,6 +24,7 @@ public class EventViewController {
     @FXML private Label startTimeLabel;
     @FXML private Label locationLabel;
     @FXML private Label maxSeatLabel;
+    @FXML private Circle eventPicCircle;
     private DataSource<EventList> datasource;
     private EventList eventList;
     private String userName;
@@ -32,6 +36,7 @@ public class EventViewController {
         detailLabel.setText(event.getInfo());
         seatLeftLabel.setText(Double.toString(event.getLeftSeat()));
         maxSeatLabel.setText(Double.toString(event.getMaxSeat()));
+        eventPicCircle.setFill(new ImagePattern(new Image("file:" + event.getEventPicture())));
     }
 
     @FXML public void initialize() {

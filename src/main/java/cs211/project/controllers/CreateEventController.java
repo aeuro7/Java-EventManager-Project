@@ -8,11 +8,21 @@ import cs211.project.services.DataSource;
 import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.MemberDataSource;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,23 +39,35 @@ public class CreateEventController {
     @FXML private TextField audienceTextField;
     @FXML private TextField limitStaffTextField;
     @FXML private TextField descriptionTextField;
+    @FXML private Circle eventPicCircle;
 
     private EventList eventList;
     DataSource<EventList> eventListDataSource;
     private MemberList memberList;
     DataSource<MemberList> memberListDataSource;
-
+    private File selectedImageFile;
     private String account;
+    private String picturePath;
     @FXML public void initialize() {
         account = (String) FXRouter.getData();
+        picturePath = "data/EventPicture/default.png";
+        eventPicCircle.setFill(new ImagePattern(new Image("file:" + picturePath)));
         eventListDataSource = new EventDataSource("data", "event.csv");
         memberListDataSource = new MemberDataSource("data", "member.csv");
         memberList = memberListDataSource.readData();
         eventList = eventListDataSource.readData();
     }
-    @FXML
-    public void browsepicBotton() {
+    @FXML public void browseButtonClick(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images (PNG, JPG)", "*.png", "*.jpg", "*.jpeg"));
+        Node source = (Node) event.getSource();
+        selectedImageFile = chooser.showOpenDialog(source.getScene().getWindow());
 
+        if (selectedImageFile != null) {
+            Image selectedImage = new Image(selectedImageFile.toURI().toString());
+            eventPicCircle.setFill(new ImagePattern(selectedImage));
+        }
     }
 
     @FXML
@@ -70,8 +92,19 @@ public class CreateEventController {
         long startTimeMillis = startDateTime.atZone(systemZone).toInstant().toEpochMilli();
         long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
 
+
         Event newEvent = new Event(eventName, startTimeMillis, dueTimeMillis, info,
-                Double.parseDouble(audience), location, Double.parseDouble(limitStaff));
+                Double.parseDouble(audience), location, Double.parseDouble(limitStaff), account);
+
+        String profilePicturePath;
+        if (selectedImageFile != null) {
+            profilePicturePath = copyFile(newEvent.getEventID(), selectedImageFile);
+        } else {
+            Path path = Path.of(picturePath);
+            selectedImageFile = path.toFile();
+            profilePicturePath = copyFile(newEvent.getEventID(), selectedImageFile);;
+        }
+        newEvent.setEventPicture(profilePicturePath);
 
         Member member = new Member(account, newEvent.getEventID(), "OWNER");
 
@@ -81,7 +114,7 @@ public class CreateEventController {
         memberListDataSource.writeData(memberList);
 
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -90,14 +123,14 @@ public class CreateEventController {
 
     @FXML public void gotoMainMenu() {
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void goProflie() {
         try {
-            FXRouter.goTo("profile-view");
+            FXRouter.goTo("profile-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -107,6 +140,24 @@ public class CreateEventController {
             FXRouter.goTo("login-view");
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    private String copyFile(String eventID, File source) {
+        String userProfilePictureFolder = "data/EventPicture";
+        File userProfilePictureDir = new File(userProfilePictureFolder);
+        if (!userProfilePictureDir.exists()) {
+            userProfilePictureDir.mkdirs();
+        }
+        String imageFilename = eventID + ".png";
+        String profilePicturePath = userProfilePictureFolder + File.separator + imageFilename;
+        try {
+            File destinationFile = new File(profilePicturePath);
+            Files.copy(source.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return profilePicturePath;
         }
     }
 }

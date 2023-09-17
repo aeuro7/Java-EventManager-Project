@@ -45,7 +45,7 @@ public class EventDataSource implements DataSource<EventList>{
                 String[] data = line.split(",");
                 Event newEvent = new Event(data[0].trim(), Long.parseLong(data[1]), Long.parseLong(data[2]), data[3].trim(),
                         Double.parseDouble(data[4]), Double.parseDouble(data[5]), Double.parseDouble(data[6]), data[7].trim(),
-                        Double.parseDouble(data[8]), data[9].trim());
+                        Double.parseDouble(data[8]), data[9].trim(), data[10].trim(), data[11]);
                 eventList.addEvent(newEvent);
             }
         } catch (FileNotFoundException e) {
@@ -82,7 +82,9 @@ public class EventDataSource implements DataSource<EventList>{
                         + event.getBookedSeat() + ","
                         + event.getLocation() + ","
                         + event.getLimitStaffPT() + ","
-                        + event.getEventID();
+                        + event.getEventID() + ","
+                        + event.getEventOwner() + ","
+                        + event.getEventPicture();
                 writer.append(line);
                 writer.newLine();
             }

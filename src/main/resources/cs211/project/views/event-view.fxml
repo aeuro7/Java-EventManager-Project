@@ -151,7 +151,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Group>
-      <Circle fx:id="profilepicID" fill="WHITE" layoutX="157.0" layoutY="264.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
+      <Circle fx:id="eventPicCircle" fill="WHITE" layoutX="157.0" layoutY="264.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
       <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="369.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../icon-png/logo_png/logo-no-background.png" />

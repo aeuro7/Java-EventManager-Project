@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CalendarController {
-    private User account;
+    private String account;
     @FXML private TableView<Calendar> calendarTableView;
     @FXML private TextField searchBox;
     @FXML private Label eventnameLabel;
@@ -31,7 +31,7 @@ public class CalendarController {
     @FXML private Label infoLabel;
     private CalendarList calendarList;
     @FXML public void initialize() {
-        account = (User) FXRouter.getData();
+        account = (String) FXRouter.getData();
         DataSource<CalendarList> dataSource = new CalendarHardCode();
         calendarList = dataSource.readData();
         showTable(calendarList);

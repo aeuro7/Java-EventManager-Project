@@ -11,6 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -159,6 +160,6 @@
          </cursor>
       </Button>
       <Label fx:id="accountnameErrorLabel" layoutX="672.0" layoutY="136.0" text="Name is Empty!" textFill="RED" />
-      <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="300.0" layoutX="78.0" layoutY="136.0" pickOnBounds="true" styleClass="circular-profile" />
+      <Circle fx:id="profilepicCircle" fill="WHITE" layoutX="228.0" layoutY="305.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
    </children>
 </AnchorPane>

@@ -17,9 +17,11 @@ public class Event {
     private String location;
 
     private double limitStaffPT; // limit staff per team of the event
+    private String eventOwner;
+    private String eventPicture;
 
 
-    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, String location, double limitStaffPT) {
+    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, String location, double limitStaffPT, String eventOwner) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
@@ -30,8 +32,10 @@ public class Event {
         this.location = location;
         this.limitStaffPT = limitStaffPT;
         this.eventID = String.valueOf(System.currentTimeMillis());
+        this.eventOwner = eventOwner;
+        this.eventPicture = this.eventID;
     }
-    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, double leftSeat, double booked, String location, double limitStaffPT, String id) {
+    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, double leftSeat, double booked, String location, double limitStaffPT, String id, String eventOwner, String eventPicture) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
@@ -42,6 +46,8 @@ public class Event {
         this.location = location;
         this.limitStaffPT = limitStaffPT;
         this.eventID = id;
+        this.eventOwner = eventOwner;
+        this.eventPicture = eventPicture;
     }
 
     public String getEventName() {
@@ -124,7 +130,15 @@ public class Event {
         }
         return limitStaffPT;
     }
+    public String getEventOwner() {return this.eventOwner;}
 
+    public String getEventPicture() {
+        return eventPicture;
+    }
+
+    public void setEventPicture(String eventPicture) {
+        this.eventPicture = eventPicture;
+    }
 }
 
 

@@ -48,8 +48,8 @@
                         </LinearGradient>
                     </fill>
                 </Rectangle>
-                <Circle fx:id="eventPicID" fill="WHITE" layoutX="142.0" layoutY="255.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
-                <Button fx:id="browsepicBotton" layoutX="80.0" layoutY="371.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Browse">
+                <Circle fx:id="eventPicCircle" fill="WHITE" layoutX="142.0" layoutY="255.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
+                <Button layoutX="80.0" layoutY="371.0" mnemonicParsing="false" onAction="#browseButtonClick" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Browse">
                     <font>
                         <Font name="Sarabun Regular" size="13.0" />
                     </font>

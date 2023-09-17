@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -29,7 +31,7 @@ public class RegisterController {
     @FXML private Label usernameErrorLabel;
     @FXML private Label passwordErrorLabel;
     @FXML private Label cPasswordErrorLabel;
-    @FXML private ImageView imageView;
+    @FXML private Circle profilepicCircle;
 
     private UserList userList;
     DataSource<UserList> dataSource;
@@ -38,7 +40,7 @@ public class RegisterController {
     @FXML
     public void initialize() {
         picturePath = "data/UserProfilePicture/default.png";
-        imageView.setImage(new Image("file:" + picturePath));
+        profilepicCircle.setFill(new ImagePattern(new Image("file:" + picturePath)));
         accountnameErrorLabel.setVisible(false);
         usernameErrorLabel.setVisible(false);
         passwordErrorLabel.setVisible(false);
@@ -132,7 +134,7 @@ public class RegisterController {
 
         if (selectedImageFile != null) {
             Image selectedImage = new Image(selectedImageFile.toURI().toString());
-            imageView.setImage(selectedImage);
+            profilepicCircle.setFill(new ImagePattern(selectedImage));
         }
     }
 

@@ -49,54 +49,54 @@
                         </LinearGradient>
                     </fill>
                 </Rectangle>
-            <TableView fx:id="calendarTableView" layoutX="75.0" layoutY="177.0" prefHeight="330.0" prefWidth="420.0" stylesheets="@../../../table_style/table.css">
+            <TableView fx:id="calendarTableView" layoutX="45.0" layoutY="178.0" prefHeight="330.0" prefWidth="450.0" stylesheets="@../../../table_style/table.css">
                <columns>
                   <TableColumn prefWidth="75.0" text="C1" />
                   <TableColumn prefWidth="75.0" text="C2" />
                </columns>
             </TableView>
-            <TextField fx:id="searchBox" layoutX="75.0" layoutY="128.0" prefHeight="32.0" prefWidth="420.0" promptText="     Seach Event" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <ImageView fx:id="eventImageView" fitHeight="150.0" fitWidth="150.0" layoutX="564.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="547.0" layoutY="300.0" text="Event:">
+            <TextField fx:id="searchBox" layoutX="45.0" layoutY="130.0" prefHeight="32.0" prefWidth="450.0" promptText="     Seach Event" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
+            <Label layoutX="524.0" layoutY="326.0" text="Event:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="547.0" layoutY="330.0" text="Start:">
+            <Label layoutX="524.0" layoutY="356.0" text="Start:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="eventnameLabel" layoutX="616.0" layoutY="300.0" text="eventnameLabel">
+            <Label fx:id="eventnameLabel" layoutX="589.0" layoutY="326.0" text="eventnameLabel">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="starttimeLabel" layoutX="616.0" layoutY="330.0" text="starttimeLabel">
+            <Label fx:id="starttimeLabel" layoutX="589.0" layoutY="356.0" text="starttimeLabel">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="547.0" layoutY="360.0" text="Due:">
+            <Label layoutX="524.0" layoutY="386.0" text="Due:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="duetimeLabel" layoutX="616.0" layoutY="360.0" text="duetimeLabel">
+            <Label fx:id="duetimeLabel" layoutX="589.0" layoutY="386.0" text="duetimeLabel">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="547.0" layoutY="390.0" text="Info:">
+            <Label layoutX="524.0" layoutY="416.0" text="Info:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="infoLabel" layoutX="564.0" layoutY="420.0" text="infoLabel">
+            <Label fx:id="infoLabel" layoutX="547.0" layoutY="441.0" text="infoLabel">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
+            <Circle fx:id="eventpicCircle" fill="WHITE" layoutX="647.0" layoutY="219.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
             </children>
         </Group>
         <Group layoutY="47.0">
