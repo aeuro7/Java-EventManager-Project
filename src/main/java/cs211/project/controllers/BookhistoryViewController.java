@@ -28,7 +28,7 @@ public class BookhistoryViewController {
     @FXML private TableView eventTableView;
     private DataSource<MemberList> memberListDataSource = new MemberDataSource("data", "member.csv");
     private DataSource<EventList> eventListDataSource = new EventDataSource("data", "event.csv");
-    String username = (String) FXRouter.getData();
+    String username;
 
     private EventList eventList;
     private MemberList memberList;
@@ -37,6 +37,7 @@ public class BookhistoryViewController {
     private void initialize() {
         eventList = eventListDataSource.readData();
         memberList = memberListDataSource.readData();
+        username = (String) FXRouter.getData();
         nowCom.setVisible(false);
         nowOn.setVisible(false);
         showTable(eventList);
@@ -80,20 +81,9 @@ public class BookhistoryViewController {
         locationNewColumn.setMinWidth(184);
 
         eventTableView.getItems().clear();
-
-//        for (Member member : memberList.getMemberList()) {
-//            if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
-//                String eventID = member.getEventID();
-//                Event addEvent = eventList.findEventByID(eventID);
-//                if (addEvent != null) {
-//                    eventTableView.getItems().add(addEvent);
-//                }
-//            }
-//        }
-
     }
 
-        @FXML
+    @FXML
     private void logoutButton() {
         try {
             FXRouter.goTo("login-view");
@@ -125,14 +115,14 @@ public class BookhistoryViewController {
     }
     @FXML private void gotoManageTeam() {
         try {
-            FXRouter.goTo("manage-team",username);
+            FXRouter.goTo("manage-team", username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageEvent() {
         try {
-            FXRouter.goTo("manage-event");
+            FXRouter.goTo("manage-event", username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
