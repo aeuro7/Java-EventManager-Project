@@ -2,9 +2,14 @@ package cs211.project.controllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
+import cs211.project.models.eventHub.Member;
+import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
+import cs211.project.services.DataSource;
+import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.MemberDataSource;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -21,11 +26,17 @@ public class BookhistoryViewController {
     @FXML private Group nowOn;
     @FXML private Group nowCom;
     @FXML private TableView eventTableView;
+    private DataSource<MemberList> memberListDataSource = new MemberDataSource("data", "member.csv");
+    private DataSource<EventList> eventListDataSource = new EventDataSource("data", "event.csv");
+    String username = (String) FXRouter.getData();
 
     private EventList eventList;
+    private MemberList memberList;
 
     @FXML
     private void initialize() {
+        eventList = eventListDataSource.readData();
+        memberList = memberListDataSource.readData();
         nowCom.setVisible(false);
         nowOn.setVisible(false);
         showTable(eventList);
@@ -70,8 +81,14 @@ public class BookhistoryViewController {
 
         eventTableView.getItems().clear();
 
-//        for (Event event : eventList.getAllEvent()) {
-//            eventTableView.getItems().add(event);
+//        for (Member member : memberList.getMemberList()) {
+//            if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
+//                String eventID = member.getEventID();
+//                Event addEvent = eventList.findEventByID(eventID);
+//                if (addEvent != null) {
+//                    eventTableView.getItems().add(addEvent);
+//                }
+//            }
 //        }
 
     }
@@ -86,7 +103,7 @@ public class BookhistoryViewController {
     }
     @FXML private void gotoMainMenu() {
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu",username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -95,20 +112,20 @@ public class BookhistoryViewController {
 
     @FXML private void gotoEditprofile() {
         try {
-            FXRouter.goTo("profile-view");
+            FXRouter.goTo("profile-view",username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     } @FXML private void gotoBook() {
         try {
-            FXRouter.goTo("book-view");
+            FXRouter.goTo("book-view",username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageTeam() {
         try {
-            FXRouter.goTo("manage-team");
+            FXRouter.goTo("manage-team",username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -126,11 +143,36 @@ public class BookhistoryViewController {
     @FXML private void showOngoing() {
             nowOn.setVisible(true);
             nowCom.setVisible(false);
+
+        eventTableView.getItems().clear();
+
+        for (Member member : memberList.getMemberList()) {
+            if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
+                String eventID = member.getEventID();
+                Event addEvent = eventList.findEventByID(eventID);
+                if (addEvent != null) {
+                    eventTableView.getItems().add(addEvent);
+                }
+            }
+        }
+
     }
 
     @FXML private void showCompleted() {
         nowCom.setVisible(true);
         nowOn.setVisible(false);
+
+        eventTableView.getItems().clear();
+
+        for (Member member : memberList.getMemberList()) {
+            if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
+                String eventID = member.getEventID();
+                Event addEvent = eventList.findEventByID(eventID);
+                if (addEvent != null) {
+                    eventTableView.getItems().add(addEvent);
+                }
+            }
+        }
 
 
     }

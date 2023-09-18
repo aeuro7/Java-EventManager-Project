@@ -215,28 +215,28 @@ public class ManageEventController {
     }
     @FXML public void gotoMainMenu() {
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoBook() {
         try {
-            FXRouter.goTo("book-view");
+            FXRouter.goTo("book-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageTeam() {
         try {
-            FXRouter.goTo("manage-team");
+            FXRouter.goTo("manage-team", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageEvent() {
         try {
-            FXRouter.goTo("manage-event");
+            FXRouter.goTo("manage-event", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

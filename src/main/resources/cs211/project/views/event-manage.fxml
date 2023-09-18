@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -136,11 +137,6 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </BorderPane>
-                        <Button layoutX="651.0" layoutY="129.0" mnemonicParsing="false" onAction="#gotoManageEvent2" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="go">
-                           <font>
-                              <Font name="Sarabun Regular" size="13.0" />
-                           </font>
-                        </Button>
                      </children>
                   </Group>
                   <Group layoutY="47.0">
@@ -255,6 +251,7 @@
                         <Image url="@../../../icon-png/home-png/caalendar.png" />
                      </image>
                   </ImageView>
+                  <TextField fx:id="searchBox" layoutX="214.0" layoutY="144.0" prefHeight="32.0" prefWidth="549.0" promptText="     Seach Event" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
                </children>
             </AnchorPane>
          </children>

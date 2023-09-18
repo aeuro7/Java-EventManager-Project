@@ -18,6 +18,7 @@ public class ManageTeamController {
     private TableView<Team> teamTableView;
 
     private TeamList teamList;
+    private String account = (String) FXRouter.getData();
 
     @FXML
     private void initialize() {
@@ -55,34 +56,34 @@ public class ManageTeamController {
     }
     @FXML private void gotoMainMenu() {
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoEditprofile() {
         try {
-            FXRouter.goTo("profile-view");
+            FXRouter.goTo("profile-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     } @FXML private void gotoBook() {
         try {
-            FXRouter.goTo("book-view");
+            FXRouter.goTo("book-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageTeam() {
         try {
-            FXRouter.goTo("manage-team");
+            FXRouter.goTo("manage-team", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageEvent() {
         try {
-            FXRouter.goTo("manage-event");
+            FXRouter.goTo("manage-event", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
