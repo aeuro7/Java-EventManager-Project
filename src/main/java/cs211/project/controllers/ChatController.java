@@ -124,13 +124,13 @@ public class ChatController {
             throw new RuntimeException(e);
         }
     }
-//    public void goMain() {
-//        try {
-//            FXRouter.goTo("main-menu", account);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public void goMain() {
+        try {
+            FXRouter.goTo("main-menu", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void goChat() {
         try {
             FXRouter.goTo("chat-view", account);
