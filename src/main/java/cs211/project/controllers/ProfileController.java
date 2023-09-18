@@ -125,7 +125,8 @@ public class ProfileController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    } @FXML private void gotoBook() {
+    }
+    @FXML private void gotoBook() {
         try {
             FXRouter.goTo("book-view");
         } catch (IOException e) {

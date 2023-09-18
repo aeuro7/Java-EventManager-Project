@@ -2,9 +2,11 @@ package cs211.project.controllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
+import cs211.project.models.eventHub.MemberList;
 import cs211.project.services.DataSource;
 import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.MemberDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -28,6 +30,7 @@ public class EventViewController {
     private DataSource<EventList> datasource;
     private EventList eventList;
     private String userName;
+    private Event selectedEvent;
     private void showEventInfo(Event event) {
         eventNameLabel.setText(event.getEventName());
         startTimeLabel.setText(formatTimestamp(event.getStartTime()));
@@ -45,12 +48,15 @@ public class EventViewController {
 
         String eventname = ((Pair<String, String>) FXRouter.getData()).getKey();
         userName = ((Pair<String, String>) FXRouter.getData()).getValue();
-        Event selectedEvent = eventList.findEventByEventName(eventname);
+        selectedEvent = eventList.findEventByEventName(eventname);
         showEventInfo(selectedEvent);
     }
 
     @FXML private void joinEvent() {
-
+        DataSource<MemberList> memberListDataSource = new MemberDataSource("data", "member.csv");
+        MemberList memberList = memberListDataSource.readData();
+        memberList.addMember(userName, selectedEvent.getEventID());
+        memberListDataSource.writeData(memberList);
     }
     @FXML private void goMainMenu() {
         try {
@@ -81,7 +87,11 @@ public class EventViewController {
         }
     }
     @FXML private void joinStaff() {
-
+        try {
+            FXRouter.goTo("owner-event", selectedEvent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML public void logoutButton() {
         try {

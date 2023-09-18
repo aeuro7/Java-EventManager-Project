@@ -196,8 +196,4 @@ public class MainMenuController {
             }
         }
     }
-
-
-
-
 }

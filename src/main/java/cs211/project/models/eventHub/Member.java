@@ -20,6 +20,13 @@ public class Member {
     public String getRole() {
         return role;
     }
+    public boolean isAudience() {
+        if(this.role.equals("AUDIENCE")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void setRole(String role) {
         this.role = role;
     }

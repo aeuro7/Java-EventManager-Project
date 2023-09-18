@@ -14,10 +14,6 @@ public class Team {
         return eventID;
     }
 
-    public List<TeamStaff> getTeamStaffList() {
-        return teamStaffList;
-    }
-
     public String getNameTeam() {
         return nameTeam;
     }
@@ -26,10 +22,6 @@ public class Team {
         teamStaffList = new ArrayList<>();
         this.nameTeam = nameTeam;
         this.eventID = eventID;
-    }
-
-    public Team() {
-        teamStaffList = new ArrayList<>();
     }
 
     public void addTeamStaff(TeamStaff teamStaff) {
