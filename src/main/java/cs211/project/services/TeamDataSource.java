@@ -47,8 +47,8 @@ public class TeamDataSource implements DataSource<TeamList> {
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 2) {
-                    currentTeam = new Team(data[1], data[0]); //data[0] is a id data[1] is a name
+                if (data.length == 4) {
+                    currentTeam = new Team(data[1], data[0], Long.parseLong(data[2]), data[3]); //data[0] is a id data[1] is a name
                     teamList.addTeam(currentTeam);
                 } else if (currentTeam != null && data[0].equals(currentTeam.getEventID())) {
                     TeamStaff staff = new TeamStaff(data[1], data[2]);
@@ -72,7 +72,9 @@ public class TeamDataSource implements DataSource<TeamList> {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             for (Team team : teamList.getAllTeams()) {
                 String teamInfo = team.getEventID() + ","
-                        + team.getNameTeam();
+                        + team.getNameTeam() + ","
+                        + team.getMaxStaff() + ","
+                        + team.getLeaderName();
                 bufferedWriter.write(teamInfo);
                 bufferedWriter.newLine();
                 for (TeamStaff staff : team.getAllTeamStaff()) {

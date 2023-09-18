@@ -9,19 +9,19 @@ public class Event {
     private long startTime;
     private long dueTime;
     private String info;
-    private double maxSeat;
+    private long maxSeat;
 
-    private double leftSeat;
-    private double bookedSeat;
+    private long leftSeat;
+    private long bookedSeat;
 
     private String location;
 
-    private double limitStaffPT; // limit staff per team of the event
+    private long limitStaffPT; // limit staff per team of the event
     private String eventOwner;
     private String eventPicture;
 
 
-    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, String location, double limitStaffPT, String eventOwner) {
+    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, String location, long limitStaffPT, String eventOwner) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
@@ -35,7 +35,7 @@ public class Event {
         this.eventOwner = eventOwner;
         this.eventPicture = this.eventID;
     }
-    public Event(String eventName, long startTime ,long dueTime, String info, double maxSeat, double leftSeat, double booked, String location, double limitStaffPT, String id, String eventOwner, String eventPicture) {
+    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, long leftSeat, long booked, String location, long limitStaffPT, String id, String eventOwner, String eventPicture) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
@@ -80,11 +80,11 @@ public class Event {
         }
     }
 
-    public double getMaxSeat() {
+    public long getMaxSeat() {
         return maxSeat;
     }
 
-    public void setMaxSeat(double maxSeat) {
+    public void setMaxSeat(long maxSeat) {
         if(bookedSeat <= maxSeat) {
             this.maxSeat = maxSeat;
         }
@@ -101,7 +101,7 @@ public class Event {
         }
     }
 
-    public double getLimitStaffPT() {
+    public long getLimitStaffPT() {
         return limitStaffPT;
     }
 
@@ -119,12 +119,12 @@ public class Event {
     private void leftSeatAssign() {
         leftSeat = maxSeat-bookedSeat;
     }
-    public double getLeftSeat() {
+    public long getLeftSeat() {
         return this.leftSeat;
     }
 
-    public double getBookedSeat() {return this.bookedSeat;}
-    public double changeLimitStaff(double newLimitStaffPT) {
+    public long getBookedSeat() {return this.bookedSeat;}
+    public long changeLimitStaff(long newLimitStaffPT) {
         if(newLimitStaffPT != 0) {
             this.limitStaffPT = newLimitStaffPT;
         }

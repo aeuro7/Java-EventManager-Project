@@ -5,16 +5,12 @@ import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
-import cs211.project.models.users.User;
-import cs211.project.models.users.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -92,6 +88,7 @@ public class ManageEventController {
 
         setCenterAlignment(nameColumn);
         setCenterAlignment(roleColumn);
+
         nameColumn.setMinWidth(148);
         roleColumn.setMinWidth(150);
 
@@ -173,7 +170,7 @@ public class ManageEventController {
                 }
             }
             if(check) {
-                Team newTeam = new Team(teamName, selectEvent.getEventID());
+                Team newTeam = new Team(teamName, selectEvent.getEventID(), selectEvent.getLimitStaffPT());
                 teamList.addTeam(newTeam);
                 teamDatasource.writeData(teamList);
                 teamnameTextfield.clear();

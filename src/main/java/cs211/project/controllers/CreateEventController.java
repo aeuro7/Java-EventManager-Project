@@ -94,7 +94,7 @@ public class CreateEventController {
 
 
         Event newEvent = new Event(eventName, startTimeMillis, dueTimeMillis, info,
-                Double.parseDouble(audience), location, Double.parseDouble(limitStaff), account);
+                Long.parseLong(audience), location, Long.parseLong(limitStaff), account);
 
         String profilePicturePath;
         if (selectedImageFile != null) {
