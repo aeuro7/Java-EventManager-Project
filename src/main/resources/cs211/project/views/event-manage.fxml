@@ -240,7 +240,7 @@
                      </children>
                   </Group>
                   <Separator layoutX="168.0" layoutY="125.0" orientation="VERTICAL" prefHeight="425.0" prefWidth="20.0" />
-                  <TableView fx:id="mainTable" layoutX="216.0" layoutY="200.0" prefHeight="320.0" prefWidth="549.0" stylesheets="@../../../table_style/table.css">
+                  <TableView fx:id="eventTableView" layoutX="216.0" layoutY="200.0" prefHeight="320.0" prefWidth="549.0" stylesheets="@../../../table_style/table.css">
                      <columns>
                         <TableColumn prefWidth="37.0" text="C1" />
                         <TableColumn prefWidth="113.0" text="C2" />
