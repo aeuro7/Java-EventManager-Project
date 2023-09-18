@@ -3,23 +3,31 @@ package cs211.project.models.eventHub;
 import java.util.ArrayList;
 
 public class MemberList {
-    private ArrayList<Member> membershipsList;
+    private ArrayList<Member> memberList;
 
     public MemberList() {
-        membershipsList = new ArrayList<>();
+        memberList = new ArrayList<>();
     }
     public void addMember(Member member) {
-        membershipsList.add(member);
+        memberList.add(member);
     }
     public void addMember(String name, String eventID) {
-        Member member = new Member(name, eventID, "AUDIENCE");
-        membershipsList.add(member);
+        boolean check = true;
+        for(Member member: memberList) {
+            if(member.getUsername().equals(name) && member.getEventID().equals(eventID)) {
+                check = false;
+            }
+        }
+        if(check) {
+            Member newMember = new Member(name, eventID, "AUDIENCE");
+            memberList.add(newMember);
+        }
     }
     public void addMember(String name, String eventID, String role) {
         Member member = new Member(name, eventID, role);
-        membershipsList.add(member);
+        memberList.add(member);
     }
     public ArrayList<Member> getMemberList() {
-        return membershipsList;
+        return memberList;
     }
 }

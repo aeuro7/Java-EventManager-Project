@@ -94,7 +94,7 @@ public class CreateEventController {
 
 
         Event newEvent = new Event(eventName, startTimeMillis, dueTimeMillis, info,
-                Double.parseDouble(audience), location, Double.parseDouble(limitStaff), account);
+                Long.parseLong(audience), location, Long.parseLong(limitStaff), account);
 
         String profilePicturePath;
         if (selectedImageFile != null) {
@@ -114,7 +114,7 @@ public class CreateEventController {
         memberListDataSource.writeData(memberList);
 
         try {
-            FXRouter.goTo("main-menu", account);
+            FXRouter.goTo("owner-event", newEvent);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -149,7 +149,7 @@ public class CreateEventController {
             userProfilePictureDir.mkdirs();
         }
         String imageFilename = eventID + ".png";
-        String profilePicturePath = userProfilePictureFolder + File.separator + imageFilename;
+        String profilePicturePath = userProfilePictureFolder + "/" + imageFilename;
         try {
             File destinationFile = new File(profilePicturePath);
             Files.copy(source.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
