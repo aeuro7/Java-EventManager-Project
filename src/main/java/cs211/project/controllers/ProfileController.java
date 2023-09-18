@@ -114,35 +114,35 @@ public class ProfileController {
     }
     @FXML public void gotoMainMenu() {
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void goProflie() {
         try {
-            FXRouter.goTo("profile-view");
+            FXRouter.goTo("profile-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoBook() {
         try {
-            FXRouter.goTo("book-view");
+            FXRouter.goTo("book-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageTeam() {
         try {
-            FXRouter.goTo("manage-team");
+            FXRouter.goTo("manage-team", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageEvent() {
         try {
-            FXRouter.goTo("manage-event");
+            FXRouter.goTo("manage-event", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
