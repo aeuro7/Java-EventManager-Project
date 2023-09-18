@@ -139,46 +139,62 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </BorderPane>
-                  <Label layoutX="223.0" layoutY="141.0" text="Event Name" textFill="#bb84e8">
+                  <Label layoutX="223.0" layoutY="141.0" text="Event Name:" textFill="#bb84e8">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
                   <Label fx:id="eventNameLabel" layoutX="338.0" layoutY="141.0" text="eventNameLebel" textFill="#bb84e8">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="515.0" layoutY="205.0" text="Name" textFill="#bb84e8">
+                  <Label layoutX="515.0" layoutY="205.0" text="Name:" textFill="#bb84e8">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="eventNameLabel1" layoutX="597.0" layoutY="206.0" text="eventNameLebel" textFill="#bb84e8">
+                  <Label fx:id="nameLabel" layoutX="615.0" layoutY="206.0" text="nameLabel" textFill="#bb84e8">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="515.0" layoutY="257.0" text="Username:" textFill="#bb84e8">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="515.0" layoutY="257.0" text="User" textFill="#bb84e8">
+                  <Label fx:id="usernameLabel" layoutX="615.0" layoutY="258.0" text="usernameLabel" textFill="#bb84e8">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="515.0" layoutY="309.0" text="Status:" textFill="#bb84e8">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="eventNameLabel11" layoutX="597.0" layoutY="258.0" text="eventNameLebel" textFill="#bb84e8">
+                  <Label fx:id="statusLabel" layoutX="615.0" layoutY="309.0" text="statusLabel" textFill="#bb84e8">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="515.0" layoutY="309.0" text="Status" textFill="#bb84e8">
+                  <Button layoutX="503.0" layoutY="374.0" mnemonicParsing="false" onAction="#banMember" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="Sarabun Regular" size="13.0" />
                      </font>
-                  </Label>
-                  <Label fx:id="eventNameLabel111" layoutX="597.0" layoutY="309.0" text="eventNameLebel" textFill="#bb84e8">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="634.0" layoutY="374.0" mnemonicParsing="false" onAction="#editMember" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="Sarabun Regular" size="13.0" />
                      </font>
-                  </Label>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </Group>
             <Group layoutY="47.0">
@@ -237,7 +253,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="549.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="549.0" layoutY="12.0" onMouseClicked="#gotoCalendar" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../icon-png/home-png/caalendar.png" />
                      </image>
@@ -247,7 +263,7 @@
                         <Image url="@../../../icon-png/home-png/setting.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" onMouseClicked="#gotoChat" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../icon-png/home-png/comment.png" />
                      </image>
@@ -290,14 +306,9 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TableView fx:id="teamTableView" layoutX="226.0" layoutY="210.0" prefHeight="320.0" prefWidth="258.0" stylesheets="@../../../table_style/table.css">
+      <TableView fx:id="memberTableView" layoutX="226.0" layoutY="210.0" prefHeight="320.0" prefWidth="258.0" stylesheets="@../../../table_style/table.css">
          <columns>
-            <TableColumn prefWidth="37.0" text="C1" />
-            <TableColumn prefWidth="113.0" text="C2" />
-            <TableColumn prefWidth="113.0" text="C3" />
-            <TableColumn prefWidth="113.0" text="C4" />
-            <TableColumn prefWidth="113.0" text="C5" />
-            <TableColumn minWidth="250.0" prefWidth="240.0" text="C6" />
+            <TableColumn prefWidth="255.0" text="C1" />
          </columns>
       </TableView>
    </children>

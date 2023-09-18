@@ -2,6 +2,7 @@ package cs211.project.controllers;
 
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
+import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.TeamDataSource;
 import javafx.fxml.FXML;
@@ -15,16 +16,20 @@ import java.io.IOException;
 public class ManageTeamViewController {
     @FXML private Label teamNameLabel;
     @FXML private Label eventNameLabel;
+    @FXML private Label usernameLabel;
+    @FXML private Label nameLabel;
+    @FXML private Label statusLabel;
     @FXML private Team selectTeam;
 
-    @FXML
-    private TableView<Team> teamTableView;
+    @FXML private TableView<Team> memberTableView;
 
-    private TeamList teamList;
+    @FXML private TeamList teamList;
 
     @FXML
     private void initialize() {
-
+        DataSource<TeamList> dataSource = new TeamDataSource("data", "team.csv");
+        teamList = dataSource.readData();
+        showTable(teamList);
     }
 
     private void showTable(TeamList teamList) {
@@ -34,13 +39,13 @@ public class ManageTeamViewController {
         TableColumn<Team, String> eventIDColumn = new TableColumn<>("Event ID");
         eventIDColumn.setCellValueFactory(new PropertyValueFactory<>("eventID"));
 
-        teamTableView.getColumns().clear();
-        teamTableView.getColumns().addAll(nameTeamColumn, eventIDColumn);
+        memberTableView.getColumns().clear();
+        memberTableView.getColumns().addAll(nameTeamColumn, eventIDColumn);
 
-        teamTableView.getItems().clear();
+        memberTableView.getItems().clear();
 
         for (Team team: teamList.getAllTeams()) {
-            teamTableView.getItems().add(team);
+            memberTableView.getItems().add(team);
         }
     }
 
@@ -59,15 +64,30 @@ public class ManageTeamViewController {
             throw new RuntimeException(e);
         }
     }
+    public void gotoChat() {
+        try {
+            FXRouter.goTo("chat-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @FXML private void gotoEditprofile() {
         try {
             FXRouter.goTo("profile-view");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    } @FXML private void gotoBook() {
+    }
+    @FXML private void gotoBook() {
         try {
             FXRouter.goTo("book-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void gotoCalendar() {
+        try {
+            FXRouter.goTo("calendar-view");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
