@@ -21,7 +21,7 @@ public class ManageTeamController {
 
     @FXML
     private void initialize() {
-        TeamHardCode dataSource = new TeamHardCode();
+        DataSource<TeamList> dataSource = new TeamDataSource("data", "team.csv");
         teamList = dataSource.readData();
         showTable(teamList);
     }
