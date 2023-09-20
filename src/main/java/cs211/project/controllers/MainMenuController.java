@@ -84,7 +84,7 @@ public class MainMenuController {
         eventTableView.getColumns().clear();
 
         eventTableView.getColumns().add(eventNameColumn);
-        eventNameColumn.setMinWidth(180);
+        eventNameColumn.setMinWidth(150);
 
         eventTableView.getColumns().add(startTimeColumn);
         eventTableView.getColumns().add(dueTimeColumn);
@@ -92,7 +92,7 @@ public class MainMenuController {
         eventTableView.getColumns().add(leftSeatNewColumn);
         leftSeatNewColumn.setMinWidth(30);
         eventTableView.getColumns().add(locationNewColumn);
-        locationNewColumn.setMinWidth(184);
+        locationNewColumn.setMinWidth(188);
 
         eventTableView.getItems().clear();
 

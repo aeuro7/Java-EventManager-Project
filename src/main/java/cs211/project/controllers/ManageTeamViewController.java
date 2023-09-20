@@ -43,7 +43,6 @@ public class ManageTeamViewController {
 
         memberTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                // เมื่อคลิกแถวใน TableView แสดงชื่อใน nameLabel และบทบาทใน roleLabel
                 nameLabel.setText(newValue.getName());
                 statusLabel.setText(newValue.getRole());
             }
