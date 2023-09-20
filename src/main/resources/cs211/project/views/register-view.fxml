@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -33,7 +34,7 @@
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
+                        <Color red="0.5686274766921997" green="0.3803921639919281" blue="0.8274509906768799" />
                      </color>
                   </Stop>
                </stops>
@@ -143,9 +144,9 @@
       <Label fx:id="usernameErrorLabel" layoutX="603.0" layoutY="216.0" text="The username is already used" textFill="RED" />
       <Label fx:id="passwordErrorLabel" layoutX="658.0" layoutY="296.0" text="Incorrect Password" textFill="RED" />
       <Label fx:id="cPasswordErrorLabel" layoutX="658.0" layoutY="376.0" text="Incorrect Password" textFill="RED" />
-      <Button layoutX="721.0" layoutY="248.0" mnemonicParsing="false" onAction="#checkUsernameClick" prefHeight="30.0" prefWidth="30.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="/" textFill="#bb84e8">
+      <Button layoutX="716.0" layoutY="248.0" mnemonicParsing="false" onAction="#checkUsernameClick" prefHeight="31.0" prefWidth="39.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/check.css" text="Check" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="9.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -161,5 +162,22 @@
       </Button>
       <Label fx:id="accountnameErrorLabel" layoutX="672.0" layoutY="136.0" text="Name is Empty!" textFill="RED" />
       <Circle fx:id="profilepicCircle" fill="WHITE" layoutX="228.0" layoutY="305.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
+      <Group layoutX="36.0" layoutY="33.0">
+         <children>
+            <Label alignment="TOP_CENTER" layoutX="147.0" prefHeight="30.0" prefWidth="70.0" text="Instruction" textFill="#9161d3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="1.0" layoutY="40.0" prefHeight="20.0" prefWidth="372.0" text="2. Password must contain with upper &amp; lower case letters, 4 numbers" textFill="#9161d3" />
+            <Label layoutX="1.0" layoutY="59.0" prefHeight="17.0" prefWidth="333.0" text="at least." textFill="#9161d3" />
+            <Label layoutX="1.0" layoutY="22.0" prefHeight="18.0" prefWidth="330.0" text="1. Name and username must be a minimum of six character." textFill="#9161d3" />
+            <Label layoutX="1.0" layoutY="77.0" text="3. You can always change your name." textFill="#9161d3" />
+            <Label layoutY="96.0" prefHeight="18.0" prefWidth="385.0" text="4. Username cannot be changed. Please check your username carefully " textFill="#9161d3" />
+            <Label layoutX="1.0" layoutY="115.0" text="before you click sign up button." textFill="#9161d3" />
+         </children>
+      </Group>
+      <Label layoutX="132.0" layoutY="99.0" />
+      <Label fx:id="usernamePassLabel" layoutX="629.0" layoutY="216.0" text="The username is verified" textFill="#aeffb2" />
    </children>
 </AnchorPane>

@@ -29,6 +29,7 @@ public class RegisterController {
     @FXML private TextField conPasswordTextField;
     @FXML private Label accountnameErrorLabel;
     @FXML private Label usernameErrorLabel;
+    @FXML private Label usernamePassLabel;
     @FXML private Label passwordErrorLabel;
     @FXML private Label cPasswordErrorLabel;
     @FXML private Circle profilepicCircle;
@@ -45,6 +46,7 @@ public class RegisterController {
         usernameErrorLabel.setVisible(false);
         passwordErrorLabel.setVisible(false);
         cPasswordErrorLabel.setVisible(false);
+        usernamePassLabel.setVisible(false);
         dataSource = new UserDataSource("data", "login.csv");
         userList = dataSource.readData();
     }
@@ -117,11 +119,14 @@ public class RegisterController {
         if (!username.isEmpty()) {
             if(!userList.isUserNameExists(username)) {
                 usernameErrorLabel.setVisible(false);
+                usernamePassLabel.setVisible(true);
             } else {
                 usernameErrorLabel.setVisible(true);
+                usernamePassLabel.setVisible(false);
             }
         } else {
             usernameErrorLabel.setVisible(true);
+            usernamePassLabel.setVisible(false);
         }
     }
 
