@@ -155,7 +155,7 @@ public class RegisterController {
             userProfilePictureDir.mkdirs();
         }
         String imageFilename = username + ".png";
-        String profilePicturePath = userProfilePictureFolder + File.separator + imageFilename;
+        String profilePicturePath = userProfilePictureFolder + "/" + imageFilename;
         try {
             File destinationFile = new File(profilePicturePath);
             Files.copy(source.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
