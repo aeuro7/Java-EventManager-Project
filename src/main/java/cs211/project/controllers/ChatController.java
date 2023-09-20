@@ -1,19 +1,28 @@
 package cs211.project.controllers;
 
+import cs211.project.models.Calendar;
+import cs211.project.models.Event;
+import cs211.project.models.EventList;
 import cs211.project.models.chats.Chat;
 import cs211.project.models.chats.ChatList;
 import cs211.project.models.chats.Message;
-import cs211.project.services.ChatListDataSource;
-import cs211.project.services.DataSource;
-import cs211.project.services.FXRouter;
+import cs211.project.models.eventHub.Member;
+import cs211.project.models.eventHub.MemberList;
+import cs211.project.models.team.Team;
+import cs211.project.models.team.TeamList;
+import cs211.project.services.*;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChatController {
 
@@ -24,14 +33,45 @@ public class ChatController {
     @FXML private Button sendButton;
 
     private DataSource<ChatList> dataSource = new ChatListDataSource("data", "chat.csv");
-    private ChatList chatList;
+    private ChatList chatList = new ChatList();
     private Chat selectChat;
-    private Message message;
+    private EventList eventList = new EventList();
     private String account = (String) FXRouter.getData();
+
+    ChatList fullchatList = dataSource.readData();
     @FXML private void initialize() {
-        chatList = dataSource.readData();
+        MemberList memberList = (new MemberDataSource("data", "member.csv").readData());
+        TeamList teamList = (new TeamDataSource("data", "team.csv").readData());
+        eventList = (new EventDataSource("data", "event.csv").readData());
+
+        List<Pair> joinData = new ArrayList<>();
+
+        for(Member member: memberList.getMemberList()) {
+            if(member.getUsername().equals(account)) {
+                joinData.add(new Pair(member.getEventID(), member.getRole()));
+            }
+        }
+        for(Team team: teamList.getAllTeams()) {
+            if(team.isInTeam(account)) {
+                joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
+            }
+        }
+
+        for (Pair data : joinData) {
+            for (Chat chat : fullchatList.getChatList()) {
+
+                if(chat.getEventID().equals(data.getKey()) && data.getValue().equals("OWNER")) {
+                    chatList.addChat(chat);
+                }
+                else if (chat.getEventID().equals(data.getKey()) && chat.getFaction().equals(data.getValue())) {
+                    chatList.addChat(chat);
+                }
+
+            }
+        }
+
         clearChat();
-        showTable(chatList);
+        showTable();
         chatListTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Chat>() {
             @Override
             public void changed(ObservableValue observable, Chat oldValue, Chat newValue) {
@@ -42,13 +82,22 @@ public class ChatController {
         });
     }
 
-    private void showTable(ChatList chatList) {
+    private void showTable() {
         TableColumn<Chat, String> eventNameColumn = new TableColumn<>("Event Name");
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
+        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventID"));
+
+        eventNameColumn.setCellValueFactory(cellDate -> {
+            Chat chat = cellDate.getValue();
+            if(chat.getFaction().equals("AUDIENCE")) {
+                Event event = eventList.findEventByID(chat.getEventID());
+                return new ReadOnlyStringWrapper(event.getEventName());
+            }
+            return new ReadOnlyStringWrapper(chat.getFaction());
+
+        });
 
         chatListTableView.getColumns().clear();
         chatListTableView.getColumns().add(eventNameColumn);
-        eventNameColumn.setMinWidth(198);
 
         chatListTableView.getItems().clear();
 
@@ -66,7 +115,7 @@ public class ChatController {
 
     private void selectChat(Chat chat) {
         selectChat = chat;
-        selectLabel.setText(chat.getEventName());
+        selectLabel.setText(chat.getFaction());
         chatListview.getItems().clear();
         chatListview.setVisible(true);
         messageTextArea.setVisible(true);
@@ -101,7 +150,7 @@ public class ChatController {
             selectChat.addChat(newMessage);
             setTextOnListView();
             messageTextArea.clear();
-            dataSource.writeData(chatList);
+            dataSource.writeData(fullchatList);
         }
     }
     public void goLogout() {
