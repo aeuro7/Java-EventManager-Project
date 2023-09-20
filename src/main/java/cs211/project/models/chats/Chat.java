@@ -10,6 +10,11 @@ public class Chat {
     public Chat() {
         messageList = new ArrayList<>();
     }
+    public Chat(String eventID, String name) {
+        this();
+        this.eventID = eventID;
+        this.eventName = name;
+    }
     public void addChat(String sendername, String text) {
         Message newchat = new Message(sendername, text);
         messageList.add(newchat);

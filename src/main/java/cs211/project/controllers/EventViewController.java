@@ -88,6 +88,8 @@ public class EventViewController {
         MemberList memberList = memberListDataSource.readData();
         memberList.addMember(userName, selectedEvent.getEventID());
         memberListDataSource.writeData(memberList);
+        selectedEvent.boooking();
+        showEventInfo(selectedEvent);
     }
     private void clearInfo() {
         teamNameLabel.setText("");
@@ -122,14 +124,7 @@ public class EventViewController {
             throw new RuntimeException(e);
         }
     }
-    @FXML private void goEdit() {
-        try {
-            FXRouter.goTo("owner-event", selectedEvent);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @FXML private void goProflie() {
+    @FXML private void goProfile() {
         try {
             FXRouter.goTo("profile-view", userName);
         } catch (IOException e) {
