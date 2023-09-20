@@ -84,7 +84,7 @@ public class MainMenuController {
         eventTableView.getColumns().clear();
 
         eventTableView.getColumns().add(eventNameColumn);
-        eventNameColumn.setMinWidth(180);
+        eventNameColumn.setMinWidth(150);
 
         eventTableView.getColumns().add(startTimeColumn);
         eventTableView.getColumns().add(dueTimeColumn);
@@ -92,7 +92,7 @@ public class MainMenuController {
         eventTableView.getColumns().add(leftSeatNewColumn);
         leftSeatNewColumn.setMinWidth(30);
         eventTableView.getColumns().add(locationNewColumn);
-        locationNewColumn.setMinWidth(184);
+        locationNewColumn.setMinWidth(188);
 
         eventTableView.getItems().clear();
 
@@ -157,7 +157,7 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
-
+    @FXML
     public void goAdminview() {
         try {
             FXRouter.goTo("admin-view", account.getUserName());
@@ -165,20 +165,22 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
-
+    @FXML
     public void goProflie() {
         try {
             FXRouter.goTo("profile-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }public void goCalendar() {
+        }}
+    @FXML
+    public void goCalendar() {
         try {
             FXRouter.goTo("calendar-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+    @FXML
     public void goChat() {
         try {
             FXRouter.goTo("chat-view", account.getUserName());

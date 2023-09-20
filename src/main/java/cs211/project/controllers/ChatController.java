@@ -48,6 +48,7 @@ public class ChatController {
 
         chatListTableView.getColumns().clear();
         chatListTableView.getColumns().add(eventNameColumn);
+        eventNameColumn.setMinWidth(198);
 
         chatListTableView.getItems().clear();
 
