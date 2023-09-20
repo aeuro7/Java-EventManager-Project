@@ -77,13 +77,16 @@ public class EventManageController {
         eventTableView.getColumns().clear();
 
         eventTableView.getColumns().add(eventNameColumn);
-        eventNameColumn.setMinWidth(180);
+        eventNameColumn.setMinWidth(150);
 
         eventTableView.getColumns().add(startTimeColumn);
+        startTimeColumn.setMinWidth(135);
+
         eventTableView.getColumns().add(dueTimeColumn);
+        dueTimeColumn.setMinWidth(135);
 
         eventTableView.getColumns().add(leftSeatNewColumn);
-        leftSeatNewColumn.setMinWidth(30);
+        leftSeatNewColumn.setMinWidth(10);
         eventTableView.getColumns().add(locationNewColumn);
         locationNewColumn.setMinWidth(184);
 

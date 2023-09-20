@@ -41,6 +41,7 @@ public class BookhistoryViewController {
         nowCom.setVisible(false);
         nowOn.setVisible(false);
         showTable(eventList);
+        showOngoing();
     }
 
     private void showTable(EventList eventList) {
@@ -61,24 +62,22 @@ public class BookhistoryViewController {
             return new SimpleStringProperty(formattedTimestamp);
         });
 
-        TableColumn<Event, String> leftSeatNewColumn = new TableColumn<>("Seat Available");
-        leftSeatNewColumn.setCellValueFactory(new PropertyValueFactory<>("leftSeat"));
-
         TableColumn<Event, String> locationNewColumn = new TableColumn<>("Location");
         locationNewColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
         eventTableView.getColumns().clear();
 
         eventTableView.getColumns().add(eventNameColumn);
-        eventNameColumn.setMinWidth(180);
+        eventNameColumn.setMinWidth(120);
 
         eventTableView.getColumns().add(startTimeColumn);
-        eventTableView.getColumns().add(dueTimeColumn);
+        startTimeColumn.setMinWidth(135);
 
-        eventTableView.getColumns().add(leftSeatNewColumn);
-        leftSeatNewColumn.setMinWidth(30);
+        eventTableView.getColumns().add(dueTimeColumn);
+        dueTimeColumn.setMinWidth(135);
+
         eventTableView.getColumns().add(locationNewColumn);
-        locationNewColumn.setMinWidth(184);
+        locationNewColumn.setMinWidth(153);
 
         eventTableView.getItems().clear();
     }
@@ -137,10 +136,10 @@ public class BookhistoryViewController {
         eventTableView.getItems().clear();
 
         for (Member member : memberList.getMemberList()) {
-            if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
+            if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE") ) {
                 String eventID = member.getEventID();
                 Event addEvent = eventList.findEventByID(eventID);
-                if (addEvent != null) {
+                if (addEvent != null && System.currentTimeMillis() < addEvent.getStartTime()) {
                     eventTableView.getItems().add(addEvent);
                 }
             }
@@ -158,7 +157,7 @@ public class BookhistoryViewController {
             if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
                 String eventID = member.getEventID();
                 Event addEvent = eventList.findEventByID(eventID);
-                if (addEvent != null) {
+                if (addEvent != null && System.currentTimeMillis() > addEvent.getStartTime()) {
                     eventTableView.getItems().add(addEvent);
                 }
             }

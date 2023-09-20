@@ -28,14 +28,19 @@ public class ManageTeamController {
     }
 
     private void showTable(TeamList teamList) {
-        TableColumn<Team, String> nameTeamColumn = new TableColumn<>("Team Name");
-        nameTeamColumn.setCellValueFactory(new PropertyValueFactory<>("nameTeam"));
 
         TableColumn<Team, String> eventIDColumn = new TableColumn<>("Event ID");
         eventIDColumn.setCellValueFactory(new PropertyValueFactory<>("eventID"));
 
+        TableColumn<Team, String> nameTeamColumn = new TableColumn<>("Team Name");
+        nameTeamColumn.setCellValueFactory(new PropertyValueFactory<>("nameTeam"));
+
+        TableColumn<Team, String> leaderNameColumn = new TableColumn<>("leader Name");
+        leaderNameColumn.setCellValueFactory(new PropertyValueFactory<>("leaderName"));
+
+
         teamTableView.getColumns().clear();
-        teamTableView.getColumns().addAll(nameTeamColumn, eventIDColumn);
+        teamTableView.getColumns().addAll(nameTeamColumn, eventIDColumn,leaderNameColumn);
 
         teamTableView.getItems().clear();
 
