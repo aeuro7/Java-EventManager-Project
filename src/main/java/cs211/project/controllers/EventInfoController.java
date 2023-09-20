@@ -1,7 +1,9 @@
 package cs211.project.controllers;
 
 import cs211.project.models.Event;
+import cs211.project.models.EventList;
 import cs211.project.models.team.Team;
+import cs211.project.services.DataSource;
 import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.TeamDataSource;
@@ -24,12 +26,17 @@ public class EventInfoController {
     @FXML private Label locationLabel;
     @FXML private Label detailLabel;
     @FXML private Circle eventPicCircle;
+    private DataSource<EventList> datasource;
+    private EventList eventList;
+    private String userName;
+    private Event selectedEvent;
+
     @FXML public void initialize() {
+        datasource = new EventDataSource("data", "event.csv");
         eventList = datasource.readData();
 
-        Event eventname = ((Pair<Event, String>) FXRouter.getData()).getKey();
+        selectedEvent = ((Pair<Event, String>) FXRouter.getData()).getKey();
         userName = ((Pair<String, String>) FXRouter.getData()).getValue();
-        selectedEvent = eventList.findEventByEventName(eventname);
         showEventInfo(selectedEvent);
 
     }
