@@ -27,6 +27,7 @@ public class ManageEventController {
     @FXML private TableView<Object> listTableView;
     @FXML private Label eventnameLabel;
     @FXML private Button addTeamPopup;
+    @FXML private Button banButton;
     @FXML private AnchorPane teamPopup;
 
 
@@ -64,6 +65,7 @@ public class ManageEventController {
 
     public void showAudienceOnTable() {
         addTeamPopup.setVisible(false);
+        banButton.setVisible(true);
         MemberList memberList = memberDatasource.readData();
 
         listTableView.getItems().clear();
@@ -129,6 +131,7 @@ public class ManageEventController {
     }
 
     public void showTeamOnTable() {
+        banButton.setVisible(false);
         addTeamPopup.setVisible(true);
         listTableView.getItems().clear();
 
@@ -203,6 +206,9 @@ public class ManageEventController {
         }
     }
 
+    @FXML private void banMember() {
+
+    }
 
 
     @FXML public void goProflie() {

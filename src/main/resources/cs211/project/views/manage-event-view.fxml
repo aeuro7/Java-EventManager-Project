@@ -181,6 +181,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </BorderPane>
+            <Button fx:id="banButton" layoutX="557.0" layoutY="494.0" mnemonicParsing="false" onAction="#banMember" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
+               <font>
+                  <Font name="Sarabun Regular" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             </children>
         </Group>
         <Group layoutY="47.0">

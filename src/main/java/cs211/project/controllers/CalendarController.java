@@ -2,6 +2,8 @@ package cs211.project.controllers;
 
 import cs211.project.models.Calendar;
 import cs211.project.models.CalendarList;
+import cs211.project.models.Event;
+import cs211.project.models.EventList;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
@@ -18,6 +20,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -35,11 +40,16 @@ public class CalendarController {
     @FXML private Label starttimeLabel;
     @FXML private Label duetimeLabel;
     @FXML private Label infoLabel;
+    @FXML private Circle eventpicCircle;
     private CalendarList calendarList = new CalendarList();
+    private EventList eventList = new EventList();
     @FXML public void initialize() {
         account = (String) FXRouter.getData();
         DataSource<CalendarList> dataSource = new CalendarDataSource("data", "calendar.csv");
         CalendarList fullcalendarList = dataSource.readData();
+        clearInfo();
+
+        eventList = (new EventDataSource("data", "event.csv").readData());
 
         MemberList memberList = (new MemberDataSource("data", "member.csv").readData());
         TeamList teamList = (new TeamDataSource("data", "team.csv").readData());
@@ -93,13 +103,16 @@ public class CalendarController {
         starttimeLabel.setText("");
         duetimeLabel.setText("");
         infoLabel.setText("");
+        eventpicCircle.setFill(new ImagePattern(new Image("file:" + "data/EventPicture/default.png")));
     }
 
     private void showInfo(Calendar calendar) {
-        eventnameLabel.setText(calendar.getEventID());
+        Event selectEvent = eventList.findEventByID(calendar.getEventID());
+        eventnameLabel.setText(selectEvent.getEventName());
         starttimeLabel.setText(formatTimestamp(calendar.getStartTime()));
         duetimeLabel.setText(formatTimestamp(calendar.getDueTime()));
         infoLabel.setText(calendar.getDetail());
+        eventpicCircle.setFill(new ImagePattern(new Image("file:" + selectEvent.getEventPicture())));
     }
 
     @FXML public void goLogout() {
@@ -133,11 +146,11 @@ public class CalendarController {
         }
     }
     private void showTable() {
-        TableColumn<Calendar, String> eventNameColumn = new TableColumn<>("Event");
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventLinkName"));
-
         TableColumn<Calendar, String> activityNameColumn = new TableColumn<>("Activity");
         activityNameColumn.setCellValueFactory(new PropertyValueFactory<>("calendarName"));
+
+        TableColumn<Calendar, String> factionColumn = new TableColumn<>("Faction");
+        factionColumn.setCellValueFactory(new PropertyValueFactory<>("faction"));
 
         TableColumn<Calendar, String> startTime = new TableColumn<>("Start-time");
         startTime.setCellValueFactory(cellData -> {
@@ -154,8 +167,8 @@ public class CalendarController {
         });
 
         calendarTableView.getColumns().clear();
-        calendarTableView.getColumns().add(eventNameColumn);
         calendarTableView.getColumns().add(activityNameColumn);
+        calendarTableView.getColumns().add(factionColumn);
         calendarTableView.getColumns().add(startTime);
         calendarTableView.getColumns().add(dueTime);
 

@@ -127,7 +127,7 @@ public class CreateEventController {
         newEvent.setEventPicture(profilePicturePath);
 
         Member member = new Member(account, newEvent.getEventID(), "OWNER");
-        Chat chat = new Chat(newEvent.getEventID(), newEvent.getEventName());
+        Chat chat = new Chat(newEvent.getEventID(), "AUDIENCE");
 
         eventList.addEvent(newEvent);
         memberList.addMember(member);
@@ -135,6 +135,7 @@ public class CreateEventController {
 
         eventListDataSource.writeData(eventList);
         memberListDataSource.writeData(memberList);
+        chatListDataSource.writeData(chatList);
 
         try {
             FXRouter.goTo("owner-event", newEvent);
