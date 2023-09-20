@@ -27,6 +27,10 @@ public class MemberList {
         Member member = new Member(name, eventID, role);
         memberList.add(member);
     }
+    public void addMember(String name, String eventID, String role, boolean banStatus) {
+        Member member = new Member(name, eventID, role, banStatus);
+        memberList.add(member);
+    }
     public ArrayList<Member> getMemberList() {
         return memberList;
     }

@@ -118,11 +118,6 @@
                   <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="C2" />
                </columns>
             </TableView>
-            <BorderPane layoutX="536.0" layoutY="107.0" onMouseClicked="#showAudienceOnTable" prefHeight="80.0" prefWidth="80.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </BorderPane>
             <BorderPane layoutX="622.0" layoutY="107.0" onMouseClicked="#showTeamOnTable" prefHeight="80.0" prefWidth="80.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -144,15 +139,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <AnchorPane fx:id="teamPopup" layoutX="195.0" layoutY="173.0" prefHeight="240.0" prefWidth="420.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
+            <AnchorPane fx:id="teamPopup" layoutX="190.0" layoutY="173.0" prefHeight="240.0" prefWidth="420.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
                <children>
-                  <Label layoutX="14.0" layoutY="28.0" text="Enter New Team Name">
+                  <Label layoutX="11.0" layoutY="63.0" text="Team Name:">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="teamnameTextfield" layoutX="37.0" layoutY="66.0" prefHeight="31.0" prefWidth="330.0" stylesheets="@../../../buttom_style/textfield.css" />
-                  <Button fx:id="addTeamButton" layoutX="137.0" layoutY="120.0" mnemonicParsing="false" onAction="#addTeamButton" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Add new team">
+                  <TextField fx:id="teamnameTextfield" layoutX="129.0" layoutY="61.0" prefHeight="31.0" prefWidth="250.0" promptText=" Enter team name" stylesheets="@../../../buttom_style/textfield.css" />
+                  <Button fx:id="addTeamButton" layoutX="255.0" layoutY="162.0" mnemonicParsing="false" onAction="#addTeamButton" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Add new team">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -160,7 +155,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="137.0" layoutY="163.0" mnemonicParsing="false" onAction="#popupClosed" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Cancel" textFill="#da5a5a">
+                  <Button layoutX="46.0" layoutY="162.0" mnemonicParsing="false" onAction="#popupClosed" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Cancel" textFill="#da5a5a">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -168,7 +163,24 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-               </children></AnchorPane>
+                  <Label layoutX="43.0" layoutY="106.0" text="Amount:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="amountTextfield" layoutX="130.0" layoutY="104.0" prefHeight="31.0" prefWidth="250.0" promptText=" Enter Amount" stylesheets="@../../../buttom_style/textfield.css" />
+                  <Label layoutX="139.0" layoutY="26.0" text="Create new team">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <BorderPane layoutX="536.0" layoutY="107.0" onMouseClicked="#showAudienceOnTable" prefHeight="80.0" prefWidth="80.0" style="-fx-border-radius: 5;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </BorderPane>
             </children>
         </Group>
         <Group layoutY="47.0">

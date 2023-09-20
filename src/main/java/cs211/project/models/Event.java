@@ -15,13 +15,11 @@ public class Event {
     private long bookedSeat;
 
     private String location;
-
-    private long limitStaffPT; // limit staff per team of the event
     private String eventOwner;
     private String eventPicture;
 
 
-    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, String location, long limitStaffPT, String eventOwner) {
+    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, String location, String eventOwner) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
@@ -30,12 +28,11 @@ public class Event {
         this.leftSeat = maxSeat;
         this.bookedSeat = 0;
         this.location = location;
-        this.limitStaffPT = limitStaffPT;
         this.eventID = String.valueOf(System.currentTimeMillis());
         this.eventOwner = eventOwner;
         this.eventPicture = this.eventID;
     }
-    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, long leftSeat, long booked, String location, long limitStaffPT, String id, String eventOwner, String eventPicture) {
+    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, long leftSeat, long booked, String location, String id, String eventOwner, String eventPicture) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
@@ -44,7 +41,6 @@ public class Event {
         this.leftSeat = leftSeat;
         this.bookedSeat = booked;
         this.location = location;
-        this.limitStaffPT = limitStaffPT;
         this.eventID = id;
         this.eventOwner = eventOwner;
         this.eventPicture = eventPicture;
@@ -100,11 +96,6 @@ public class Event {
             this.location = location;
         }
     }
-
-    public long getLimitStaffPT() {
-        return limitStaffPT;
-    }
-
     public void changeEventName(String newEventName) {
         if(!newEventName.equals("")) {
             this.eventName = newEventName;
@@ -124,12 +115,6 @@ public class Event {
     }
 
     public long getBookedSeat() {return this.bookedSeat;}
-    public long changeLimitStaff(long newLimitStaffPT) {
-        if(newLimitStaffPT != 0) {
-            this.limitStaffPT = newLimitStaffPT;
-        }
-        return limitStaffPT;
-    }
     public String getEventOwner() {return this.eventOwner;}
 
     public String getEventPicture() {

@@ -2,11 +2,13 @@ package cs211.project.controllers;
 
 import cs211.project.models.Calendar;
 import cs211.project.models.CalendarList;
+import cs211.project.models.eventHub.Member;
+import cs211.project.models.eventHub.MemberList;
+import cs211.project.models.team.Team;
+import cs211.project.models.team.TeamList;
 import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
-import cs211.project.services.CalendarHardCode;
-import cs211.project.services.DataSource;
-import cs211.project.services.FXRouter;
+import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,10 +18,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class CalendarController {
     private String account;
@@ -29,12 +35,42 @@ public class CalendarController {
     @FXML private Label starttimeLabel;
     @FXML private Label duetimeLabel;
     @FXML private Label infoLabel;
-    private CalendarList calendarList;
+    private CalendarList calendarList = new CalendarList();
     @FXML public void initialize() {
         account = (String) FXRouter.getData();
-        DataSource<CalendarList> dataSource = new CalendarHardCode();
-        calendarList = dataSource.readData();
-        showTable(calendarList);
+        DataSource<CalendarList> dataSource = new CalendarDataSource("data", "calendar.csv");
+        CalendarList fullcalendarList = dataSource.readData();
+
+        MemberList memberList = (new MemberDataSource("data", "member.csv").readData());
+        TeamList teamList = (new TeamDataSource("data", "team.csv").readData());
+
+        List<Pair> joinData = new ArrayList<>();
+
+        for(Member member: memberList.getMemberList()) {
+            if(member.getUsername().equals(account)) {
+                joinData.add(new Pair(member.getEventID(), member.getRole()));
+            }
+        }
+        for(Team team: teamList.getAllTeams()) {
+            if(team.isInTeam(account)) {
+                joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
+            }
+        }
+
+        for (Pair data : joinData) {
+            for (Calendar calendar : fullcalendarList.getCalendars()) {
+
+                if(calendar.getEventID().equals(data.getKey()) && data.getValue().equals("OWNER")) {
+                    calendarList.addNewCalendar(calendar);
+                }
+                else if (calendar.getEventID().equals(data.getKey()) && calendar.getFaction().equals(data.getValue())) {
+                    calendarList.addNewCalendar(calendar);
+                }
+
+            }
+        }
+
+        showTable();
 
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             SearchFn(newValue);
@@ -60,7 +96,7 @@ public class CalendarController {
     }
 
     private void showInfo(Calendar calendar) {
-        eventnameLabel.setText(calendar.getEventLinkName());
+        eventnameLabel.setText(calendar.getEventID());
         starttimeLabel.setText(formatTimestamp(calendar.getStartTime()));
         duetimeLabel.setText(formatTimestamp(calendar.getDueTime()));
         infoLabel.setText(calendar.getDetail());
@@ -96,7 +132,7 @@ public class CalendarController {
             throw new RuntimeException(e);
         }
     }
-    private void showTable(CalendarList calendars) {
+    private void showTable() {
         TableColumn<Calendar, String> eventNameColumn = new TableColumn<>("Event");
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventLinkName"));
 
@@ -125,7 +161,7 @@ public class CalendarController {
 
         calendarTableView.getItems().clear();
 
-        for (Calendar calendar: calendars.getCalendars()) {
+        for (Calendar calendar: calendarList.getCalendars()) {
             calendarTableView.getItems().add(calendar);
         }
     }
@@ -138,7 +174,7 @@ public class CalendarController {
         calendarTableView.getItems().clear();
 
         for (Calendar calendar : calendarList.getCalendars()) {
-            if (calendar.getEventLinkName().toLowerCase().contains(searchTerm)) {
+            if (calendar.getEventID().toLowerCase().contains(searchTerm)) {
                 calendarTableView.getItems().add(calendar);
             }
         }

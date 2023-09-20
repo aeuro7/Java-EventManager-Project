@@ -1,19 +1,20 @@
 package cs211.project.services;
 
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
-import cs211.project.models.users.User;
+import cs211.project.models.Calendar;
+import cs211.project.models.CalendarList;
 
 import java.io.*;
 
-public class EventDataSource implements DataSource<EventList>{
+public class CalendarDataSource implements DataSource<CalendarList> {
     private String fileDirectoryName;
     private String fileName;
-    public EventDataSource(String fileDirectoryName, String fileName) {
+
+    public CalendarDataSource(String fileDirectoryName, String fileName) {
         this.fileDirectoryName = fileDirectoryName;
         this.fileName = fileName;
         checkFileIsExisted();
     }
+
     private void checkFileIsExisted() {
         File file = new File(fileDirectoryName);
         if (!file.exists()) {
@@ -29,9 +30,10 @@ public class EventDataSource implements DataSource<EventList>{
             }
         }
     }
+
     @Override
-    public EventList readData() {
-        EventList eventList = new EventList();
+    public CalendarList readData() {
+        CalendarList calendarList = new CalendarList();
         String filePath = fileDirectoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -42,21 +44,15 @@ public class EventDataSource implements DataSource<EventList>{
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
-        String[] data = line.split(",");
-                String name = data[0].trim();
-                long starttime = Long.parseLong(data[1]);
-                long duetime = Long.parseLong(data[2]);
-                String picture = data[3].trim();
-                long maxseat = Long.parseLong(data[4]);
-                long leftseat = Long.parseLong(data[5]);
-                long booked = Long.parseLong(data[6]);
-                String location = data[7].trim();
-                String id = data[8].trim();
-                String owner = data[9].trim();
-                String info = (data.length == 11) ? data[10] : "";
-                Event newEvent = new Event(name, starttime, duetime, info
-                , maxseat, leftseat, booked, location, id, owner, picture);
-                eventList.addEvent(newEvent);
+                String[] data = line.split(",");
+                String name = data[0];
+                String event = data[1];
+                String faction = data[2];
+                long startTime = Long.parseLong(data[3]);
+                long dueTime = Long.parseLong(data[4]);
+                String info = (data.length == 6) ? data[5] : "";
+
+                calendarList.addNewCalendar(name, event, faction, startTime, dueTime, info);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -70,11 +66,11 @@ public class EventDataSource implements DataSource<EventList>{
                 e.printStackTrace();
             }
         }
-        return eventList;
+        return calendarList;
     }
 
     @Override
-    public void writeData(EventList writeEventList) {
+    public void writeData(CalendarList calendarList) {
         String filePath = fileDirectoryName + File.separator + fileName;
         File file = new File(filePath);
         FileWriter fileWriter = null;
@@ -82,18 +78,13 @@ public class EventDataSource implements DataSource<EventList>{
             fileWriter = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fileWriter);
 
-            for (Event event: writeEventList.getAllEvent()){
-                String line = event.getEventName() + ","
-                        + event.getStartTime() + ","
-                        + event.getDueTime() + ","
-                        + event.getEventPicture() + ","
-                        + event.getMaxSeat() + ","
-                        + event.getLeftSeat() + ","
-                        + event.getBookedSeat() + ","
-                        + event.getLocation() + ","
-                        + event.getEventID() + ","
-                        + event.getEventOwner() + ","
-                        + event.getInfo();
+            for (Calendar calendar : calendarList.getCalendars()) {
+                String line = calendar.getCalendarName() + ","
+                        + calendar.getEventID() + ","
+                        + calendar.getFaction() + ","
+                        + calendar.getStartTime() + ","
+                        + calendar.getDueTime() + ","
+                        + calendar.getDetail();
                 writer.append(line);
                 writer.newLine();
             }

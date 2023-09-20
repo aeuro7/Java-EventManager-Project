@@ -134,7 +134,6 @@
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </BorderPane>
-                                <ImageView fitHeight="220.0" fitWidth="220.0" layoutX="211.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
                                 <Button layoutX="652.0" layoutY="31.0" mnemonicParsing="false" onAction="#logoutButton" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Logout" textFill="#da5a5a">
                                     <font>
                                         <Font name="Sarabun Regular" size="13.0" />
@@ -143,62 +142,61 @@
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </Button>
-                                <Button layoutX="227.0" layoutY="417.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
+                                <Button layoutX="457.0" layoutY="421.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
                                     <font>
                                         <Font name="Sarabun Regular" size="13.0" />
                                     </font>
                                 </Button>
-                        <Label layoutX="501.0" layoutY="179.0" text="Name" textFill="#bb84e8">
+                        <Label layoutX="490.0" layoutY="220.0" text="Name">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="503.0" layoutY="221.0" text="User" textFill="#bb84e8">
+                        <Label layoutX="492.0" layoutY="262.0" text="User">
                            <font>
-                              <Font name="Sarabun Regular" size="20.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="503.0" layoutY="263.0" text="Status" textFill="#bb84e8">
+                        <Label layoutX="492.0" layoutY="304.0" text="Status">
                            <font>
-                              <Font name="Sarabun Regular" size="20.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="nameLabel" layoutX="623.0" layoutY="179.0" text="nameLabel">
-                           <font>
-                              <Font name="Sarabun Regular" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="userLabel" layoutX="623.0" layoutY="221.0" text="userLabel">
+                        <Label fx:id="nameLabel" layoutX="585.0" layoutY="220.0" text="nameLabel">
                            <font>
                               <Font name="Sarabun Regular" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="statusLabel" layoutX="623.0" layoutY="263.0" text="statusLabel">
+                        <Label fx:id="userLabel" layoutX="585.0" layoutY="262.0" text="userLabel">
                            <font>
                               <Font name="Sarabun Regular" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="502.0" layoutY="307.0" text="Booking" textFill="#bb84e8">
-                           <font>
-                              <Font name="Sarabun Regular" size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="bookLabel" layoutX="622.0" layoutY="310.0" text="bookLabel">
+                        <Label fx:id="statusLabel" layoutX="585.0" layoutY="304.0" text="statusLabel">
                            <font>
                               <Font name="Sarabun Regular" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="502.0" layoutY="354.0" text="Team" textFill="#bb84e8">
+                        <Label layoutX="491.0" layoutY="345.0" text="Team">
                            <font>
-                              <Font name="Sarabun Regular" size="20.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="teamLabel" layoutX="622.0" layoutY="357.0" text="teamLabel">
+                        <Label fx:id="teamLabel" layoutX="584.0" layoutY="348.0" text="teamLabel">
                            <font>
                               <Font name="Sarabun Regular" size="18.0" />
                            </font>
                         </Label>
-                        <Button layoutX="360.0" layoutY="417.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
+                        <Button layoutX="590.0" layoutY="421.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
+                           <font>
+                              <Font name="Sarabun Regular" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Circle fx:id="profilepicCircle" fill="WHITE" layoutX="319.0" layoutY="319.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
+                        <Button layoutX="192.0" layoutY="132.0" mnemonicParsing="false" onAction="#goOwnerView" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Back">
                            <font>
                               <Font name="Sarabun Regular" size="13.0" />
                            </font>
@@ -233,7 +231,7 @@
                                         </LinearGradient>
                                     </fill>
                                 </Rectangle>
-                                <Label layoutX="70.0" layoutY="18.0" text="Manage Event" textFill="WHITE">
+                                <Label layoutX="70.0" layoutY="18.0" text="Manage Event : Audieun" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="25.0" />
                                     </font>
@@ -259,7 +257,7 @@
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </ImageView>
-                                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="549.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="549.0" layoutY="12.0" onMouseClicked="#goCalendar" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../../../icon-png/home-png/caalendar.png" />
                                     </image>
@@ -269,7 +267,7 @@
                                         <Image url="@../../../icon-png/home-png/setting.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" onMouseClicked="#goChat" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../../../icon-png/home-png/comment.png" />
                                     </image>

@@ -1,6 +1,8 @@
 package cs211.project.controllers;
 
 import cs211.project.models.Event;
+import cs211.project.models.chats.Chat;
+import cs211.project.models.chats.ChatList;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
@@ -29,6 +31,10 @@ public class ManageEventController {
 
 
     @FXML private TextField teamnameTextfield;
+    @FXML private TextField amountTextfield;
+
+    DataSource<ChatList> chatListDataSource;
+    private ChatList chatList;
 
 
     @FXML public void initialize() {
@@ -36,15 +42,18 @@ public class ManageEventController {
         eventnameLabel.setText(selectEvent.getEventName());
         account = selectEvent.getEventOwner();
         profilepicCircle.setFill(new ImagePattern(new Image("file:" + selectEvent.getEventPicture())));
+        chatListDataSource = new ChatListDataSource("data", "chat.csv");
         memberDatasource = new MemberDataSource("data", "member.csv");
         teamDatasource = new TeamDataSource("data", "team.csv");
+        chatList = chatListDataSource.readData();
         addTeamPopup.setVisible(false);
         popupClosed();
+        showAudienceOnTable();
     }
 
     public void goEdit() {
         try {
-            FXRouter.goTo("edit-event-view", selectEvent);
+            FXRouter.goTo("edit-event", selectEvent.getEventID());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -161,6 +170,7 @@ public class ManageEventController {
     }
     public void addTeamButton() {
         String teamName =  teamnameTextfield.getText();
+        long amount =  Long.parseLong(amountTextfield.getText());
         TeamList teamList = teamDatasource.readData();
         if(!teamName.equals("")) {
             boolean check = true;
@@ -170,17 +180,27 @@ public class ManageEventController {
                 }
             }
             if(check) {
-                Team newTeam = new Team(teamName, selectEvent.getEventID(), selectEvent.getLimitStaffPT());
+                Team newTeam = new Team(teamName, selectEvent.getEventID(), amount);
+                Chat newChat = new Chat(selectEvent.getEventID(), teamName);
                 teamList.addTeam(newTeam);
+                chatList.addChat(newChat);
+
                 teamDatasource.writeData(teamList);
+                chatListDataSource.writeData(chatList);
+
                 teamnameTextfield.clear();
+                amountTextfield.clear();
                 showTeamOnTable();
                 popupClosed();
             }
         }
     }
     public void goeditCalendar() {
-
+        try {
+            FXRouter.goTo("calendar-event", selectEvent);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

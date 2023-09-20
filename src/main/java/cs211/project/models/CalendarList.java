@@ -12,8 +12,8 @@ public class CalendarList {
     public void addNewCalendar(Calendar calendar) {
         calendars.add(calendar);
     }
-    public void addNewCalendar(String name, String event, long startTime, long dueTime, String info) {
-        Calendar calendar = new Calendar(name, event, startTime, dueTime, info);
+    public void addNewCalendar(String name, String event, String faction, long startTime, long dueTime, String info) {
+        Calendar calendar = new Calendar(name, event, faction, startTime, dueTime, info);
         addNewCalendar(calendar);
     }
 

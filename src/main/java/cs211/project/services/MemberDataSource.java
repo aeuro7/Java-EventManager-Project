@@ -42,7 +42,7 @@ public class MemberDataSource implements DataSource<MemberList> {
             String line = "";
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
-                memberList.addMember(data[0], data[1], data[2]);
+                memberList.addMember(data[0], data[1], data[2], Boolean.parseBoolean(data[3]));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -71,7 +71,8 @@ public class MemberDataSource implements DataSource<MemberList> {
             for (Member member: memberList.getMemberList()){
                 String line = member.getUsername() + ","
                         + member.getEventID() + ","
-                        + member.getRole();
+                        + member.getRole() + ","
+                        + member.getBanStatus();
                 writer.append(line);
                 writer.newLine();
             }

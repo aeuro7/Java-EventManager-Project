@@ -134,52 +134,52 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </BorderPane>
-                  <BorderPane layoutX="11.0" layoutY="146.0" onMouseClicked="#gotoEditprofile" prefHeight="49.0" prefWidth="167.0">
+                  <BorderPane layoutX="11.0" layoutY="144.0" onMouseClicked="#gotoEditprofile" prefHeight="49.0" prefWidth="167.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </BorderPane>
-                  <Label layoutX="223.0" layoutY="141.0" text="Event Name:" textFill="#bb84e8">
+                  <Label layoutX="207.0" layoutY="141.0" text="Event Name:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="eventNameLabel" layoutX="338.0" layoutY="141.0" text="eventNameLebel" textFill="#bb84e8">
+                  <Label fx:id="eventNameLabel" layoutX="338.0" layoutY="141.0" text="eventNameLebel">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="515.0" layoutY="205.0" text="Name:" textFill="#bb84e8">
+                  <Label layoutX="505.0" layoutY="205.0" text="Name:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nameLabel" layoutX="615.0" layoutY="206.0" text="nameLabel" textFill="#bb84e8">
+                  <Label fx:id="nameLabel" layoutX="615.0" layoutY="206.0" text="nameLabel">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="515.0" layoutY="257.0" text="Username:" textFill="#bb84e8">
+                  <Label layoutX="505.0" layoutY="257.0" text="Username:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="usernameLabel" layoutX="615.0" layoutY="258.0" text="usernameLabel" textFill="#bb84e8">
+                  <Label fx:id="usernameLabel" layoutX="615.0" layoutY="258.0" text="usernameLabel">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="515.0" layoutY="309.0" text="Status:" textFill="#bb84e8">
+                  <Label layoutX="505.0" layoutY="309.0" text="Status:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="statusLabel" layoutX="615.0" layoutY="309.0" text="statusLabel" textFill="#bb84e8">
+                  <Label fx:id="statusLabel" layoutX="615.0" layoutY="309.0" text="statusLabel">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button layoutX="503.0" layoutY="374.0" mnemonicParsing="false" onAction="#banMember" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
+                  <Button fx:id="leadersButton" layoutX="638.0" layoutY="374.0" mnemonicParsing="false" onAction="#banMember" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -187,7 +187,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="634.0" layoutY="374.0" mnemonicParsing="false" onAction="#editMember" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
+                  <Button fx:id="leadersButton" layoutX="501.0" layoutY="374.0" mnemonicParsing="false" onAction="#editMember" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -222,7 +222,7 @@
                         </LinearGradient>
                      </fill>
                   </Rectangle>
-                  <Label layoutX="70.0" layoutY="18.0" text="Editing Team:" textFill="WHITE">
+                  <Label layoutX="67.0" layoutY="18.0" text="Editing Team:" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -235,7 +235,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Label fx:id="teamNameLabel" layoutX="219.0" layoutY="18.0" text="teamNameLabel" textFill="WHITE">
+                  <Label fx:id="teamNameLabel" layoutX="237.0" layoutY="18.0" text="teamNameLabel" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -306,7 +306,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TableView fx:id="memberTableView" layoutX="226.0" layoutY="210.0" prefHeight="320.0" prefWidth="258.0" stylesheets="@../../../table_style/table.css">
+      <TableView fx:id="memberTableView" layoutX="211.0" layoutY="210.0" prefHeight="320.0" prefWidth="258.0" stylesheets="@../../../table_style/table.css">
          <columns>
             <TableColumn prefWidth="255.0" text="C1" />
          </columns>

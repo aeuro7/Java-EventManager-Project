@@ -2,15 +2,15 @@ package cs211.project.controllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
+import cs211.project.models.chats.Chat;
+import cs211.project.models.chats.ChatList;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
-import cs211.project.services.DataSource;
-import cs211.project.services.EventDataSource;
-import cs211.project.services.FXRouter;
-import cs211.project.services.MemberDataSource;
+import cs211.project.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -32,19 +32,22 @@ import java.time.format.DateTimeFormatter;
 public class CreateEventController {
     @FXML private TextField eventnameTextField;
     @FXML private DatePicker startDatePicker;
-    @FXML private TextField startTimeTextField;
     @FXML private DatePicker dueDatePicker;
-    @FXML private TextField dueTimeTextField;
     @FXML private TextField locationTextField;
     @FXML private TextField audienceTextField;
-    @FXML private TextField limitStaffTextField;
     @FXML private TextField descriptionTextField;
     @FXML private Circle eventPicCircle;
+    @FXML private ChoiceBox<String> hourStartChoice;
+    @FXML private ChoiceBox<String> minStartChoice;
+    @FXML private ChoiceBox<String> hourDueChoice;
+    @FXML private ChoiceBox<String> minDueChoice;
 
     private EventList eventList;
     DataSource<EventList> eventListDataSource;
     private MemberList memberList;
     DataSource<MemberList> memberListDataSource;
+    DataSource<ChatList> chatListDataSource;
+    private ChatList chatList;
     private File selectedImageFile;
     private String account;
     private String picturePath;
@@ -54,8 +57,27 @@ public class CreateEventController {
         eventPicCircle.setFill(new ImagePattern(new Image("file:" + picturePath)));
         eventListDataSource = new EventDataSource("data", "event.csv");
         memberListDataSource = new MemberDataSource("data", "member.csv");
+        chatListDataSource = new ChatListDataSource("data", "chat.csv");
         memberList = memberListDataSource.readData();
         eventList = eventListDataSource.readData();
+        chatList = chatListDataSource.readData();
+
+        hourStartChoice.getItems().addAll(
+                "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+                "20", "21", "22", "23"
+        );
+        minStartChoice.getItems().addAll("00", "15", "30", "45");
+        hourDueChoice.getItems().addAll(
+                "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+                "20", "21", "22", "23"
+        );
+        minDueChoice.getItems().addAll("00", "15", "30", "45");
+        hourStartChoice.setValue("00");
+        minStartChoice.setValue("00");
+        hourDueChoice.setValue("00");
+        minDueChoice.setValue("00");
     }
     @FXML public void browseButtonClick(ActionEvent event) {
         FileChooser chooser = new FileChooser();
@@ -70,17 +92,15 @@ public class CreateEventController {
         }
     }
 
-    @FXML
-    public void createEventButton() {
+    @FXML public void createEventButton() {
         String eventName = eventnameTextField.getText();
         LocalDate startDate = startDatePicker.getValue();
-        String startTimeStr = startTimeTextField.getText();
         LocalDate dueDate = dueDatePicker.getValue();
-        String dueTimeStr = dueTimeTextField.getText();
         String location = locationTextField.getText();
         String audience = audienceTextField.getText();
-        String limitStaff = limitStaffTextField.getText();
         String info = descriptionTextField.getText();
+        String startTimeStr = hourStartChoice.getValue() + ":" + minStartChoice.getValue();
+        String dueTimeStr = hourDueChoice.getValue() + ":" + minDueChoice.getValue();
 
         LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
         LocalTime dueTime = LocalTime.parse(dueTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
@@ -94,7 +114,7 @@ public class CreateEventController {
 
 
         Event newEvent = new Event(eventName, startTimeMillis, dueTimeMillis, info,
-                Long.parseLong(audience), location, Long.parseLong(limitStaff), account);
+                Long.parseLong(audience), location, account);
 
         String profilePicturePath;
         if (selectedImageFile != null) {
@@ -107,9 +127,12 @@ public class CreateEventController {
         newEvent.setEventPicture(profilePicturePath);
 
         Member member = new Member(account, newEvent.getEventID(), "OWNER");
+        Chat chat = new Chat(newEvent.getEventID(), newEvent.getEventName());
 
         eventList.addEvent(newEvent);
         memberList.addMember(member);
+        chatList.addChat(chat);
+
         eventListDataSource.writeData(eventList);
         memberListDataSource.writeData(memberList);
 

@@ -3,13 +3,15 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -17,9 +19,32 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EditEventController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventCalendarController">
     <children>
-        <Group layoutX="1.0" layoutY="12.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="49.0" layoutX="1.0" layoutY="247.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="167.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                            <color>
+                                <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+        <Group layoutY="16.0">
             <children>
                 <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="364.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -49,7 +74,7 @@
                         </LinearGradient>
                     </fill>
                 </Rectangle>
-                <Button layoutX="100.0" layoutY="439.0" mnemonicParsing="false" onAction="#browseButtonClick" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Edit Picture" textFill="RED">
+                <Button layoutX="45.0" layoutY="463.0" mnemonicParsing="false" onAction="#goOwner" prefHeight="31.0" prefWidth="80.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Back">
                     <font>
                         <Font name="Sarabun Regular" size="13.0" />
                     </font>
@@ -57,96 +82,26 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button layoutX="26.0" layoutY="135.0" mnemonicParsing="false" onAction="#gotoManageEvent" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Return To Table">
+                <TableView fx:id="calendarTableView" layoutX="205.0" layoutY="219.0" prefHeight="300.0" prefWidth="520.0" stylesheets="@../../../table_style/table.css">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                </TableView>
+                <Label layoutX="205.0" layoutY="117.0" text="Calendar">
                     <font>
-                        <Font name="Sarabun Regular" size="13.0" />
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
-                <Label layoutX="108.0" layoutY="184.0" text="Event Picture">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="System Bold" size="25.0" />
                     </font>
                 </Label>
-                <Circle fx:id="eventPicCircle" fill="WHITE" layoutX="167.0" layoutY="311.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
-            <Label layoutX="292.0" layoutY="259.0" text="Due Date">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="292.0" layoutY="219.0" text="Start Date">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="292.0" layoutY="299.0" text="Location">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="292.0" layoutY="339.0" text="Audience">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="292.0" layoutY="179.0" text="Event Name">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="292.0" layoutY="379.0" text="Description">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Button layoutX="478.0" layoutY="494.0" mnemonicParsing="false" onAction="#editEvent" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Edit Event" textFill="RED">
-               <font>
-                  <Font name="Sarabun Regular" size="13.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TextField fx:id="eventnameTextField" layoutX="400.0" layoutY="179.0" prefHeight="30.0" prefWidth="280.0" promptText="eventnameTextField" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <Label layoutX="524.0" layoutY="221.0" text="Time">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="524.0" layoutY="261.0" text="Time">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="audienceTextField" layoutX="400.0" layoutY="339.0" prefHeight="30.0" prefWidth="280.0" promptText="audienceTextField" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="descriptionTextField" alignment="TOP_LEFT" layoutX="400.0" layoutY="382.0" prefHeight="100.0" prefWidth="280.0" promptText="descriptionTextField" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="locationTextField" layoutX="400.0" layoutY="299.0" prefHeight="30.0" prefWidth="280.0" promptText="locationTextField" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <DatePicker fx:id="startDatePicker" layoutX="402.0" layoutY="222.0" prefHeight="25.0" prefWidth="115.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" />
-            <DatePicker fx:id="dueDatePicker" layoutX="402.0" layoutY="261.0" prefHeight="25.0" prefWidth="115.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <ChoiceBox fx:id="hourStartChoice" layoutX="567.0" layoutY="221.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <ChoiceBox fx:id="minDueChoice" layoutX="634.0" layoutY="261.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <ChoiceBox fx:id="hourDueChoice" layoutX="568.0" layoutY="261.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <ChoiceBox fx:id="minStartChoice" layoutX="634.0" layoutY="221.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <Label layoutX="622.0" layoutY="222.0" text=":" />
-            <Label layoutX="622.0" layoutY="262.0" text=":" />
+                <Button layoutX="595.0" layoutY="120.0" mnemonicParsing="false" onAction="#addNewCalendar" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Add new Calendar">
+                    <font>
+                        <Font name="Sarabun Regular" size="13.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <TextField fx:id="searchBox" layoutX="205.0" layoutY="168.0" prefHeight="32.0" prefWidth="520.0" promptText="     Seach Activity" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
             </children>
         </Group>
         <Group layoutY="47.0">
@@ -174,12 +129,12 @@
                         </LinearGradient>
                     </fill>
                 </Rectangle>
-                <Label layoutX="74.0" layoutY="13.0" text="Editing Event" textFill="WHITE">
+                <Label layoutX="38.0" layoutY="20.0" text="Editing Event:" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="30.0" />
+                        <Font name="System Bold" size="25.0" />
                     </font>
                 </Label>
-                <Button layoutX="642.0" layoutY="22.0" mnemonicParsing="false" onAction="#logoutButton" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Logout" textFill="#da5a5a">
+                <Button layoutX="642.0" layoutY="21.0" mnemonicParsing="false" onAction="#goLogout" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Logout" textFill="#da5a5a">
                     <font>
                         <Font name="Sarabun Regular" size="13.0" />
                     </font>
@@ -187,6 +142,11 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
+                <Label fx:id="eventnameLabel" layoutX="208.0" layoutY="20.0" text="eventName" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
             </children>
         </Group>
         <Group layoutY="553.0">
@@ -257,5 +217,70 @@
                 </Rectangle>
             </children>
         </Group>
+        <Separator layoutX="168.0" layoutY="125.0" orientation="VERTICAL" prefHeight="425.0" prefWidth="20.0" />
+        <Circle fill="WHITE" layoutX="31.0" layoutY="170.0" radius="17.0" stroke="#757575" strokeType="INSIDE" />
+        <Label layoutX="61.0" layoutY="160.0" text="Edit Profile">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Circle fill="WHITE" layoutX="31.0" layoutY="220.0" radius="17.0" stroke="#757575" strokeType="INSIDE" />
+        <Label layoutX="61.0" layoutY="210.0" text="Booking History">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="18.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../icon-png/home-png/proflie.png" />
+            </image>
+        </ImageView>
+        <Circle fill="WHITE" layoutX="31.0" layoutY="270.0" radius="17.0" stroke="#757575" strokeType="INSIDE" />
+        <Label layoutX="61.0" layoutY="260.0" text="Manage Event" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Circle fill="WHITE" layoutX="31.0" layoutY="320.0" radius="17.0" stroke="#757575" strokeType="INSIDE" />
+        <Label layoutX="61.0" layoutY="310.0" text="Manage Team">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="18.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../icon-png/profile-png/ticket-2-2.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="18.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../icon-png/team-png/teamicon.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="19.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../icon-png/home-png/caalendar.png" />
+            </image>
+        </ImageView>
+        <BorderPane layoutX="3.0" layoutY="295.0" onMouseClicked="#gotoManageTeam" prefHeight="49.0" prefWidth="167.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </BorderPane>
+        <BorderPane layoutX="1.0" layoutY="248.0" onMouseClicked="#gotoManageEvent" prefHeight="49.0" prefWidth="167.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </BorderPane>
+        <BorderPane layoutX="2.0" layoutY="146.0" onMouseClicked="#goProflie" prefHeight="49.0" prefWidth="167.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </BorderPane>
+        <BorderPane layoutX="1.0" layoutY="195.0" onMouseClicked="#gotoBook" prefHeight="49.0" prefWidth="167.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </BorderPane>
     </children>
 </AnchorPane>

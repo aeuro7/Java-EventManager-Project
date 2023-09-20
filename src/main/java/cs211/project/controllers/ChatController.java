@@ -23,7 +23,7 @@ public class ChatController {
     @FXML private Label selectLabel;
     @FXML private Button sendButton;
 
-    private DataSource<ChatList> dataSource = new ChatListDataSource("data", "chatList.csv");
+    private DataSource<ChatList> dataSource = new ChatListDataSource("data", "chat.csv");
     private ChatList chatList;
     private Chat selectChat;
     private Message message;

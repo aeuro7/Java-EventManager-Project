@@ -59,7 +59,7 @@ public class EventViewController {
         selectedEvent = eventList.findEventByEventName(eventname);
         showEventInfo(selectedEvent);
         closePopup();
-        teamMaxSeatLabel.setText(String.valueOf(selectedEvent.getLimitStaffPT()));
+        teamMaxSeatLabel.setText("00");
         listTeamTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Team>() {
             @Override
             public void changed(ObservableValue<? extends Team> observable, Team oldValue, Team newValue) {
@@ -93,11 +93,13 @@ public class EventViewController {
         teamNameLabel.setText("");
         teamLeaderLabel.setText("");
         teamSeatleftLabel.setText("00");
+        teamMaxSeatLabel.setText("00");
     }
     private void showTeamInfo(Team team) {
         teamNameLabel.setText(team.getNameTeam());
         teamLeaderLabel.setText(team.getLeaderName());
         teamSeatleftLabel.setText(String.valueOf(team.getSeatLeft()));
+        teamMaxSeatLabel.setText(String.valueOf(team.getMaxStaff()));
     }
     @FXML private void goMainMenu() {
         try {
