@@ -86,6 +86,15 @@ public class Team {
         this.seatLeft = count;
     }
 
+    public boolean isInTeam(String username) {
+        for(TeamStaff teamStaff: teamStaffList) {
+            if(teamStaff.getName().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public long getSeatLeft() {
         return seatLeft;
     }
