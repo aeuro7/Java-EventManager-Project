@@ -124,7 +124,7 @@ public class EventViewController {
             throw new RuntimeException(e);
         }
     }
-    @FXML private void goProfile() {
+    @FXML private void goProflie() {
         try {
             FXRouter.goTo("profile-view", userName);
         } catch (IOException e) {
