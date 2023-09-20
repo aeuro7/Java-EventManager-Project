@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.ManageTeamController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.ManageTeamViewController">
    <children>
       <AnchorPane layoutX="1.0" prefHeight="600.0" prefWidth="800.0">
          <children>
@@ -149,37 +149,27 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="505.0" layoutY="205.0" text="Name:">
+                  <Label layoutX="505.0" layoutY="343.0" text="Name:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nameLabel" layoutX="615.0" layoutY="206.0" text="nameLabel">
+                  <Label fx:id="nameLabel" layoutX="615.0" layoutY="344.0" text="nameLabel">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="505.0" layoutY="257.0" text="Username:">
+                  <Label layoutX="505.0" layoutY="387.0" text="Role:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="usernameLabel" layoutX="615.0" layoutY="258.0" text="usernameLabel">
+                  <Label fx:id="statusLabel" layoutX="615.0" layoutY="387.0" text="statusLabel">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="505.0" layoutY="309.0" text="Status:">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="statusLabel" layoutX="615.0" layoutY="309.0" text="statusLabel">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="leadersButton" layoutX="638.0" layoutY="374.0" mnemonicParsing="false" onAction="#banMember" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
+                  <Button layoutX="638.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -187,7 +177,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="leadersButton" layoutX="501.0" layoutY="374.0" mnemonicParsing="false" onAction="#editMember" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
+                  <Button layoutX="501.0" layoutY="452.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -253,7 +243,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="549.0" layoutY="12.0" onMouseClicked="#gotoCalendar" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="549.0" layoutY="12.0" onMouseClicked="#goCalendar" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../icon-png/home-png/caalendar.png" />
                      </image>

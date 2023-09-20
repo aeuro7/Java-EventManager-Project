@@ -157,7 +157,7 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
-
+    @FXML
     public void goAdminview() {
         try {
             FXRouter.goTo("admin-view", account.getUserName());
@@ -165,20 +165,22 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
-
+    @FXML
     public void goProflie() {
         try {
             FXRouter.goTo("profile-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }public void goCalendar() {
+        }}
+    @FXML
+    public void goCalendar() {
         try {
             FXRouter.goTo("calendar-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+    @FXML
     public void goChat() {
         try {
             FXRouter.goTo("chat-view", account.getUserName());

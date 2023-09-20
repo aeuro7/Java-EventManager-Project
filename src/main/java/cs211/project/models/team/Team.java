@@ -41,7 +41,7 @@ public class Team {
     }
 
     public void addTeamStaff(String username){
-        TeamStaff teamStaff = new TeamStaff(username,"0");
+        TeamStaff teamStaff = new TeamStaff(username,"CREW");
         teamStaffList.add(teamStaff);
         setSeatLeft();
     }
