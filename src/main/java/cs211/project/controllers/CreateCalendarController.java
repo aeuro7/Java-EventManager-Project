@@ -105,13 +105,10 @@ public class CreateCalendarController {
         long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
 
         if(!name.equals("")) {
-            if(!(startTimeMillis < selectEvent.getStartTime()) && !(dueTimeMillis > selectEvent.getDueTime())) {
-                Calendar newCalendar = new Calendar(name, selectEvent.getEventID(), faction, startTimeMillis, dueTimeMillis, description);
-                calendarList.addNewCalendar(newCalendar);
-                calendarListDataSource.writeData(calendarList);
-            } else{
-
-            }
+            Calendar newCalendar = new Calendar(name, selectEvent.getEventID(), faction, startTimeMillis, dueTimeMillis, description);
+            calendarList.addNewCalendar(newCalendar);
+            calendarListDataSource.writeData(calendarList);
+            goEventCalendar();
         } else{
 
         }

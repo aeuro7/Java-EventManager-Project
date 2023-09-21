@@ -10,6 +10,7 @@ import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
+import cs211.project.models.users.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -37,6 +39,7 @@ public class ChatController {
     private Chat selectChat;
     private EventList eventList = new EventList();
     private String account = (String) FXRouter.getData();
+    private UserList userList = (new UserDataSource("data", "login.csv").readData());
 
     ChatList fullchatList = dataSource.readData();
     @FXML private void initialize() {
@@ -69,6 +72,12 @@ public class ChatController {
 
             }
         }
+
+        messageTextArea.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                sendButton();
+            }
+        });
 
         clearChat();
         showTable();
@@ -127,11 +136,11 @@ public class ChatController {
         chatListview.getItems().clear();
 
         for (Message message : selectChat.getChatlist()) {
-            String sender = message.getSenderName();
+            String sender = userList.findUserByUserName(message.getSenderName()).getAccountName();
             String text = message.getMessage();
             Label label = new Label(sender + ":\n" + text);
 
-            if (account.equals(sender)) {
+            if (account.equals(message.getSenderName())) {
                 label.setAlignment(Pos.CENTER_RIGHT);
                 label.setStyle("-fx-background-color: #D3E1E1; -fx-padding: 5px;");
             } else {

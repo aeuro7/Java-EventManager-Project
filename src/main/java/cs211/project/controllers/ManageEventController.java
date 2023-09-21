@@ -9,12 +9,15 @@ import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.util.Pair;
 
 import java.io.IOException;
 
@@ -36,6 +39,8 @@ public class ManageEventController {
 
     DataSource<ChatList> chatListDataSource;
     private ChatList chatList;
+    private MemberList memberList;
+    private Member selecteUser;
 
 
     @FXML public void initialize() {
@@ -46,6 +51,7 @@ public class ManageEventController {
         chatListDataSource = new ChatListDataSource("data", "chat.csv");
         memberDatasource = new MemberDataSource("data", "member.csv");
         teamDatasource = new TeamDataSource("data", "team.csv");
+        memberList = memberDatasource.readData();
         chatList = chatListDataSource.readData();
         addTeamPopup.setVisible(false);
         popupClosed();
@@ -66,7 +72,7 @@ public class ManageEventController {
     public void showAudienceOnTable() {
         addTeamPopup.setVisible(false);
         banButton.setVisible(true);
-        MemberList memberList = memberDatasource.readData();
+        memberList = memberDatasource.readData();
 
         listTableView.getItems().clear();
 
@@ -89,6 +95,9 @@ public class ManageEventController {
             Object obj = param.getValue();
             if (obj instanceof Member) {
                 Member member = (Member) obj;
+                if(member.getBanStatus()) {
+                    return new SimpleStringProperty("BAN");
+                }
                 return new SimpleStringProperty(member.getRole());
             } else {
                 return new SimpleStringProperty("");
@@ -113,6 +122,8 @@ public class ManageEventController {
                 }
             }
         }
+        listTableView.getSelectionModel().selectedItemProperty().removeListener(teamListener);
+        listTableView.getSelectionModel().selectedItemProperty().addListener(memberListener);
     }
     private void setCenterAlignment(TableColumn<Object, String> column) {
         column.setCellFactory(tc -> new TableCell<Object, String>() {
@@ -163,6 +174,8 @@ public class ManageEventController {
                 listTableView.getItems().add(team);
             }
         }
+        listTableView.getSelectionModel().selectedItemProperty().removeListener(memberListener);
+        listTableView.getSelectionModel().selectedItemProperty().addListener(teamListener);
     }
 
     public void popupClosed() {
@@ -198,6 +211,22 @@ public class ManageEventController {
             }
         }
     }
+
+    private final ChangeListener<Object> teamListener = (observable, oldValue, newValue) -> {
+        if (newValue != null) {
+            try {
+                Pair<String , Team> sender = new Pair<String, Team>(account, (Team) newValue);
+                FXRouter.goTo("manage-team-view", sender);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
+    private final ChangeListener<Object> memberListener = (observable, oldValue, newValue) -> {
+        if (newValue != null) {
+            selecteUser = (Member) newValue;
+        }
+    };
     public void goeditCalendar() {
         try {
             FXRouter.goTo("calendar-event", selectEvent);
@@ -207,7 +236,11 @@ public class ManageEventController {
     }
 
     @FXML private void banMember() {
-
+        if(selecteUser != null) {
+            selecteUser.ban();
+            memberDatasource.writeData(memberList);
+            showAudienceOnTable();
+        }
     }
 
 

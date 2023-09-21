@@ -1,17 +1,22 @@
 package cs211.project.controllers;
 
+import cs211.project.models.Event;
+import cs211.project.models.EventList;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
 import cs211.project.models.team.TeamStaff;
-import cs211.project.services.DataSource;
-import cs211.project.services.FXRouter;
-import cs211.project.services.TeamDataSource;
+import cs211.project.models.users.User;
+import cs211.project.services.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -19,35 +24,44 @@ import java.io.IOException;
 public class ManageTeamViewController {
     @FXML private Label teamNameLabel;
     @FXML private Label eventNameLabel;
-    @FXML private Label usernameLabel;
     @FXML private Label nameLabel;
     @FXML private Label statusLabel;
-    @FXML private Team selectTeam;
-
-
-
     @FXML private TableView<TeamStaff> memberTableView;
-
-    @FXML private TeamList teamList;
+    @FXML private Button editButton;
+    @FXML private Button banButton;
+    @FXML private Circle profilepicCircle;
+    private Team selectTeam;
+    private TeamList teamList;
     private String account;
 
     @FXML
     private void initialize() {
         DataSource<TeamList> dataSource = new TeamDataSource("data", "team.csv");
+        EventList eventList = (new EventDataSource("data", "event.csv").readData());
         teamList = dataSource.readData();
         account = ((Pair<String , Team>) FXRouter.getData()).getKey();
         selectTeam = ((Pair<String , Team>) FXRouter.getData()).getValue();
+        Event thisEvent = eventList.findEventByID(selectTeam.getEventID());
         showTable(selectTeam);
         teamNameLabel.setText(selectTeam.getNameTeam());
-        eventNameLabel.setText(selectTeam.getEventID());
+        eventNameLabel.setText(thisEvent.getEventName());
+        hideButton();
 
         memberTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 nameLabel.setText(newValue.getName());
                 statusLabel.setText(newValue.getRole());
+                User user = (new UserDataSource("data", "login.csv")).readData().findUserByUserName(newValue.getName());
+                profilepicCircle.setFill(new ImagePattern(new Image("file:" + user.getProfilePicture())));
+                if(thisEvent.getEventOwner().equals(account)) {
+                    showButton();
+                } else if(selectTeam.getLeaderName().equals(account) && !(newValue.getName().equals(account))) {
+                    showButton();
+                } else {
+                    hideButton();
+                }
             }
         });
-
     }
 
     private void showTable(Team team) {
@@ -70,10 +84,23 @@ public class ManageTeamViewController {
         for (TeamStaff teamStaff: team.getAllTeamStaff() ) {
             memberTableView.getItems().add(teamStaff);
         }
-
-
     }
 
+    private void showButton() {
+        editButton.setVisible(true);
+        banButton.setVisible(true);
+    }
+    private void hideButton() {
+        editButton.setVisible(false);
+        banButton.setVisible(false);
+    }
+
+    @FXML private void banThisMember() {
+
+    }
+    @FXML private void editHandleButton() {
+
+    }
 
     @FXML
     public void logoutButton() {

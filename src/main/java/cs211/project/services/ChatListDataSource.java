@@ -35,56 +35,56 @@ public class ChatListDataSource implements DataSource<ChatList> {
     @Override
     public ChatList readData() {
         ChatList chatList = new ChatList();
-//        String filePath = fileDirectoryName + File.separator + fileName;
-//        File file = new File(filePath);
-//
-//        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-//            String line;
-//            Chat currentChat = null;
-//
-//            while ((line = bufferedReader.readLine()) != null) {
-//                String[] data = line.split(",");
-//                if (data.length == 2) {
-//                    // New chat entry
-//                    currentChat = new Chat(data[0].trim(), data[1].trim());
-//                    chatList.addChat(currentChat);
-//                } else if (currentChat != null) {
-//                    Message message = new Message(data[1], data[3]);
-//                    message.setSentDateTime(Long.parseLong(data[2]));
-//                    currentChat.addChat(message);
-//                }
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
+        String filePath = fileDirectoryName + File.separator + fileName;
+        File file = new File(filePath);
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            String line;
+            Chat currentChat = null;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 2) {
+                    // New chat entry
+                    currentChat = new Chat(data[0].trim(), data[1].trim());
+                    chatList.addChat(currentChat);
+                } else if (currentChat != null) {
+                    Message message = new Message(data[1], data[3]);
+                    message.setSentDateTime(Long.parseLong(data[2]));
+                    currentChat.addChat(message);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return chatList;
     }
 
     @Override
     public void writeData(ChatList chatList) {
-//        String filePath = fileDirectoryName + File.separator + fileName;
-//        File file = new File(filePath);
-//
-//        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-//            for (Chat chat : chatList.getChatList()) {
-//                String chatInfo = chat.getEventID() + ","
-//                        + chat.getFaction();
-//                bufferedWriter.write(chatInfo);
-//                bufferedWriter.newLine();
-//                for (Message message : chat.getChatlist()) {
-//                    String line = chat.getEventID() + ","
-//                            + message.getSenderName() + ","
-//                            + message.getSentDateTime() + ","
-//                            + message.getMessage().trim();
-//                    bufferedWriter.write(line);
-//                    bufferedWriter.newLine();
-//                }
-//            }
-//        } catch (IOException e) {
-//            System.err.println("Cannot write " + filePath);
-//        }
+        String filePath = fileDirectoryName + File.separator + fileName;
+        File file = new File(filePath);
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+            for (Chat chat : chatList.getChatList()) {
+                String chatInfo = chat.getEventID() + ","
+                        + chat.getFaction();
+                bufferedWriter.write(chatInfo);
+                bufferedWriter.newLine();
+                for (Message message : chat.getChatlist()) {
+                    String line = chat.getEventID() + ","
+                            + message.getSenderName() + ","
+                            + message.getSentDateTime() + ","
+                            + message.getMessage().trim();
+                    bufferedWriter.write(line);
+                    bufferedWriter.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Cannot write " + filePath);
+        }
     }
 }

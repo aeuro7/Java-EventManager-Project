@@ -11,11 +11,14 @@ import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.MemberDataSource;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -42,6 +45,19 @@ public class BookhistoryViewController {
         nowOn.setVisible(false);
         showTable(eventList);
         showOngoing();
+        eventTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Event>() {
+            @Override
+            public void changed(ObservableValue observable, Event oldValue, Event newValue) {
+                if (newValue != null) {
+                    Pair sender = new Pair<Event, String>(newValue, username);
+                    try {
+                        FXRouter.goTo("event-info", sender);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
     }
 
     private void showTable(EventList eventList) {

@@ -56,49 +56,49 @@ public class EventInfoController {
     }
     @FXML public void goCalendar() {
         try {
-            FXRouter.goTo("calendar-view");
+            FXRouter.goTo("calendar-view", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoMainMenu() {
         try {
-            FXRouter.goTo("main-menu");
+            FXRouter.goTo("main-menu", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML public void goChat() {
         try {
-            FXRouter.goTo("chat-view");
+            FXRouter.goTo("chat-view", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoEditprofile() {
         try {
-            FXRouter.goTo("profile-view");
+            FXRouter.goTo("profile-view", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoBook() {
         try {
-            FXRouter.goTo("book-view");
+            FXRouter.goTo("book-view", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageTeam() {
         try {
-            FXRouter.goTo("manage-team");
+            FXRouter.goTo("manage-team", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void gotoManageEvent() {
         try {
-            FXRouter.goTo("manage-event");
+            FXRouter.goTo("manage-event", userName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -149,27 +149,27 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="505.0" layoutY="343.0" text="Name:">
+                  <Label layoutX="556.0" layoutY="367.0" text="Name:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nameLabel" layoutX="615.0" layoutY="344.0" text="nameLabel">
+                  <Label fx:id="nameLabel" layoutX="635.0" layoutY="367.0" text="nameLabel">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="505.0" layoutY="387.0" text="Role:">
+                  <Label layoutX="569.0" layoutY="410.0" text="Role:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="statusLabel" layoutX="615.0" layoutY="387.0" text="statusLabel">
+                  <Label fx:id="statusLabel" layoutX="635.0" layoutY="410.0" text="statusLabel">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button layoutX="638.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#logoutButton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
+                  <Button fx:id="banButton" layoutX="636.0" layoutY="462.0" mnemonicParsing="false" onAction="#banThisMember" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -177,7 +177,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="501.0" layoutY="452.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
+                  <Button fx:id="editButton" layoutX="499.0" layoutY="462.0" mnemonicParsing="false" onAction="#editHandleButton" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -185,6 +185,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Circle fx:id="profilepicCircle" fill="WHITE" layoutX="629.0" layoutY="247.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
                </children>
             </Group>
             <Group layoutY="47.0">

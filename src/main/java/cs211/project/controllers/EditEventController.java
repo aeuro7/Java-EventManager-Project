@@ -2,11 +2,9 @@ package cs211.project.controllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
-import cs211.project.models.eventHub.Member;
 import cs211.project.services.DataSource;
 import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
-import cs211.project.services.MemberDataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -21,7 +19,6 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +29,6 @@ public class EditEventController {
     @FXML private DatePicker dueDatePicker;
     @FXML private TextField locationTextField;
     @FXML private TextField audienceTextField;
-    @FXML private TextField limitStaffTextField;
     @FXML private TextField descriptionTextField;
     @FXML private Circle eventPicCircle;
     @FXML private ChoiceBox hourStartChoice;
@@ -106,7 +102,6 @@ public class EditEventController {
         LocalDate dueDate = dueDatePicker.getValue();
         String location = locationTextField.getText();
         String audience = audienceTextField.getText();
-        String limitStaff = limitStaffTextField.getText();
         String info = descriptionTextField.getText();
         String startTimeStr = hourStartChoice.getValue() + ":" + minStartChoice.getValue();
         String dueTimeStr = hourDueChoice.getValue() + ":" + minDueChoice.getValue();
