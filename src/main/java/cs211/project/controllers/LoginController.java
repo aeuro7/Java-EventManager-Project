@@ -1,14 +1,14 @@
 package cs211.project.controllers;
 
-import cs211.project.models.User;
-import cs211.project.models.UserList;
+import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserDataHardCode;
 import cs211.project.services.UserDataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
 
@@ -26,11 +26,21 @@ public class LoginController {
 
     private DataSource<UserList> dataSource;
 
-    @FXML
-    private void initialize() {
+    @FXML private void initialize() {
         dataSource = new UserDataSource("data", "login.csv");
         userList = dataSource.readData();
         errorLabel.setVisible(false);
+        usernameTextField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                onSignInButtonClick();
+            }
+        });
+
+        passwordTextField.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                onSignInButtonClick();
+            }
+        });
     }
 
     @FXML
@@ -43,7 +53,7 @@ public class LoginController {
         if (isValid(loginUser)) {
             dataSource.writeData(userList);
             try {
-                FXRouter.goTo("main-menu", loginUser);
+                FXRouter.goTo("main-menu", username);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

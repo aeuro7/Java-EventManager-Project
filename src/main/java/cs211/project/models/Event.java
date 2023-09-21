@@ -1,78 +1,70 @@
 package cs211.project.models;
 
-public class Event {
-    private String eventName;
-    private String startDate;
-    private String dueDate;
-    private String startTime;
-    private String dueTime;
-    private String info; //detail on createEvent page
-    private double maxSeat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    private double leftSeat;
-    private double bookedSeat;
+public class Event {
+    private String eventID;
+    private String eventName;
+    private long startTime;
+    private long dueTime;
+    private String info;
+    private long maxSeat;
+
+    private long leftSeat;
+    private long bookedSeat;
 
     private String location;
-    private double limitStaffPT; // limit staff per team of the event
+    private String eventOwner;
+    private String eventPicture;
 
-    private final String eventOwner;
 
-    public Event(String eventName, String startDate, String startTime, String dueDate, String dueTime, String info, double maxSeat, String location, double limitStaffPT, String eventOwner) {
+    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, String location, String eventOwner) {
         this.eventName = eventName;
-        this.startDate = startDate;
         this.startTime = startTime;
-        this.dueDate = dueDate;
         this.dueTime = dueTime;
         this.info = info;
         this.maxSeat = maxSeat;
         this.leftSeat = maxSeat;
         this.bookedSeat = 0;
         this.location = location;
-        this.limitStaffPT = limitStaffPT;
+        this.eventID = String.valueOf(System.currentTimeMillis());
         this.eventOwner = eventOwner;
+        this.eventPicture = this.eventID;
+    }
+    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, long leftSeat, long booked, String location, String id, String eventOwner, String eventPicture) {
+        this.eventName = eventName;
+        this.startTime = startTime;
+        this.dueTime = dueTime;
+        this.info = info;
+        this.maxSeat = maxSeat;
+        this.leftSeat = leftSeat;
+        this.bookedSeat = booked;
+        this.location = location;
+        this.eventID = id;
+        this.eventOwner = eventOwner;
+        this.eventPicture = eventPicture;
     }
 
     public String getEventName() {
         return eventName;
     }
-    public String getStartDate() {
-        return startDate;
-    }
+    public String getEventID() {return this.eventID;}
 
-    public void setStartDate(String startDate) {
-        if(!startDate.equals("")) {
-            this.startDate = startDate;
-        }
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(String dueDate) {
-        if(!dueDate.equals("")) {
-            this.dueDate = dueDate;
-        }
-    }
-
-    public String getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
-        if(!startTime.equals("")) {
-            this.startTime = startTime;
-        }
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
-    public String getDueTime() {
+    public long getDueTime() {
         return dueTime;
     }
 
-    public void setDueTime(String dueTime) {
-        if(!dueTime.equals("")) {
-            this.dueTime = dueTime;
-        }
+    public void setDueTime(long dueTime) {
+        this.dueTime = dueTime;
     }
     public String getInfo() {
         return info;
@@ -84,11 +76,11 @@ public class Event {
         }
     }
 
-    public double getMaxSeat() {
+    public long getMaxSeat() {
         return maxSeat;
     }
 
-    public void setMaxSeat(double maxSeat) {
+    public void setMaxSeat(long maxSeat) {
         if(bookedSeat <= maxSeat) {
             this.maxSeat = maxSeat;
         }
@@ -104,15 +96,6 @@ public class Event {
             this.location = location;
         }
     }
-
-    public double getLimitStaffPT() {
-        return limitStaffPT;
-    }
-
-    public String getEventOwner() {
-        return eventOwner;
-    }
-
     public void changeEventName(String newEventName) {
         if(!newEventName.equals("")) {
             this.eventName = newEventName;
@@ -127,14 +110,19 @@ public class Event {
     private void leftSeatAssign() {
         leftSeat = maxSeat-bookedSeat;
     }
-    public double getLeftSeat() {
+    public long getLeftSeat() {
         return this.leftSeat;
     }
-    public double changeLimitStaff(double newLimitStaffPT) {
-        if(newLimitStaffPT != 0) {
-            this.limitStaffPT = newLimitStaffPT;
-        }
-        return limitStaffPT;
+
+    public long getBookedSeat() {return this.bookedSeat;}
+    public String getEventOwner() {return this.eventOwner;}
+
+    public String getEventPicture() {
+        return eventPicture;
+    }
+
+    public void setEventPicture(String eventPicture) {
+        this.eventPicture = eventPicture;
     }
 }
 

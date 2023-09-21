@@ -1,17 +1,17 @@
 package cs211.project.controllers;
 
-import cs211.project.models.User;
-import cs211.project.models.UserList;
+import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserDataHardCode;
 import cs211.project.services.UserDataSource;
-import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 
@@ -22,6 +22,7 @@ public class AdminEditController {
     @FXML private Label roleLabel;
     @FXML private Label changeLabel;
     @FXML private Label nameEmptyLabel;
+    @FXML private Circle profilepicCircle;
     private DataSource<UserList> datasource = new UserDataSource("data", "login.csv");;
     private UserList userList = datasource.readData();
     String username = (String) FXRouter.getData();
@@ -94,6 +95,7 @@ public class AdminEditController {
         accountnameTextField.setText(user.getAccountName());
         newpasswordField.clear();
         roleLabel.setText(user.getRole());
+        profilepicCircle.setFill(new ImagePattern(new Image("file:" + user.getProfilePicture())));
     }
     void updateToCSV() {
         datasource.writeData(userList);

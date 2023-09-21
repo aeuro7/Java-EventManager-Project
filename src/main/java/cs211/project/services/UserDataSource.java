@@ -1,14 +1,13 @@
 package cs211.project.services;
 
-import cs211.project.models.User;
-import cs211.project.models.UserList;
+import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
 
 import java.io.*;
 
 public class UserDataSource implements DataSource<UserList> {
     private String fileDirectoryName;
     private String fileName;
-    private UserList userList;
     public UserDataSource(String fileDirectoryName, String fileName) {
         this.fileDirectoryName = fileDirectoryName;
         this.fileName = fileName;
@@ -43,7 +42,7 @@ public class UserDataSource implements DataSource<UserList> {
             String line = "";
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
-                User newUser = new User(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(), Long.parseLong(data[4]));
+                User newUser = new User(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(), Long.parseLong(data[4]), data[5].trim());
                 userList.addUser(newUser);
             }
         } catch (FileNotFoundException e) {
@@ -75,7 +74,8 @@ public class UserDataSource implements DataSource<UserList> {
                         + newUser.getAccountName() + ","
                         + newUser.getPassWord() + ","
                         + newUser.getRole() + ","
-                        + newUser.getLastLoginTimestamp();
+                        + newUser.getLastLoginTimestamp() + ","
+                        + newUser.getProfilePicture();
                 writer.append(line);
                 writer.newLine();
             }

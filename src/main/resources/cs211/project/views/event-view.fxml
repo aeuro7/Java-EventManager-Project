@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,6 +18,31 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventViewController">
    <children>
+      <Button fx:id="joinButton" layoutX="222.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#joinEvent" prefHeight="50.0" prefWidth="160.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="joinMemberButton" layoutX="486.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#joinStaff" prefHeight="50.0" prefWidth="280.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event as Member">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Button>
+      <Label fx:id="seatLeftLabel" layoutX="615.0" layoutY="260.0" prefHeight="58.0" prefWidth="95.0" text="0000" textAlignment="RIGHT" textFill="#d75e5e">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="642.0" layoutY="320.0" prefHeight="31.0" prefWidth="40.0" text="from" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="maxSeatLabel" layoutX="634.0" layoutY="351.0" prefHeight="26.0" prefWidth="56.0" text="000000" textFill="#bb84e8">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
       <Label layoutX="295.0" layoutY="165.0" text="Start Date" textFill="#bb84e8">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -23,32 +50,17 @@
       </Label>
       <Label layoutX="297.0" layoutY="205.0" text="Due Date" textFill="#bb84e8">
          <font>
-            <Font name="Sarabun Regular" size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <Label layoutX="299.0" layoutY="245.0" text="Location" textFill="#bb84e8">
          <font>
-            <Font name="Sarabun Regular" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="573.0" layoutY="165.0" text="Time" textFill="#bb84e8">
-         <font>
-            <Font name="Sarabun Regular" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="571.0" layoutY="202.0" text="Time" textFill="#bb84e8">
-         <font>
-            <Font name="Sarabun Regular" size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <Label layoutX="298.0" layoutY="295.0" text="Detail" textFill="#bb84e8">
          <font>
-            <Font name="Sarabun Regular" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="startDateLabel" layoutX="418.0" layoutY="165.0" text="startDateLabel">
-         <font>
-            <Font name="Sarabun Regular" size="18.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <Label fx:id="detailLabel" layoutX="322.0" layoutY="335.0" text="detailLabel">
@@ -56,116 +68,7 @@
             <Font name="Sarabun Regular" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="seatLeftLabel" alignment="CENTER" layoutX="621.0" layoutY="295.0" text="seatLeft" textAlignment="CENTER" textFill="#bb84e8" wrapText="true">
-         <font>
-            <Font name="Sarabun Regular" size="24.0" />
-         </font>
-      </Label>
-      <Group layoutX="554.0" layoutY="411.0" onMouseClicked="#joinEvent">
-         <children>
-            <Rectangle fx:id="s1" arcHeight="5.0" arcWidth="5.0" height="37.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="s3" arcHeight="4.0" arcWidth="4.0" height="5.0" layoutX="1.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="s2" arcHeight="5.0" arcWidth="5.0" height="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="s4" arcHeight="5.0" arcWidth="5.0" height="37.0" layoutX="197.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Label layoutX="66.0" layoutY="8.0" text="Join Event" textFill="#bb84e8">
-               <font>
-                  <Font name="Sarabun Regular" size="16.0" />
-               </font>
-            </Label>
-         </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Group>
-      <Circle fx:id="profilepicID" fill="WHITE" layoutX="157.0" layoutY="264.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
+      <Circle fx:id="eventPicCircle" fill="WHITE" layoutX="157.0" layoutY="264.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
       <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="369.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../icon-png/logo_png/logo-no-background.png" />
@@ -196,7 +99,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="234.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="234.0" layoutY="563.0" onMouseClicked="#goChat" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../icon-png/home-png/comment.png" />
          </image>
@@ -240,37 +143,22 @@
             <Image url="@../../../icon-png/logo_png/logo-no-background.png" />
          </image>
       </ImageView>
-      <Label layoutX="576.0" layoutY="344.0" text="from">
-         <font>
-            <Font name="Sarabun Regular" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="dueDateLabel" layoutX="419.0" layoutY="205.0" text="dueDateLabel">
+      <Label fx:id="dueTimeLabel" layoutX="419.0" layoutY="208.0" text="endTimeLabel">
          <font>
             <Font name="Sarabun Regular" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="dueTimeLabel" layoutX="638.0" layoutY="206.0" text="endTimeLabel">
+      <Label fx:id="startTimeLabel" layoutX="419.0" layoutY="166.0" text="startTimeLabel">
          <font>
             <Font name="Sarabun Regular" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="startTimeLabel" layoutX="638.0" layoutY="166.0" text="startTimeLabel">
+      <Label fx:id="locationLabel" layoutX="419.0" layoutY="248.0" text="locationLabel">
          <font>
             <Font name="Sarabun Regular" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="locationLabel" layoutX="419.0" layoutY="245.0" text="locationLabel">
-         <font>
-            <Font name="Sarabun Regular" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="maxSeatLabel" alignment="CENTER" layoutX="621.0" layoutY="344.0" text="maxSeat" textAlignment="CENTER" textFill="#e58383" wrapText="true">
-         <font>
-            <Font name="Sarabun Regular" size="16.0" />
-         </font>
-      </Label>
-      <Button layoutX="57.0" layoutY="489.0" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Back" textFill="#da5a5a">
+      <Button layoutX="57.0" layoutY="489.0" mnemonicParsing="false" onAction="#goMainMenu" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Back" textFill="#da5a5a">
          <font>
             <Font name="Sarabun Regular" size="13.0" />
          </font>
@@ -309,118 +197,97 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="eventNameLabel" alignment="CENTER" layoutX="65.0" layoutY="61.0" text="eventNameLabel" textFill="WHITE">
+      <Label fx:id="eventNameLabel" alignment="CENTER" layoutX="64.0" layoutY="54.0" text="eventNameLabel" textFill="WHITE">
          <font>
-            <Font name="Sarabun Regular" size="32.0" />
+            <Font name="System Bold" size="40.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <Label layoutX="604.0" layoutY="212.0" text="Available" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <Group layoutX="554.0" layoutY="472.0" onMouseClicked="#joinStaff">
+      <AnchorPane fx:id="teamPickerPopup" layoutX="145.0" layoutY="110.0" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
          <children>
-            <Rectangle fx:id="s11" arcHeight="5.0" arcWidth="5.0" height="37.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="s31" arcHeight="4.0" arcWidth="4.0" height="5.0" layoutX="1.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="s21" arcHeight="5.0" arcWidth="5.0" height="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="s41" arcHeight="5.0" arcWidth="5.0" height="37.0" layoutX="197.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006711409395973154">
-                           <color>
-                              <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Label layoutX="46.0" layoutY="7.0" text="Join Team Staff" textFill="#bb84e8">
+            <Label layoutX="156.0" layoutY="31.0" text="Select Team to join">
                <font>
-                  <Font name="Sarabun Regular" size="16.0" />
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+            <TableView fx:id="listTeamTableView" layoutX="29.0" layoutY="114.0" prefHeight="250.0" prefWidth="202.0" stylesheets="@../../../table_style/table.css">
+               <columns>
+                  <TableColumn maxWidth="201.5999969482422" minWidth="150.0" prefWidth="201.5999969482422" text="C1" />
+               </columns>
+            </TableView>
+            <Label layoutX="90.0" layoutY="80.0" text="List Team">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="301.0" layoutY="332.0" mnemonicParsing="false" onAction="#closePopup" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Close" textFill="#da5a5a">
+               <font>
+                  <Font name="Sarabun Regular" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="260.0" layoutY="114.0" text="Team Name:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="140.0" text="Team Leader:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="169.0" text="Aviliable:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="teamSeatleftLabel" layoutX="319.0" layoutY="194.0" prefHeight="75.0" prefWidth="106.0" text="0000" textAlignment="CENTER" textFill="#d75e5e">
+               <font>
+                  <Font name="System Bold" size="43.0" />
+               </font>
+            </Label>
+            <Label layoutX="438.0" layoutY="213.0" prefHeight="75.0" prefWidth="26.0" text="/" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="43.0" />
+               </font>
+            </Label>
+            <Label fx:id="teamMaxSeatLabel" layoutX="457.0" layoutY="251.0" prefHeight="25.0" prefWidth="40.0" text="0000" textFill="#bb84e8">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="300.0" layoutY="288.0" mnemonicParsing="false" onAction="#joinTeambutton" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join this team">
+               <font>
+                  <Font name="Sarabun Regular" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="teamNameLabel" layoutX="377.0" layoutY="114.0" text="teamNameLabel">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="teamLeaderLabel" layoutX="377.0" layoutY="140.0" text="teamLeaderLabel">
+               <font>
+                  <Font size="16.0" />
                </font>
             </Label>
          </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Group>
-      <Label layoutX="539.0" layoutY="301.0" text="Available" textAlignment="CENTER">
+      </AnchorPane>
+      <Label fx:id="textLabel" layoutX="388.0" layoutY="451.0" text="text">
          <font>
-            <Font name="Sarabun Regular" size="18.0" />
+            <Font size="33.0" />
          </font>
       </Label>
    </children>

@@ -56,7 +56,6 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-            <Circle fx:id="profilepicID" fill="WHITE" layoutX="212.0" layoutY="281.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
             <Button layoutX="150.0" layoutY="446.0" mnemonicParsing="false" onAction="#deleteAcount" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Delete Account">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
@@ -135,6 +134,12 @@
                </font>
             </Label>
             <Label fx:id="nameEmptyLabel" layoutX="455.0" layoutY="389.0" text="Name Cannot Be Empty!" textFill="RED" />
+            <Label layoutX="158.0" layoutY="191.0" text="Profile Picture">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Circle fx:id="profilepicCircle" fill="WHITE" layoutX="217.0" layoutY="318.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
             </children>
         </Group>
         <Group layoutY="47.0">
@@ -163,17 +168,7 @@
                     </fill>
                 </Rectangle>
                 <Circle fill="WHITE" layoutX="36.0" layoutY="35.0" radius="20.0" stroke="#757575" strokeType="INSIDE" />
-                <Label layoutX="80.0" layoutY="22.0" text="Good Morning, " textFill="WHITE">
-                    <font>
-                        <Font name="Sarabun Regular" size="18.0" />
-                    </font>
-                </Label>
-                <Label layoutX="206.0" layoutY="22.0" text="label_name" textFill="WHITE">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
-                <Label layoutX="435.0" layoutY="23.0" text="Account Edit" textFill="WHITE">
+                <Label layoutX="80.0" layoutY="23.0" text="Account Edit" textFill="WHITE">
                     <font>
                         <Font size="20.0" />
                     </font>

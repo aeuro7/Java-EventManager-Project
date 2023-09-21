@@ -28,7 +28,18 @@ public class HelloApplication extends Application {
         FXRouter.when("create-event", resourcesPath + "create-event.fxml");
         FXRouter.when("admin-edit", resourcesPath + "admin-edit-view.fxml");
         FXRouter.when("event-view", resourcesPath + "event-view.fxml");
-
+        FXRouter.when("manage-team", resourcesPath + "manage-team.fxml");
+        FXRouter.when("manage-event", resourcesPath + "event-manage.fxml");
+        FXRouter.when("calendar-view", resourcesPath + "calendar-view.fxml");
+        FXRouter.when("manage-event2", resourcesPath + "event-manage2.fxml");
+        FXRouter.when("account-view", resourcesPath + "account-view.fxml");
+        FXRouter.when("chat-view", resourcesPath + "chat-view.fxml");
+        FXRouter.when("owner-event", resourcesPath + "manage-event-view.fxml");
+        FXRouter.when("manage-team-view", resourcesPath + "manage-team-view.fxml");
+        FXRouter.when("edit-event", resourcesPath + "edit-event.fxml");
+        FXRouter.when("calendar-event", resourcesPath + "event-calendar-view.fxml");
+        FXRouter.when("create-calendar", resourcesPath + "create-calendar.fxml");
+        FXRouter.when("event-info", resourcesPath + "event-info.fxml");
     }
 
 
