@@ -8,22 +8,21 @@ import cs211.project.services.DataSource;
 import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataSource;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainMenuController {
 
-    @FXML private TableView<Event> eventTableView;
+    @FXML private GridPane eventContrainer;
     @FXML private Button adminButton;
+    @FXML private ScrollPane scrollpain;
     private EventList eventList;
     private DataSource<EventList> datasource;
 
@@ -31,14 +30,14 @@ public class MainMenuController {
     @FXML Label accountnameLabel;
     private User account ;
     private UserList userList;
-
+    private int column = 0;
+    private int row = 1;
     private DataSource<UserList> datasourceUser;
 
     @FXML public void initialize() {
         datasource = new EventDataSource("data", "event.csv");
         eventList = datasource.readData();
         adminButton.setVisible(false);
-        showTable(eventList);
         datasourceUser = new UserDataSource("data", "login.csv");
         userList = datasourceUser.readData();
         String username = (String) FXRouter.getData();
@@ -47,98 +46,45 @@ public class MainMenuController {
         if(account.isAdmin()) {
             adminButton.setVisible(true);
         }
-
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             SearchFn(newValue);
         });
+
+        for(Event event: eventList.getAllEvent()) {
+            showEvent(event);
+        }
     }
 
-    private void showTable(EventList eventList) {
-        TableColumn<Event, String> eventNameColumn = new TableColumn<>("Event Name");
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
+    private void showEvent(Event event) {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/cs211/project/views/event-tab-info.fxml"));
+            AnchorPane eventinfoTab = loader.load();
+            EventTabController infoTabController = loader.getController();
+            infoTabController.setData(event,userList.findUserByUserName(event.getEventOwner()).getAccountName());
 
-        TableColumn<Event, String> startTimeColumn = new TableColumn<>("Start From");
-        startTimeColumn.setCellValueFactory(cellData -> {
-            long startTime = cellData.getValue().getStartTime();
-            String formattedTimestamp = formatTimestamp(startTime); // Format the timestamp
-            return new SimpleStringProperty(formattedTimestamp);
-        });
+            eventinfoTab.setOnMouseClicked(activity -> {
+                try {
+                    Pair<String , String> sender = new Pair<String, String>(event.getEventName(), account.getUserName());
+                    FXRouter.goTo("event-view", sender);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
-        TableColumn<Event, String> dueTimeColumn = new TableColumn<>("End At");
-        dueTimeColumn.setCellValueFactory(cellData -> {
-            long endTime = cellData.getValue().getDueTime();
-            String formattedTimestamp = formatTimestamp(endTime);
-            return new SimpleStringProperty(formattedTimestamp);
-        });
-
-        TableColumn<Event, String> leftSeatNewColumn = new TableColumn<>("Seat Available");
-        leftSeatNewColumn.setCellValueFactory(new PropertyValueFactory<>("leftSeat"));
-
-        TableColumn<Event, String> locationNewColumn = new TableColumn<>("Location");
-        locationNewColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-
-        setCenterAlignment(startTimeColumn);
-        setCenterAlignment(dueTimeColumn);
-
-
-        eventTableView.getColumns().clear();
-
-        eventTableView.getColumns().add(eventNameColumn);
-        eventNameColumn.setMinWidth(150);
-
-        eventTableView.getColumns().add(startTimeColumn);
-        eventTableView.getColumns().add(dueTimeColumn);
-
-        eventTableView.getColumns().add(leftSeatNewColumn);
-        leftSeatNewColumn.setMinWidth(30);
-        eventTableView.getColumns().add(locationNewColumn);
-        locationNewColumn.setMinWidth(188);
-
-        eventTableView.getItems().clear();
-
-        for (Event event: eventList.getAllEvent()) {
-            eventTableView.getItems().add(event);
+            if(column == 1) {
+                column = 0;
+                row++;
+            }
+            scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            eventContrainer.add(eventinfoTab, column++, row);
+            GridPane.setMargin(eventinfoTab, new Insets(3));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        eventTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Event>() {
-            @Override
-            public void changed(ObservableValue observable, Event oldValue, Event newValue) {
-                if (newValue != null) {
-                    try {
-                        Pair<String , String> sender = new Pair<String, String>(newValue.getEventName(), account.getUserName());
-                        FXRouter.goTo("event-view", sender);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        });
-
-
-
     }
 
-    private String formatTimestamp(long timestamp) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return dateFormat.format(new Date(timestamp));
-    }
-
-
-    private void setCenterAlignment(TableColumn<Event, String> column) {
-        column.setCellFactory(tc -> new TableCell<Event, String>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setAlignment(null);
-                } else {
-                    setText(item);
-                    setAlignment(javafx.geometry.Pos.CENTER);
-                }
-            }
-        });
-    }
 
     @FXML
     public void goLogout() {
@@ -189,13 +135,12 @@ public class MainMenuController {
         }
     }
     private void SearchFn(String searchTerm) {
-        searchTerm = searchTerm.toLowerCase().trim();
-        eventTableView.getItems().clear();
-
+        eventContrainer.getChildren().clear();
         for (Event event : eventList.getAllEvent()) {
-            if (event.getEventName().toLowerCase().contains(searchTerm)) {
-                eventTableView.getItems().add(event);
+            if (searchTerm == null || searchTerm.isEmpty() || event.getEventName().toLowerCase().contains(searchTerm.toLowerCase())) {
+                showEvent(event);
             }
         }
     }
+
 }
