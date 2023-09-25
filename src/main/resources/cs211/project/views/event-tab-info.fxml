@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="180.0" prefWidth="700.0" style="-fx-border-radius: 5; -fx-background-color: FAF6FF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventTabController">
+<AnchorPane prefHeight="180.0" prefWidth="700.0" style="-fx-border-radius: 5; -fx-background-color: FAF6FF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.OnGoingTabController">
    <children>
       <Label layoutX="158.0" layoutY="29.0" text="Event Name:" textFill="#9161d3">
          <font>
@@ -47,24 +47,14 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1cfffb0" height="130.0" layoutX="578.0" layoutY="25.0" smooth="false" stroke="#7653b8" strokeType="INSIDE" strokeWidth="0.0" width="110.0" />
-      <Label layoutX="605.0" layoutY="26.0" prefHeight="26.0" prefWidth="58.0" text="Available" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="seatleftLabel" alignment="CENTER" layoutX="583.0" layoutY="52.0" prefHeight="35.0" prefWidth="100.0" text="000" textAlignment="CENTER" textFill="#913c3c">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
-      <Label layoutX="616.0" layoutY="95.0" prefHeight="26.0" prefWidth="34.0" text="From" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <Rectangle fx:id="profileRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="120.0" layoutX="12.0" layoutY="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" />
-      <Label fx:id="maxseatLabel" alignment="CENTER" layoutX="583.0" layoutY="117.0" prefHeight="35.0" prefWidth="100.0" text="000" textAlignment="CENTER" textFill="#9161d3">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e2d1ffb0" height="170.0" layoutX="568.0" layoutY="5.0" smooth="false" stroke="#9e85c74b" strokeType="INSIDE" strokeWidth="0.0" width="110.0" />
+      <Label fx:id="daysleftLabel" alignment="CENTER" layoutX="573.0" layoutY="42.0" prefHeight="58.0" prefWidth="100.0" text="000" textAlignment="RIGHT" textFill="#913c3c">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="574.0" layoutY="111.0" prefHeight="27.0" prefWidth="100.0" text="days left" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
