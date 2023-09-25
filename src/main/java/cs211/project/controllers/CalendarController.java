@@ -2,6 +2,8 @@ package cs211.project.controllers;
 
 import cs211.project.models.Calendar;
 import cs211.project.models.CalendarList;
+import cs211.project.models.Event;
+import cs211.project.models.EventList;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
@@ -13,11 +15,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -29,17 +35,20 @@ import java.util.List;
 
 public class CalendarController {
     private String account;
-    @FXML private TableView<Calendar> calendarTableView;
+    @FXML private GridPane calendarContrainer;
     @FXML private TextField searchBox;
-    @FXML private Label eventnameLabel;
-    @FXML private Label starttimeLabel;
-    @FXML private Label duetimeLabel;
-    @FXML private Label infoLabel;
+    @FXML private ScrollPane scrollpain;
     private CalendarList calendarList = new CalendarList();
+    private EventList eventList = new EventList();
+
+    private int column = 0;
+    private int row = 1;
     @FXML public void initialize() {
         account = (String) FXRouter.getData();
         DataSource<CalendarList> dataSource = new CalendarDataSource("data", "calendar.csv");
         CalendarList fullcalendarList = dataSource.readData();
+
+        eventList = (new EventDataSource("data", "event.csv").readData());
 
         MemberList memberList = (new MemberDataSource("data", "member.csv").readData());
         TeamList teamList = (new TeamDataSource("data", "team.csv").readData());
@@ -70,36 +79,13 @@ public class CalendarController {
             }
         }
 
-        showTable();
+        for (Calendar calendar : calendarList.getCalendars()) {
+            showEvent(calendar);
+        }
 
-        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
-            SearchFn(newValue);
-        });
-
-        calendarTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Calendar>() {
-            @Override
-            public void changed(ObservableValue<? extends Calendar> observable, Calendar oldValue, Calendar newValue) {
-                if (newValue == null) {
-                    clearInfo();
-                } else {
-                    showInfo(newValue);
-                }
-            }
-        });
-    }
-
-    private void clearInfo() {
-        eventnameLabel.setText("");
-        starttimeLabel.setText("");
-        duetimeLabel.setText("");
-        infoLabel.setText("");
-    }
-
-    private void showInfo(Calendar calendar) {
-        eventnameLabel.setText(calendar.getEventID());
-        starttimeLabel.setText(formatTimestamp(calendar.getStartTime()));
-        duetimeLabel.setText(formatTimestamp(calendar.getDueTime()));
-        infoLabel.setText(calendar.getDetail());
+//        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+//            SearchFn(newValue);
+//        });
     }
 
     @FXML public void goLogout() {
@@ -132,51 +118,37 @@ public class CalendarController {
             throw new RuntimeException(e);
         }
     }
-    private void showTable() {
-        TableColumn<Calendar, String> eventNameColumn = new TableColumn<>("Event");
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventLinkName"));
 
-        TableColumn<Calendar, String> activityNameColumn = new TableColumn<>("Activity");
-        activityNameColumn.setCellValueFactory(new PropertyValueFactory<>("calendarName"));
+    private void showEvent(Calendar calendar) {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/cs211/project/views/calendar-tab.fxml"));
+            AnchorPane calendartab = loader.load();
+            CalendarTabController calendarTabController = loader.getController();
+            calendarTabController.setData(calendar, eventList.findEventByID(calendar.getEventID()));
 
-        TableColumn<Calendar, String> startTime = new TableColumn<>("Start-time");
-        startTime.setCellValueFactory(cellData -> {
-            long timestamp = cellData.getValue().getStartTime();
-            String formattedTimestamp = formatTimestamp(timestamp); // Format the timestamp
-            return new SimpleStringProperty(formattedTimestamp);
-        });
-
-        TableColumn<Calendar, String> dueTime = new TableColumn<>("Due-time");
-        dueTime.setCellValueFactory(cellData -> {
-            long timestamp = cellData.getValue().getDueTime();
-            String formattedTimestamp = formatTimestamp(timestamp); // Format the timestamp
-            return new SimpleStringProperty(formattedTimestamp);
-        });
-
-        calendarTableView.getColumns().clear();
-        calendarTableView.getColumns().add(eventNameColumn);
-        calendarTableView.getColumns().add(activityNameColumn);
-        calendarTableView.getColumns().add(startTime);
-        calendarTableView.getColumns().add(dueTime);
-
-        calendarTableView.getItems().clear();
-
-        for (Calendar calendar: calendarList.getCalendars()) {
-            calendarTableView.getItems().add(calendar);
+            if(column == 1) {
+                column = 0;
+                row++;
+            }
+            scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            calendarContrainer.add(calendartab, column++, row);
+            GridPane.setMargin(calendartab, new Insets(5));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
     private String formatTimestamp(long timestamp) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(new Date(timestamp));
     }
-    private void SearchFn(String searchTerm) {
-        searchTerm = searchTerm.toLowerCase().trim();
-        calendarTableView.getItems().clear();
-
-        for (Calendar calendar : calendarList.getCalendars()) {
-            if (calendar.getEventID().toLowerCase().contains(searchTerm)) {
-                calendarTableView.getItems().add(calendar);
-            }
-        }
-    }
+//    private void SearchFn(String searchTerm) {
+//        searchTerm = searchTerm.toLowerCase().trim();
+//        calendarContrainer.getChildren().clear();
+//
+//        if (calendar.getCalendarName().toLowerCase().contains(searchTerm)) {
+//            showEvent(calendar);
+//        }
+//    }
 }

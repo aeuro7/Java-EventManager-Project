@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Chat {
     private ArrayList<Message> messageList;
     private String eventID;
-    private String eventName;
+    private String faction;
 
     public Chat() {
         messageList = new ArrayList<>();
     }
-    public Chat(String eventID, String name) {
+    public Chat(String eventID, String faction) {
         this();
         this.eventID = eventID;
-        this.eventName = name;
+        this.faction = faction;
     }
     public void addChat(String sendername, String text) {
         Message newchat = new Message(sendername, text);
@@ -26,16 +26,9 @@ public class Chat {
     public String getEventID() {
         return eventID;
     }
-    public String getEventName() {
-        return eventName;
+    public String getFaction() {
+        return faction;
     }
-    public void setName(String name) {
-        this.eventName = name;
-    }
-    public void setID(String id) {
-        this.eventID = id;
-    }
-
     public ArrayList<Message> getChatlist() {
         return messageList;
     }

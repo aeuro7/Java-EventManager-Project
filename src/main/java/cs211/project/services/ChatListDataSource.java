@@ -46,9 +46,7 @@ public class ChatListDataSource implements DataSource<ChatList> {
                 String[] data = line.split(",");
                 if (data.length == 2) {
                     // New chat entry
-                    currentChat = new Chat();
-                    currentChat.setID(data[0]);
-                    currentChat.setName(data[1]);
+                    currentChat = new Chat(data[0].trim(), data[1].trim());
                     chatList.addChat(currentChat);
                 } else if (currentChat != null) {
                     Message message = new Message(data[1], data[3]);
@@ -73,7 +71,7 @@ public class ChatListDataSource implements DataSource<ChatList> {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             for (Chat chat : chatList.getChatList()) {
                 String chatInfo = chat.getEventID() + ","
-                        + chat.getEventName();
+                        + chat.getFaction();
                 bufferedWriter.write(chatInfo);
                 bufferedWriter.newLine();
                 for (Message message : chat.getChatlist()) {

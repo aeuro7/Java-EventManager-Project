@@ -79,7 +79,7 @@ public class Team {
         return maxStaff;
     }
     private void setSeatLeft() {
-        long count = 0;
+        long count = maxStaff;
         for(TeamStaff staff: teamStaffList) {
             count++;
         }

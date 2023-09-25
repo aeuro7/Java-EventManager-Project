@@ -12,10 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
@@ -41,7 +38,10 @@ public class EventViewController {
     @FXML private Circle eventPicCircle;
     @FXML private AnchorPane teamPickerPopup;
     @FXML private TableView<Team> listTeamTableView;
-    private DataSource<EventList> datasource;
+    @FXML private Button joinButton;
+    @FXML private Button joinMemberButton;
+    @FXML private Label textLabel;
+    private DataSource<EventList> eventDatasource;
     private DataSource<TeamList> teamListDataSource;
     private TeamList teamlist;
     private EventList eventList;
@@ -49,10 +49,13 @@ public class EventViewController {
     private Event selectedEvent;
     private Team selectedTeam;
 
+    private TeamList teamList = (new TeamDataSource("data", "team.csv").readData());
+    private MemberList memberList = (new MemberDataSource("data", "member.csv").readData());
+
     @FXML public void initialize() {
-        datasource = new EventDataSource("data", "event.csv");
+        eventDatasource = new EventDataSource("data", "event.csv");
         teamListDataSource = new TeamDataSource("data", "team.csv");
-        eventList = datasource.readData();
+        eventList = eventDatasource.readData();
 
         String eventname = ((Pair<String, String>) FXRouter.getData()).getKey();
         userName = ((Pair<String, String>) FXRouter.getData()).getValue();
@@ -60,6 +63,22 @@ public class EventViewController {
         showEventInfo(selectedEvent);
         closePopup();
         teamMaxSeatLabel.setText("00");
+        showJoinButton();
+        if(selectedEvent.getLeftSeat() == 0) {
+            hideJoinButton("Already Full");
+        } else {
+            for(Member member: memberList.getMemberList()) {
+                if(member.getUsername().equals(userName) && member.getEventID().equals(selectedEvent.getEventID())) {
+                    hideJoinButton("Already Join");
+                }
+            }
+            for(Team team: teamList.getAllTeams()) {
+                if(team.isInTeam(userName) && team.getEventID().equals(selectedEvent.getEventID())) {
+                    hideJoinButton("Already Join");
+                }
+            }
+        }
+
         listTeamTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Team>() {
             @Override
             public void changed(ObservableValue<? extends Team> observable, Team oldValue, Team newValue) {
@@ -72,6 +91,18 @@ public class EventViewController {
             }
         });
     }
+
+    private void showJoinButton() {
+        joinButton.setVisible(true);
+        joinMemberButton.setVisible(true);
+        textLabel.setText("");
+    }
+    private void hideJoinButton(String text) {
+        joinButton.setVisible(false);
+        joinMemberButton.setVisible(false);
+        textLabel.setText(text);
+    }
+
     private void showEventInfo(Event event) {
         eventNameLabel.setText(event.getEventName());
         startTimeLabel.setText(formatTimestamp(event.getStartTime()));
@@ -89,6 +120,8 @@ public class EventViewController {
         memberList.addMember(userName, selectedEvent.getEventID());
         memberListDataSource.writeData(memberList);
         selectedEvent.boooking();
+        eventDatasource.writeData(eventList);
+        memberListDataSource.writeData(memberList);
         showEventInfo(selectedEvent);
     }
     private void clearInfo() {
@@ -159,7 +192,7 @@ public class EventViewController {
         listTeamTableView.getColumns().add(nameColumn);
 
         for (Team team: teamlist.getAllTeams()) {
-            if(team.getEventID().equals(selectedEvent.getEventID())) {
+            if(team.getEventID().equals(selectedEvent.getEventID()) && team.getSeatLeft() > 0) {
                 listTeamTableView.getItems().add(team);
             }
         }
@@ -183,9 +216,12 @@ public class EventViewController {
         teamPickerPopup.setVisible(false);
     }
     @FXML public void joinTeambutton() {
-        selectedTeam.addTeamStaff(userName);
-        showTeamInfo(selectedTeam);
-        teamListDataSource.writeData(teamlist);
+        if(selectedTeam.getSeatLeft() > 0) {
+            selectedTeam.addTeamStaff(userName);
+            showTeamInfo(selectedTeam);
+            teamListDataSource.writeData(teamlist);
+            goMainMenu();
+        }
     }
     @FXML public void logoutButton() {
         try {

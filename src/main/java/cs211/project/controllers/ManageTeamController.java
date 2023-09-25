@@ -1,6 +1,11 @@
 package cs211.project.controllers;
 
+import cs211.project.models.Calendar;
 import cs211.project.models.Event;
+import cs211.project.models.EventList;
+import cs211.project.models.chats.Chat;
+import cs211.project.models.eventHub.Member;
+import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
 import cs211.project.services.*;
@@ -9,10 +14,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ManageTeamController {
 
@@ -20,15 +28,49 @@ public class ManageTeamController {
 
     @FXML
     private TableView<Team> teamTableView;
+    @FXML private TextField searchBox;
 
-    private TeamList teamList;
+    private TeamList fullteamList;
+    private TeamList teamList = new TeamList();
     private String account = (String) FXRouter.getData();
 
     @FXML
     private void initialize() {
         DataSource<TeamList> dataSource = new TeamDataSource("data", "team.csv");
-        teamList = dataSource.readData();
+        fullteamList = dataSource.readData();
+
+
+        EventList eventList = (new EventDataSource("data", "event.csv").readData());
+        fullteamList = (new TeamDataSource("data", "team.csv").readData());
+
+        List<Pair> joinData = new ArrayList<>();
+
+        for(Event event: eventList.getAllEvent()) {
+            if(event.getEventOwner().equals(account)) {
+                joinData.add(new Pair(event.getEventID(), "OWNER"));
+            }
+        }
+        for(Team team: fullteamList.getAllTeams()) {
+            if(team.isInTeam(account)) {
+                joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
+            }
+        }
+
+        for (Pair data : joinData) {
+            for (Team team : fullteamList.getAllTeams()) {
+                if(team.getEventID().equals(data.getKey()) && data.getValue().equals("OWNER")) {
+                    teamList.addTeam(team);
+                }
+                else if (team.getEventID().equals(data.getKey()) && team.getNameTeam().equals(data.getValue())) {
+                    teamList.addTeam(team);
+                }
+
+            }
+        }
         showTable(teamList);
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            SearchFn(newValue);
+        });
     }
 
     private void showTable(TeamList teamList) {
@@ -65,14 +107,7 @@ public class ManageTeamController {
                 }
             }
         });
-
-
-
-
-
     }
-
-
 
     @FXML
     private void logoutButton() {
@@ -117,7 +152,15 @@ public class ManageTeamController {
         }
     }
 
+    private void SearchFn(String searchTerm) {
+        searchTerm = searchTerm.toLowerCase().trim();
+        teamTableView.getItems().clear();
 
-
+        for (Team team : teamList.getAllTeams()) {
+            if (team.getNameTeam().toLowerCase().contains(searchTerm)) {
+                teamTableView.getItems().add(team);
+            }
+        }
+    }
 }
 
