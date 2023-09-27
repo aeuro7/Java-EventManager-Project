@@ -40,6 +40,7 @@ public class HelloApplication extends Application {
         FXRouter.when("calendar-event", resourcesPath + "event-calendar-view.fxml");
         FXRouter.when("create-calendar", resourcesPath + "create-calendar.fxml");
         FXRouter.when("event-info", resourcesPath + "event-info.fxml");
+        FXRouter.when("ongoing-tab", resourcesPath + "ongoing-event-tab.fxml");
     }
 
 
