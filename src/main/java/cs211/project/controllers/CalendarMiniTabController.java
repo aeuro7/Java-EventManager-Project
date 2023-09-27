@@ -11,9 +11,8 @@ import javafx.scene.shape.Rectangle;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CalendarTabController {
+public class CalendarMiniTabController {
     @FXML private Label activitynameLabel;
-    @FXML private Label eventnameLabel;
     @FXML private Label factionLabel;
     @FXML private Label starttimeLabel;
     @FXML private Label duetimeLabel;
@@ -25,7 +24,6 @@ public class CalendarTabController {
     public void setData(Calendar calendar, Event event) {
         profileRectangle.setFill(new ImagePattern(new Image("file:" + event.getEventPicture())));
         activitynameLabel.setText(calendar.getCalendarName());
-        eventnameLabel.setText(event.getEventName());
         factionLabel.setText(calendar.getFaction());
         starttimeLabel.setText(formatTimestamp(calendar.getStartTime()));
         duetimeLabel.setText(formatTimestamp(calendar.getDueTime()));
