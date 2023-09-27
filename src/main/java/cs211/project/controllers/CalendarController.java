@@ -43,13 +43,13 @@ public class CalendarController {
         Set<Pair> joinData = new HashSet<>();
 
         for (Member member : memberList.getMemberList()) {
-            if (member.getUsername().equals(account)) {
+            if (member.getUsername().equals(account) && !member.getBanStatus()) {
                 joinData.add(new Pair(member.getEventID(), member.getRole()));
             }
         }
 
         for (Team team : teamList.getAllTeams()) {
-            if (team.isInTeam(account)) {
+            if (team.isInTeam(account) && !team.isThisGuyAreBaned(account)) {
                 joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
             }
         }

@@ -33,10 +33,12 @@ public class ManageTeamViewController {
     private Team selectTeam;
     private TeamList teamList;
     private String account;
+    private TeamStaff selectStaff;
+    private DataSource<TeamList> dataSource;
 
     @FXML
     private void initialize() {
-        DataSource<TeamList> dataSource = new TeamDataSource("data", "team.csv");
+        dataSource = new TeamDataSource("data", "team.csv");
         EventList eventList = (new EventDataSource("data", "event.csv").readData());
         teamList = dataSource.readData();
         account = ((Pair<String , Team>) FXRouter.getData()).getKey();
@@ -49,6 +51,7 @@ public class ManageTeamViewController {
 
         memberTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                selectStaff = newValue;
                 nameLabel.setText(newValue.getName());
                 statusLabel.setText(newValue.getRole());
                 User user = (new UserDataSource("data", "login.csv")).readData().findUserByUserName(newValue.getName());
@@ -96,7 +99,10 @@ public class ManageTeamViewController {
     }
 
     @FXML private void banThisMember() {
-
+        if(selectStaff != null) {
+            selectStaff.setRole("BAN");
+            dataSource.writeData(teamList);
+        }
     }
     @FXML private void editHandleButton() {
 
