@@ -20,6 +20,10 @@ import javafx.scene.shape.Circle;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class ManageEventController {
     private Event selectEvent;
@@ -32,6 +36,12 @@ public class ManageEventController {
     @FXML private Button addTeamPopup;
     @FXML private Button banButton;
     @FXML private AnchorPane teamPopup;
+    @FXML private DatePicker startDatePicker;
+    @FXML private DatePicker dueDatePicker;
+    @FXML private ChoiceBox<String> hourStartChoice;
+    @FXML private ChoiceBox<String> minStartChoice;
+    @FXML private ChoiceBox<String> hourDueChoice;
+    @FXML private ChoiceBox<String> minDueChoice;
 
 
     @FXML private TextField teamnameTextfield;
@@ -54,6 +64,22 @@ public class ManageEventController {
         memberList = memberDatasource.readData();
         chatList = chatListDataSource.readData();
         addTeamPopup.setVisible(false);
+        hourStartChoice.getItems().addAll(
+                "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+                "20", "21", "22", "23"
+        );
+        minStartChoice.getItems().addAll("00", "15", "30", "45");
+        hourDueChoice.getItems().addAll(
+                "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+                "20", "21", "22", "23"
+        );
+        minDueChoice.getItems().addAll("00", "15", "30", "45");
+        hourStartChoice.setValue("00");
+        minStartChoice.setValue("00");
+        hourDueChoice.setValue("00");
+        minDueChoice.setValue("00");
         popupClosed();
         showAudienceOnTable();
     }
@@ -188,6 +214,7 @@ public class ManageEventController {
         String teamName =  teamnameTextfield.getText();
         long amount =  Long.parseLong(amountTextfield.getText());
         TeamList teamList = teamDatasource.readData();
+
         if(!teamName.equals("")) {
             boolean check = true;
             for(Team team: teamList.getAllTeams()) {
@@ -196,7 +223,20 @@ public class ManageEventController {
                 }
             }
             if(check) {
-                Team newTeam = new Team(teamName, selectEvent.getEventID(), amount);
+                String startTimeStr = hourStartChoice.getValue() + ":" + minStartChoice.getValue();
+                String dueTimeStr = hourDueChoice.getValue() + ":" + minDueChoice.getValue();
+
+                LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+                LocalTime dueTime = LocalTime.parse(dueTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+
+                LocalDateTime startDateTime = startDatePicker.getValue().atTime(startTime);
+                LocalDateTime dueDateTime = dueDatePicker.getValue().atTime(dueTime);
+
+                ZoneId systemZone = ZoneId.systemDefault();
+                long startTimeMillis = startDateTime.atZone(systemZone).toInstant().toEpochMilli();
+                long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
+
+                Team newTeam = new Team(teamName, selectEvent.getEventID(), amount, startTimeMillis, dueTimeMillis);
                 Chat newChat = new Chat(selectEvent.getEventID(), teamName);
                 teamList.addTeam(newTeam);
                 chatList.addChat(newChat);
