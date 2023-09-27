@@ -2,6 +2,7 @@ package cs211.project.models.team;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Team {
     private ArrayList<TeamStaff> teamStaffList;
@@ -82,7 +83,10 @@ public class Team {
     private void setSeatLeft() {
         long count = maxStaff;
         for(TeamStaff staff: teamStaffList) {
-            count++;
+            if(staff.getRole().equals("BAN")) {
+                continue;
+            }
+            count--;
         }
         this.seatLeft = count;
     }
@@ -94,6 +98,28 @@ public class Team {
             }
         }
         return false;
+    }
+    public boolean isThisGuyAreBaned(String username) {
+        for(TeamStaff teamStaff: teamStaffList) {
+            if(teamStaff.getName().equals(username)) {
+                if(teamStaff.getRole().equals("BAN")) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Team otherTeam = (Team) obj;
+        return Objects.equals(this.eventID, otherTeam.eventID);
     }
 
     public long getSeatLeft() {
