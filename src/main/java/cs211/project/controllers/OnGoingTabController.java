@@ -21,7 +21,7 @@ public class OnGoingTabController {
     @FXML private Label daysleftLabel;
     private Event currentEvent;
 
-    public void setData(Calendar calendar, Event event, String ownerEventname) {
+    public void setData(Event event, String ownerEventname) {
         currentEvent = event;
         profileRectangle.setFill(new ImagePattern(new Image("file:" + event.getEventPicture())));
         eventnameLabel.setText(event.getEventName());
@@ -29,7 +29,7 @@ public class OnGoingTabController {
         duetimeLabel.setText(formatTimestamp(event.getDueTime()));
         ownernameLabel.setText(ownerEventname);
         long millisecondsPerDay = 24 * 60 * 60 * 1000;
-        long dayleft = calendar.getStartTime() - System.currentTimeMillis();
+        long dayleft = event.getStartTime() - System.currentTimeMillis();
         dayleft  /= millisecondsPerDay;
         daysleftLabel.setText(String.valueOf(dayleft));
     }

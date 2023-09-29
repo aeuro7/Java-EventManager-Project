@@ -50,6 +50,7 @@ public class MainMenuController {
         for(Event event: eventList.getAllEvent()) {
             showEvent(event);
         }
+
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             SearchFn(newValue);
         });
