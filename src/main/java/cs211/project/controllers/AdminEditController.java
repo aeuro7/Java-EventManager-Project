@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -32,14 +31,6 @@ public class AdminEditController {
         nameEmptyLabel.setVisible(false);
         changeLabel.setVisible(false);
     }
-
-    @FXML private void gotoMainMenu() {
-        try {
-            FXRouter.goTo("main-menu");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @FXML private void goAdminview() {
         try {
             FXRouter.goTo("admin-view");
@@ -54,21 +45,14 @@ public class AdminEditController {
             throw new RuntimeException(e);
         }
     }
-    @FXML public void goProflie() {
-        try {
-            FXRouter.goTo("profile-view");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @FXML private void changeRole() {
         userList.changeRole(selectedUser.getUserName());
         updateToCSV();
         showUserInfo(selectedUser);
         changeLabel.setVisible(true);
     }
-    @FXML private void deleteAcount() {
-        userList.deleteThisAccount(selectedUser.getUserName());
+    @FXML private void banAcount() {
+        selectedUser.banThisUser();
         updateToCSV();
         goAdminview();
     }

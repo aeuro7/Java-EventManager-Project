@@ -19,53 +19,18 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.AdminViewController">
     <children>
-        <Group layoutX="1.0" layoutY="15.0">
-            <children>
-                <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="364.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../icon-png/logo_png/logo-no-background.png" />
-                    </image>
-                </ImageView>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" height="92.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="800.0">
-                    <fill>
-                        <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                            <stops>
-                                <Stop>
-                                    <color>
-                                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.0" />
-                                    </color>
-                                </Stop>
-                                <Stop offset="0.18120805369127516">
-                                    <color>
-                                        <Color red="1.0" green="1.0" blue="1.0" opacity="0.0" />
-                                    </color>
-                                </Stop>
-                                <Stop offset="1.0">
-                                    <color>
-                                        <Color red="0.5616999864578247" green="0.37720000743865967" blue="0.8199999928474426" opacity="0.4703632891178131" />
-                                    </color>
-                                </Stop>
-                            </stops>
-                        </LinearGradient>
-                    </fill>
-                </Rectangle>
-            <TableView fx:id="userTableView" layoutX="76.0" layoutY="176.0" prefHeight="330.0" prefWidth="649.0" stylesheets="@../../../table_style/table.css">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
-            <Button layoutX="668.0" layoutY="-8.0" mnemonicParsing="false" onAction="#gotoMainMenu" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Main-Menu" textFill="#bb84e8">
-               <font>
-                  <Font name="Sarabun Regular" size="13.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TextField fx:id="searchBox" layoutX="75.0" layoutY="128.0" prefHeight="32.0" prefWidth="650.0" promptText="     Seach Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            </children>
-        </Group>
+          <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="365.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../../../icon-png/logo_png/logo-no-background.png" />
+              </image>
+          </ImageView>
+      <TableView fx:id="userTableView" layoutX="51.0" layoutY="186.0" prefHeight="400.0" prefWidth="700.0" stylesheets="@../../../table_style/table.css">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <TextField fx:id="searchBox" layoutX="51.0" layoutY="142.0" prefHeight="30.0" prefWidth="700.0" promptText="     Seach Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
         <Group layoutY="47.0">
             <children>
                 <Rectangle arcHeight="5.0" arcWidth="5.0" height="75.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="800.0">
@@ -91,7 +56,10 @@
                         </LinearGradient>
                     </fill>
                 </Rectangle>
-                <Circle fill="WHITE" layoutX="36.0" layoutY="35.0" radius="20.0" stroke="#757575" strokeType="INSIDE" />
+                <Circle fx:id="adminProficCircle" fill="WHITE" layoutX="36.0" layoutY="35.0" onMouseClicked="#changeAdminProfile" radius="20.0" stroke="#757575" strokeType="INSIDE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Circle>
                 <Label layoutX="80.0" layoutY="22.0" text="Good Morning, " textFill="WHITE">
                     <font>
                         <Font name="Sarabun Regular" size="18.0" />
@@ -115,74 +83,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            </children>
-        </Group>
-        <Group layoutY="553.0">
-            <children>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="800.0" />
-                <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="389.0" layoutY="13.0" onMouseClicked="#gotoMainMenu" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../icon-png/home-png/home.png" />
-                    </image>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ImageView>
-                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="549.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../icon-png/home-png/caalendar.png" />
-                    </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-                </ImageView>
-                <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="710.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../icon-png/home-png/setting.png" />
-                    </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-                </ImageView>
-                <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="229.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../icon-png/home-png/comment.png" />
-                    </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-                </ImageView>
-                <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="69.0" layoutY="10.0" onMouseClicked="#goProflie" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../icon-png/home-png/proflie.png" />
-                    </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-                </ImageView>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" height="5.0" layoutX="321.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="160.0">
-                    <fill>
-                        <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                            <stops>
-                                <Stop>
-                                    <color>
-                                        <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                                    </color>
-                                </Stop>
-                                <Stop offset="0.006711409395973154">
-                                    <color>
-                                        <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
-                                    </color>
-                                </Stop>
-                                <Stop offset="1.0">
-                                    <color>
-                                        <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
-                                    </color>
-                                </Stop>
-                            </stops>
-                        </LinearGradient>
-                    </fill>
-                </Rectangle>
             </children>
         </Group>
     </children>

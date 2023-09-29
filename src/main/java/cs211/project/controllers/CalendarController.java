@@ -12,14 +12,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Pair;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class CalendarController {
@@ -27,11 +28,13 @@ public class CalendarController {
     @FXML private GridPane calendarContrainer;
     @FXML private TextField searchBox;
     @FXML private ScrollPane scrollpain;
+    @FXML private Circle userProficCircle;
     private CalendarList calendarList = new CalendarList();
     private EventList eventList = new EventList();
     private int row = 1;
     @FXML public void initialize() {
         account = (String) FXRouter.getData();
+        userProficCircle.setFill(new ImagePattern(new Image("file:" + "data/UserProfilePicture/" + account + ".png")));
         DataSource<CalendarList> dataSource = new CalendarDataSource("data", "calendar.csv");
         CalendarList fullcalendarList = dataSource.readData();
 
@@ -98,6 +101,14 @@ public class CalendarController {
     public void goChat() {
         try {
             FXRouter.goTo("chat-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

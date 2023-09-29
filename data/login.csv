@@ -1,7 +1,7 @@
-admin,ADMIN,admin,admin,1695830296767,data/UserProfilePicture/admin.png
-bank,bank,bank,user,1695824623916,data/UserProfilePicture/bank.png
-nammey,nammey,nammey,user,1693811730294,data/UserProfilePicture/nammey.png
-e,Euro Cake,e,admin,1695826260161,data/UserProfilePicture/e.png
-tent,tent,123,user,1694672595584,data/UserProfilePicture/tent.png
-b,bank,b,user,1695829580552,data/UserProfilePicture/b.png
-t,test1,t,user,1695824105018,data/UserProfilePicture/t.png
+admin,ADMIN,admin,ADMIN,1695903105876,data/UserProfilePicture/admin.png
+bank,bank,bank,USER,1695824623916,data/UserProfilePicture/bank.png
+nammey,nammey,nammey,USER,1693811730294,data/UserProfilePicture/nammey.png
+e,Euro Cake,e,ADMIN,1695826260161,data/UserProfilePicture/e.png
+tent,tent,123,USER,1694672595584,data/UserProfilePicture/tent.png
+b,Bank,b,USER,1695905416304,data/UserProfilePicture/b.png
+t,test1,t,USER,1695824105018,data/UserProfilePicture/t.png

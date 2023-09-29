@@ -13,7 +13,7 @@ public class User {
         this.accountName = accountName;
         this.userName = userName;
         this.passWord = passWord;
-        this.role = "user";
+        this.role = "USER";
         this.lastLoginTimestamp = System.currentTimeMillis();
         this.profilePicture = "default";
     }
@@ -56,11 +56,19 @@ public class User {
         return isAuthenticated;
     } // ตรวจสอบรหัสผ่านและ userName ใช้ตอน Login
 
-    public boolean isAdmin() {return this.role.equals("admin");}
+    public boolean isAdmin() {return this.role.equals("ADMIN");}
+    public boolean isBan() {return this.role.equals("BAN");}
 
-    public void thisIsAdmin() {this.role = "admin";}
+    public void banThisUser() {
+        this.role = "BAN";
+    }
+    public void unBanThisUser() {
+        thisIsUser();
+    }
 
-    public void thisIsUser() {this.role = "user";}
+    public void thisIsAdmin() {this.role = "ADMIN";}
+
+    public void thisIsUser() {this.role = "USER";}
     public void changeAccountName(String name) {
         if(!name.equals("")) {
             this.accountName = name;
