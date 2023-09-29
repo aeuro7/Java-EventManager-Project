@@ -4,6 +4,7 @@ public class Calendar {
     private String calendarName;
     private String eventID;
     private String faction;
+    private boolean status;
     private long startTime;
     private long dueTime;
     private String detail;
@@ -15,10 +16,16 @@ public class Calendar {
         this.startTime = startTime;
         this.dueTime = dueTime;
         this.detail = "";
+        this.status = false;
     }
     public Calendar(String name, String event, String faction, long startTime, long dueTime, String info) {
         this(name, event, faction, startTime, dueTime);
         this.detail = info;
+    }
+    public Calendar(String name, String event, String faction, long startTime, long dueTime, boolean status, String info) {
+        this(name, event, faction, startTime, dueTime);
+        this.detail = info;
+        this.status = status;
     }
 
     public String getCalendarName() {
@@ -42,6 +49,12 @@ public class Calendar {
 
     public String getDetail() {
         return detail;
+    }
+    public boolean isDone() {
+        return this.status;
+    }
+    public void itDone() {
+        this.status = true;
     }
 
     public void setCalendarName(String calendarName) {

@@ -50,9 +50,10 @@ public class CalendarDataSource implements DataSource<CalendarList> {
                 String faction = data[2];
                 long startTime = Long.parseLong(data[3]);
                 long dueTime = Long.parseLong(data[4]);
-                String info = (data.length == 6) ? data[5] : "";
+                boolean status = Boolean.parseBoolean(data[5]);
+                String info = (data.length == 7) ? data[6] : "";
 
-                calendarList.addNewCalendar(name, event, faction, startTime, dueTime, info);
+                calendarList.addNewCalendar(name, event, faction, startTime, dueTime, status, info);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -84,6 +85,7 @@ public class CalendarDataSource implements DataSource<CalendarList> {
                         + calendar.getFaction() + ","
                         + calendar.getStartTime() + ","
                         + calendar.getDueTime() + ","
+                        + calendar.isDone() + ","
                         + calendar.getDetail();
                 writer.append(line);
                 writer.newLine();
