@@ -8,6 +8,9 @@ public class Event {
     private String eventName;
     private long startTime;
     private long dueTime;
+
+    private long startBookingTime;
+    private long dueBookingTime;
     private String info;
     private long maxSeat;
 
@@ -19,10 +22,12 @@ public class Event {
     private String eventPicture;
 
 
-    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, String location, String eventOwner) {
+    public Event(String eventName, long startTime ,long dueTime, long startBookingTime, long dueBookingTime, String info, long maxSeat, String location, String eventOwner) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
+        this.startBookingTime = startBookingTime;
+        this.dueBookingTime = dueBookingTime;
         this.info = info;
         this.maxSeat = maxSeat;
         this.leftSeat = maxSeat;
@@ -32,10 +37,12 @@ public class Event {
         this.eventOwner = eventOwner;
         this.eventPicture = this.eventID;
     }
-    public Event(String eventName, long startTime ,long dueTime, String info, long maxSeat, long leftSeat, long booked, String location, String id, String eventOwner, String eventPicture) {
+    public Event(String eventName, long startTime ,long dueTime, long startBookingTime, long dueBookingTime, String info, long maxSeat, long leftSeat, long booked, String location, String id, String eventOwner, String eventPicture) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.dueTime = dueTime;
+        this.startBookingTime = startBookingTime;
+        this.dueBookingTime = dueBookingTime;
         this.info = info;
         this.maxSeat = maxSeat;
         this.leftSeat = leftSeat;
@@ -66,6 +73,23 @@ public class Event {
     public void setDueTime(long dueTime) {
         this.dueTime = dueTime;
     }
+
+    public long getStartBookingTime() {
+        return startBookingTime;
+    }
+
+    public void setStartBookingTime(long startBookingTime) {
+        this.startBookingTime = startBookingTime;
+    }
+
+    public long getDueBookingTime() {
+        return dueBookingTime;
+    }
+
+    public void setDueBookingTime(long dueBookingTime) {
+        this.dueBookingTime = dueBookingTime;
+    }
+
     public String getInfo() {
         return info;
     }
