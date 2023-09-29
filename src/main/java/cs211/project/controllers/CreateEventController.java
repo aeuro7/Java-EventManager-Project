@@ -33,6 +33,8 @@ public class CreateEventController {
     @FXML private TextField eventnameTextField;
     @FXML private DatePicker startDatePicker;
     @FXML private DatePicker dueDatePicker;
+    @FXML private DatePicker startBookedPicker;
+    @FXML private DatePicker dueBookedPicker;
     @FXML private TextField locationTextField;
     @FXML private TextField audienceTextField;
     @FXML private TextField descriptionTextField;
@@ -41,6 +43,10 @@ public class CreateEventController {
     @FXML private ChoiceBox<String> minStartChoice;
     @FXML private ChoiceBox<String> hourDueChoice;
     @FXML private ChoiceBox<String> minDueChoice;
+    @FXML private ChoiceBox<String> hrStartBookedChoice;
+    @FXML private ChoiceBox<String> mStartBookedChoice;
+    @FXML private ChoiceBox<String> hrDueBookedChoice;
+    @FXML private ChoiceBox<String> mDueBookedChoice;
 
     private EventList eventList;
     DataSource<EventList> eventListDataSource;
@@ -78,6 +84,23 @@ public class CreateEventController {
         minStartChoice.setValue("00");
         hourDueChoice.setValue("00");
         minDueChoice.setValue("00");
+
+        hrStartBookedChoice.getItems().addAll(
+                "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+                "20", "21", "22", "23"
+        );
+        mStartBookedChoice.getItems().addAll("00", "15", "30", "45");
+        hrDueBookedChoice.getItems().addAll(
+                "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+                "20", "21", "22", "23"
+        );
+        mDueBookedChoice.getItems().addAll("00", "15", "30", "45");
+        hrStartBookedChoice.setValue("00");
+        mStartBookedChoice.setValue("00");
+        hrDueBookedChoice.setValue("00");
+        mDueBookedChoice.setValue("00");
     }
     @FXML public void browseButtonClick(ActionEvent event) {
         FileChooser chooser = new FileChooser();
@@ -96,25 +119,36 @@ public class CreateEventController {
         String eventName = eventnameTextField.getText();
         LocalDate startDate = startDatePicker.getValue();
         LocalDate dueDate = dueDatePicker.getValue();
+        LocalDate startBookingDate = startBookedPicker.getValue();
+        LocalDate dueBookingDate = dueBookedPicker.getValue();
         String location = locationTextField.getText();
         String audience = audienceTextField.getText();
         String info = descriptionTextField.getText();
         String startTimeStr = hourStartChoice.getValue() + ":" + minStartChoice.getValue();
         String dueTimeStr = hourDueChoice.getValue() + ":" + minDueChoice.getValue();
+        String startBookingStr = hrStartBookedChoice.getValue() + ":" + mStartBookedChoice.getValue();
+        String dueBookingStr = hrDueBookedChoice.getValue() + ":" + mDueBookedChoice.getValue();
 
         LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
         LocalTime dueTime = LocalTime.parse(dueTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+        LocalTime startBookingTime = LocalTime.parse(startBookingStr, DateTimeFormatter.ofPattern("HH:mm"));
+        LocalTime dueBookingTime = LocalTime.parse(dueBookingStr, DateTimeFormatter.ofPattern("HH:mm"));
+
 
         LocalDateTime startDateTime = startDate.atTime(startTime);
         LocalDateTime dueDateTime = dueDate.atTime(dueTime);
+        LocalDateTime startBookingDateTime = startBookingDate.atTime(startBookingTime);
+        LocalDateTime dueBookingDateTime = dueBookingDate.atTime(dueBookingTime);
+
 
         ZoneId systemZone = ZoneId.systemDefault();
         long startTimeMillis = startDateTime.atZone(systemZone).toInstant().toEpochMilli();
         long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
+        long startBookingTimeMillis = startBookingDateTime.atZone(systemZone).toInstant().toEpochMilli();
+        long dueBookingTimeMillis = dueBookingDateTime.atZone(systemZone).toInstant().toEpochMilli();
 
 
-        Event newEvent = new Event(eventName, startTimeMillis, dueTimeMillis, info,
-                Long.parseLong(audience), location, account);
+        Event newEvent = new Event(eventName, startTimeMillis, dueTimeMillis, startBookingTimeMillis, dueBookingTimeMillis, info, Long.parseLong(audience), location, account);
 
         String profilePicturePath;
         if (selectedImageFile != null) {

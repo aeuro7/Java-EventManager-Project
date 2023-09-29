@@ -20,7 +20,7 @@ public class CompletedTabController {
     @FXML private Label ownernameLabel;
     private Event currentEvent;
 
-    public void setData(Calendar calendar, Event event, String ownerEventname) {
+    public void setData(Event event, String ownerEventname) {
         currentEvent = event;
         profileRectangle.setFill(new ImagePattern(new Image("file:" + event.getEventPicture())));
         eventnameLabel.setText(event.getEventName());
