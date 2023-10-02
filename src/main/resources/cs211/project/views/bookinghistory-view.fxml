@@ -345,6 +345,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </BorderPane>
+            <ScrollPane fx:id="scrollpain" layoutX="194.0" layoutY="177.0" prefHeight="330.0" prefWidth="583.0">
+               <content>
+                  <GridPane fx:id="eventContrainer" prefHeight="150.0" prefWidth="581.0">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
             </children>
         </Group>
         <Group layoutY="47.0">
@@ -444,18 +453,5 @@
             </children>
         </Group>
       <Separator layoutX="168.0" layoutY="125.0" orientation="VERTICAL" prefHeight="425.0" prefWidth="20.0" />
-      <AnchorPane layoutX="57.0" layoutY="187.0" prefHeight="330.0" prefWidth="577.0">
-         <children>
-            <ScrollPane fx:id="scrollpain" layoutX="139.0" layoutY="4.0" prefHeight="330.0" prefWidth="583.0">
-               <content>
-                  <GridPane fx:id="eventContrainer" prefHeight="150.0" prefWidth="581.0">
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-               </content>
-            </ScrollPane>
-         </children>
-      </AnchorPane>
     </children>
 </AnchorPane>

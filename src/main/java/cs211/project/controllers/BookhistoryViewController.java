@@ -138,7 +138,7 @@ private void showEvent(Event event) {
             throw new RuntimeException(e);
         }
     }
-    @FXML private void gotoMainMenu() {
+    @FXML public void gotoMainMenu() {
         try {
             FXRouter.goTo("main-menu",username);
         } catch (IOException e) {
@@ -147,27 +147,27 @@ private void showEvent(Event event) {
     }
 
 
-    @FXML private void gotoEditprofile() {
+    @FXML public void gotoEditprofile() {
         try {
             FXRouter.goTo("profile-view",username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    } @FXML private void gotoBook() {
+    } @FXML public void gotoBook() {
         try {
             FXRouter.goTo("book-view",username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @FXML private void gotoManageTeam() {
+    @FXML public void gotoManageTeam() {
         try {
             FXRouter.goTo("manage-team", username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @FXML private void gotoManageEvent() {
+    @FXML public void gotoManageEvent() {
         try {
             FXRouter.goTo("manage-event", username);
         } catch (IOException e) {

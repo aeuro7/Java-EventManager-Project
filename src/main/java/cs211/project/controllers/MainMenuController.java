@@ -48,9 +48,10 @@ public class MainMenuController {
         }
 
         for(Event event: eventList.getAllEvent()) {
-            showEvent(event);
+            if(event.getStartTime() >= System.currentTimeMillis()) {
+                showEvent(event);
+            }
         }
-
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             SearchFn(newValue);
         });
@@ -85,8 +86,6 @@ public class MainMenuController {
         }
 
     }
-
-
     @FXML
     public void goLogout() {
         try {
@@ -95,7 +94,6 @@ public class MainMenuController {
             throw new RuntimeException(e);
         }
     }
-
     @FXML
     public void createEvent() {
         try {
