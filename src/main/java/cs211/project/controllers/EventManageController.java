@@ -80,8 +80,7 @@ public class EventManageController {
 
             eventinfoTab.setOnMouseClicked(activity -> {
                 try {
-                    Pair<String , String> sender = new Pair<String, String>(event.getEventName(), account.getUserName());
-                    FXRouter.goTo("owner-event", sender);
+                    FXRouter.goTo("owner-event", event);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -164,4 +163,3 @@ public class EventManageController {
 
 
 }
-

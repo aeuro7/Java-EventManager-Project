@@ -87,6 +87,9 @@ public class ManageTeamController {
 
         teamTableView.getColumns().clear();
         teamTableView.getColumns().addAll(nameTeamColumn, eventIDColumn,leaderNameColumn);
+        nameTeamColumn.setMinWidth(100);
+        eventIDColumn.setMinWidth(100);
+        leaderNameColumn.setMinWidth(400);
 
         teamTableView.getItems().clear();
 

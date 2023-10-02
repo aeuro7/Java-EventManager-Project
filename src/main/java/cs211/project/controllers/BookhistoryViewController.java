@@ -70,34 +70,34 @@ public class BookhistoryViewController {
 
     }
 
-private void showEvent(Event event) {
-    try{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/cs211/project/views/ongoing-event-tab.fxml"));
-        AnchorPane eventinfoTab = loader.load();
-        OnGoingTabController infoTabController = loader.getController();
-        infoTabController.setData(event,userList.findUserByUserName(event.getEventOwner()).getAccountName());
+    private void showEvent(Event event) {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/cs211/project/views/ongoing-event-tab.fxml"));
+            AnchorPane eventinfoTab = loader.load();
+            OnGoingTabController infoTabController = loader.getController();
+            infoTabController.setData(event,userList.findUserByUserName(event.getEventOwner()).getAccountName());
 
-        eventinfoTab.setOnMouseClicked(activity -> {
-            try {
-                Pair<String , String> sender = new Pair<String, String>(event.getEventName(), account.getUserName());
-                FXRouter.goTo("owner-event", sender);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            eventinfoTab.setOnMouseClicked(activity -> {
+                try {
+                    Pair<Event, String> sender = new Pair<Event, String>(event, account.getUserName());
+                    FXRouter.goTo("event-info", sender);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            if(column == 1) {
+                column = 0;
+                row++;
             }
-        });
-
-        if(column == 1) {
-            column = 0;
-            row++;
+            scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            eventContrainer.add(eventinfoTab, column++, row);
+            GridPane.setMargin(eventinfoTab, new Insets(3));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        eventContrainer.add(eventinfoTab, column++, row);
-        GridPane.setMargin(eventinfoTab, new Insets(3));
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-}
 
 
     private void showEventComplete(Event event) {
@@ -110,8 +110,8 @@ private void showEvent(Event event) {
 
             eventinfoTab.setOnMouseClicked(activity -> {
                 try {
-                    Pair<String, String> sender = new Pair<String, String>(event.getEventName(), account.getUserName());
-                    FXRouter.goTo("owner-event", sender);
+                    Pair<Event, String> sender = new Pair<Event, String>(event, account.getUserName());
+                    FXRouter.goTo("event-info", sender);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -138,7 +138,7 @@ private void showEvent(Event event) {
             throw new RuntimeException(e);
         }
     }
-    @FXML public void gotoMainMenu() {
+    @FXML private void gotoMainMenu() {
         try {
             FXRouter.goTo("main-menu",username);
         } catch (IOException e) {
@@ -147,27 +147,27 @@ private void showEvent(Event event) {
     }
 
 
-    @FXML public void gotoEditprofile() {
+    @FXML private void gotoEditprofile() {
         try {
             FXRouter.goTo("profile-view",username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    } @FXML public void gotoBook() {
+    } @FXML private void gotoBook() {
         try {
             FXRouter.goTo("book-view",username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @FXML public void gotoManageTeam() {
+    @FXML private void gotoManageTeam() {
         try {
             FXRouter.goTo("manage-team", username);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @FXML public void gotoManageEvent() {
+    @FXML private void gotoManageEvent() {
         try {
             FXRouter.goTo("manage-event", username);
         } catch (IOException e) {
@@ -194,8 +194,6 @@ private void showEvent(Event event) {
             }
         }
     }
-
-
     @FXML private void showCompleted() {
         nowCom.setVisible(true);
         nowOn.setVisible(false);
@@ -221,4 +219,3 @@ private void showEvent(Event event) {
 
 
 }
-
