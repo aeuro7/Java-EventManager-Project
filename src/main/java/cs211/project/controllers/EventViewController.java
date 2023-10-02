@@ -1,17 +1,12 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Calendar;
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
-import cs211.project.models.chats.Chat;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
-import cs211.project.models.users.User;
 import cs211.project.services.*;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -45,55 +40,100 @@ public class EventViewController {
     @FXML private Button joinButton;
     @FXML private Button joinMemberButton;
     @FXML private Label textLabel;
+
     private DataSource<EventList> eventDatasource;
     private DataSource<TeamList> teamListDataSource;
-    private TeamList teamlist;
     private EventList eventList;
     private String userName;
     private Event selectedEvent;
     private Team selectedTeam;
-
-    private TeamList teamList = (new TeamDataSource("data", "team.csv").readData());
-    private MemberList memberList = (new MemberDataSource("data", "member.csv").readData());
+    private String text;
+    private TeamList joinableTeamlist = new TeamList();
+    private TeamList allTeamlist;
+    private MemberList memberList = new MemberList();
 
     @FXML public void initialize() {
         eventDatasource = new EventDataSource("data", "event.csv");
         teamListDataSource = new TeamDataSource("data", "team.csv");
+        memberList = (new MemberDataSource("data", "member.csv")).readData();
+        allTeamlist = teamListDataSource.readData();
         eventList = eventDatasource.readData();
 
-        String eventname = ((Pair<String, String>) FXRouter.getData()).getKey();
-        userName = ((Pair<String, String>) FXRouter.getData()).getValue();
-        selectedEvent = eventList.findEventByEventName(eventname);
+        Pair<String, String> eventData = (Pair<String, String>) FXRouter.getData();
+        String eventID = eventData.getKey();
+        userName = eventData.getValue();
+        selectedEvent = eventList.findEventByID(eventID);
+
         showEventInfo(selectedEvent);
         closePopup();
         teamMaxSeatLabel.setText("00");
-        showJoinButton();
-
-        if(selectedEvent.getLeftSeat() == 0) {
-            hideJoinButton("Already Full");
-        } else {
-            for(Member member: memberList.getMemberList()) {
-                if(member.getUsername().equals(userName) && member.getEventID().equals(selectedEvent.getEventID())) {
-                    hideJoinButton("Already Join");
+        text = "";
+        hideJoinAudienceButton();
+        hideJoinTeamButton();
+        if(selectedEvent.getLeftSeat() > 0) {
+            if(selectedEvent.getStartBookingTime() < System.currentTimeMillis() && selectedEvent.getDueBookingTime() > System.currentTimeMillis()) {
+                for(Member member: memberList.getMemberList()) {
+                    if(member.getUsername().equals(userName) && member.getEventID().equals(selectedEvent.getEventID())) {
+                        if(member.getBanStatus()) {
+                            text = "BANNED";
+                        } else if (member.getUsername().equals(selectedEvent.getEventOwner())) {
+                            text = "This is Your Event";
+                        } else {
+                            text = "Already join!";
+                        }
+                    }
                 }
-            }
-            for(Team team: teamList.getAllTeams()) {
-                if(team.isInTeam(userName) && team.getEventID().equals(selectedEvent.getEventID())) {
-                    hideJoinButton("Already Join");
+                if(text.isEmpty()) {
+                    showJoinAudienceButton();
                 }
             }
         }
+
+        for(Team team: allTeamlist.getAllTeams()) {
+            if(team.getEventID().equals(selectedEvent.getEventID())) {
+                if(team.getStartJoin() < System.currentTimeMillis() && team.getEndJoin() > System.currentTimeMillis()) {
+                    if(team.isInTeam(userName)) {
+                        text = "Already join team!";
+                    } else {
+                        if(team.getSeatLeft() > 0) {
+                            joinableTeamlist.addTeam(team);
+                        }
+                    }
+                }
+            }
+        }
+
+        if(!joinableTeamlist.getAllTeams().isEmpty()) {
+            showJoinTeamButton();
+        }
+
+        if(!joinButton.isVisible() || !joinMemberButton.isVisible()) {
+            if(text.isEmpty()) {
+                textLabel.setText("Not Available");
+            } else {
+                hideJoinAudienceButton();
+                hideJoinTeamButton();
+                textLabel.setText(text);
+            }
+        } else {
+            textLabel.setText("");
+        }
+
     }
 
-    private void showJoinButton() {
-        joinButton.setVisible(true);
-        joinMemberButton.setVisible(true);
-        textLabel.setText("");
-    }
-    private void hideJoinButton(String text) {
+    private void hideJoinAudienceButton() {
         joinButton.setVisible(false);
+    }
+
+    private void showJoinAudienceButton() {
+        joinButton.setVisible(true);
+    }
+
+    private void hideJoinTeamButton() {
         joinMemberButton.setVisible(false);
-        textLabel.setText(text);
+    }
+    private void showJoinTeamButton() {
+        joinMemberButton.setVisible(true);
     }
 
     private void showEventInfo(Event event) {
@@ -163,13 +203,12 @@ public class EventViewController {
         if(selectedTeam.getSeatLeft() > 0) {
             selectedTeam.addTeamStaff(userName);
             showTeamInfo(selectedTeam);
-            teamListDataSource.writeData(teamlist);
+            teamListDataSource.writeData(allTeamlist);
             goMainMenu();
         }
     }
     @FXML private void joinStaff() {
         teamPickerPopup.setVisible(true);
-        teamlist = teamListDataSource.readData();
 
         TableColumn<Team, String> nameColumn = new TableColumn<>("Team Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("nameTeam"));
@@ -183,10 +222,8 @@ public class EventViewController {
 
         listTeamTableView.getItems().clear();
 
-        for (Team team: teamlist.getAllTeams()) {
-            if(team.getEventID().equals(selectedEvent.getEventID()) && team.getSeatLeft() > 0) {
-                listTeamTableView.getItems().add(team);
-            }
+        for (Team team: joinableTeamlist.getAllTeams()) {
+            listTeamTableView.getItems().add(team);
         }
         listTeamTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Team>() {
             @Override
@@ -230,6 +267,5 @@ public class EventViewController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(new Date(timestamp));
     }
-
 
 }
