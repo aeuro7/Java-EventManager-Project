@@ -1,5 +1,7 @@
 package cs211.project.models;
 
+import cs211.project.services.SortingSystem;
+
 import java.util.ArrayList;
 
 public class EventList {
@@ -42,5 +44,9 @@ public class EventList {
             }
         }
         return null;
+    }
+
+    public void sortEventByNearCurrentDate() {
+        eventList.sort(SortingSystem.sortByNearCurrentDate);
     }
 }
