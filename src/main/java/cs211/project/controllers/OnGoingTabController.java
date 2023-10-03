@@ -29,8 +29,9 @@ public class OnGoingTabController {
         duetimeLabel.setText(formatTimestamp(event.getDueTime()));
         ownernameLabel.setText(ownerEventname);
         long millisecondsPerDay = 24 * 60 * 60 * 1000;
-        long dayleft = event.getStartTime() - System.currentTimeMillis();
-        dayleft  /= millisecondsPerDay;
+        long currentTime = System.currentTimeMillis();
+        long startTime = event.getStartTime();
+        long dayleft = (startTime - currentTime + millisecondsPerDay - 1) / millisecondsPerDay;
         daysleftLabel.setText(String.valueOf(dayleft));
     }
     public Event getData() {
