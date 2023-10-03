@@ -161,5 +161,20 @@ public class EventManageController {
     }
 
 
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

@@ -212,6 +212,22 @@ public class BookhistoryViewController {
 
     }
 
+
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private String formatTimestamp(long timestamp) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(new Date(timestamp));
