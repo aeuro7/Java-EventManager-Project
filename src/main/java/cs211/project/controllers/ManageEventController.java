@@ -41,6 +41,7 @@ public class ManageEventController {
     @FXML private ChoiceBox<String> minStartChoice;
     @FXML private ChoiceBox<String> hourDueChoice;
     @FXML private ChoiceBox<String> minDueChoice;
+    @FXML private Label errorLabel;
 
 
     @FXML private TextField teamnameTextfield;
@@ -81,6 +82,18 @@ public class ManageEventController {
         minDueChoice.setValue("00");
         popupClosed();
         showAudienceOnTable();
+        hideErrorLabel();
+
+        TextFilter.allowAlphanumericOnly(teamnameTextfield);
+        TextFilter.allowOnlyNumber(amountTextfield);
+    }
+
+    private void hideErrorLabel() {
+        errorLabel.setText("");
+    }
+
+    private void showErrorLabel(String text) {
+        errorLabel.setText(text);
     }
 
     public void goEdit() {
@@ -90,13 +103,10 @@ public class ManageEventController {
             throw new RuntimeException(e);
         }
     }
-    public void cancelEvent() {
-        //change status to offline on event object
-    }
 
     public void showAudienceOnTable() {
         addTeamPopup.setVisible(false);
-        banButton.setVisible(true);
+        banButton.setVisible(false);
         memberList = memberDatasource.readData();
 
         listTableView.getItems().clear();
@@ -211,43 +221,64 @@ public class ManageEventController {
     }
     public void addTeamButton() {
         String teamName =  teamnameTextfield.getText();
-        long amount =  Long.parseLong(amountTextfield.getText());
         TeamList teamList = teamDatasource.readData();
-
         if(!teamName.equals("")) {
-            boolean check = true;
+            hideErrorLabel();
+            boolean itSame = false;
             for(Team team: teamList.getAllTeams()) {
                 if(teamName.equals(team.getNameTeam())) {
-                    check = false;
+                    itSame = false;
                 }
             }
-            if(check) {
-                String startTimeStr = hourStartChoice.getValue() + ":" + minStartChoice.getValue();
-                String dueTimeStr = hourDueChoice.getValue() + ":" + minDueChoice.getValue();
+            if(itSame) {
+                showErrorLabel("This has been Used!");
+            } else {
+                if(amountTextfield.getText().equals("")) {
+                    showErrorLabel("Fill the Amount");
+                } else {
+                    long amount =  Long.parseLong(amountTextfield.getText());
+                    if(amount <= 0) {
+                        showErrorLabel("Amount must be more than 0!");
+                    } else {
+                        if(startDatePicker.getValue() == null && dueDatePicker.getValue() == null) {
+                            showErrorLabel("Time must be chosen!");
+                        } else {
+                            String startTimeStr = hourStartChoice.getValue() + ":" + minStartChoice.getValue();
+                            String dueTimeStr = hourDueChoice.getValue() + ":" + minDueChoice.getValue();
 
-                LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
-                LocalTime dueTime = LocalTime.parse(dueTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+                            LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+                            LocalTime dueTime = LocalTime.parse(dueTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
 
-                LocalDateTime startDateTime = startDatePicker.getValue().atTime(startTime);
-                LocalDateTime dueDateTime = dueDatePicker.getValue().atTime(dueTime);
+                            LocalDateTime startDateTime = startDatePicker.getValue().atTime(startTime);
+                            LocalDateTime dueDateTime = dueDatePicker.getValue().atTime(dueTime);
 
-                ZoneId systemZone = ZoneId.systemDefault();
-                long startTimeMillis = startDateTime.atZone(systemZone).toInstant().toEpochMilli();
-                long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
+                            ZoneId systemZone = ZoneId.systemDefault();
+                            long startTimeMillis = startDateTime.atZone(systemZone).toInstant().toEpochMilli();
+                            long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
 
-                Team newTeam = new Team(teamName, selectEvent.getEventID(), amount, startTimeMillis, dueTimeMillis);
-                Chat newChat = new Chat(selectEvent.getEventID(), teamName);
-                teamList.addTeam(newTeam);
-                chatList.addChat(newChat);
+                            if (dueTimeMillis > startTimeMillis) {
+                                hideErrorLabel();
+                                Team newTeam = new Team(teamName, selectEvent.getEventID(), amount, startTimeMillis, dueTimeMillis);
+                                Chat newChat = new Chat(selectEvent.getEventID(), teamName);
+                                teamList.addTeam(newTeam);
+                                chatList.addChat(newChat);
 
-                teamDatasource.writeData(teamList);
-                chatListDataSource.writeData(chatList);
+                                teamDatasource.writeData(teamList);
+                                chatListDataSource.writeData(chatList);
 
-                teamnameTextfield.clear();
-                amountTextfield.clear();
-                showTeamOnTable();
-                popupClosed();
+                                teamnameTextfield.clear();
+                                amountTextfield.clear();
+                                showTeamOnTable();
+                                popupClosed();
+                            } else {
+                                showErrorLabel("Start time must be before due time.");
+                            }
+                        }
+                    }
+                }
             }
+        } else {
+            showErrorLabel("Name is Required!");
         }
     }
 
@@ -264,6 +295,7 @@ public class ManageEventController {
     private final ChangeListener<Object> memberListener = (observable, oldValue, newValue) -> {
         if (newValue != null) {
             selecteUser = (Member) newValue;
+            banButton.setVisible(true);
         }
     };
     public void goeditCalendar() {

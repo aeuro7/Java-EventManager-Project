@@ -30,11 +30,16 @@ public class CalendarTabController {
         starttimeLabel.setText(formatTimestamp(calendar.getStartTime()));
         duetimeLabel.setText(formatTimestamp(calendar.getDueTime()));
         detailLabel.setText(calendar.getDetail());
-        if(!calendar.isDone()) {
+        if (!calendar.isDone()) {
             long millisecondsPerDay = 24 * 60 * 60 * 1000;
-            long dayleft = calendar.getStartTime() - System.currentTimeMillis();
-            dayleft  /= millisecondsPerDay;
-            daysleftLabel.setText(String.valueOf(dayleft));
+            long currentTime = System.currentTimeMillis();
+            long startTime = calendar.getStartTime();
+            long dayleft = (startTime - currentTime + millisecondsPerDay - 1) / millisecondsPerDay;
+            if (dayleft <= 0) {
+                daysleftLabel.setText("TODAY");
+            } else {
+                daysleftLabel.setText(String.valueOf(dayleft));
+            }
             daysleftFixLabel.setVisible(true);
         } else {
             daysleftLabel.setText("DONE");

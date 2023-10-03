@@ -2,7 +2,6 @@ package cs211.project.controllers;
 
 import cs211.project.models.Event;
 import cs211.project.models.EventList;
-import cs211.project.models.eventHub.Member;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
 import cs211.project.models.team.TeamStaff;

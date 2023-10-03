@@ -104,7 +104,7 @@ public class EventInfoController {
         }
     }
     private String formatTimestamp(long timestamp) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return dateFormat.format(new Date(timestamp));
     }
 }

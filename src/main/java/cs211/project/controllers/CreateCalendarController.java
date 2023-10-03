@@ -5,10 +5,7 @@ import cs211.project.models.CalendarList;
 import cs211.project.models.Event;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
-import cs211.project.services.CalendarDataSource;
-import cs211.project.services.DataSource;
-import cs211.project.services.FXRouter;
-import cs211.project.services.TeamDataSource;
+import cs211.project.services.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -34,6 +31,8 @@ public class CreateCalendarController {
     @FXML private ChoiceBox<String> minDueChoice;
     @FXML private ChoiceBox<String> majorChoice;
     @FXML private ChoiceBox<String> teamChoice;
+    @FXML private Label nameErrorLabel;
+    @FXML private Label timeErrorLabel;
 
     private Event selectEvent = (Event) FXRouter.getData();
     private String account = selectEvent.getEventOwner();
@@ -47,6 +46,11 @@ public class CreateCalendarController {
         calendarList = calendarListDataSource.readData();
         TeamList teamList = teamListDataSource.readData();
         eventnameLabel.setText(selectEvent.getEventName());
+
+        TextFilter.allowAlphanumericOnly(nameTextfield);
+        TextFilter.preventSeperateOnly(descriptionTextField);
+        hideNameErrorLabel();
+        hideTimeErrorLabel();
         teamChoice.setVisible(false);
 
         hourStartChoice.getItems().addAll(
@@ -86,6 +90,7 @@ public class CreateCalendarController {
     }
 
     @FXML public void createButton() {
+
         String name = nameTextfield.getText();
         String faction = (majorChoice.getValue().equals("AUDIENCE")) ? majorChoice.getValue():teamChoice.getValue();
         LocalDate startDate = startDatePicker.getValue();
@@ -94,24 +99,60 @@ public class CreateCalendarController {
         String dueTimeStr = hourDueChoice.getValue() + ":" + minDueChoice.getValue();
         String description = descriptionTextField.getText();
 
-        LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
-        LocalTime dueTime = LocalTime.parse(dueTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
-
-        LocalDateTime startDateTime = startDate.atTime(startTime);
-        LocalDateTime dueDateTime = dueDate.atTime(dueTime);
-
-        ZoneId systemZone = ZoneId.systemDefault();
-        long startTimeMillis = startDateTime.atZone(systemZone).toInstant().toEpochMilli();
-        long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
+        boolean nameCheck = false;
+        boolean timeCheck = false;
 
         if(!name.equals("")) {
-            Calendar newCalendar = new Calendar(name, selectEvent.getEventID(), faction, startTimeMillis, dueTimeMillis, description);
-            calendarList.addNewCalendar(newCalendar);
-            calendarListDataSource.writeData(calendarList);
-            goEventCalendar();
+            nameCheck = true;
+            hideNameErrorLabel();
         } else{
-
+            showNameErrorLabel("Name is Required!");
         }
+
+        if(startDate == null || dueDate == null || startTimeStr == null || dueTimeStr == null) {
+            showTimeErrorLabel("Time must be chosen!");
+        } else {
+            LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime dueTime = LocalTime.parse(dueTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
+
+            LocalDateTime startDateTime = startDate.atTime(startTime);
+            LocalDateTime dueDateTime = dueDate.atTime(dueTime);
+
+            ZoneId systemZone = ZoneId.systemDefault();
+            long startTimeMillis = startDateTime.atZone(systemZone).toInstant().toEpochMilli();
+            long dueTimeMillis = dueDateTime.atZone(systemZone).toInstant().toEpochMilli();
+
+            if(dueTimeMillis > startTimeMillis) {
+                timeCheck = true;
+                hideTimeErrorLabel();
+            } else {
+                showTimeErrorLabel("Start time must be before due time.");
+            }
+
+
+            if(nameCheck && timeCheck) {
+                Calendar newCalendar = new Calendar(name, selectEvent.getEventID(), faction, startTimeMillis, dueTimeMillis, description);
+                calendarList.addNewCalendar(newCalendar);
+                calendarListDataSource.writeData(calendarList);
+                goEventCalendar();
+            }
+        }
+    }
+
+    private void showNameErrorLabel(String text) {
+        nameErrorLabel.setText(text);
+    }
+
+    private void hideNameErrorLabel() {
+        nameErrorLabel.setText("");
+    }
+
+    private void showTimeErrorLabel(String text) {
+        timeErrorLabel.setText(text);
+    }
+
+    private void hideTimeErrorLabel() {
+        timeErrorLabel.setText("");
     }
 
     @FXML

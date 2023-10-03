@@ -22,7 +22,7 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="starttimeLabel" alignment="CENTER" layoutX="165.0" layoutY="49.0" prefHeight="26.0" prefWidth="130.0" text="starttimeLabel" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+        <Label fx:id="starttimeLabel" alignment="CENTER" layoutX="178.0" layoutY="49.0" prefHeight="26.0" prefWidth="120.0" text="starttimeLabel" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
             <font>
                 <Font size="14.0" />
             </font>

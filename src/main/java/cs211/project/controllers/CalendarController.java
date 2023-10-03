@@ -60,7 +60,10 @@ public class CalendarController {
         for (Calendar calendar : fullcalendarList.getCalendars()) {
             for (Pair data : joinData) {
                 if (calendar.getEventID().equals(data.getKey()) && ((data.getValue().equals("OWNER") || calendar.getFaction().equals(data.getValue())))) {
-                    calendarList.addNewCalendar(calendar);
+                    if(calendar.getDueTime() > System.currentTimeMillis()) {
+                        calendarList.addNewCalendar(calendar);
+                        break;
+                    }
                 }
             }
         }

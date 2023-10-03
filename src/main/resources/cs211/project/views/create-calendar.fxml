@@ -82,7 +82,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label layoutX="437.0" layoutY="220.0">
+            <Label layoutX="437.0" layoutY="214.0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -92,7 +92,7 @@
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Button layoutX="237.0" layoutY="463.0" mnemonicParsing="false" onAction="#goEventCalendar" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Cancel" textFill="#da5a5a">
+            <Button layoutX="247.0" layoutY="466.0" mnemonicParsing="false" onAction="#goEventCalendar" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Cancel" textFill="#da5a5a">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
@@ -100,46 +100,46 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label layoutX="249.0" layoutY="191.0" text="Activity Name:">
+            <Label layoutX="249.0" layoutY="185.0" text="Activity Name:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="nameTextfield" layoutX="380.0" layoutY="191.0" prefHeight="25.0" prefWidth="280.0" promptText=" Activity Name" stylesheets="@../../../buttom_style/textfield.css" />
-            <Label layoutX="299.0" layoutY="233.0" text="Faction:">
+            <TextField fx:id="nameTextfield" layoutX="380.0" layoutY="185.0" prefHeight="25.0" prefWidth="280.0" promptText=" Activity Name" stylesheets="@../../../buttom_style/textfield.css" />
+            <Label layoutX="299.0" layoutY="227.0" text="Faction:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="majorChoice" layoutX="380.0" layoutY="233.0" prefHeight="25.0" prefWidth="100.0" />
-            <ChoiceBox fx:id="teamChoice" layoutX="503.0" layoutY="233.0" prefHeight="25.0" prefWidth="100.0" />
-            <Label layoutX="295.0" layoutY="271.0" text="Start At:">
+            <ChoiceBox fx:id="majorChoice" layoutX="380.0" layoutY="227.0" prefHeight="25.0" prefWidth="100.0" />
+            <ChoiceBox fx:id="teamChoice" layoutX="503.0" layoutY="227.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label layoutX="295.0" layoutY="265.0" text="Start At:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="304.0" layoutY="311.0" text="End At:">
+            <Label layoutX="304.0" layoutY="305.0" text="End At:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="501.0" layoutY="311.0" text="Time">
+            <Label layoutX="501.0" layoutY="305.0" text="Time">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <DatePicker fx:id="startDatePicker" layoutX="379.0" layoutY="271.0" prefHeight="25.0" prefWidth="115.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <DatePicker fx:id="dueDatePicker" layoutX="379.0" layoutY="311.0" prefHeight="25.0" prefWidth="115.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" />
-            <ChoiceBox fx:id="hourStartChoice" layoutX="550.0" layoutY="271.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <ChoiceBox fx:id="minDueChoice" layoutX="603.0" layoutY="311.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <ChoiceBox fx:id="hourDueChoice" layoutX="550.0" layoutY="311.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <ChoiceBox fx:id="minStartChoice" layoutX="603.0" layoutY="271.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
-            <Label layoutX="501.0" layoutY="271.0" text="Time">
+            <DatePicker fx:id="startDatePicker" layoutX="379.0" layoutY="265.0" prefHeight="25.0" prefWidth="115.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
+            <DatePicker fx:id="dueDatePicker" layoutX="379.0" layoutY="305.0" prefHeight="25.0" prefWidth="115.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" />
+            <ChoiceBox fx:id="hourStartChoice" layoutX="550.0" layoutY="265.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
+            <ChoiceBox fx:id="minDueChoice" layoutX="603.0" layoutY="305.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
+            <ChoiceBox fx:id="hourDueChoice" layoutX="550.0" layoutY="305.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
+            <ChoiceBox fx:id="minStartChoice" layoutX="603.0" layoutY="265.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
+            <Label layoutX="501.0" layoutY="265.0" text="Time">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="530.0" layoutY="463.0" mnemonicParsing="false" onAction="#createButton" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Create Calendar">
+            <Button layoutX="595.0" layoutY="466.0" mnemonicParsing="false" onAction="#createButton" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Create Calendar">
                <font>
                   <Font name="Sarabun Regular" size="13.0" />
                </font>
@@ -147,16 +147,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label layoutX="269.0" layoutY="356.0" text="Description:">
+            <Label layoutX="269.0" layoutY="350.0" text="Description:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="descriptionTextField" alignment="TOP_LEFT" layoutX="379.0" layoutY="356.0" prefHeight="77.0" prefWidth="273.0" promptText="description" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
+            <TextField fx:id="descriptionTextField" alignment="TOP_LEFT" layoutX="379.0" layoutY="350.0" prefHeight="77.0" prefWidth="273.0" promptText="description" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
                <font>
                   <Font size="10.0" />
                </font>
             </TextField>
+            <Label fx:id="nameErrorLabel" alignment="CENTER" layoutX="670.0" layoutY="189.0" prefHeight="17.0" prefWidth="110.0" text="nameErrorLabel" textFill="#da5a5a" />
+            <Label fx:id="timeErrorLabel" alignment="CENTER" layoutX="371.0" layoutY="435.0" prefHeight="17.0" prefWidth="235.0" text="timeErrorLabel" textFill="#da5a5a" />
          </children>
       </Group>
       <Group layoutY="47.0">

@@ -2,6 +2,7 @@ package cs211.project.controllers;
 
 import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
+import cs211.project.services.TextFilter;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataSource;
@@ -30,6 +31,9 @@ public class AdminEditController {
         showUserInfo(selectedUser);
         nameEmptyLabel.setVisible(false);
         changeLabel.setVisible(false);
+
+        TextFilter.allowAlphanumericOnly(accountnameTextField);
+        TextFilter.allowAlphanumericOnly(newpasswordField);
     }
     @FXML private void goAdminview() {
         try {

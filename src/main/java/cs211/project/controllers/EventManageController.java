@@ -27,7 +27,6 @@ public class EventManageController {
 
 
     private DataSource<MemberList> memberListDataSource = new MemberDataSource("data", "member.csv");
-    private DataSource<EventList> eventListDataSource = new EventDataSource("data", "event.csv");
     String username = (String) FXRouter.getData();
 
     @FXML TextField searchBox;
@@ -66,9 +65,11 @@ public class EventManageController {
                 }
             }
         }
+
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            SearchFn(newValue);
+        });
     }
-
-
 
     private void showEvent(Event event) {
         try{
@@ -141,12 +142,6 @@ public class EventManageController {
             throw new RuntimeException(e);
         }
     }
-
-    private String formatTimestamp(long timestamp) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return dateFormat.format(new Date(timestamp));
-    }
-
     private void SearchFn(String searchTerm) {
         eventContrainer.getChildren().clear();
         for (Member member : memberList.getMemberList()) {

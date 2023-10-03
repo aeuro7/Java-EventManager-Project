@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,17 +17,22 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventViewController">
    <children>
-      <Button fx:id="joinButton" layoutX="222.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#joinEvent" prefHeight="50.0" prefWidth="160.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event">
+      <Label fx:id="textLabel" alignment="CENTER" layoutX="255.0" layoutY="396.0" prefHeight="50.0" prefWidth="461.0" text="text">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="joinButton" layoutX="255.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#joinEvent" prefHeight="50.0" prefWidth="160.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
       </Button>
-      <Button fx:id="joinMemberButton" layoutX="486.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#joinStaff" prefHeight="50.0" prefWidth="280.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event as Member">
+      <Button fx:id="joinMemberButton" layoutX="454.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#joinStaff" prefHeight="50.0" prefWidth="280.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event as Member">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
       </Button>
-      <Label fx:id="seatLeftLabel" layoutX="615.0" layoutY="260.0" prefHeight="58.0" prefWidth="95.0" text="0000" textAlignment="RIGHT" textFill="#d75e5e">
+      <Label fx:id="seatLeftLabel" alignment="CENTER" layoutX="577.0" layoutY="251.0" prefHeight="58.0" prefWidth="170.0" text="0000000" textAlignment="RIGHT" textFill="#d75e5e">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
@@ -38,7 +42,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="maxSeatLabel" layoutX="634.0" layoutY="351.0" prefHeight="26.0" prefWidth="56.0" text="000000" textFill="#bb84e8">
+      <Label fx:id="maxSeatLabel" alignment="CENTER" layoutX="577.0" layoutY="351.0" prefHeight="26.0" prefWidth="170.0" text="0000000" textFill="#bb84e8">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -83,7 +87,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="554.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="554.0" layoutY="564.0" onMouseClicked="#goCalendar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../icon-png/home-png/caalendar.png" />
          </image>
@@ -201,16 +205,13 @@
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
-         <effect>
-            <DropShadow />
-         </effect>
       </Label>
-      <Label layoutX="604.0" layoutY="212.0" text="Available" textAlignment="CENTER">
+      <Label layoutX="604.0" layoutY="210.0" text="Available" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="teamPickerPopup" layoutX="145.0" layoutY="110.0" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
+      <AnchorPane fx:id="teamPickerPopup" layoutX="144.0" layoutY="91.0" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
          <children>
             <Label layoutX="156.0" layoutY="31.0" text="Select Team to join">
                <font>
@@ -250,7 +251,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="teamSeatleftLabel" layoutX="319.0" layoutY="194.0" prefHeight="75.0" prefWidth="106.0" text="0000" textAlignment="CENTER" textFill="#d75e5e">
+            <Label fx:id="teamSeatleftLabel" alignment="CENTER_RIGHT" layoutX="334.0" layoutY="197.0" prefHeight="75.0" prefWidth="106.0" text="0000" textAlignment="CENTER" textFill="#d75e5e">
                <font>
                   <Font name="System Bold" size="43.0" />
                </font>
@@ -260,7 +261,7 @@
                   <Font name="System Bold" size="43.0" />
                </font>
             </Label>
-            <Label fx:id="teamMaxSeatLabel" layoutX="457.0" layoutY="251.0" prefHeight="25.0" prefWidth="40.0" text="0000" textFill="#bb84e8">
+            <Label fx:id="teamMaxSeatLabel" layoutX="457.0" layoutY="251.0" prefHeight="26.0" prefWidth="40.0" text="0000" textFill="#bb84e8">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -285,10 +286,5 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label fx:id="textLabel" layoutX="388.0" layoutY="451.0" text="text">
-         <font>
-            <Font size="33.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

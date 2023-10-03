@@ -12,8 +12,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -23,6 +26,7 @@ public class MainMenuController {
     @FXML private GridPane eventContrainer;
     @FXML private Button adminButton;
     @FXML private ScrollPane scrollpain;
+    @FXML private Circle userProficCircle;
     private EventList eventList;
     private DataSource<EventList> datasource;
 
@@ -42,13 +46,14 @@ public class MainMenuController {
         userList = datasourceUser.readData();
         String username = (String) FXRouter.getData();
         account = userList.findUserByUserName(username);
+        userProficCircle.setFill(new ImagePattern(new Image("file:" + "data/UserProfilePicture/" + account + ".png")));
         accountnameLabel.setText(account.getAccountName());
         if(account.isAdmin()) {
             adminButton.setVisible(true);
         }
 
         for(Event event: eventList.getAllEvent()) {
-            if(event.getStartTime() >= System.currentTimeMillis()) {
+            if(event.getDueTime() > System.currentTimeMillis()) {
                 showEvent(event);
             }
         }
@@ -67,7 +72,7 @@ public class MainMenuController {
 
             eventinfoTab.setOnMouseClicked(activity -> {
                 try {
-                    Pair<String , String> sender = new Pair<String, String>(event.getEventName(), account.getUserName());
+                    Pair<String , String> sender = new Pair<String, String>(event.getEventID(), account.getUserName());
                     FXRouter.goTo("event-view", sender);
                 } catch (IOException e) {
                     throw new RuntimeException(e);

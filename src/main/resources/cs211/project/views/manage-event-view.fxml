@@ -85,14 +85,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="220.0" layoutY="440.0" mnemonicParsing="false" onAction="#cancelEvent" prefHeight="31.0" prefWidth="170.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Cancel this event" textFill="#da5a5a">
-               <font>
-                  <Font name="Sarabun Regular" size="13.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <Circle fill="WHITE" layoutX="576.0" layoutY="160.0" radius="20.0" stroke="#757575" strokeType="INSIDE" />
             <ImageView fitHeight="34.0" fitWidth="38.0" layoutX="559.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -141,7 +133,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <AnchorPane fx:id="teamPopup" layoutX="174.0" layoutY="140.0" prefHeight="300.0" prefWidth="440.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
+            <AnchorPane fx:id="teamPopup" layoutX="174.0" layoutY="140.0" prefHeight="330.0" prefWidth="461.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
                <children>
                   <Label layoutX="38.0" layoutY="61.0" text="Team Name:">
                      <font>
@@ -149,7 +141,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="teamnameTextfield" layoutX="156.0" layoutY="59.0" prefHeight="31.0" prefWidth="250.0" promptText=" Enter team name" stylesheets="@../../../buttom_style/textfield.css" />
-                  <Button fx:id="addTeamButton" layoutX="276.0" layoutY="252.0" mnemonicParsing="false" onAction="#addTeamButton" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Add new team">
+                  <Button fx:id="addTeamButton" layoutX="276.0" layoutY="276.0" mnemonicParsing="false" onAction="#addTeamButton" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Add new team">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -157,7 +149,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="67.0" layoutY="252.0" mnemonicParsing="false" onAction="#popupClosed" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Cancel" textFill="#da5a5a">
+                  <Button layoutX="67.0" layoutY="276.0" mnemonicParsing="false" onAction="#popupClosed" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Cancel" textFill="#da5a5a">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>
@@ -204,6 +196,7 @@
                   <ChoiceBox fx:id="minStartChoice" layoutX="393.0" layoutY="146.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
                   <Label layoutX="381.0" layoutY="147.0" text=":" />
                   <Label layoutX="381.0" layoutY="187.0" text=":" />
+                  <Label fx:id="errorLabel" alignment="CENTER" layoutX="119.0" layoutY="238.0" prefHeight="17.0" prefWidth="235.0" text="errorLabel" textFill="#da5a5a" />
                </children>
             </AnchorPane>
             <BorderPane layoutX="536.0" layoutY="107.0" onMouseClicked="#showAudienceOnTable" prefHeight="80.0" prefWidth="80.0" style="-fx-border-radius: 5;">

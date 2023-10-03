@@ -4,6 +4,7 @@ import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.TextFilter;
 import cs211.project.services.UserDataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -52,6 +52,11 @@ public class ProfileController {
         showUserInfo(account);
         errorLabel.setVisible(false);
         changeLabel.setVisible(false);
+
+        TextFilter.allowAlphanumericOnly(accountnameTextField);
+        TextFilter.allowAlphanumericOnly(passwordField);
+        TextFilter.allowAlphanumericOnly(newpasswordField);
+        TextFilter.allowAlphanumericOnly(connewpasswordField);
     }
 
     @FXML public void browseButtonClick(ActionEvent event) {
