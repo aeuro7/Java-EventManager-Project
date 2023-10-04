@@ -41,6 +41,7 @@ public class MainMenuController {
     @FXML public void initialize() {
         datasource = new EventDataSource("data", "event.csv");
         eventList = datasource.readData();
+        eventList.sortEventByNearCurrentDate();
         adminButton.setVisible(false);
         datasourceUser = new UserDataSource("data", "login.csv");
         userList = datasourceUser.readData();

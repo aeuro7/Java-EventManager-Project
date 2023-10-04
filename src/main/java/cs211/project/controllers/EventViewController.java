@@ -82,9 +82,9 @@ public class EventViewController {
                         } else {
                             text = "Already join!";
                         }
+                        memberStatusChecked = true;
+                        break;
                     }
-                    memberStatusChecked = true;
-                    break;
                 }
                 if(text.isEmpty()) {
                     showJoinAudienceButton();
@@ -124,17 +124,20 @@ public class EventViewController {
             showJoinTeamButton();
         }
 
-        if(!joinButton.isVisible() || !joinMemberButton.isVisible()) {
+        if(!joinButton.isVisible() && !joinMemberButton.isVisible()) {
             if(text.isEmpty()) {
-                textLabel.setText("Not Available");
-            } else {
-                hideJoinAudienceButton();
-                hideJoinTeamButton();
-                textLabel.setText(text);
+                text = "Not Available";
             }
-        } else {
-            textLabel.setText("");
+        } else if(!joinButton.isVisible()) {
+            if(!text.isEmpty()) {
+                hideJoinTeamButton();
+            }
+        } else if(!joinMemberButton.isVisible()) {
+            if(!text.isEmpty()) {
+                hideJoinAudienceButton();
+            }
         }
+        textLabel.setText(text);
 
     }
 

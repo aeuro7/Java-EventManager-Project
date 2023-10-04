@@ -37,6 +37,7 @@ public class CalendarController {
         userProficCircle.setFill(new ImagePattern(new Image("file:" + "data/UserProfilePicture/" + account + ".png")));
         DataSource<CalendarList> dataSource = new CalendarDataSource("data", "calendar.csv");
         CalendarList fullcalendarList = dataSource.readData();
+        fullcalendarList.sortCalendarByNearStartDate();
 
         eventList = (new EventDataSource("data", "event.csv").readData());
 

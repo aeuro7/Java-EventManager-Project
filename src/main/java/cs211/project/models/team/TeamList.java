@@ -13,17 +13,13 @@ public class TeamList {
     public void addTeam(Team team) {
         teamList.add(team);
     }
-    public Team findTeamByObj(Team target) {
+    public Team findTeamByNameAndEventID(String name, String eventID) {
         for(Team team: teamList) {
-            if(team.equals(target)) {
+            if(team.getEventID().equals(eventID) && team.getNameTeam().equals(name)) {
                 return team;
             }
         }
         return null;
-    }
-
-    public void removeTeam(Team team) {
-        teamList.remove(team);
     }
 
     public List<Team> getAllTeams() {

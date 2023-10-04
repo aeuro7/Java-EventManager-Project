@@ -26,7 +26,6 @@ public class ManageTeamViewController {
     @FXML private Label nameLabel;
     @FXML private Label statusLabel;
     @FXML private TableView<TeamStaff> memberTableView;
-    @FXML private Button editButton;
     @FXML private Button banButton;
     @FXML private Circle profilepicCircle;
     private Team selectTeam;
@@ -41,7 +40,8 @@ public class ManageTeamViewController {
         EventList eventList = (new EventDataSource("data", "event.csv").readData());
         teamList = dataSource.readData();
         account = ((Pair<String , Team>) FXRouter.getData()).getKey();
-        selectTeam = ((Pair<String , Team>) FXRouter.getData()).getValue();
+        Team inputTeam = ((Pair<String , Team>) FXRouter.getData()).getValue();
+        selectTeam = teamList.findTeamByNameAndEventID(inputTeam.getNameTeam(), inputTeam.getEventID());
         Event thisEvent = eventList.findEventByID(selectTeam.getEventID());
         showTable(selectTeam);
         teamNameLabel.setText(selectTeam.getNameTeam());
@@ -89,11 +89,9 @@ public class ManageTeamViewController {
     }
 
     private void showButton() {
-        editButton.setVisible(true);
         banButton.setVisible(true);
     }
     private void hideButton() {
-        editButton.setVisible(false);
         banButton.setVisible(false);
     }
 
@@ -102,9 +100,6 @@ public class ManageTeamViewController {
             selectStaff.setRole("BAN");
             dataSource.writeData(teamList);
         }
-    }
-    @FXML private void editHandleButton() {
-
     }
 
     @FXML

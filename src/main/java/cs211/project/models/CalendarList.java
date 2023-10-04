@@ -1,5 +1,7 @@
 package cs211.project.models;
 
+import cs211.project.services.SortingSystem;
+
 import java.util.ArrayList;
 
 public class CalendarList {
@@ -20,13 +22,8 @@ public class CalendarList {
         addNewCalendar(calendar);
     }
 
-    public Calendar findCalendarByName(String name) {
-        for(Calendar calendar: calendars) {
-            if(calendar.getCalendarName().equals(name)) {
-                return calendar;
-            }
-        }
-        return null;
+    public void sortCalendarByNearStartDate() {
+        calendars.sort(SortingSystem.calendarSortByNearCurrentDate);
     }
 
     public void removeCalendar(Calendar target) {

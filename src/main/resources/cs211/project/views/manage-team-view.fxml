@@ -169,15 +169,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button fx:id="banButton" layoutX="636.0" layoutY="462.0" mnemonicParsing="false" onAction="#banThisMember" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
-                     <font>
-                        <Font name="Sarabun Regular" size="13.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="editButton" layoutX="499.0" layoutY="462.0" mnemonicParsing="false" onAction="#editHandleButton" prefHeight="31.0" prefWidth="130.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Edit">
+                  <Button fx:id="banButton" layoutX="527.0" layoutY="463.0" mnemonicParsing="false" onAction="#banThisMember" prefHeight="31.0" prefWidth="205.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/logout.css" text="Ban" textFill="#da5a5a">
                      <font>
                         <Font name="Sarabun Regular" size="13.0" />
                      </font>

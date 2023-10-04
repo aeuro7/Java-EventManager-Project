@@ -29,6 +29,7 @@ public class EventCalendarController {
     @FXML public void initialize() {
         calendarListDataSource = new CalendarDataSource("data", "calendar.csv");
         calendarList = calendarListDataSource.readData();
+        calendarList.sortCalendarByNearStartDate();
         eventnameLabel.setText(selectedEvent.getEventName());
 
         fillTheGrid();

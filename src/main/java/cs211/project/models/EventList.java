@@ -47,6 +47,6 @@ public class EventList {
     }
 
     public void sortEventByNearCurrentDate() {
-        eventList.sort(SortingSystem.sortByNearCurrentDate);
+        eventList.sort(SortingSystem.eventSortByNearCurrentDate);
     }
 }
