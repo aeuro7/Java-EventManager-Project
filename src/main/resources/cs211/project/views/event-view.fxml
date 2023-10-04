@@ -17,17 +17,37 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.EventViewController">
    <children>
-      <Label fx:id="textLabel" alignment="CENTER" layoutX="255.0" layoutY="396.0" prefHeight="50.0" prefWidth="461.0" text="text">
+      <Label layoutX="15.0" layoutY="379.0" text="Booking Start At:" textFill="#bb84e8">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="410.0" text="Booking End At:" textFill="#bb84e8">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="endTimeBookingLabel" layoutX="169.0" layoutY="411.0" prefHeight="25.0" prefWidth="200.0" text="endTimeBookingLabel">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="startTimeBookingLabel" layoutX="167.0" layoutY="379.0" prefHeight="27.0" prefWidth="200.0" text="startTimeBookingLabel">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="textLabel" alignment="CENTER" layoutX="292.0" layoutY="407.0" prefHeight="50.0" prefWidth="461.0" text="text">
          <font>
             <Font size="33.0" />
          </font>
       </Label>
-      <Button fx:id="joinButton" layoutX="255.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#joinEvent" prefHeight="50.0" prefWidth="160.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event">
+      <Button fx:id="joinButton" layoutX="292.0" layoutY="461.0" mnemonicParsing="false" onMouseClicked="#joinEvent" prefHeight="50.0" prefWidth="160.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
       </Button>
-      <Button fx:id="joinMemberButton" layoutX="454.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#joinStaff" prefHeight="50.0" prefWidth="280.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event as Member">
+      <Button fx:id="joinMemberButton" layoutX="491.0" layoutY="461.0" mnemonicParsing="false" onMouseClicked="#joinStaff" prefHeight="50.0" prefWidth="280.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Join Event as Member">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>
@@ -211,7 +231,7 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="teamPickerPopup" layoutX="144.0" layoutY="91.0" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
+      <AnchorPane fx:id="teamPickerPopup" layoutX="145.0" layoutY="100.0" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: F1EFEF; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-padding: 10px;">
          <children>
             <Label layoutX="156.0" layoutY="31.0" text="Select Team to join">
                <font>

@@ -85,7 +85,7 @@ public class ManageTeamController {
         teamTableView.getColumns().addAll(nameTeamColumn, eventNameColumn,leaderNameColumn);
         nameTeamColumn.setMinWidth(100);
         eventNameColumn.setMinWidth(248);
-        leaderNameColumn.setMinWidth(200);
+        leaderNameColumn.setMinWidth(198);
 
         teamTableView.getItems().clear();
 
@@ -146,6 +146,23 @@ public class ManageTeamController {
     @FXML private void gotoManageEvent() {
         try {
             FXRouter.goTo("manage-event", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view",account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view",account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

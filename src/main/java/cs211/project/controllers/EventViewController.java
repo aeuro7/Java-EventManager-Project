@@ -40,6 +40,8 @@ public class EventViewController {
     @FXML private Button joinButton;
     @FXML private Button joinMemberButton;
     @FXML private Label textLabel;
+    @FXML private Label startTimeBookingLabel;
+    @FXML private Label endTimeBookingLabel;
 
     private DataSource<EventList> eventDatasource;
     private DataSource<TeamList> teamListDataSource;
@@ -165,6 +167,8 @@ public class EventViewController {
         seatLeftLabel.setText(String.valueOf(event.getLeftSeat()));
         maxSeatLabel.setText(String.valueOf(event.getMaxSeat()));
         eventPicCircle.setFill(new ImagePattern(new Image("file:" + event.getEventPicture())));
+        startTimeBookingLabel.setText(formatTimestamp(event.getStartBookingTime()));
+        endTimeBookingLabel.setText(formatTimestamp(event.getDueBookingTime()));
         teamPickerPopup.setVisible(false);
     }
     @FXML private void joinEvent() {

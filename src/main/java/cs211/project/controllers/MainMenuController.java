@@ -24,10 +24,9 @@ import java.io.IOException;
 public class MainMenuController {
 
     @FXML private GridPane eventContrainer;
-    @FXML private Button adminButton;
     @FXML private ScrollPane scrollpain;
     @FXML private Circle userProficCircle;
-    private EventList eventList;
+    private EventList eventList = new EventList();
     private DataSource<EventList> datasource;
 
     @FXML TextField searchBox;
@@ -40,18 +39,20 @@ public class MainMenuController {
 
     @FXML public void initialize() {
         datasource = new EventDataSource("data", "event.csv");
-        eventList = datasource.readData();
-        eventList.sortEventByNearCurrentDate();
-        adminButton.setVisible(false);
+        EventList fulleventlist = datasource.readData();
+        fulleventlist.sortEventByNearCurrentDate();
+        for(Event event: fulleventlist.getAllEvent()) {
+            if(event.getDueTime() > System.currentTimeMillis()) {
+                eventList.addEvent(event);
+            }
+        }
+
         datasourceUser = new UserDataSource("data", "login.csv");
         userList = datasourceUser.readData();
         String username = (String) FXRouter.getData();
         account = userList.findUserByUserName(username);
         userProficCircle.setFill(new ImagePattern(new Image("file:" + "data/UserProfilePicture/" + account + ".png")));
         accountnameLabel.setText(account.getAccountName());
-        if(account.isAdmin()) {
-            adminButton.setVisible(true);
-        }
 
         for(Event event: eventList.getAllEvent()) {
             if(event.getDueTime() > System.currentTimeMillis()) {
@@ -104,14 +105,6 @@ public class MainMenuController {
     public void createEvent() {
         try {
             FXRouter.goTo("create-event", account.getUserName());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @FXML
-    public void goAdminview() {
-        try {
-            FXRouter.goTo("admin-view", account.getUserName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

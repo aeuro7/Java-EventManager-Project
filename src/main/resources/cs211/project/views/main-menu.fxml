@@ -51,14 +51,6 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <Button fx:id="adminButton" layoutX="668.0" layoutY="-8.0" mnemonicParsing="false" onAction="#goAdminview" prefHeight="31.0" prefWidth="124.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Admin" textFill="#bb84e8">
-               <font>
-                  <Font name="Sarabun Regular" size="13.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <AnchorPane layoutX="40.0" layoutY="175.0" prefHeight="330.0" prefWidth="720.0">
                <children>
                   <ScrollPane fx:id="scrollpain" prefHeight="330.0" prefWidth="720.0">
