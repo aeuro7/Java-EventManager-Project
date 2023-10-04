@@ -34,6 +34,7 @@ public class ManageTeamController {
     private TeamList teamList = new TeamList();
     private String account = (String) FXRouter.getData();
 
+
     @FXML
     private void initialize() {
         DataSource<TeamList> dataSource = new TeamDataSource("data", "team.csv");
@@ -89,7 +90,7 @@ public class ManageTeamController {
         teamTableView.getColumns().addAll(nameTeamColumn, eventIDColumn,leaderNameColumn);
         nameTeamColumn.setMinWidth(100);
         eventIDColumn.setMinWidth(100);
-        leaderNameColumn.setMinWidth(400);
+        leaderNameColumn.setMinWidth(347);
 
         teamTableView.getItems().clear();
 
@@ -165,5 +166,21 @@ public class ManageTeamController {
             }
         }
     }
+
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
 

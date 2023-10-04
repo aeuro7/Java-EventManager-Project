@@ -4,48 +4,68 @@ import cs211.project.models.Event;
 import cs211.project.models.EventList;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
+import cs211.project.models.team.Team;
+import cs211.project.models.team.TeamList;
 import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
 import cs211.project.services.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BookhistoryViewController {
 
     @FXML private Group nowOn;
     @FXML private Group nowCom;
+    @FXML private TableView eventTableView;
     private DataSource<MemberList> memberListDataSource = new MemberDataSource("data", "member.csv");
     private DataSource<EventList> eventListDataSource = new EventDataSource("data", "event.csv");
     String username;
+
     private EventList eventList;
     private MemberList memberList;
+
     private DataSource<UserList> datasourceUser;
+
     @FXML private GridPane eventContrainer;
     @FXML private ScrollPane scrollpain;
+    private DataSource<EventList> datasource;
     private int column = 0;
     private int row = 1;
+
     private UserList userList;
+
     private User account ;
+
 
     @FXML
     private void initialize() {
         username = (String) FXRouter.getData();
         nowCom.setVisible(false);
         nowOn.setVisible(false);
-        eventList = eventListDataSource.readData();
+        datasource = new EventDataSource("data", "event.csv");
+        eventList = datasource.readData();
         datasourceUser = new UserDataSource("data", "login.csv");
         userList = datasourceUser.readData();
         String username = (String) FXRouter.getData();
         account = userList.findUserByUserName(username);
         memberList = memberListDataSource.readData();
+
         showOngoing();
 
     }
@@ -109,6 +129,7 @@ public class BookhistoryViewController {
         }
     }
 
+
     @FXML
     private void logoutButton() {
         try {
@@ -124,6 +145,8 @@ public class BookhistoryViewController {
             throw new RuntimeException(e);
         }
     }
+
+
     @FXML private void gotoEditprofile() {
         try {
             FXRouter.goTo("profile-view",username);
@@ -165,7 +188,7 @@ public class BookhistoryViewController {
             if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
                 String eventID = member.getEventID();
                 Event addEvent = eventList.findEventByID(eventID);
-                if (addEvent != null && System.currentTimeMillis() < addEvent.getDueTime()) {
+                if (addEvent != null && System.currentTimeMillis() < addEvent.getStartTime()) {
                     showEvent(addEvent);
                 }
             }
@@ -175,17 +198,40 @@ public class BookhistoryViewController {
         nowCom.setVisible(true);
         nowOn.setVisible(false);
 
-        eventContrainer.getChildren().clear();
+        eventContrainer.getChildren().clear(); // เคลียร์ข้อมูลก่อนแสดง Event ใหม่
 
         for (Member member : memberList.getMemberList()) {
             if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
                 String eventID = member.getEventID();
                 Event addEvent = eventList.findEventByID(eventID);
-                if (addEvent != null && System.currentTimeMillis() > addEvent.getDueTime()) {
+                if (addEvent != null && System.currentTimeMillis() > addEvent.getStartTime()) {
                     showEventComplete(addEvent);
                 }
             }
         }
 
     }
+
+
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String formatTimestamp(long timestamp) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(new Date(timestamp));
+    }
+
+
 }

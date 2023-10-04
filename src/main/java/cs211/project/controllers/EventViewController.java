@@ -70,6 +70,7 @@ public class EventViewController {
         text = "";
         hideJoinAudienceButton();
         hideJoinTeamButton();
+        boolean memberStatusChecked = false;
         if(selectedEvent.getLeftSeat() > 0) {
             if(selectedEvent.getStartBookingTime() < System.currentTimeMillis() && selectedEvent.getDueBookingTime() > System.currentTimeMillis()) {
                 for(Member member: memberList.getMemberList()) {
@@ -82,9 +83,25 @@ public class EventViewController {
                             text = "Already join!";
                         }
                     }
+                    memberStatusChecked = true;
+                    break;
                 }
                 if(text.isEmpty()) {
                     showJoinAudienceButton();
+                }
+            }
+        }
+
+        if (!memberStatusChecked) {
+            for (Member member : memberList.getMemberList()) {
+                if (member.getUsername().equals(userName) && member.getEventID().equals(selectedEvent.getEventID())) {
+                    if (member.getBanStatus()) {
+                        text = "BANNED";
+                    } else if (member.getUsername().equals(selectedEvent.getEventOwner())) {
+                        text = "This is Your Event";
+                    } else {
+                        text = "Already join!";
+                    }
                 }
             }
         }

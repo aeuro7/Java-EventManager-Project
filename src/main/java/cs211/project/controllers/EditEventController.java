@@ -165,6 +165,8 @@ public class EditEventController {
         selectEvent.setLocation(location);
         selectEvent.setMaxSeat(Long.parseLong(audience));
         selectEvent.setInfo(info);
+        selectEvent.setStartBookingTime(startBookingTimeMillis);
+        selectEvent.setDueBookingTime(dueBookingTimeMillis);
 
         eventListDataSource.writeData(eventList);
 
