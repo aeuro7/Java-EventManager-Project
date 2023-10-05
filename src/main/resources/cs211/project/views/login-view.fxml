@@ -83,11 +83,7 @@
             <Image url="@../../../icon-png/logo_png/logo-no-background.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameTextField" layoutX="529.0" layoutY="210.0" prefHeight="45.0" prefWidth="250.0" promptText="  Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </TextField>
+      <TextField fx:id="usernameTextField" layoutX="529.0" layoutY="210.0" prefHeight="45.0" prefWidth="250.0" promptText="  Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" />
       <Label alignment="CENTER" contentDisplay="TOP" layoutX="501.0" layoutY="140.0" prefHeight="30.0" prefWidth="298.0" text="Login to Your Account" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="25.0" />
@@ -157,11 +153,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
-      <PasswordField fx:id="passwordTextField" layoutX="529.0" layoutY="279.0" prefHeight="45.0" prefWidth="250.0" promptText="  Password" styleClass="BoxAllWhite">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </PasswordField>
+      <PasswordField fx:id="passwordTextField" layoutX="529.0" layoutY="279.0" prefHeight="45.0" prefWidth="250.0" promptText="  Password" styleClass="BoxAllWhite" />
       <ImageView fitHeight="14.0" fitWidth="13.0" layoutX="755.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../icon-png/home-png/password.png" />
