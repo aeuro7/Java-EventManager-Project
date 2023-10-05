@@ -7,6 +7,7 @@ import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
+import cs211.project.models.users.UserList;
 import cs211.project.services.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -51,6 +52,7 @@ public class ManageEventController {
     private ChatList chatList;
     private MemberList memberList;
     private Member selecteUser;
+    private UserList userList = (new UserDataSource("data", "login.csv")).readData();
 
 
     @FXML public void initialize() {
@@ -84,7 +86,7 @@ public class ManageEventController {
         showAudienceOnTable();
         hideErrorLabel();
 
-        TextFilter.allowAlphanumericOnly(teamnameTextfield);
+        TextFilter.safeForCSV(teamnameTextfield);
         TextFilter.allowOnlyNumber(amountTextfield);
     }
 
@@ -116,7 +118,7 @@ public class ManageEventController {
             Object obj = param.getValue();
             if (obj instanceof Member) {
                 Member member = (Member) obj;
-                return new SimpleStringProperty(member.getUsername());
+                return new SimpleStringProperty(userList.findUserByUserName(member.getUsername()).getAccountName());
             } else if (obj instanceof Team) {
                 Team team = (Team) obj;
                 return new SimpleStringProperty(team.getNameTeam());

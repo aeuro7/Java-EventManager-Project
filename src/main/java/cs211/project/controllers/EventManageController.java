@@ -72,32 +72,59 @@ public class EventManageController {
     }
 
     private void showEvent(Event event) {
-        try{
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/cs211/project/views/ongoing-event-tab.fxml"));
-            AnchorPane eventinfoTab = loader.load();
-            OnGoingTabController infoTabController = loader.getController();
-            infoTabController.setData(event,userList.findUserByUserName(event.getEventOwner()).getAccountName());
+        if(event.getDueTime() > System.currentTimeMillis()) {
+            try{
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/cs211/project/views/ongoing-event-tab.fxml"));
+                AnchorPane eventinfoTab = loader.load();
+                OnGoingTabController infoTabController = loader.getController();
+                infoTabController.setData(event,userList.findUserByUserName(event.getEventOwner()).getAccountName());
 
-            eventinfoTab.setOnMouseClicked(activity -> {
-                try {
-                    FXRouter.goTo("owner-event", event);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                eventinfoTab.setOnMouseClicked(activity -> {
+                    try {
+                        FXRouter.goTo("owner-event", event);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+                if(column == 1) {
+                    column = 0;
+                    row++;
                 }
-            });
-
-            if(column == 1) {
-                column = 0;
-                row++;
+                scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+                eventContrainer.add(eventinfoTab, column++, row);
+                GridPane.setMargin(eventinfoTab, new Insets(3));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            eventContrainer.add(eventinfoTab, column++, row);
-            GridPane.setMargin(eventinfoTab, new Insets(3));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } else {
+            try{
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/cs211/project/views/completed-event-tab.fxml"));
+                AnchorPane eventinfoTab = loader.load();
+                CompletedTabController infoTabController = loader.getController();
+                infoTabController.setData(event,userList.findUserByUserName(event.getEventOwner()).getAccountName());
 
+                eventinfoTab.setOnMouseClicked(activity -> {
+                    try {
+                        FXRouter.goTo("owner-event", event);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+                if(column == 1) {
+                    column = 0;
+                    row++;
+                }
+                scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+                eventContrainer.add(eventinfoTab, column++, row);
+                GridPane.setMargin(eventinfoTab, new Insets(3));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML

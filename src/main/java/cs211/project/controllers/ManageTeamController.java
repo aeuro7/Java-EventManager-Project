@@ -45,7 +45,9 @@ public class ManageTeamController {
         }
         for(Team team: fullteamList.getAllTeams()) {
             if(team.isInTeam(account)) {
-                joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
+                if(!team.isThisGuyAreBaned(account)) {
+                    joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
+                }
             }
         }
 

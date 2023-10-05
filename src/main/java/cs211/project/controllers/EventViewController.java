@@ -72,75 +72,53 @@ public class EventViewController {
         text = "";
         hideJoinAudienceButton();
         hideJoinTeamButton();
-        boolean memberStatusChecked = false;
-        if(selectedEvent.getLeftSeat() > 0) {
-            if(selectedEvent.getStartBookingTime() < System.currentTimeMillis() && selectedEvent.getDueBookingTime() > System.currentTimeMillis()) {
-                for(Member member: memberList.getMemberList()) {
-                    if(member.getUsername().equals(userName) && member.getEventID().equals(selectedEvent.getEventID())) {
-                        if(member.getBanStatus()) {
-                            text = "BANNED";
-                        } else if (member.getUsername().equals(selectedEvent.getEventOwner())) {
-                            text = "This is Your Event";
-                        } else {
-                            text = "Already join!";
-                        }
-                        memberStatusChecked = true;
-                        break;
-                    }
+
+        boolean isJointhisEvent = false;
+        text = "";
+
+        for(Member runner: memberList.getMemberList()) {
+            if(runner.getUsername().equals(userName) && runner.getEventID().equals(selectedEvent.getEventID())) {
+                if(runner.getBanStatus()) {
+                    text = "BANNED";
+                }else if (runner.getUsername().equals(selectedEvent.getEventOwner())) {
+                    text = "This is Your Event";
+                } else {
+                    text = "Already join!";
                 }
-                if(text.isEmpty()) {
-                    showJoinAudienceButton();
-                }
+                isJointhisEvent = true;
+                break;
             }
         }
 
-        if (!memberStatusChecked) {
-            for (Member member : memberList.getMemberList()) {
-                if (member.getUsername().equals(userName) && member.getEventID().equals(selectedEvent.getEventID())) {
-                    if (member.getBanStatus()) {
+        if(!isJointhisEvent) {
+            for(Team runner: allTeamlist.getAllTeams()) {
+                if(runner.getEventID().equals(selectedEvent.getEventID()) && runner.isInTeam(userName)) {
+                    if (runner.isThisGuyAreBaned(userName)) {
                         text = "BANNED";
-                    } else if (member.getUsername().equals(selectedEvent.getEventOwner())) {
-                        text = "This is Your Event";
                     } else {
-                        text = "Already join!";
-                    }
-                }
-            }
-        }
-
-        for(Team team: allTeamlist.getAllTeams()) {
-            if(team.getEventID().equals(selectedEvent.getEventID())) {
-                if(team.getStartJoin() < System.currentTimeMillis() && team.getEndJoin() > System.currentTimeMillis()) {
-                    if(team.isInTeam(userName)) {
                         text = "Already join team!";
-                    } else {
-                        if(team.getSeatLeft() > 0) {
-                            joinableTeamlist.addTeam(team);
-                        }
                     }
+                    isJointhisEvent = true;
+                    break;
                 }
             }
         }
 
-        if(!joinableTeamlist.getAllTeams().isEmpty()) {
-            showJoinTeamButton();
-        }
-
-        if(!joinButton.isVisible() && !joinMemberButton.isVisible()) {
-            if(text.isEmpty()) {
-                text = "Not Available";
+        if(!isJointhisEvent) {
+            long currentTime = System.currentTimeMillis();
+            if(selectedEvent.getStartBookingTime() < currentTime && selectedEvent.getDueBookingTime() > currentTime) {
+                showJoinAudienceButton();
             }
-        } else if(!joinButton.isVisible()) {
-            if(!text.isEmpty()) {
-                hideJoinTeamButton();
+            for(Team runner: allTeamlist.getAllTeams()) {
+                if(runner.getEventID().equals(selectedEvent.getEventID()) && runner.getStartJoin() < System.currentTimeMillis() && runner.getEndJoin() > System.currentTimeMillis()) {
+                    joinableTeamlist.addTeam(runner);
+                }
             }
-        } else if(!joinMemberButton.isVisible()) {
-            if(!text.isEmpty()) {
-                hideJoinAudienceButton();
+            if(!joinableTeamlist.getAllTeams().isEmpty()) {
+                showJoinTeamButton();
             }
         }
         textLabel.setText(text);
-
     }
 
     private void hideJoinAudienceButton() {

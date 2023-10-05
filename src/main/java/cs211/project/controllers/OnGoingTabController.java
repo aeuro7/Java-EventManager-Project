@@ -32,6 +32,7 @@ public class OnGoingTabController {
         long currentTime = System.currentTimeMillis();
         long startTime = event.getStartTime();
         long dayleft = (startTime - currentTime + millisecondsPerDay - 1) / millisecondsPerDay;
+        dayleft = (dayleft > 0) ? dayleft : 0;
         daysleftLabel.setText(String.valueOf(dayleft));
     }
     public Event getData() {

@@ -139,12 +139,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </BorderPane>
-                  <Label layoutX="207.0" layoutY="141.0" text="Event Name:">
+                  <Label layoutX="195.0" layoutY="128.0" text="Event Name:">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="eventNameLabel" layoutX="338.0" layoutY="141.0" text="eventNameLebel">
+                  <Label fx:id="eventNameLabel" layoutX="326.0" layoutY="128.0" text="eventNameLebel">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -177,7 +177,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Circle fx:id="profilepicCircle" fill="WHITE" layoutX="629.0" layoutY="247.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
+                  <Circle fx:id="profilepicCircle" fill="WHITE" layoutX="635.0" layoutY="250.0" radius="100.0" stroke="#757575" strokeType="INSIDE" />
+                  <TableView fx:id="memberTableView" layoutX="204.0" layoutY="175.0" prefHeight="320.0" prefWidth="258.0" stylesheets="@../../../table_style/table.css">
+                     <columns>
+                        <TableColumn prefWidth="255.0" text="C1" />
+                     </columns>
+                  </TableView>
                </children>
             </Group>
             <Group layoutY="47.0">
@@ -289,10 +294,5 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TableView fx:id="memberTableView" layoutX="211.0" layoutY="210.0" prefHeight="320.0" prefWidth="258.0" stylesheets="@../../../table_style/table.css">
-         <columns>
-            <TableColumn prefWidth="255.0" text="C1" />
-         </columns>
-      </TableView>
    </children>
 </AnchorPane>

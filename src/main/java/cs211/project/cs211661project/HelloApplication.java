@@ -10,10 +10,8 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         configRoute();
-
-        FXRouter.bind(this, stage, "CS211 661 Project");
+        FXRouter.bind(this, stage, "NEBB Application");
         FXRouter.goTo("login-view");
-
     }
 
     private static void configRoute() {
@@ -31,7 +29,6 @@ public class HelloApplication extends Application {
         FXRouter.when("manage-team", resourcesPath + "manage-team.fxml");
         FXRouter.when("manage-event", resourcesPath + "event-manage.fxml");
         FXRouter.when("calendar-view", resourcesPath + "calendar-view.fxml");
-        FXRouter.when("manage-event2", resourcesPath + "event-manage2.fxml");
         FXRouter.when("chat-view", resourcesPath + "chat-view.fxml");
         FXRouter.when("owner-event", resourcesPath + "manage-event-view.fxml");
         FXRouter.when("manage-team-view", resourcesPath + "manage-team-view.fxml");
@@ -41,7 +38,6 @@ public class HelloApplication extends Application {
         FXRouter.when("event-info", resourcesPath + "event-info.fxml");
         FXRouter.when("admin-edit-profile", resourcesPath + "admin-edit-profile.fxml");
     }
-
 
     public static void main(String[] args) {
         launch();

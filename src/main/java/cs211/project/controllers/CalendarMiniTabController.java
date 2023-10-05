@@ -34,12 +34,17 @@ public class CalendarMiniTabController {
             long startTime = calendar.getStartTime();
             long dayleft = (startTime - currentTime + millisecondsPerDay - 1) / millisecondsPerDay;
 
-            if (dayleft <= 0) {
+            if (dayleft == 0) {
                 daysleftLabel.setText("TODAY");
-            } else {
-                daysleftLabel.setText(String.valueOf(dayleft));
+                daysleftFixLabel.setVisible(true);
+            } else if(dayleft < 0) {
+                daysleftLabel.setText("DONE");
+                daysleftFixLabel.setVisible(false);
             }
-            daysleftFixLabel.setVisible(true);
+            else {
+                daysleftLabel.setText(String.valueOf(dayleft));
+                daysleftFixLabel.setVisible(true);
+            }
         } else {
             daysleftLabel.setText("DONE");
             daysleftFixLabel.setVisible(false);

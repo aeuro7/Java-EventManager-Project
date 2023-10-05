@@ -32,8 +32,8 @@ public class AdminEditController {
         nameEmptyLabel.setVisible(false);
         changeLabel.setVisible(false);
 
-        TextFilter.allowAlphanumericOnly(accountnameTextField);
-        TextFilter.allowAlphanumericOnly(newpasswordField);
+        TextFilter.safeForCSV(accountnameTextField);
+        TextFilter.safeForCSV(newpasswordField);
     }
     @FXML private void goAdminview() {
         try {

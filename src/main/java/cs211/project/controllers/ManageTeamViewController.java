@@ -6,7 +6,9 @@ import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
 import cs211.project.models.team.TeamStaff;
 import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
 import cs211.project.services.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,6 +35,7 @@ public class ManageTeamViewController {
     private String account;
     private TeamStaff selectStaff;
     private DataSource<TeamList> dataSource;
+    private UserList userList = (new UserDataSource("data", "login.csv")).readData();
 
     @FXML
     private void initialize() {
@@ -51,7 +54,7 @@ public class ManageTeamViewController {
         memberTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectStaff = newValue;
-                nameLabel.setText(newValue.getName());
+                nameLabel.setText(userList.findUserByUserName(newValue.getName()).getAccountName());
                 statusLabel.setText(newValue.getRole());
                 User user = (new UserDataSource("data", "login.csv")).readData().findUserByUserName(newValue.getName());
                 profilepicCircle.setFill(new ImagePattern(new Image("file:" + user.getProfilePicture())));
@@ -68,7 +71,10 @@ public class ManageTeamViewController {
 
     private void showTable(Team team) {
         TableColumn<TeamStaff, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameColumn.setCellValueFactory(cellData -> {
+            TeamStaff staff = cellData.getValue();
+            return new SimpleStringProperty(userList.findUserByUserName(staff.getName()).getAccountName());
+        });
 
         TableColumn<TeamStaff, String> roleColumn = new TableColumn<>("Role");
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));

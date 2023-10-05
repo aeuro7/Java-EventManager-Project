@@ -53,10 +53,10 @@ public class ProfileController {
         errorLabel.setVisible(false);
         changeLabel.setVisible(false);
 
-        TextFilter.allowAlphanumericOnly(accountnameTextField);
-        TextFilter.allowAlphanumericOnly(passwordField);
-        TextFilter.allowAlphanumericOnly(newpasswordField);
-        TextFilter.allowAlphanumericOnly(connewpasswordField);
+        TextFilter.safeForCSV(accountnameTextField);
+        TextFilter.safeForCSV(passwordField);
+        TextFilter.safeForCSV(newpasswordField);
+        TextFilter.safeForCSV(connewpasswordField);
     }
 
     @FXML public void browseButtonClick(ActionEvent event) {

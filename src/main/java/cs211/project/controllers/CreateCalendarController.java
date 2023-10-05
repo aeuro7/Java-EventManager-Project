@@ -47,8 +47,8 @@ public class CreateCalendarController {
         TeamList teamList = teamListDataSource.readData();
         eventnameLabel.setText(selectEvent.getEventName());
 
-        TextFilter.allowAlphanumericOnly(nameTextfield);
-        TextFilter.preventSeperateOnly(descriptionTextField);
+        TextFilter.safeForCSV(nameTextfield);
+        TextFilter.safeForCSV(descriptionTextField);
         hideNameErrorLabel();
         hideTimeErrorLabel();
         teamChoice.setVisible(false);

@@ -72,7 +72,6 @@ public class ChatController {
                 if (chat.getEventID().equals(data.getKey()) && ((data.getValue().equals("OWNER") || chat.getFaction().equals(data.getValue())))) {
                     if(eventList.findEventByID(chat.getEventID()).getDueTime() > System.currentTimeMillis()) {
                         chatList.addChat(chat);
-                        break;
                     }
                 }
             }
@@ -82,7 +81,7 @@ public class ChatController {
                 sendButton();
             }
         });
-        TextFilter.preventSeperateOnly(messageTextField);
+        TextFilter.safeForCSV(messageTextField);
         clearChat();
         showTable();
         chatListTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Chat>() {

@@ -32,9 +32,7 @@ public class BookhistoryViewController {
 
     @FXML private Group nowOn;
     @FXML private Group nowCom;
-    @FXML private TableView eventTableView;
     private DataSource<MemberList> memberListDataSource = new MemberDataSource("data", "member.csv");
-    private DataSource<EventList> eventListDataSource = new EventDataSource("data", "event.csv");
     String username;
 
     private EventList eventList;
