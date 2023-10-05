@@ -14,13 +14,4 @@ public class ChatList {
     }
 
     public ArrayList<Chat> getChatList() {return chatList;}
-
-    public Chat findChatByEventID(String eventID) {
-        for(Chat chat: chatList) {
-            if(chat.getEventID().equals(eventID)) {
-                return chat;
-            }
-        }
-        return null;
-    }
 }

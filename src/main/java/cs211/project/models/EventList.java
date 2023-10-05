@@ -19,24 +19,6 @@ public class EventList {
         return eventList;
     }
 
-    public boolean isThisEventExist(String Event) {
-        for(Event event: eventList) {
-            if(event.getEventName().equals(Event)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Event findEventByEventName(String eventName) {
-        for(Event event : getAllEvent()) {
-            if(event.getEventName().equals(eventName)) {
-                return event;
-            }
-        }
-        return null;
-    }
-
     public Event findEventByID(String id) {
         for(Event event : getAllEvent()) {
             if(event.getEventID().equals(id)) {

@@ -56,20 +56,4 @@ public class Calendar {
     public void itDone() {
         this.status = true;
     }
-
-    public void setCalendarName(String calendarName) {
-        this.calendarName = calendarName;
-    }
-    public void setFaction(String faction) {
-        this.faction = faction;
-    }
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
-    }
-    public void setDueTime(long dueTime) {
-        this.dueTime = dueTime;
-    }
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
 }

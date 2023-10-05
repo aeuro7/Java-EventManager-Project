@@ -52,7 +52,4 @@ public class Member {
             return false;
         }
     }
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

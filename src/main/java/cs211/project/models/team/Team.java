@@ -1,7 +1,6 @@
 package cs211.project.models.team;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Team {
@@ -47,18 +46,6 @@ public class Team {
         teamStaffList.add(teamStaff);
         setSeatLeft();
     }
-
-    public void addTeamStaff(String username,String role){
-        TeamStaff teamStaff = new TeamStaff(username,role);
-        teamStaffList.add(teamStaff);
-        setSeatLeft();
-    }
-
-    public void removeTeamStaff(TeamStaff teamStaff) {
-        teamStaffList.remove(teamStaff);
-        setSeatLeft();
-    }
-
     public ArrayList<TeamStaff> getAllTeamStaff() {
         return teamStaffList;
     }
@@ -66,17 +53,6 @@ public class Team {
     public String getLeaderName() {
         return leaderName;
     }
-
-    public boolean setLeaderName(String leaderName) {
-        for(TeamStaff staff: teamStaffList) {
-            if(leaderName.equals(staff.getName())) {
-                this.leaderName = leaderName;
-                return true;
-            }
-        }
-        return false;
-    }
-
     public long getMaxStaff() {
         return maxStaff;
     }
