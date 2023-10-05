@@ -131,6 +131,13 @@ public class MainMenuController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }@FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     private void SearchFn(String searchTerm) {
         eventContrainer.getChildren().clear();

@@ -37,6 +37,7 @@ public class HelloApplication extends Application {
         FXRouter.when("create-calendar", resourcesPath + "create-calendar.fxml");
         FXRouter.when("event-info", resourcesPath + "event-info.fxml");
         FXRouter.when("admin-edit-profile", resourcesPath + "admin-edit-profile.fxml");
+        FXRouter.when("credit-view", resourcesPath + "credit-view.fxml");
     }
 
     public static void main(String[] args) {
