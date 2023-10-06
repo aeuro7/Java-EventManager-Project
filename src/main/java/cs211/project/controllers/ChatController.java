@@ -203,6 +203,14 @@ public class ChatController {
         }
     }
 
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private String formatTimestamp(long timestamp) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         return dateFormat.format(new Date(timestamp));

@@ -118,6 +118,15 @@ public class CalendarController {
         }
     }
 
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void showCalendar(Calendar calendar) {
         try{
             FXMLLoader loader = new FXMLLoader();

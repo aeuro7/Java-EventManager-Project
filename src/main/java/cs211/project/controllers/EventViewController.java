@@ -265,6 +265,15 @@ public class EventViewController {
         }
     }
 
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", userName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private String formatTimestamp(long timestamp) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(new Date(timestamp));

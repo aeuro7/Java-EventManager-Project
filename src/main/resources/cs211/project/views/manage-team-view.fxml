@@ -232,7 +232,7 @@
             </Group>
             <Group layoutY="553.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="800.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="48.0" onMouseClicked="#goCredit" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="800.0" />
                   <ImageView fitHeight="20.0" fitWidth="83.0" layoutX="389.0" layoutY="13.0" onMouseClicked="#gotoMainMenu" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../icon-png/home-png/home.png" />
@@ -246,7 +246,7 @@
                         <Image url="@../../../icon-png/home-png/caalendar.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="710.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="710.0" layoutY="14.0" onMouseClicked="#goCredit" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../icon-png/home-png/setting.png" />
                      </image>

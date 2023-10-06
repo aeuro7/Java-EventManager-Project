@@ -218,4 +218,31 @@ public class CreateEventController {
             return profilePicturePath;
         }
     }
+
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void gotoChat() {
+        try {
+            FXRouter.goTo("chat-view",account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -115,7 +115,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="715.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="715.0" layoutY="566.0" onMouseClicked="#goCredit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../icon-png/home-png/setting.png" />
          </image>

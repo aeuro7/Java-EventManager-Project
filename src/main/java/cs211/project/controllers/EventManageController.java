@@ -169,6 +169,16 @@ public class EventManageController {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", username);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void SearchFn(String searchTerm) {
         eventContrainer.getChildren().clear();
         for (Member member : memberList.getMemberList()) {

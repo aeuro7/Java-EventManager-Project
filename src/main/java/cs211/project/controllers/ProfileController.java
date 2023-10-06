@@ -138,6 +138,15 @@ public class ProfileController {
             throw new RuntimeException(e);
         }
     }
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML private void gotoManageTeam() {
         try {
             FXRouter.goTo("manage-team", account.getUserName());

@@ -169,4 +169,13 @@ public class EventCalendarController {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

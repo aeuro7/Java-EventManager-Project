@@ -107,4 +107,13 @@ public class EventInfoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return dateFormat.format(new Date(timestamp));
     }
+
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", userName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
