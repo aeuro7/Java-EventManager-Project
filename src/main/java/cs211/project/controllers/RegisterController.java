@@ -59,34 +59,48 @@ public class RegisterController {
         String password = passwordTextField.getText();
         String confirmPassword = conPasswordTextField.getText();
 
-        // Perform validation checks
+
         boolean isValid = false;
-        if (!accountname.isEmpty()) {
+        if (accountname.length() >= 6) {
             accountnameErrorLabel.setVisible(false);
         } else {
             accountnameErrorLabel.setVisible(true);
         }
 
-        if (!username.isEmpty()) {
-            // check if usernames already exist?
-            if (!userList.isUserNameExists(username)) {
+        if (username.length() >= 6) {
+            // Check if usernames already exist?
+            if (!userList.isUserNameExists(username) && isValidInput(username)) {
                 usernameErrorLabel.setVisible(false);
                 isValid = true;
             } else {
                 usernameErrorLabel.setVisible(true);
+                if (isValidInput(username)) {
+                    usernameErrorLabel.setVisible(true);
+                    isValid = false;
+                }
             }
         } else {
             usernameErrorLabel.setVisible(true);
         }
 
-        if (!password.equals(confirmPassword) || password.isEmpty()) {
+        if (!password.equals(confirmPassword) || password.length() < 4) {
             passwordErrorLabel.setVisible(true);
             cPasswordErrorLabel.setVisible(true);
             isValid = false;
         } else {
             passwordErrorLabel.setVisible(false);
             cPasswordErrorLabel.setVisible(false);
+
+            if (!isValidPassword(password)) {
+                passwordErrorLabel.setVisible(true);
+                cPasswordErrorLabel.setVisible(true);
+                isValid = false;
+            } else {
+                passwordErrorLabel.setVisible(false);
+                cPasswordErrorLabel.setVisible(false);
+            }
         }
+
 
         String profilePicturePath;
         if (selectedImageFile != null) {
@@ -111,13 +125,21 @@ public class RegisterController {
         }
     }
 
+    public boolean isValidInput(String input) {
+        return input.length() >= 6 && input.matches("^[a-zA-Z0-9\\s]+$");
+    }
+
+    private boolean isValidPassword(String password) {
+        return password.length() >= 4 && password.matches(".*[a-z].*") && password.matches(".*[A-Z].*");
+    }
+
 
     @FXML
     public void checkUsernameClick() {
         String username = usernameTextField.getText();
 
-        if (!username.isEmpty()) {
-            if(!userList.isUserNameExists(username)) {
+        if (username.length() >= 6) {
+            if (!userList.isUserNameExists(username)) {
                 usernameErrorLabel.setVisible(false);
                 usernamePassLabel.setVisible(true);
             } else {
@@ -129,6 +151,7 @@ public class RegisterController {
             usernamePassLabel.setVisible(false);
         }
     }
+
 
     @FXML public void browseButtonClick(ActionEvent event) {
         FileChooser chooser = new FileChooser();

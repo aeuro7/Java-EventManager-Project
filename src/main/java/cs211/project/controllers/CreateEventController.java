@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -31,11 +32,13 @@ import java.time.format.DateTimeFormatter;
 
 public class CreateEventController {
     @FXML private TextField eventnameTextField;
+    @FXML private Label eventNameErrorLabel;
     @FXML private DatePicker startDatePicker;
     @FXML private DatePicker dueDatePicker;
     @FXML private DatePicker startBookedPicker;
     @FXML private DatePicker dueBookedPicker;
     @FXML private TextField locationTextField;
+    @FXML private Label locationErrorLabel;
     @FXML private TextField audienceTextField;
     @FXML private TextField descriptionTextField;
     @FXML private Circle eventPicCircle;
@@ -67,6 +70,8 @@ public class CreateEventController {
         memberList = memberListDataSource.readData();
         eventList = eventListDataSource.readData();
         chatList = chatListDataSource.readData();
+        eventNameErrorLabel.setVisible(false);
+        locationErrorLabel.setVisible(false);
 
         hourStartChoice.getItems().addAll(
                 "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
@@ -129,6 +134,7 @@ public class CreateEventController {
         String startBookingStr = hrStartBookedChoice.getValue() + ":" + mStartBookedChoice.getValue();
         String dueBookingStr = hrDueBookedChoice.getValue() + ":" + mDueBookedChoice.getValue();
 
+
         LocalTime startTime = LocalTime.parse(startTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
         LocalTime dueTime = LocalTime.parse(dueTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
         LocalTime startBookingTime = LocalTime.parse(startBookingStr, DateTimeFormatter.ofPattern("HH:mm"));
@@ -176,8 +182,23 @@ public class CreateEventController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        if (isValidInput(eventName) || isValidInput(location)) {
+            eventNameErrorLabel.setVisible(false);
+            locationErrorLabel.setVisible(false);
+
+
+        } else {
+            eventNameErrorLabel.setVisible(true);
+            locationErrorLabel.setVisible(true);
+
+        }
     }
 
+    private boolean isValidInput(String input) {
+        // Use a regular expression to check if the input contains only alphanumeric characters and spaces.
+        return input.length() >= 4 && input.matches("^[a-zA-Z0-9\\s]+$");
+    }
 
     @FXML public void gotoMainMenu() {
         try {
