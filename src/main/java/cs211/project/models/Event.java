@@ -1,8 +1,5 @@
 package cs211.project.models;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Event {
     private String eventID;
     private String eventName;

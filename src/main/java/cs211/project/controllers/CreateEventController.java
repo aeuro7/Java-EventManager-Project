@@ -40,7 +40,9 @@ public class CreateEventController {
     @FXML private TextField locationTextField;
     @FXML private Label locationErrorLabel;
     @FXML private TextField audienceTextField;
+    @FXML private Label audienceErrorLabel;
     @FXML private TextField descriptionTextField;
+    @FXML private Label descriptionErrorLabel;
     @FXML private Circle eventPicCircle;
     @FXML private ChoiceBox<String> hourStartChoice;
     @FXML private ChoiceBox<String> minStartChoice;
@@ -70,8 +72,6 @@ public class CreateEventController {
         memberList = memberListDataSource.readData();
         eventList = eventListDataSource.readData();
         chatList = chatListDataSource.readData();
-        eventNameErrorLabel.setVisible(false);
-        locationErrorLabel.setVisible(false);
 
         hourStartChoice.getItems().addAll(
                 "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
@@ -156,6 +156,26 @@ public class CreateEventController {
 
         Event newEvent = new Event(eventName, startTimeMillis, dueTimeMillis, startBookingTimeMillis, dueBookingTimeMillis, info, Long.parseLong(audience), location, account);
 
+
+        if (isValidInput(eventName) || isValidInput(location) || isValidInput(audience)) {
+            eventNameErrorLabel.setVisible(false);
+            locationErrorLabel.setVisible(false);
+            audienceErrorLabel.setVisible(false);
+        } else {
+            eventNameErrorLabel.setVisible(true);
+            locationErrorLabel.setVisible(true);
+            audienceErrorLabel.setVisible(true);
+        }
+
+        // Check if the description contains a comma
+        if (isValidDescription(info)) {
+            // Description is valid
+            descriptionErrorLabel.setVisible(false);
+        } else {
+            // Description contains a comma, show an error
+            descriptionErrorLabel.setVisible(true);
+        }
+
         String profilePicturePath;
         if (selectedImageFile != null) {
             profilePicturePath = copyFile(newEvent.getEventID(), selectedImageFile);
@@ -182,22 +202,16 @@ public class CreateEventController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        if (isValidInput(eventName) || isValidInput(location)) {
-            eventNameErrorLabel.setVisible(false);
-            locationErrorLabel.setVisible(false);
-
-
-        } else {
-            eventNameErrorLabel.setVisible(true);
-            locationErrorLabel.setVisible(true);
-
-        }
     }
 
     private boolean isValidInput(String input) {
         // Use a regular expression to check if the input contains only alphanumeric characters and spaces.
-        return input.length() >= 4 && input.matches("^[a-zA-Z0-9\\s]+$");
+        return !input.matches(".*[\",].*") && input.matches("^[a-zA-Z0-9\\s]+$");
+    }
+
+    private boolean isValidDescription(String description) {
+        // Check if the description does not contain a comma
+        return !description.matches(".*[\",].*");
     }
 
     @FXML public void gotoMainMenu() {

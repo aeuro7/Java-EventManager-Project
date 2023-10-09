@@ -168,6 +168,7 @@ public class EditEventController {
         selectEvent.setStartBookingTime(startBookingTimeMillis);
         selectEvent.setDueBookingTime(dueBookingTimeMillis);
 
+
         eventListDataSource.writeData(eventList);
 
         try {

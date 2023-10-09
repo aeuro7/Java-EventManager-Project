@@ -60,45 +60,33 @@ public class RegisterController {
         String confirmPassword = conPasswordTextField.getText();
 
 
+        // Perform validation checks
         boolean isValid = false;
-        if (accountname.length() >= 6) {
+        if (!accountname.isEmpty() && isValidInput(accountname)) {
             accountnameErrorLabel.setVisible(false);
         } else {
             accountnameErrorLabel.setVisible(true);
         }
 
-        if (username.length() >= 6) {
-            // Check if usernames already exist?
-            if (!userList.isUserNameExists(username) && isValidInput(username)) {
+        if (!username.isEmpty() && isValidInput(username)) {
+            // check if usernames already exist?
+            if (!userList.isUserNameExists(username)) {
                 usernameErrorLabel.setVisible(false);
                 isValid = true;
             } else {
                 usernameErrorLabel.setVisible(true);
-                if (isValidInput(username)) {
-                    usernameErrorLabel.setVisible(true);
-                    isValid = false;
-                }
             }
         } else {
             usernameErrorLabel.setVisible(true);
         }
 
-        if (!password.equals(confirmPassword) || password.length() < 4) {
+        if (!password.equals(confirmPassword) || password.isEmpty() || isValidInput(password) || isValidInput(confirmPassword)) {
             passwordErrorLabel.setVisible(true);
             cPasswordErrorLabel.setVisible(true);
             isValid = false;
         } else {
             passwordErrorLabel.setVisible(false);
             cPasswordErrorLabel.setVisible(false);
-
-            if (!isValidPassword(password)) {
-                passwordErrorLabel.setVisible(true);
-                cPasswordErrorLabel.setVisible(true);
-                isValid = false;
-            } else {
-                passwordErrorLabel.setVisible(false);
-                cPasswordErrorLabel.setVisible(false);
-            }
         }
 
 
@@ -126,11 +114,7 @@ public class RegisterController {
     }
 
     public boolean isValidInput(String input) {
-        return input.length() >= 6 && input.matches("^[a-zA-Z0-9\\s]+$");
-    }
-
-    private boolean isValidPassword(String password) {
-        return password.length() >= 4 && password.matches(".*[a-z].*") && password.matches(".*[A-Z].*");
+        return !input.matches(".*[\",].*") && input.matches("^[a-zA-Z0-9\\s]+$") ;
     }
 
 
@@ -138,7 +122,7 @@ public class RegisterController {
     public void checkUsernameClick() {
         String username = usernameTextField.getText();
 
-        if (username.length() >= 6) {
+        if (!username.isEmpty() && isValidInput(username)) {
             if (!userList.isUserNameExists(username)) {
                 usernameErrorLabel.setVisible(false);
                 usernamePassLabel.setVisible(true);
@@ -151,6 +135,8 @@ public class RegisterController {
             usernamePassLabel.setVisible(false);
         }
     }
+
+
 
 
     @FXML public void browseButtonClick(ActionEvent event) {

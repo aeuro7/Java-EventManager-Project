@@ -128,8 +128,15 @@
                 <ChoiceBox fx:id="minStartChoice" layoutX="614.0" layoutY="189.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
                 <Label layoutX="602.0" layoutY="190.0" text=":" />
                 <Label layoutX="602.0" layoutY="227.0" text=":" />
-            <Label fx:id="eventnameErrorLabel" layoutX="670.0" layoutY="156.0" text="Invalid Event Name" textFill="RED" />
+            <Label fx:id="eventNameErrorLabel" layoutX="670.0" layoutY="156.0" text="Invalid Event Name" textFill="RED" />
             <Label fx:id="locationErrorLabel" layoutX="670.0" layoutY="342.0" text="Incorrect Location" textFill="RED" />
+            <Group fx:id="descriptionErrorLabel" layoutX="670.0" layoutY="415.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="120.0" text="description must not " textFill="RED" />
+                  <Label layoutX="2.0" layoutY="13.0" prefHeight="17.0" prefWidth="120.0" text="contains comma ( , )" textFill="RED" />
+               </children>
+            </Group>
+            <Label fx:id="audienceErrorLabel" layoutX="670.0" layoutY="382.0" text="Incorrect Audience" textFill="RED" />
             </children>
         </Group>
         <Group layoutY="47.0">
@@ -268,6 +275,5 @@
         <ChoiceBox fx:id="mStartBookedChoice" layoutX="615.0" layoutY="277.0" prefHeight="25.0" prefWidth="45.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/textfield.css" />
         <Label layoutX="603.0" layoutY="278.0" text=":" />
         <Label layoutX="603.0" layoutY="315.0" text=":" />
-      <Label text="Label" />
     </children>
 </AnchorPane>
