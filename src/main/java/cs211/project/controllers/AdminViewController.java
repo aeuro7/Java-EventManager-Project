@@ -9,10 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -79,6 +76,16 @@ public class AdminViewController {
         userTableView.getColumns().add(roleColumn);
         userTableView.getColumns().add(timestampColumn);
 
+        setCenterAlignment(userNameColumn);
+        setCenterAlignment(accountNameColumn);
+        setCenterAlignment(roleColumn);
+        setCenterAlignment(timestampColumn);
+
+        userNameColumn.setMinWidth(200);
+        accountNameColumn.setMinWidth(200);
+        roleColumn.setMinWidth(50);
+        timestampColumn.setMinWidth(230);
+
         userTableView.getItems().clear();
 
         for (User user: userList.getAllUser()) {
@@ -116,4 +123,20 @@ public class AdminViewController {
             throw new RuntimeException(e);
         }
     }
+    private <T> void setCenterAlignment(TableColumn<T, String> column) {
+        column.setCellFactory(tc -> new TableCell<T, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setAlignment(null);
+                } else {
+                    setText(item);
+                    setAlignment(javafx.geometry.Pos.CENTER);
+                }
+            }
+        });
+    }
+
 }

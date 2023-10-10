@@ -4,6 +4,7 @@ import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.TextFilter;
 import cs211.project.services.UserDataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +50,11 @@ public class RegisterController {
         usernamePassLabel.setVisible(false);
         dataSource = new UserDataSource("data", "login.csv");
         userList = dataSource.readData();
+
+        TextFilter.safeForCSV(accountnameTextField);
+        TextFilter.safeForCSV(usernameTextField);
+        TextFilter.safeForCSV(passwordTextField);
+        TextFilter.safeForCSV(conPasswordTextField);
     }
 
     @FXML

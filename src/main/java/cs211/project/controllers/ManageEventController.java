@@ -229,11 +229,11 @@ public class ManageEventController {
             boolean itSame = false;
             for(Team team: teamList.getAllTeams()) {
                 if(teamName.equals(team.getNameTeam())) {
-                    itSame = false;
+                    itSame = true;
                 }
             }
             if(itSame) {
-                showErrorLabel("This has been Used!");
+                showErrorLabel("This name has been Used!");
             } else {
                 if(amountTextfield.getText().equals("")) {
                     showErrorLabel("Fill the Amount");
