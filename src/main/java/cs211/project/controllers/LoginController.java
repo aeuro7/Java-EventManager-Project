@@ -48,11 +48,6 @@ public class LoginController {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-        if (!isValidInput(username) || !isValidInput(password)) {
-            errorLabel.setVisible(true);
-            return;
-        }
-
         User loginUser = userList.loginFn(username, password);
 
         if (isValid(loginUser)) {
@@ -74,9 +69,6 @@ public class LoginController {
             errorLabel.setVisible(true);
         }
     }
-    private boolean isValidInput(String input) {
-        return input.matches("^[a-zA-Z0-9]+$");
-    }
 
     @FXML
     private void onCreateAcButtonClick() {
@@ -94,8 +86,11 @@ public class LoginController {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML private void tutorial() {
+
+    }
     private boolean isValid(User user) {
         return user != null;
     }
-
 }

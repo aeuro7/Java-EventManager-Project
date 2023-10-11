@@ -84,7 +84,7 @@
          </image>
       </ImageView>
       <TextField fx:id="usernameTextField" layoutX="529.0" layoutY="210.0" prefHeight="45.0" prefWidth="250.0" promptText="  Username" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" />
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="501.0" layoutY="140.0" prefHeight="30.0" prefWidth="298.0" text="Login to Your Account" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="501.0" layoutY="121.0" prefHeight="30.0" prefWidth="298.0" text="Login to Your Account" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
@@ -92,7 +92,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="501.0" layoutY="159.0" opacity="0.46" prefHeight="30.0" prefWidth="298.0" text="Enter your usename and password" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="501.0" layoutY="140.0" opacity="0.46" prefHeight="30.0" prefWidth="298.0" text="Enter your usename and password" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -108,7 +108,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="529.0" layoutY="420.0" prefHeight="30.0" prefWidth="102.0" text="Don't have an Account?" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="529.0" layoutY="420.0" prefHeight="30.0" prefWidth="126.0" text="Don't have an Account?" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -116,7 +116,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="632.0" layoutY="420.0" onMouseClicked="#onCreateAcButtonClick" prefHeight="30.0" prefWidth="71.0" text="Create account" textAlignment="CENTER" textFill="#4e2a68" underline="true">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="655.0" layoutY="420.0" onMouseClicked="#onCreateAcButtonClick" prefHeight="30.0" prefWidth="71.0" text="Create account" textAlignment="CENTER" textFill="#4e2a68" underline="true">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -145,9 +145,9 @@
             <Image url="@../../../icon-png/logo_png/r.png" />
          </image>
       </ImageView>
-      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="499.0" layoutY="180.0" prefHeight="30.0" prefWidth="298.0" text="Username May Not Exist or Invalid Password" textAlignment="CENTER" textFill="#fc0000">
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="499.0" layoutY="170.0" prefHeight="30.0" prefWidth="298.0" text="Username May Not Exist or Invalid Password" textAlignment="CENTER" textFill="#8e0000">
          <font>
-            <Font name="System Italic" size="10.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -164,5 +164,13 @@
             <Font name="Verdana Bold" size="10.0" />
          </font>
       </Hyperlink>
+      <Button layoutX="529.0" layoutY="522.0" mnemonicParsing="false" onAction="#tutorial" prefHeight="45.0" prefWidth="250.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Tutorial" textFill="#bb84e8">
+         <font>
+            <Font name="Sarabun Regular" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
