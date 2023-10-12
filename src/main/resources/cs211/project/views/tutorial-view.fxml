@@ -59,7 +59,7 @@
                 </LinearGradient>
             </fill>
         </Rectangle>
-      <Button layoutX="471.0" layoutY="541.0" mnemonicParsing="false" onAction="#next" prefHeight="45.0" prefWidth="134.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Next" textFill="#bb84e8">
+      <Button fx:id="nextButton" layoutX="471.0" layoutY="541.0" mnemonicParsing="false" onAction="#next" prefHeight="45.0" prefWidth="134.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Next" textFill="#bb84e8">
          <font>
             <Font name="Sarabun Regular" size="13.0" />
          </font>
@@ -67,7 +67,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="168.0" layoutY="540.0" mnemonicParsing="false" onAction="#previous" prefHeight="45.0" prefWidth="134.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Previous" textFill="#bb84e8">
+      <Button fx:id="previousButton" layoutX="168.0" layoutY="540.0" mnemonicParsing="false" onAction="#previous" prefHeight="45.0" prefWidth="134.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Previous" textFill="#bb84e8">
          <font>
             <Font name="Sarabun Regular" size="13.0" />
          </font>
