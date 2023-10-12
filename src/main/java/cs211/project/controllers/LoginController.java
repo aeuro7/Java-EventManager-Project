@@ -87,9 +87,14 @@ public class LoginController {
         }
     }
 
-    @FXML private void tutorial() {
-
+    @FXML public void tutorial() {
+        try {
+            FXRouter.goTo("tutorial-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     private boolean isValid(User user) {
         return user != null;
     }

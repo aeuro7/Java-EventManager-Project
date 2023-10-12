@@ -38,6 +38,7 @@ public class HelloApplication extends Application {
         FXRouter.when("event-info", resourcesPath + "event-info.fxml");
         FXRouter.when("admin-edit-profile", resourcesPath + "admin-edit-profile.fxml");
         FXRouter.when("credit-view", resourcesPath + "credit-view.fxml");
+        FXRouter.when("tutorial-view", resourcesPath + "tutorial-view.fxml");
     }
 
     public static void main(String[] args) {
