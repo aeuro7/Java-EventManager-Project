@@ -92,6 +92,21 @@
 * Event Owner
   * Username: brofessors
   * Password: 170447
+* Event Audience
+  * Username: 9arm
+  * Password: 9arm
+* Event Audience BANNED
+  * Username: mayaCreator
+  * Password: 1234
+* Event Team Member(Demon Team)
+  * Username: ithikornn
+  * Password: 1234
+* Event Team Member(Angel Team)
+  * Username: pepTheBald
+  * Password: pep
+* Event Team Member(Angel Team) BANNED
+  * Username: tentlnwza007
+  * Password: 1234
 
 ## สรุปสิ่งที่พัฒนาแต่ละครั้งที่นำเสนอความก้าวหน้าของระบบ
 * ครั้งที่ 1 (11 สิงหาคม 2566)
@@ -99,4 +114,6 @@
 * ครั้งที่ 2 (1 กันยายน 2566)
     
 * ครั้งที่ 3 (22 กันยายน 2566)
+
+* ครั้งที่ 4 (13 ตุลาคม 2566)
    
