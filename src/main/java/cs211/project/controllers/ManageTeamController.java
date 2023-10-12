@@ -1,14 +1,11 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Calendar;
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
-import cs211.project.models.chats.Chat;
-import cs211.project.models.eventHub.Member;
-import cs211.project.models.eventHub.MemberList;
+import cs211.project.models.eventHub.Event;
+import cs211.project.models.eventHub.EventList;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
 import cs211.project.services.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -24,23 +21,19 @@ import java.util.List;
 
 public class ManageTeamController {
 
-    private Team selectTeam;
-
-    @FXML
-    private TableView<Team> teamTableView;
+    @FXML private TableView<Team> teamTableView;
     @FXML private TextField searchBox;
 
     private TeamList fullteamList;
     private TeamList teamList = new TeamList();
     private String account = (String) FXRouter.getData();
+    private EventList eventList;
 
     @FXML
     private void initialize() {
         DataSource<TeamList> dataSource = new TeamDataSource("data", "team.csv");
         fullteamList = dataSource.readData();
-
-
-        EventList eventList = (new EventDataSource("data", "event.csv").readData());
+        eventList = (new EventDataSource("data", "event.csv").readData());
         fullteamList = (new TeamDataSource("data", "team.csv").readData());
 
         List<Pair> joinData = new ArrayList<>();
@@ -52,7 +45,9 @@ public class ManageTeamController {
         }
         for(Team team: fullteamList.getAllTeams()) {
             if(team.isInTeam(account)) {
-                joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
+                if(!team.isThisGuyAreBaned(account)) {
+                    joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
+                }
             }
         }
 
@@ -75,18 +70,24 @@ public class ManageTeamController {
 
     private void showTable(TeamList teamList) {
 
-        TableColumn<Team, String> eventIDColumn = new TableColumn<>("Event ID");
-        eventIDColumn.setCellValueFactory(new PropertyValueFactory<>("eventID"));
+        TableColumn<Team, String> eventNameColumn = new TableColumn<>("Event Name");
+        eventNameColumn.setCellValueFactory(cellData -> {
+            Team team = cellData.getValue();
+            return new SimpleStringProperty(eventList.findEventByID(team.getEventID()).getEventName());
+        });
 
         TableColumn<Team, String> nameTeamColumn = new TableColumn<>("Team Name");
         nameTeamColumn.setCellValueFactory(new PropertyValueFactory<>("nameTeam"));
 
-        TableColumn<Team, String> leaderNameColumn = new TableColumn<>("leader Name");
+        TableColumn<Team, String> leaderNameColumn = new TableColumn<>("Leader Name");
         leaderNameColumn.setCellValueFactory(new PropertyValueFactory<>("leaderName"));
 
 
         teamTableView.getColumns().clear();
-        teamTableView.getColumns().addAll(nameTeamColumn, eventIDColumn,leaderNameColumn);
+        teamTableView.getColumns().addAll(nameTeamColumn, eventNameColumn,leaderNameColumn);
+        nameTeamColumn.setMinWidth(100);
+        eventNameColumn.setMinWidth(248);
+        leaderNameColumn.setMinWidth(198);
 
         teamTableView.getItems().clear();
 
@@ -107,6 +108,16 @@ public class ManageTeamController {
                 }
             }
         });
+    }
+
+
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -147,6 +158,23 @@ public class ManageTeamController {
     @FXML private void gotoManageEvent() {
         try {
             FXRouter.goTo("manage-event", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view",account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view",account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

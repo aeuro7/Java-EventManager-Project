@@ -4,6 +4,7 @@ import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
+import cs211.project.services.TextFilter;
 import cs211.project.services.UserDataSource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +50,11 @@ public class RegisterController {
         usernamePassLabel.setVisible(false);
         dataSource = new UserDataSource("data", "login.csv");
         userList = dataSource.readData();
+
+        TextFilter.safeForCSV(accountnameTextField);
+        TextFilter.safeForCSV(usernameTextField);
+        TextFilter.safeForCSV(passwordTextField);
+        TextFilter.safeForCSV(conPasswordTextField);
     }
 
     @FXML
@@ -59,15 +65,16 @@ public class RegisterController {
         String password = passwordTextField.getText();
         String confirmPassword = conPasswordTextField.getText();
 
+
         // Perform validation checks
         boolean isValid = false;
-        if (!accountname.isEmpty()) {
+        if (!accountname.isEmpty() && isValidInput(accountname)) {
             accountnameErrorLabel.setVisible(false);
         } else {
             accountnameErrorLabel.setVisible(true);
         }
 
-        if (!username.isEmpty()) {
+        if (!username.isEmpty() && isValidInput(username)) {
             // check if usernames already exist?
             if (!userList.isUserNameExists(username)) {
                 usernameErrorLabel.setVisible(false);
@@ -79,7 +86,7 @@ public class RegisterController {
             usernameErrorLabel.setVisible(true);
         }
 
-        if (!password.equals(confirmPassword) || password.isEmpty()) {
+        if (!password.equals(confirmPassword) || password.isEmpty() && isValidInput(password) && isValidInput(confirmPassword)) {
             passwordErrorLabel.setVisible(true);
             cPasswordErrorLabel.setVisible(true);
             isValid = false;
@@ -87,6 +94,7 @@ public class RegisterController {
             passwordErrorLabel.setVisible(false);
             cPasswordErrorLabel.setVisible(false);
         }
+
 
         String profilePicturePath;
         if (selectedImageFile != null) {
@@ -111,13 +119,16 @@ public class RegisterController {
         }
     }
 
+    public boolean isValidInput(String input) {
+        return !input.matches(".*[\",].*") && input.matches("^[a-zA-Z0-9\\s]+$") ;
+    }
 
     @FXML
     public void checkUsernameClick() {
         String username = usernameTextField.getText();
 
-        if (!username.isEmpty()) {
-            if(!userList.isUserNameExists(username)) {
+        if (!username.isEmpty() && isValidInput(username)) {
+            if (!userList.isUserNameExists(username)) {
                 usernameErrorLabel.setVisible(false);
                 usernamePassLabel.setVisible(true);
             } else {
@@ -129,6 +140,9 @@ public class RegisterController {
             usernamePassLabel.setVisible(false);
         }
     }
+
+
+
 
     @FXML public void browseButtonClick(ActionEvent event) {
         FileChooser chooser = new FileChooser();

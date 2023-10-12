@@ -52,10 +52,18 @@ public class LoginController {
 
         if (isValid(loginUser)) {
             dataSource.writeData(userList);
-            try {
-                FXRouter.goTo("main-menu", username);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if(loginUser.isAdmin()) {
+                try {
+                    FXRouter.goTo("admin-view", username);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                try {
+                    FXRouter.goTo("main-menu", username);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         } else {
             errorLabel.setVisible(true);
@@ -78,6 +86,15 @@ public class LoginController {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML public void tutorial() {
+        try {
+            FXRouter.goTo("tutorial-view");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private boolean isValid(User user) {
         return user != null;
     }

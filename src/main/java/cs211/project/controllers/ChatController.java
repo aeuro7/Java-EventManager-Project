@@ -1,8 +1,7 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Calendar;
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
+import cs211.project.models.eventHub.Event;
+import cs211.project.models.eventHub.EventList;
 import cs211.project.models.chats.Chat;
 import cs211.project.models.chats.ChatList;
 import cs211.project.models.chats.Message;
@@ -19,20 +18,26 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Pair;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ChatController {
 
     @FXML private TableView chatListTableView;
     @FXML private ListView<Label> chatListview;
-    @FXML private TextArea messageTextArea;
+    @FXML private TextField messageTextField;
     @FXML private Label selectLabel;
     @FXML private Button sendButton;
+    @FXML private Circle userProficCircle;
 
     private DataSource<ChatList> dataSource = new ChatListDataSource("data", "chat.csv");
     private ChatList chatList = new ChatList();
@@ -46,39 +51,36 @@ public class ChatController {
         MemberList memberList = (new MemberDataSource("data", "member.csv").readData());
         TeamList teamList = (new TeamDataSource("data", "team.csv").readData());
         eventList = (new EventDataSource("data", "event.csv").readData());
+        userProficCircle.setFill(new ImagePattern(new Image("file:" + "data/UserProfilePicture/" + account + ".png")));
+        Set<Pair> joinData = new HashSet<>();
 
-        List<Pair> joinData = new ArrayList<>();
-
-        for(Member member: memberList.getMemberList()) {
-            if(member.getUsername().equals(account)) {
+        for (Member member : memberList.getMemberList()) {
+            if (member.getUsername().equals(account) && !member.getBanStatus()) {
                 joinData.add(new Pair(member.getEventID(), member.getRole()));
             }
         }
-        for(Team team: teamList.getAllTeams()) {
-            if(team.isInTeam(account)) {
+
+        for (Team team : teamList.getAllTeams()) {
+            if (team.isInTeam(account) && !team.isThisGuyAreBaned(account)) {
                 joinData.add(new Pair(team.getEventID(), team.getNameTeam()));
             }
         }
 
         for (Pair data : joinData) {
             for (Chat chat : fullchatList.getChatList()) {
-
-                if(chat.getEventID().equals(data.getKey()) && data.getValue().equals("OWNER")) {
-                    chatList.addChat(chat);
+                if (chat.getEventID().equals(data.getKey()) && ((data.getValue().equals("OWNER") || chat.getFaction().equals(data.getValue())))) {
+                    if(eventList.findEventByID(chat.getEventID()).getDueTime() > System.currentTimeMillis()) {
+                        chatList.addChat(chat);
+                    }
                 }
-                else if (chat.getEventID().equals(data.getKey()) && chat.getFaction().equals(data.getValue())) {
-                    chatList.addChat(chat);
-                }
-
             }
         }
-
-        messageTextArea.setOnKeyPressed(event -> {
+        messageTextField.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER) {
                 sendButton();
             }
         });
-
+        TextFilter.safeForCSV(messageTextField);
         clearChat();
         showTable();
         chatListTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Chat>() {
@@ -118,7 +120,7 @@ public class ChatController {
     private void clearChat() {
         selectLabel.setText("Chat List");
         chatListview.setVisible(false);
-        messageTextArea.setVisible(false);
+        messageTextField.setVisible(false);
         sendButton.setVisible(false);
     }
 
@@ -127,7 +129,7 @@ public class ChatController {
         selectLabel.setText(chat.getFaction());
         chatListview.getItems().clear();
         chatListview.setVisible(true);
-        messageTextArea.setVisible(true);
+        messageTextField.setVisible(true);
         sendButton.setVisible(true);
         setTextOnListView();
     }
@@ -138,7 +140,9 @@ public class ChatController {
         for (Message message : selectChat.getChatlist()) {
             String sender = userList.findUserByUserName(message.getSenderName()).getAccountName();
             String text = message.getMessage();
-            Label label = new Label(sender + ":\n" + text);
+            Label label = new Label(sender
+                    + " ("+ formatTimestamp(message.getSentDateTime()) + ")"
+                    + ":\n" + text);
 
             if (account.equals(message.getSenderName())) {
                 label.setAlignment(Pos.CENTER_RIGHT);
@@ -153,12 +157,12 @@ public class ChatController {
     }
 
     public void sendButton() {
-        String messageText = messageTextArea.getText();
+        String messageText = messageTextField.getText();
         if (!messageText.isEmpty()) {
             Message newMessage = new Message(account, messageText);
             selectChat.addChat(newMessage);
             setTextOnListView();
-            messageTextArea.clear();
+            messageTextField.clear();
             dataSource.writeData(fullchatList);
         }
     }
@@ -196,5 +200,18 @@ public class ChatController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private String formatTimestamp(long timestamp) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        return dateFormat.format(new Date(timestamp));
     }
 }

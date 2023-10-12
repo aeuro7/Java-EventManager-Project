@@ -1,5 +1,7 @@
 package cs211.project.models.users;
 
+import cs211.project.services.SortingSystem;
+
 import java.util.ArrayList;
 
 public class UserList {
@@ -53,7 +55,7 @@ public class UserList {
     public void changeRole(String username) {
         for(User selectedUser : getAllUser()) {
             if(selectedUser.getUserName().equals(username)) {
-                if(selectedUser.isAdmin()) {
+                if(selectedUser.isAdmin() || selectedUser.isBan()) {
                     selectedUser.thisIsUser();
                 } else {
                     selectedUser.thisIsAdmin();
@@ -61,12 +63,8 @@ public class UserList {
             }
         }
     }
-    public void deleteThisAccount(String username) {
-        for(User selectedUser : getAllUser()) {
-            if(selectedUser.getUserName().equals(username)) {
-                userList.remove(selectedUser);
-                break;
-            }
-        }
+    public void sortUsersByLastTimeLogin() {
+        userList.sort(SortingSystem.sortByLastLogin);
     }
+
 }

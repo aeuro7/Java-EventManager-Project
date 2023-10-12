@@ -1,23 +1,19 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
+import cs211.project.models.eventHub.Event;
+import cs211.project.models.eventHub.EventList;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
-import cs211.project.models.team.Team;
-import cs211.project.models.team.TeamList;
-import cs211.project.services.DataSource;
-import cs211.project.services.EventDataSource;
-import cs211.project.services.FXRouter;
-import cs211.project.services.MemberDataSource;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
+import cs211.project.services.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -28,75 +24,101 @@ public class BookhistoryViewController {
 
     @FXML private Group nowOn;
     @FXML private Group nowCom;
-    @FXML private TableView eventTableView;
     private DataSource<MemberList> memberListDataSource = new MemberDataSource("data", "member.csv");
-    private DataSource<EventList> eventListDataSource = new EventDataSource("data", "event.csv");
     String username;
 
     private EventList eventList;
     private MemberList memberList;
 
+    private DataSource<UserList> datasourceUser;
+
+    @FXML private GridPane eventContrainer;
+    @FXML private ScrollPane scrollpain;
+    private DataSource<EventList> datasource;
+    private int column = 0;
+    private int row = 1;
+
+    private UserList userList;
+
+    private User account ;
+
+
     @FXML
     private void initialize() {
-        eventList = eventListDataSource.readData();
-        memberList = memberListDataSource.readData();
         username = (String) FXRouter.getData();
         nowCom.setVisible(false);
         nowOn.setVisible(false);
-        showTable(eventList);
+        datasource = new EventDataSource("data", "event.csv");
+        eventList = datasource.readData();
+        datasourceUser = new UserDataSource("data", "login.csv");
+        userList = datasourceUser.readData();
+        String username = (String) FXRouter.getData();
+        account = userList.findUserByUserName(username);
+        memberList = memberListDataSource.readData();
+
         showOngoing();
-        eventTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Event>() {
-            @Override
-            public void changed(ObservableValue observable, Event oldValue, Event newValue) {
-                if (newValue != null) {
-                    Pair sender = new Pair<Event, String>(newValue, username);
-                    try {
-                        FXRouter.goTo("event-info", sender);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+
+    }
+
+    private void showEvent(Event event) {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/cs211/project/views/ongoing-event-tab.fxml"));
+            AnchorPane eventinfoTab = loader.load();
+            OnGoingTabController infoTabController = loader.getController();
+            infoTabController.setData(event,userList.findUserByUserName(event.getEventOwner()).getAccountName());
+
+            eventinfoTab.setOnMouseClicked(activity -> {
+                try {
+                    Pair<Event, String> sender = new Pair<Event, String>(event, account.getUserName());
+                    FXRouter.goTo("event-info", sender);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+            });
+
+            if(column == 1) {
+                column = 0;
+                row++;
             }
-        });
+            scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            eventContrainer.add(eventinfoTab, column++, row);
+            GridPane.setMargin(eventinfoTab, new Insets(3));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void showTable(EventList eventList) {
-        TableColumn<Event, String> eventNameColumn = new TableColumn<>("Event Name");
-        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
 
-        TableColumn<Event, String> startTimeColumn = new TableColumn<>("Start From");
-        startTimeColumn.setCellValueFactory(cellData -> {
-            long startTime = cellData.getValue().getStartTime();
-            String formattedTimestamp = formatTimestamp(startTime); // Format the timestamp
-            return new SimpleStringProperty(formattedTimestamp);
-        });
+    private void showEventComplete(Event event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/cs211/project/views/completed-event-tab.fxml"));
+            AnchorPane eventinfoTab = loader.load();
+            CompletedTabController infoTabController = loader.getController();
+            infoTabController.setData(event, userList.findUserByUserName(event.getEventOwner()).getAccountName());
 
-        TableColumn<Event, String> dueTimeColumn = new TableColumn<>("End At");
-        dueTimeColumn.setCellValueFactory(cellData -> {
-            long endTime = cellData.getValue().getDueTime();
-            String formattedTimestamp = formatTimestamp(endTime);
-            return new SimpleStringProperty(formattedTimestamp);
-        });
+            eventinfoTab.setOnMouseClicked(activity -> {
+                try {
+                    Pair<Event, String> sender = new Pair<Event, String>(event, account.getUserName());
+                    FXRouter.goTo("event-info", sender);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
-        TableColumn<Event, String> locationNewColumn = new TableColumn<>("Location");
-        locationNewColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-
-        eventTableView.getColumns().clear();
-
-        eventTableView.getColumns().add(eventNameColumn);
-        eventNameColumn.setMinWidth(120);
-
-        eventTableView.getColumns().add(startTimeColumn);
-        startTimeColumn.setMinWidth(135);
-
-        eventTableView.getColumns().add(dueTimeColumn);
-        dueTimeColumn.setMinWidth(135);
-
-        eventTableView.getColumns().add(locationNewColumn);
-        locationNewColumn.setMinWidth(153);
-
-        eventTableView.getItems().clear();
+            if (column == 1) {
+                column = 0;
+                row++;
+            }
+            scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            eventContrainer.add(eventinfoTab, column++, row);
+            GridPane.setMargin(eventinfoTab, new Insets(3));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     private void logoutButton() {
@@ -113,7 +135,14 @@ public class BookhistoryViewController {
             throw new RuntimeException(e);
         }
     }
-
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", username);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML private void gotoEditprofile() {
         try {
@@ -146,40 +175,54 @@ public class BookhistoryViewController {
 
 
     @FXML private void showOngoing() {
-            nowOn.setVisible(true);
-            nowCom.setVisible(false);
+        nowOn.setVisible(true);
+        nowCom.setVisible(false);
 
-        eventTableView.getItems().clear();
+        eventContrainer.getChildren().clear();
+
 
         for (Member member : memberList.getMemberList()) {
-            if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE") ) {
+            if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
                 String eventID = member.getEventID();
                 Event addEvent = eventList.findEventByID(eventID);
                 if (addEvent != null && System.currentTimeMillis() < addEvent.getStartTime()) {
-                    eventTableView.getItems().add(addEvent);
+                    showEvent(addEvent);
                 }
             }
         }
-
     }
-
     @FXML private void showCompleted() {
         nowCom.setVisible(true);
         nowOn.setVisible(false);
 
-        eventTableView.getItems().clear();
+        eventContrainer.getChildren().clear(); // เคลียร์ข้อมูลก่อนแสดง Event ใหม่
 
         for (Member member : memberList.getMemberList()) {
             if (member.getUsername().equals(username) && member.getRole().equals("AUDIENCE")) {
                 String eventID = member.getEventID();
                 Event addEvent = eventList.findEventByID(eventID);
                 if (addEvent != null && System.currentTimeMillis() > addEvent.getStartTime()) {
-                    eventTableView.getItems().add(addEvent);
+                    showEventComplete(addEvent);
                 }
             }
         }
 
+    }
 
+
+    public void goCalendar() {
+        try {
+            FXRouter.goTo("calendar-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goChat() {
+        try {
+            FXRouter.goTo("chat-view", account.getUserName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String formatTimestamp(long timestamp) {
@@ -189,4 +232,3 @@ public class BookhistoryViewController {
 
 
 }
-

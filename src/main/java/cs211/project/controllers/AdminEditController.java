@@ -2,6 +2,7 @@ package cs211.project.controllers;
 
 import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
+import cs211.project.services.TextFilter;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
 import cs211.project.services.UserDataSource;
@@ -9,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -31,14 +31,9 @@ public class AdminEditController {
         showUserInfo(selectedUser);
         nameEmptyLabel.setVisible(false);
         changeLabel.setVisible(false);
-    }
 
-    @FXML private void gotoMainMenu() {
-        try {
-            FXRouter.goTo("main-menu");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        TextFilter.safeForCSV(accountnameTextField);
+        TextFilter.safeForCSV(newpasswordField);
     }
     @FXML private void goAdminview() {
         try {
@@ -54,21 +49,14 @@ public class AdminEditController {
             throw new RuntimeException(e);
         }
     }
-    @FXML public void goProflie() {
-        try {
-            FXRouter.goTo("profile-view");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @FXML private void changeRole() {
         userList.changeRole(selectedUser.getUserName());
         updateToCSV();
         showUserInfo(selectedUser);
         changeLabel.setVisible(true);
     }
-    @FXML private void deleteAcount() {
-        userList.deleteThisAccount(selectedUser.getUserName());
+    @FXML private void banAcount() {
+        selectedUser.banThisUser();
         updateToCSV();
         goAdminview();
     }

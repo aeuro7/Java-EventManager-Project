@@ -1,41 +1,63 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Calendar;
-import cs211.project.models.CalendarList;
-import cs211.project.models.Event;
+import cs211.project.models.eventHub.Calendar;
+import cs211.project.models.eventHub.CalendarList;
+import cs211.project.models.eventHub.Event;
 import cs211.project.services.CalendarDataSource;
 import cs211.project.services.DataSource;
 import cs211.project.services.FXRouter;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class EventCalendarController {
-    @FXML private TableView<Calendar> calendarTableView;
+
+    @FXML private GridPane calendarContrainer;
     @FXML private Label eventnameLabel;
     @FXML private TextField searchBox;
+    @FXML private ScrollPane scrollpain;
     private Event selectedEvent = (Event) FXRouter.getData();
     private String account = selectedEvent.getEventOwner();
     DataSource<CalendarList> calendarListDataSource;
     CalendarList calendarList;
+    private int row = 1;
 
     @FXML public void initialize() {
         calendarListDataSource = new CalendarDataSource("data", "calendar.csv");
         calendarList = calendarListDataSource.readData();
+        calendarList.sortCalendarByNearStartDate();
         eventnameLabel.setText(selectedEvent.getEventName());
-        showTable(calendarList);
+
+        fillTheGrid();
 
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             SearchFn(newValue);
         });
+    }
+
+    private void fillTheGrid() {
+        calendarContrainer.getChildren().clear();
+
+        for (Calendar calendar: calendarList.getCalendars()) {
+            if(calendar.getEventID().equals(selectedEvent.getEventID())) {
+                showCalendar(calendar);
+            }
+        }
+    }
+
+    private void SearchFn(String searchTerm) {
+        searchTerm = searchTerm.toLowerCase().trim();
+        calendarContrainer.getChildren().clear();
+
+        for (Calendar calendar : calendarList.getCalendars()) {
+            if (calendar.getCalendarName().toLowerCase().contains(searchTerm)) {
+                showCalendar(calendar);
+            }
+        }
     }
 
     public void addNewCalendar() {
@@ -45,55 +67,42 @@ public class EventCalendarController {
             throw new RuntimeException(e);
         }
     }
-    private void showTable(CalendarList calendars) {
-        TableColumn<Calendar, String> activityNameColumn = new TableColumn<>("Activity");
-        activityNameColumn.setCellValueFactory(new PropertyValueFactory<>("calendarName"));
+    private void showCalendar(Calendar calendar) {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/cs211/project/views/calendar-tab-mini.fxml"));
+            AnchorPane calendartab = loader.load();
+            CalendarMiniTabController calendarTabController = loader.getController();
+            calendarTabController.setData(calendar, selectedEvent);
 
-        TableColumn<Calendar, String> factionColumn = new TableColumn<>("Faction");
-        factionColumn.setCellValueFactory(new PropertyValueFactory<>("faction"));
-
-        TableColumn<Calendar, String> startTime = new TableColumn<>("Start-time");
-        startTime.setCellValueFactory(cellData -> {
-            long timestamp = cellData.getValue().getStartTime();
-            String formattedTimestamp = formatTimestamp(timestamp); // Format the timestamp
-            return new SimpleStringProperty(formattedTimestamp);
-        });
-
-        TableColumn<Calendar, String> dueTime = new TableColumn<>("Due-time");
-        dueTime.setCellValueFactory(cellData -> {
-            long timestamp = cellData.getValue().getDueTime();
-            String formattedTimestamp = formatTimestamp(timestamp); // Format the timestamp
-            return new SimpleStringProperty(formattedTimestamp);
-        });
-
-        calendarTableView.getColumns().clear();
-        calendarTableView.getColumns().add(activityNameColumn);
-        calendarTableView.getColumns().add(factionColumn);
-        calendarTableView.getColumns().add(startTime);
-        calendarTableView.getColumns().add(dueTime);
-
-        calendarTableView.getItems().clear();
-
-        for (Calendar calendar: calendars.getCalendars()) {
-            if(calendar.getEventID().equals(selectedEvent.getEventID())) {
-                calendarTableView.getItems().add(calendar);
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem deleteMenuItem = new MenuItem("Delete");
+            MenuItem markItDone = new MenuItem("Mark It Done");
+            if(!calendar.getFaction().equals("AUDIENCE") && !calendar.isDone()) {
+                contextMenu.getItems().add(markItDone);
             }
-        }
-    }
+            contextMenu.getItems().add(deleteMenuItem);
 
-    private String formatTimestamp(long timestamp) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return dateFormat.format(new Date(timestamp));
-    }
-    private void SearchFn(String searchTerm) {
-        searchTerm = searchTerm.toLowerCase().trim();
-        calendarTableView.getItems().clear();
-
-        for (Calendar calendar : calendarList.getCalendars()) {
-            if (calendar.getCalendarName().toLowerCase().contains(searchTerm)) {
-                calendarTableView.getItems().add(calendar);
-            }
+            calendartab.setOnContextMenuRequested(event -> {
+                contextMenu.show(calendartab, event.getScreenX(), event.getScreenY());
+            });
+            markItDone.setOnAction(event -> {
+                calendar.itDone();
+                calendarListDataSource.writeData(calendarList);
+                fillTheGrid();
+            });
+            deleteMenuItem.setOnAction(event -> {
+                calendarList.removeCalendar(calendar);
+                calendarListDataSource.writeData(calendarList);
+                fillTheGrid();
+            });
+            scrollpain.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            calendarContrainer.add(calendartab, 0, row++);
+            GridPane.setMargin(calendartab, new Insets(5));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     @FXML
@@ -156,6 +165,15 @@ public class EventCalendarController {
     @FXML private void gotoManageEvent() {
         try {
             FXRouter.goTo("manage-event", account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

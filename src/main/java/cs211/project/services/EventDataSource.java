@@ -1,8 +1,7 @@
 package cs211.project.services;
 
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
-import cs211.project.models.users.User;
+import cs211.project.models.eventHub.Event;
+import cs211.project.models.eventHub.EventList;
 
 import java.io.*;
 
@@ -44,18 +43,20 @@ public class EventDataSource implements DataSource<EventList>{
             while ((line = buffer.readLine()) != null) {
         String[] data = line.split(",");
                 String name = data[0].trim();
-                long starttime = Long.parseLong(data[1]);
-                long duetime = Long.parseLong(data[2]);
-                String picture = data[3].trim();
-                long maxseat = Long.parseLong(data[4]);
-                long leftseat = Long.parseLong(data[5]);
+                long startTime = Long.parseLong(data[1]);
+                long dueTime = Long.parseLong(data[2]);
+                String eventPicture = data[3].trim();
+                long maxSeat = Long.parseLong(data[4]);
+                long leftSeat = Long.parseLong(data[5]);
                 long booked = Long.parseLong(data[6]);
                 String location = data[7].trim();
                 String id = data[8].trim();
                 String owner = data[9].trim();
-                String info = (data.length == 11) ? data[10] : "";
-                Event newEvent = new Event(name, starttime, duetime, info
-                , maxseat, leftseat, booked, location, id, owner, picture);
+                long startBookingTime = Long.parseLong(data[10]);
+                long dueBookingTime = Long.parseLong(data[11]);
+                String info = (data.length == 13) ? data[12] : "";
+
+                Event newEvent = new Event(name, startTime, dueTime, startBookingTime, dueBookingTime, info, maxSeat, leftSeat, booked, location, id, owner, eventPicture);
                 eventList.addEvent(newEvent);
             }
         } catch (FileNotFoundException e) {
@@ -93,6 +94,8 @@ public class EventDataSource implements DataSource<EventList>{
                         + event.getLocation() + ","
                         + event.getEventID() + ","
                         + event.getEventOwner() + ","
+                        + event.getStartBookingTime() + ","
+                        + event.getDueBookingTime() + ","
                         + event.getInfo();
                 writer.append(line);
                 writer.newLine();

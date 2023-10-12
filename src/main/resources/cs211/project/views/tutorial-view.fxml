@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.TutorialController">
+    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="74.0" layoutX="1.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="798.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006711409395973154">
+                     <color>
+                        <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="74.0" layoutX="1.0" layoutY="525.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="798.0">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                            <color>
+                                <Color red="0.7333333492279053" green="0.5176470875740051" blue="0.9098039269447327" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.5670230388641357" green="0.3799342215061188" blue="0.8289473652839661" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Rectangle>
+      <Button fx:id="nextButton" layoutX="471.0" layoutY="541.0" mnemonicParsing="false" onAction="#next" prefHeight="45.0" prefWidth="134.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Next" textFill="#bb84e8">
+         <font>
+            <Font name="Sarabun Regular" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="previousButton" layoutX="168.0" layoutY="540.0" mnemonicParsing="false" onAction="#previous" prefHeight="45.0" prefWidth="134.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Previous" textFill="#bb84e8">
+         <font>
+            <Font name="Sarabun Regular" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="45.0" prefWidth="134.0" styleClass="BoxAllWhite" stylesheets="@../../../buttom_style/t.css" text="Back" textFill="#bb84e8">
+         <font>
+            <Font name="Sarabun Regular" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fx:id="mainShow" fitHeight="400.0" fitWidth="711.0" layoutX="43.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="310.0" layoutY="23.0" prefHeight="30.0" prefWidth="298.0" text="Tutorial  of NEBB" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+    </children>
+</AnchorPane>

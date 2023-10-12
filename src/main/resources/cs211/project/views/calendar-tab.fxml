@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="200.0" prefWidth="700.0" style="-fx-background-color: FAF6FF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs211.project.controllers.CalendarTabController">
+   <children>
+      <Label layoutX="158.0" layoutY="18.0" text="Activity Name:" textFill="#9161d3">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="activitynameLabel" layoutX="307.0" layoutY="19.0" prefHeight="27.0" prefWidth="259.0" text="activitynameLabel">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="158.0" layoutY="100.0" text="From: " textFill="#9161d3">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="starttimeLabel" alignment="CENTER" layoutX="219.0" layoutY="100.0" prefHeight="26.0" prefWidth="130.0" text="starttimeLabel" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="358.0" layoutY="100.0" text="till" textFill="#9161d3">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="duetimeLabel" alignment="CENTER" layoutX="393.0" layoutY="99.0" prefHeight="26.0" prefWidth="130.0" text="duetimeLabel" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="158.0" layoutY="127.0" text="Deatil:" textFill="#9161d3">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="detailLabel" layoutX="193.0" layoutY="153.0" prefHeight="26.0" prefWidth="330.0" text="detailLabel" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e2d1ffb0" height="170.0" layoutX="578.0" layoutY="14.0" smooth="false" stroke="#9e85c74b" strokeType="INSIDE" strokeWidth="0.0" width="110.0" />
+      <Label fx:id="daysleftLabel" alignment="CENTER" layoutX="567.0" layoutY="53.0" prefHeight="58.0" prefWidth="130.0" text="000" textAlignment="RIGHT" textFill="#913c3c">
+         <font>
+            <Font name="System Bold" size="38.0" />
+         </font>
+      </Label>
+      <Label fx:id="daysleftFixLabel" alignment="CENTER" layoutX="584.0" layoutY="120.0" prefHeight="27.0" prefWidth="100.0" text="days left" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="profileRectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="120.0" layoutX="12.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" />
+      <Label layoutX="158.0" layoutY="49.0" text="Event Name:" textFill="#9161d3">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="eventnameLabel" layoutX="266.0" layoutY="48.0" prefHeight="26.0" prefWidth="130.0" text="eventLabel" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="158.0" layoutY="74.0" text="Faction:" textFill="#9161d3">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="factionLabel" layoutX="234.0" layoutY="74.0" prefHeight="26.0" prefWidth="130.0" text="factionLabel" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

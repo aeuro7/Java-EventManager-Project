@@ -1,13 +1,14 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
-import cs211.project.models.eventHub.Member;
+import cs211.project.models.eventHub.Event;
+import cs211.project.models.eventHub.EventList;
 import cs211.project.models.team.Team;
 import cs211.project.models.team.TeamList;
 import cs211.project.models.team.TeamStaff;
 import cs211.project.models.users.User;
+import cs211.project.models.users.UserList;
 import cs211.project.services.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,20 +28,23 @@ public class ManageTeamViewController {
     @FXML private Label nameLabel;
     @FXML private Label statusLabel;
     @FXML private TableView<TeamStaff> memberTableView;
-    @FXML private Button editButton;
     @FXML private Button banButton;
     @FXML private Circle profilepicCircle;
     private Team selectTeam;
     private TeamList teamList;
     private String account;
+    private TeamStaff selectStaff;
+    private DataSource<TeamList> dataSource;
+    private UserList userList = (new UserDataSource("data", "login.csv")).readData();
 
     @FXML
     private void initialize() {
-        DataSource<TeamList> dataSource = new TeamDataSource("data", "team.csv");
+        dataSource = new TeamDataSource("data", "team.csv");
         EventList eventList = (new EventDataSource("data", "event.csv").readData());
         teamList = dataSource.readData();
         account = ((Pair<String , Team>) FXRouter.getData()).getKey();
-        selectTeam = ((Pair<String , Team>) FXRouter.getData()).getValue();
+        Team inputTeam = ((Pair<String , Team>) FXRouter.getData()).getValue();
+        selectTeam = teamList.findTeamByNameAndEventID(inputTeam.getNameTeam(), inputTeam.getEventID());
         Event thisEvent = eventList.findEventByID(selectTeam.getEventID());
         showTable(selectTeam);
         teamNameLabel.setText(selectTeam.getNameTeam());
@@ -49,7 +53,8 @@ public class ManageTeamViewController {
 
         memberTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                nameLabel.setText(newValue.getName());
+                selectStaff = newValue;
+                nameLabel.setText(userList.findUserByUserName(newValue.getName()).getAccountName());
                 statusLabel.setText(newValue.getRole());
                 User user = (new UserDataSource("data", "login.csv")).readData().findUserByUserName(newValue.getName());
                 profilepicCircle.setFill(new ImagePattern(new Image("file:" + user.getProfilePicture())));
@@ -66,7 +71,10 @@ public class ManageTeamViewController {
 
     private void showTable(Team team) {
         TableColumn<TeamStaff, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameColumn.setCellValueFactory(cellData -> {
+            TeamStaff staff = cellData.getValue();
+            return new SimpleStringProperty(userList.findUserByUserName(staff.getName()).getAccountName());
+        });
 
         TableColumn<TeamStaff, String> roleColumn = new TableColumn<>("Role");
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
@@ -87,19 +95,17 @@ public class ManageTeamViewController {
     }
 
     private void showButton() {
-        editButton.setVisible(true);
         banButton.setVisible(true);
     }
     private void hideButton() {
-        editButton.setVisible(false);
         banButton.setVisible(false);
     }
 
     @FXML private void banThisMember() {
-
-    }
-    @FXML private void editHandleButton() {
-
+        if(selectStaff != null) {
+            selectStaff.setRole("BAN");
+            dataSource.writeData(teamList);
+        }
     }
 
     @FXML
@@ -157,6 +163,15 @@ public class ManageTeamViewController {
     @FXML public void gotoManageEvent() {
         try {
             FXRouter.goTo("manage-event",account);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void goCredit() {
+        try {
+            FXRouter.goTo("credit-view", account);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
