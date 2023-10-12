@@ -116,32 +116,25 @@ cs211-661-project-nebb-group <br>
 
 
 ## วิธีการติดตั้งหรือรันโปรแกรม
+1.ผู้ที่ต้องการจะใช้งานต้องทำการติดตั้ง Java JDK 17 ก่อนทำการใช้งาน    
+2.กดเข้าลิงค์ด้านล่าง เพื่อดาวน์โหลดโปรแกรมมาใช้
+   ```
+   https://github.com/CS211-661/cs211-661-project-nebb-group/releases/tag/final1.0
+   ```
+3.จากนั้นกด ตัว "NEBB.Application.zip" เพื่อดาวน์โหลดApplicationมาใช้ <br>
+4.ให้Unzip ไฟล์ที่ดาวน์โหลดมา จะได้มา 1 ไฟล์ กับ 1 Folder
+* Folder data จะเป็น Folder ที่เก็บข้อมูลทั้งหมดในApplication
+* NEBB.jar จะเป็น ตัว Program ที่พวกเราได้พัฒนาขึ้นมา
+5.จากนั้น ให้กด Double Click ที่ NEBB.jar เพื่อเข้าใช้งาน Program <br>
+  
+  * (หากไม่สามรถเข้าใช้งานผ่านDouble Click ได้ ให้ทำตามนี้) <br>
+    * 1.เปิดTerminal หรือ Command Prompt
+    * 2.จากนั้นให้ ใช้คำสั่ง cd ไปยังFolderที่จัดเก็บตัว NEBB.jar
+    * 3.ใช้คำสั่งในการ run Program 
 
-### วิธีที่ 1
-   ```
-   
-   ```
-
-   ```
-   
-   ```
-
-
-### วิธีที่ 2
-
-   ```
-   
-   ```
-
-
-   ```
-   
-   ```
-
-
-   ```
-   
-   ```
+       ```
+        java -jar NEBB.jar
+       ```
 
 ## ตัวอย่างข้อมูลผู้ใช้ระบบ
 * Admin
