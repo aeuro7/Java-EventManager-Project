@@ -56,6 +56,57 @@
         * 21.c ผู้จัดอีเวนต์กำหนดได้ว่า กิจกรรมใดเสร็จสิ้นไปแล้ว กิจกรรมที่เสร็จสิ้นแล้วต้องแสดงให้เห็นชัดเจนว่าเสร็จสิ้นแล้วใน “ตารางกิจกรรมของอีเวนต์สำหรับผู้ร่วมทีม<ชื่อทีม>”
 
 
+## การวางโครงสร้างไฟล์
+
+cs211-661-project-nebb-group <br>
+|-- src <br>
+|   |-- main <br>
+|   |   |-- java <br>
+|   |   |   |-- cs211 <br>
+|   |   |   |   |-- project <br>
+|   |   |   |       |-- controllers <br>
+|   |   |   |       |   |-- ในFolderนี้จะทำการเก็บController .java ทั้งหมดที่ใช้ในNEBB Application
+|   |   |   |       |-- cs211661project
+|   |   |   |       |   |-- ในFolderนี้จะทำการเก็บตัวHelloApplication ที่จะเป็นตัวกลางในการเข้าถึงหน้าต่างๆใน NEBB Application
+|   |   |   |       |-- models
+|   |   |   |       |   |-- chats
+|   |   |   |       |   |-- eventHub
+|   |   |   |       |   |-- team
+|   |   |   |       |   |-- users
+|   |   |   |-- module-info.java <br>
+|   |   |-- resources  <br>
+|   |       |-- application.properties  <br>
+|   |  <br>
+|   |-- test  <br>
+|       |-- java  <br>
+|           |-- com  <br>
+|               |-- yourcompany <br>
+|                   |-- TestClass.java <br>
+| <br>
+|-- lib <br>
+|   |-- library1.jar <br>
+|   |-- library2.jar <br>
+| <br>
+|-- docs <br>
+|   |-- design <br>
+|   |   |-- design_document.pdf <br>
+|   | <br>
+|   |-- user_manual.pdf <br>
+| <br>
+|-- README.md <br>
+|-- LICENSE <br>
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## วิธีการติดตั้งหรือรันโปรแกรม
 
