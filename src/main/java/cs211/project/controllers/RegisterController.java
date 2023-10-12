@@ -86,7 +86,7 @@ public class RegisterController {
             usernameErrorLabel.setVisible(true);
         }
 
-        if (!password.equals(confirmPassword) || password.isEmpty() || isValidInput(password) || isValidInput(confirmPassword)) {
+        if (!password.equals(confirmPassword) || password.isEmpty() && isValidInput(password) && isValidInput(confirmPassword)) {
             passwordErrorLabel.setVisible(true);
             cPasswordErrorLabel.setVisible(true);
             isValid = false;
@@ -122,7 +122,6 @@ public class RegisterController {
     public boolean isValidInput(String input) {
         return !input.matches(".*[\",].*") && input.matches("^[a-zA-Z0-9\\s]+$") ;
     }
-
 
     @FXML
     public void checkUsernameClick() {
