@@ -1,8 +1,8 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Calendar;
-import cs211.project.models.CalendarList;
-import cs211.project.models.EventList;
+import cs211.project.models.eventHub.Calendar;
+import cs211.project.models.eventHub.CalendarList;
+import cs211.project.models.eventHub.EventList;
 import cs211.project.models.eventHub.Member;
 import cs211.project.models.eventHub.MemberList;
 import cs211.project.models.team.Team;

@@ -1,4 +1,4 @@
-package cs211.project.models;
+package cs211.project.models.eventHub;
 
 public class Event {
     private String eventID;

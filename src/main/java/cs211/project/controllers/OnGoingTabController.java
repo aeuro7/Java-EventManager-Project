@@ -1,7 +1,6 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Calendar;
-import cs211.project.models.Event;
+import cs211.project.models.eventHub.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

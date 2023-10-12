@@ -1,7 +1,7 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
+import cs211.project.models.eventHub.Event;
+import cs211.project.models.eventHub.EventList;
 import cs211.project.models.chats.Chat;
 import cs211.project.models.chats.ChatList;
 import cs211.project.models.chats.Message;
@@ -20,7 +20,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Pair;

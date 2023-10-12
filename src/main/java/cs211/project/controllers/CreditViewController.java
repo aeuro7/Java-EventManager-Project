@@ -1,26 +1,12 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Event;
-import cs211.project.models.EventList;
-import cs211.project.models.users.User;
 import cs211.project.models.users.UserList;
 import cs211.project.services.DataSource;
-import cs211.project.services.EventDataSource;
 import cs211.project.services.FXRouter;
-import cs211.project.services.UserDataSource;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
-import javafx.util.Pair;
 
 import java.io.IOException;
 

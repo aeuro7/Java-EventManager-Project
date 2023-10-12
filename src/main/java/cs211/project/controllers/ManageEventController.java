@@ -1,6 +1,6 @@
 package cs211.project.controllers;
 
-import cs211.project.models.Event;
+import cs211.project.models.eventHub.Event;
 import cs211.project.models.chats.Chat;
 import cs211.project.models.chats.ChatList;
 import cs211.project.models.eventHub.Member;

@@ -1,7 +1,7 @@
 package cs211.project.services;
 
-import cs211.project.models.Calendar;
-import cs211.project.models.Event;
+import cs211.project.models.eventHub.Calendar;
+import cs211.project.models.eventHub.Event;
 import cs211.project.models.users.User;
 
 import java.util.Comparator;

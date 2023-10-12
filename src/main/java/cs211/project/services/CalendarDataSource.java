@@ -1,7 +1,7 @@
 package cs211.project.services;
 
-import cs211.project.models.Calendar;
-import cs211.project.models.CalendarList;
+import cs211.project.models.eventHub.Calendar;
+import cs211.project.models.eventHub.CalendarList;
 
 import java.io.*;
 

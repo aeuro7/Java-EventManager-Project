@@ -56,55 +56,62 @@
         * 21.c ผู้จัดอีเวนต์กำหนดได้ว่า กิจกรรมใดเสร็จสิ้นไปแล้ว กิจกรรมที่เสร็จสิ้นแล้วต้องแสดงให้เห็นชัดเจนว่าเสร็จสิ้นแล้วใน “ตารางกิจกรรมของอีเวนต์สำหรับผู้ร่วมทีม<ชื่อทีม>”
 
 
+
 ## การวางโครงสร้างไฟล์
 
 cs211-661-project-nebb-group <br>
+|--data <br>
+|&emsp;|-- EventPicture <br>
+|&emsp;|&emsp;|-- เก็บรูปภาพของงานแต่ละEvent <br>
+|&emsp;|-- UserProfilePicture <br>
+|&emsp;|&emsp;|-- เก็บรูปภาพของUserทั้งหมดในProgram <br>
+|&emsp;|-- จะเก็บพวกไฟล์CSVที่บันทึกข้อมูลต่างๆทั้งหมดของ NEBB Application  <br>
 |-- src <br>
-|   |-- main <br>
-|   |   |-- java <br>
-|   |   |   |-- cs211 <br>
-|   |   |   |   |-- project <br>
-|   |   |   |       |-- controllers <br>
-|   |   |   |       |   |-- ในFolderนี้จะทำการเก็บController .java ทั้งหมดที่ใช้ในNEBB Application
-|   |   |   |       |-- cs211661project
-|   |   |   |       |   |-- ในFolderนี้จะทำการเก็บตัวHelloApplication ที่จะเป็นตัวกลางในการเข้าถึงหน้าต่างๆใน NEBB Application
-|   |   |   |       |-- models
-|   |   |   |       |   |-- chats
-|   |   |   |       |   |-- eventHub
-|   |   |   |       |   |-- team
-|   |   |   |       |   |-- users
-|   |   |   |-- module-info.java <br>
-|   |   |-- resources  <br>
-|   |       |-- application.properties  <br>
-|   |  <br>
-|   |-- test  <br>
-|       |-- java  <br>
-|           |-- com  <br>
-|               |-- yourcompany <br>
-|                   |-- TestClass.java <br>
-| <br>
-|-- lib <br>
-|   |-- library1.jar <br>
-|   |-- library2.jar <br>
-| <br>
-|-- docs <br>
-|   |-- design <br>
-|   |   |-- design_document.pdf <br>
-|   | <br>
-|   |-- user_manual.pdf <br>
-| <br>
+|&emsp;|-- main <br>
+|&emsp;|&emsp;|-- java <br>
+|&emsp;|&emsp;|&emsp;|-- cs211 <br>
+|&emsp;|&emsp;|&emsp;|&emsp;|-- project <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|-- controllers <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|-- ในFolderนี้จะทำการเก็บController .java ทั้งหมดที่ใช้ในNEBB Application  <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|-- cs211661project <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|-- ในFolderนี้จะทำการเก็บตัวHelloApplication ที่จะเป็นตัวกลางในการเข้าถึงหน้าต่างๆใน NEBB Application <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|-- models <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|-- chats <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- เก็บตัวModel ที่เกี่ยวข้องกับ ระบบ แชท <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|-- eventHub <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- เก็บตัวModel ที่เกี่ยวข้องกับ ระบบ event ตารางกิจกรรม และ ตัวเชื่อมระหว่าง user กับ event <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|-- team <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- เก็บตัวModel ที่เกี่ยวข้องกับ ระบบ สมาชิกทีมใน Event <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|-- users <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- เก็บตัวModel ที่เกี่ยวข้องกับ ระบบ user ที่ใช้ในการระบุตัว และ login เข้าใช้งาน <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;|-- services <br>
+|&emsp;|&emsp;|&emsp;|&emsp;&emsp;&emsp;|-- ในFolderนี้จะทำการเก็บพวกคำสั่งที่ใช้ในการอ่านเขียนไฟล์ รวมถึง ตัวเรียงลำดับเวลา และในส่วนของ FXRouter <br>
+|&emsp;|&emsp;|&emsp;|-- module-info.java <br>
+|&emsp;|&emsp;|-- resources  <br>
+|&emsp;|&emsp;&emsp;|-- buttom_style <br>
+|&emsp;|&emsp;&emsp;|&emsp;|-- เก็บตัวCSS ของEffect ในตัวฺปุ่มต่างๆในโปรแกรม <br>
+|&emsp;|&emsp;&emsp;|-- cs211 <br>
+|&emsp;|&emsp;&emsp;|&emsp;|-- project <br>
+|&emsp;|&emsp;&emsp;|&emsp;&emsp;|-- views <br>
+|&emsp;|&emsp;&emsp;|&emsp;&emsp;&emsp;|-- เก็บตัว FXML ทั้งหมดที่ถูกใช้งานบน NEBB Application <br>
+|&emsp;|&emsp;&emsp;|-- icon-png <br>
+|&emsp;|&emsp;&emsp;|&emsp;|-- home-png <br>
+|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- home <br>
+|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|&emsp;|-- เก็บตัวโลโก้Home <br>
+|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- เก็บตัว โลโก้ที่ใช้ในทุกๆหน้า ตรงแถบด้านล่าง <br>
+|&emsp;|&emsp;&emsp;|&emsp;|-- logo_png <br>
+|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- เก็บตัว โลโก้ทNEBB <br>
+|&emsp;|&emsp;&emsp;|&emsp;|-- profile-png <br>
+|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- เก็บตัว โลโก้รูปโปรไฟล์กับรูปTicket <br>
+|&emsp;|&emsp;&emsp;|&emsp;|-- team-png <br>
+|&emsp;|&emsp;&emsp;|&emsp;|&emsp;|-- เก็บตัว โลโก้รูปทีม <br>
+|&emsp;|&emsp;&emsp;|-- images <br>
+|&emsp;|&emsp;&emsp;|&emsp;|-- เก็บรูปของผู้พัฒนาโปรแกรม <br>
+|&emsp;|&emsp;&emsp;|-- NEBB_tutorial <br>
+|&emsp;|&emsp;&emsp;|&emsp;|-- เก็บรูปของตังอย่างและการสอนใช้งาน NEBB Application <br>
+|&emsp;|&emsp;&emsp;|-- table_style <br>
+|&emsp;|&emsp;&emsp;&emsp;|-- เก็บลักษณะGUIของTableView <br>
 |-- README.md <br>
-|-- LICENSE <br>
-
-
-
-
-
-
-
-
-
-
 
 
 
