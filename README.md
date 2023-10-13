@@ -122,9 +122,10 @@ cs211-661-project-nebb-group <br>
    https://github.com/CS211-661/cs211-661-project-nebb-group/releases/tag/final1.0
    ```
 3.จากนั้นกด ตัว "NEBB.Application.zip" เพื่อดาวน์โหลดApplicationมาใช้ <br>
-4.ให้Unzip ไฟล์ที่ดาวน์โหลดมา จะได้มา 1 ไฟล์ กับ 1 Folder
-* Folder data จะเป็น Folder ที่เก็บข้อมูลทั้งหมดในApplication
-* NEBB.jar จะเป็น ตัว Program ที่พวกเราได้พัฒนาขึ้นมา
+4.ให้Unzip ไฟล์ที่ดาวน์โหลดมา จะได้มา 1 ไฟล์ กับ 1 Folder<br>
+* Folder data จะเป็น Folder ที่เก็บข้อมูลทั้งหมดในApplication<br>
+* NEBB.jar จะเป็น ตัว Program ที่พวกเราได้พัฒนาขึ้นมา<br>
+
 5.จากนั้น ให้กด Double Click ที่ NEBB.jar เพื่อเข้าใช้งาน Program <br>
   
   * (หากไม่สามรถเข้าใช้งานผ่านDouble Click ได้ ให้ทำตามนี้) <br>
